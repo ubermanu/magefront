@@ -1,5 +1,11 @@
 {
   "name": "magefront",
+  "version": "0.1.0",
+  "files": [
+    "Gulpfile.mjs",
+    "helpers/*",
+    "tasks/*"
+  ],
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
