@@ -11,5 +11,5 @@ export const build = async (theme) => {
     tasks.push(() => plugin(themeConfig))
   }
 
-  return gulp.series(...tasks)
+  return gulp.series(...tasks)()
 }
