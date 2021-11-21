@@ -10,7 +10,6 @@ importers:
       commander: ^8.3.0
       fast-glob: ^3.2.7
       gulp: ^4.0.2
-      gulp-babel: ^8.0.0
       magefront-plugin-less: workspace:*
       prettier: ^2.4.1
       xml2js: ^0.4.23
@@ -21,7 +20,6 @@ importers:
       commander: 8.3.0
       fast-glob: 3.2.7
       gulp: 4.0.2
-      gulp-babel: 8.0.0_@babel+core@7.16.0
       magefront-plugin-less: link:plugins/less
       xml2js: 0.4.23
     devDependencies:
@@ -2580,19 +2578,6 @@ packages:
 
   /graceful-fs/4.2.8:
     resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
-    dev: false
-
-  /gulp-babel/8.0.0_@babel+core@7.16.0:
-    resolution: {integrity: sha512-oomaIqDXxFkg7lbpBou/gnUkX51/Y/M2ZfSjL2hdqXTAlSWZcgZtd2o0cOH0r/eE8LWD0+Q/PsLsr2DKOoqToQ==}
-    engines: {node: '>=6'}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-    dependencies:
-      '@babel/core': 7.16.0
-      plugin-error: 1.0.1
-      replace-ext: 1.0.1
-      through2: 2.0.5
-      vinyl-sourcemaps-apply: 0.2.1
     dev: false
 
   /gulp-cli/2.3.0:
