@@ -10,26 +10,29 @@
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "license": "MIT",
   "files": [
-    "Gulpfile.mjs",
-    "helpers/*",
-    "tasks/*"
+    "src"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git"
   },
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "rollup -c"
+  },
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "browser-sync": "^2.27.7",
+    "commander": "^8.3.0",
     "fast-glob": "^3.2.7",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "magefront-plugin-less": "workspace:*",
-    "minimist": "^1.2.5",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "prettier": "^2.4.1"
-  }
+  },
+  "bin": "src/cli.mjs"
 }
