@@ -24,7 +24,7 @@ export const getThemeSrcDir = (name) => {
 // TODO: support multiple output languages
 export const getThemeConfig = async (name) => {
     const src = getThemeSrcDir(name)
-    const magpieConfig = await import(`${process.cwd()}/${src}/magpie.config.js`).default
+    const customConfig = await import(`${process.cwd()}/${src}/magefront.config.js`).default
 
     const defaultConfig = {
         plugins: [
@@ -32,7 +32,7 @@ export const getThemeConfig = async (name) => {
         ]
     }
 
-    const config = Object.assign({}, defaultConfig, magpieConfig)
+    const config = Object.assign({}, defaultConfig, customConfig)
     config.src = src
     config.dest = `pub/static/frontend/${name.replace('_', '/')}/en_US`
 
