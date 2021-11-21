@@ -11,6 +11,7 @@ importers:
       fast-glob: ^3.2.7
       gulp: ^4.0.2
       magefront-plugin-less: workspace:*
+      php-parser: ^3.0.3
       prettier: ^2.4.1
       xml2js: ^0.4.23
     dependencies:
@@ -21,6 +22,7 @@ importers:
       fast-glob: 3.2.7
       gulp: 4.0.2
       magefront-plugin-less: link:plugins/less
+      php-parser: 3.0.3
       xml2js: 0.4.23
     devDependencies:
       prettier: 2.4.1
@@ -3612,6 +3614,10 @@ packages:
       graceful-fs: 4.2.8
       pify: 2.3.0
       pinkie-promise: 2.0.1
+    dev: false
+
+  /php-parser/3.0.3:
+    resolution: {integrity: sha512-WjbrtYrwmLY9hpoKoq1+mVqJhT0dEVDZRWSpNIw2MpTw3VM/K4C6e0WR4KlU6G/XROkV7tpH4NesV2dDiPxqaw==}
     dev: false
 
   /picocolors/1.0.0:

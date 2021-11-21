@@ -28,6 +28,7 @@
     "fast-glob": "^3.2.7",
     "gulp": "^4.0.2",
     "magefront-plugin-less": "workspace:*",
+    "php-parser": "^3.0.3",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
