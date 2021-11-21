@@ -1,6 +1,18 @@
 {
   "name": "magefront-plugin-less",
   "version": "0.1.0",
-  "main": "plugin.mjs",
-  "license": "MIT"
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/less"
+  },
+  "main": "plugin.mjs"
 }

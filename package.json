@@ -1,11 +1,23 @@
 {
   "name": "magefront",
   "version": "0.1.0",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
   "files": [
     "Gulpfile.mjs",
     "helpers/*",
     "tasks/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git"
+  },
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
