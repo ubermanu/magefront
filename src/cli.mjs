@@ -1,12 +1,13 @@
 import { Command } from 'commander'
-import pkg from '../package.json'
+// FIXME: build the cli using rollup
+// import { version } from '../package.json'
 import { build } from './tasks/build.mjs'
 
 const program = new Command()
 
 program
   .name('magefront')
-  .version(pkg.version, '-v, --version', 'Output the current version.')
+  .version('0', '-v, --version', 'Output the current version.')
   .helpOption('-h, --help', 'Show this command summary.')
   .addHelpCommand(false)
 
