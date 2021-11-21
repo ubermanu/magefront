@@ -28,5 +28,8 @@
     "magefront-plugin-less": "workspace:*",
     "minimist": "^1.2.5",
     "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1"
   }
 }

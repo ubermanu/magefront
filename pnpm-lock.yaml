@@ -12,6 +12,7 @@ importers:
       gulp-babel: ^8.0.0
       magefront-plugin-less: workspace:*
       minimist: ^1.2.5
+      prettier: ^2.4.1
       xml2js: ^0.4.23
     dependencies:
       '@babel/core': 7.16.0
@@ -23,6 +24,8 @@ importers:
       magefront-plugin-less: link:plugins/less
       minimist: 1.2.5
       xml2js: 0.4.23
+    devDependencies:
+      prettier: 2.4.1
 
   plugins/less:
     specifiers:
@@ -3675,6 +3678,12 @@ packages:
     resolution: {integrity: sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=}
     engines: {node: '>=0.10.0'}
     dev: false
+
+  /prettier/2.4.1:
+    resolution: {integrity: sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
 
   /pretty-hrtime/1.0.3:
     resolution: {integrity: sha1-t+PqQkNaTJsnWdmeDyAesZWALuE=}
