@@ -1,0 +1,15 @@
+{
+  "name": "magefront",
+  "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "browser-sync": "^2.27.7",
+    "fast-glob": "^3.2.7",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-less": "^5.0.0",
+    "magefront-plugin-less": "workspace:*",
+    "minimist": "^1.2.5",
+    "xml2js": "^0.4.23"
+  }
+}

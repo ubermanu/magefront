@@ -1,0 +1,5 @@
+{
+  "name": "magefront-plugin-less",
+  "main": "plugin.mjs",
+  "license": "MIT"
+}
