@@ -14,5 +14,11 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/less"
   },
-  "main": "plugin.mjs"
+  "main": "plugin.mjs",
+  "files": [
+    "plugin.mjs"
+  ],
+  "dependencies": {
+    "gulp-less": "^5.0.0"
+  }
 }
