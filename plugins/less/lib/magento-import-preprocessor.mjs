@@ -1,10 +1,13 @@
+/**
+ * Replaces the commented `@magento_import` statements with
+ * the actual import statements for each enabled modules.
+ */
 class preProcessor {
   constructor(modules) {
     this.modules = modules
   }
 
-  // Replace the magento imports with the actual modules
-  process(src, extra) {
+  process(src) {
     return src.replace(/^\/\/@magento_import(.*);(.*)$/gm, (match, path) => {
       path = path.replace(/["']/g, '').trim()
       return this.modules
