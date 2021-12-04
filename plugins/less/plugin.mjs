@@ -6,7 +6,7 @@ import magentoImport from './lib/magento-import-preprocessor.mjs'
 // TODO: Get the modules list from the themeConfig
 export default (options) => (themeConfig) => {
   return gulp
-    .src(`${themeConfig.src}/web/css/test.less`)
+    .src(`${themeConfig.src}/web/css/*.less`)
     .pipe(less({ plugins: [magentoImport(themeConfig.modules)] }))
     .pipe(gulp.dest(`${themeConfig.dest}/css`))
 }
