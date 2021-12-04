@@ -16,12 +16,15 @@ program
   .command('build')
   .description('Build the theme.')
   .requiredOption('--theme <theme>', 'Theme name.')
-  .action(({ theme }) => inheritance(theme) && build(theme))
+  .action(async ({ theme }) => {
+    await inheritance(theme)
+    await build(theme)
+  })
 
 program
   .command('inheritance')
   .description('Create the inheritance symlinks in the cache.')
   .requiredOption('--theme <theme>', 'Theme name.')
-  .action(({ theme }) => inheritance(theme))
+  .action(async ({ theme }) => await inheritance(theme))
 
 program.parse(process.argv)
