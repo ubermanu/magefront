@@ -1,7 +1,6 @@
 import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
-// TODO: Implement the inheritance of the themes
 import { getThemes } from '../theme.mjs'
 
 const themes = getThemes()
@@ -27,60 +26,41 @@ function generateSymlinks(src, dest, replacePattern, ignore = []) {
     })
 }
 
-function themeDependencyTree(themeName, tree, dependencyTree) {
+function getThemeDependencyTree(themeName, dependencyTree) {
   dependencyTree = dependencyTree ? dependencyTree : []
   dependencyTree.push(themeName)
 
-  if (!tree) {
-    return dependencyTree
-  }
-
   if (themes[themeName].parent) {
-    return themeDependencyTree(themes[themeName].parent, tree, dependencyTree)
+    return getThemeDependencyTree(themes[themeName].parent, dependencyTree)
   } else {
     return dependencyTree.reverse()
   }
 }
 
-const libSrc = path.join(projectPath, 'lib')
-
-// TODO: Remove the symlinks in the parent theme?
+// TODO: Add predefined ignores for the core themes
 export const inheritance = async (name) => {
-  // const themeConfig = await getThemeConfig(theme)
+  const themeDest = path.join(tempPath, themes[name].dest)
 
-  return new Promise((resolve) => {
-    themeDependencyTree(name, true).forEach((themeName) => {
-      const theme = themes[themeName]
-      const themeSrc = path.join(projectPath, theme.src)
-      const themeDest = path.join(tempPath, theme.dest)
+  // Clean destination dir before generating new symlinks
+  fs.removeSync(themeDest)
 
-      // Clean destination dir before generating new symlinks
-      fs.removeSync(themeDest)
+  // Add the Magento/base resources as a dependency for everyone
+  const libSrc = path.join(projectPath, 'lib')
+  generateSymlinks(libSrc, themeDest, '', [
+    'internal/*',
+    'web/tiny_mce_4',
+    'web/extjs',
+    'web/chartjs',
+    'web/css/docs/*'
+  ])
 
-      // Add the Magento/base resources as a dependency for everyone
-      if (!theme.parent) {
-        generateSymlinks(libSrc, themeDest, '', [
-          'internal/*',
-          'web/tiny_mce_4',
-          'web/extjs',
-          'web/chartjs',
-          'web/css/docs/*'
-        ])
-      }
+  // TODO: For each modules, create symlinks for the theme
+  // TODO: Get the modules from the config.php file
 
-      // Create symlinks for parent theme
-      if (theme.parent) {
-        const parentSrc = path.join(tempPath, themes[theme.parent].dest)
-        generateSymlinks(parentSrc, themeDest, '', themes[theme.parent].ignore)
-      }
-
-      // TODO: For each modules, create symlinks for the theme
-      // TODO: Get the modules from the config.php file
-
-      // Create symlinks to all files in this theme. Will overwrite parent symlinks if exist.
-      generateSymlinks(themeSrc, themeDest, '', theme.ignore)
-    })
-
-    resolve()
+  // Create symlinks for all the related themes
+  getThemeDependencyTree(name).forEach((themeName) => {
+    const theme = themes[themeName]
+    const themeSrc = path.join(projectPath, theme.src)
+    generateSymlinks(themeSrc, themeDest, '', theme.ignore)
   })
 }

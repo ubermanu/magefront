@@ -16,7 +16,7 @@ program
   .command('build')
   .description('Build the theme.')
   .requiredOption('--theme <theme>', 'Theme name.')
-  .action(({ theme }) => build(theme))
+  .action(({ theme }) => inheritance(theme) && build(theme))
 
 program
   .command('inheritance')

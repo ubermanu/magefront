@@ -69,19 +69,11 @@ export const getThemes = () => {
   return themes
 }
 
-export const getTheme = (name) => {
-  const theme = getThemes()[name]
-  if (!theme) {
-    throw new Error(`Theme ${name} not found`)
-  }
-  return theme
-}
-
 // TODO: return default config if not defined
 // TODO: get the correct root path
 // TODO: support multiple output languages
 export const getThemeBuildConfig = async (name) => {
-  const theme = getTheme(name)
+  const theme = getThemes()[name]
 
   // const customConfig = await import(
   //   `${process.cwd()}/${theme.src}/magefront.config.js`
