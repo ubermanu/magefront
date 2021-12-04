@@ -1,7 +1,7 @@
 import glob from 'fast-glob'
 import { parseString } from 'xml2js'
 import fs from 'fs'
-import less from 'magefront-plugin-less'
+import less from '../plugins/less/plugin.mjs'
 import phpParser from 'php-parser'
 
 /**
@@ -71,7 +71,6 @@ export const getThemes = () => {
 
 // TODO: return default config if not defined
 // TODO: get the correct root path
-// TODO: support multiple output languages
 export const getThemeBuildConfig = async (name) => {
   const theme = getThemes()[name]
 
@@ -80,15 +79,13 @@ export const getThemeBuildConfig = async (name) => {
   )
 
   const defaultConfig = {
-    locale: ['en_US'],
+    locales: ['en_US'],
     plugins: [less()]
   }
 
   const config = Object.assign({}, defaultConfig, customConfig)
-  config.src = process.cwd() + '/var/view_preprocessed/magefront/' + theme.dest
-  config.dest = `pub/static/frontend/${name.replace('_', '/')}/en_US`
-
-  // console.log(config)
+  config.src = `var/view_preprocessed/magefront/${theme.dest}`
+  config.dest = `pub/static/frontend/${name.replace('_', '/')}`
 
   return config
 }

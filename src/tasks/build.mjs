@@ -7,8 +7,12 @@ export const build = async (theme) => {
   const themeConfig = await getThemeBuildConfig(theme)
   const tasks = []
 
-  for (const plugin of themeConfig.plugins) {
-    tasks.push(() => plugin(themeConfig))
+  // Execute all the tasks for each locales
+  for (const locale of themeConfig.locales) {
+    const localeDir = `${themeConfig.dest}/${locale}`
+    for (const plugin of themeConfig.plugins) {
+      tasks.push(() => plugin({ ...themeConfig, dest: localeDir, locale }))
+    }
   }
 
   if (tasks.length > 0) {
