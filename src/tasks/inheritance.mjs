@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
 import { getThemes } from '../theme.mjs'
+import { getModules } from '../modules.mjs'
 
 const themes = getThemes()
 
@@ -54,8 +55,19 @@ export const inheritance = async (name) => {
     'web/css/docs'
   ])
 
-  // TODO: For each modules, create symlinks for the theme
-  // TODO: Get the modules from the config.php file
+  // For each enabled modules, create symlinks into the theme
+  const modules = Object.values(getModules()).filter((m) => m.enabled && m.src)
+  const area = themes[name].area
+
+  // TODO: Resolve the "base" area as well (common to frontend and adminhtml)
+  modules.forEach((m) => {
+    const moduleSrc = path.join(projectPath, m.src, 'view', area)
+    generateSymlinks(moduleSrc, path.join(themeDest, m.name), '', [
+      'page_layout',
+      'layout',
+      'templates'
+    ])
+  })
 
   // Create symlinks for all the related themes
   getThemeDependencyTree(name).forEach((themeName) => {

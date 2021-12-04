@@ -5,7 +5,7 @@ import less from 'gulp-less'
 // Allow custom options to be passed in via the `options` parameter.
 export default (options) => (themeConfig) => {
   return gulp
-    .src(`${themeConfig.src}/web/css/*.less`)
+    .src(`${themeConfig.src}/web/css/styles-m.less`)
     .pipe(less(options))
     .pipe(gulp.dest(`${themeConfig.dest}/css`))
 }

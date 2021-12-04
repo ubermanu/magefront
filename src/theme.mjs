@@ -25,6 +25,7 @@ export const getThemes = () => {
       name,
       src: path.replace(/\/theme.xml$/, ''),
       dest: `pub/static/${path.split('/').slice(2, -1).join('/')}`,
+      area: path.split('/')[2],
       parent
     }
   })
@@ -60,6 +61,7 @@ export const getThemes = () => {
       name,
       src,
       dest: `pub/static/${fullName}`,
+      area: fullName.split('/')[0],
       parent
     }
   })
