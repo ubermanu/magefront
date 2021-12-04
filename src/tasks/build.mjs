@@ -1,10 +1,10 @@
 import gulp from 'gulp'
-import { getThemeConfig } from '../theme.mjs'
+import { getThemeBuildConfig } from '../theme.mjs'
 
 // TODO: get config from the theme
 // TODO: Add support for multiple themes at once?
 export const build = async (theme) => {
-  const themeConfig = await getThemeConfig(theme)
+  const themeConfig = await getThemeBuildConfig(theme)
   const tasks = []
 
   for (const plugin of themeConfig.plugins) {

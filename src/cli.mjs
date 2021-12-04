@@ -2,6 +2,7 @@ import { Command } from 'commander'
 // FIXME: build the cli using rollup
 // import { version } from '../package.json'
 import { build } from './tasks/build.mjs'
+import { inheritance } from './tasks/inheritance.mjs'
 
 const program = new Command()
 
@@ -13,8 +14,14 @@ program
 
 program
   .command('build')
-  .description('Generate optimization configuration based on given page URLs.')
-  .requiredOption('--theme <theme>', 'CMS page URL.')
+  .description('Build the theme.')
+  .requiredOption('--theme <theme>', 'Theme name.')
   .action(({ theme }) => build(theme))
+
+program
+  .command('inheritance')
+  .description('Create the inheritance symlinks in the cache.')
+  .requiredOption('--theme <theme>', 'Theme name.')
+  .action(({ theme }) => inheritance(theme))
 
 program.parse(process.argv)

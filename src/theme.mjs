@@ -6,13 +6,14 @@ import phpParser from 'php-parser'
 
 /**
  * Returns all the themes with their source path.
- * @return {{path: *, name: string}[]}
+ * @return {{[key: string]: object}}
  */
+// TODO: Maybe create a magento module to output these data instead of parsing PHP files with JS
 export const getThemes = () => {
   let themes = {}
 
   glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml').forEach((path) => {
-    const name = path.split('/').slice(-3, -1).join('/')
+    const name = path.split('/').slice(3, -1).join('/')
     let parent = false
 
     const themeXml = fs.readFileSync(path, 'utf8')
@@ -23,6 +24,7 @@ export const getThemes = () => {
     themes[name] = {
       name,
       src: path.replace(/\/theme.xml$/, ''),
+      dest: `pub/static/${path.split('/').slice(2, -1).join('/')}`,
       parent
     }
   })
@@ -34,7 +36,7 @@ export const getThemes = () => {
   )
 
   composerThemes.forEach((pkg) => {
-    let name = pkg.name
+    let fullName = pkg.name
     const src = `vendor/${pkg.name}`
     const themeXml = fs.readFileSync(`${src}/theme.xml`, 'utf8')
     let parent = false
@@ -49,26 +51,26 @@ export const getThemes = () => {
 
     registration.forEach((token) => {
       if (token[0] === 'T_CONSTANT_ENCAPSED_STRING') {
-        name = token[1]
-          .replace(/^['"]|['"]$/g, '')
-          .replace(/^frontend\/|^adminhtml\//, '')
+        fullName = token[1].replace(/^['"]|['"]$/g, '')
       }
     })
 
+    const name = fullName.split('/').slice(1).join('/')
     themes[name] = {
       name,
       src,
+      dest: `pub/static/${fullName}`,
       parent
     }
   })
 
   console.log(themes)
 
-  return Object.values(themes)
+  return themes
 }
 
 export const getTheme = (name) => {
-  const theme = getThemes().find((theme) => theme.name === name)
+  const theme = getThemes()[name]
   if (!theme) {
     throw new Error(`Theme ${name} not found`)
   }
@@ -78,29 +80,24 @@ export const getTheme = (name) => {
 // TODO: return default config if not defined
 // TODO: get the correct root path
 // TODO: support multiple output languages
-export const getThemeConfig = async (name) => {
+export const getThemeBuildConfig = async (name) => {
   const theme = getTheme(name)
 
-  const customConfig = await import(
-    `${process.cwd()}/${theme.src}/magefront.config.js`
-  ).default
+  // const customConfig = await import(
+  //   `${process.cwd()}/${theme.src}/magefront.config.js`
+  // ).default
+
+  const customConfig = {}
 
   const defaultConfig = {
     plugins: [less()]
   }
 
   const config = Object.assign({}, defaultConfig, customConfig)
-  config.src = theme.src
+  config.src = process.cwd() + '/var/view_preprocessed/magefront/' + theme.dest
   config.dest = `pub/static/frontend/${name.replace('_', '/')}/en_US`
 
-  // Get the parent name from the theme.xml file
-  // const themeXml = fs.readFileSync(`${src}/theme.xml`, 'utf8')
-  // parseString(themeXml, (err, result) => {
-  //   if (err) {
-  //     throw new Error(err)
-  //   }
-  //   config.parent = result.theme.parent[0] || false
-  // })
+  // console.log(config)
 
   return config
 }
