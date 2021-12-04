@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-less",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "module",
   "keywords": [
     "magefront",
@@ -17,6 +17,7 @@
   },
   "main": "plugin.mjs",
   "files": [
+    "lib",
     "plugin.mjs"
   ],
   "dependencies": {
