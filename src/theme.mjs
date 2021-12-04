@@ -74,14 +74,16 @@ export const getThemes = () => {
 // TODO: support multiple output languages
 export const getThemeBuildConfig = async (name) => {
   const theme = getThemes()[name]
+  let customConfig = {}
 
-  // const customConfig = await import(
-  //   `${process.cwd()}/${theme.src}/magefront.config.js`
-  // ).default
-
-  const customConfig = {}
+  try {
+    customConfig = await import(
+      `${process.cwd()}/${theme.src}/magefront.config.js`
+    ).default
+  } catch (e) {}
 
   const defaultConfig = {
+    locale: ['en_US'],
     plugins: [less()]
   }
 
