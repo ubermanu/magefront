@@ -59,14 +59,20 @@ export const inheritance = async (name) => {
   const modules = Object.values(getModules()).filter((m) => m.enabled && m.src)
   const area = themes[name].area
 
-  // TODO: Resolve the "base" area as well (common to frontend and adminhtml)
   modules.forEach((m) => {
-    const moduleSrc = path.join(projectPath, m.src, 'view', area)
-    generateSymlinks(moduleSrc, path.join(themeDest, m.name), '', [
-      'page_layout',
-      'layout',
-      'templates'
-    ])
+    // Resolve the "base" area as well (common to frontend and adminhtml)
+    generateSymlinks(
+      path.join(projectPath, m.src, 'view', 'base'),
+      path.join(themeDest, m.name),
+      '',
+      ['page_layout', 'layout', 'templates']
+    )
+    generateSymlinks(
+      path.join(projectPath, m.src, 'view', area),
+      path.join(themeDest, m.name),
+      '',
+      ['page_layout', 'layout', 'templates']
+    )
   })
 
   // Create symlinks for all the related themes
