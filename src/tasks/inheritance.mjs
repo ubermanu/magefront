@@ -42,7 +42,9 @@ function themeDependencyTree(themeName, tree, dependencyTree) {
   }
 }
 
-// TODO: Add the Magento/base theme as a dependency for everyone
+const libSrc = path.join(projectPath, 'lib')
+
+// TODO: Remove the symlinks in the parent theme?
 export const inheritance = async (name) => {
   // const themeConfig = await getThemeConfig(theme)
 
@@ -54,6 +56,17 @@ export const inheritance = async (name) => {
 
       // Clean destination dir before generating new symlinks
       fs.removeSync(themeDest)
+
+      // Add the Magento/base resources as a dependency for everyone
+      if (!theme.parent) {
+        generateSymlinks(libSrc, themeDest, '', [
+          'internal/*',
+          'web/tiny_mce_4',
+          'web/extjs',
+          'web/chartjs',
+          'web/css/docs/*'
+        ])
+      }
 
       // Create symlinks for parent theme
       if (theme.parent) {
@@ -70,10 +83,4 @@ export const inheritance = async (name) => {
 
     resolve()
   })
-
-  // for (const plugin of themeConfig.plugins) {
-  //   tasks.push(() => plugin(themeConfig))
-  // }
-
-  // return gulp.series(...tasks)()
 }
