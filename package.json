@@ -18,8 +18,6 @@
     "url": "git+https://github.com/ubermanu/magefront.git"
   },
   "scripts": {
-    "build": "rollup -c",
-    "prepublishOnly": "rollup -c"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
