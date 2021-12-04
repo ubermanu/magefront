@@ -51,7 +51,7 @@ export const inheritance = async (name) => {
     'web/tiny_mce_4',
     'web/extjs',
     'web/chartjs',
-    'web/css/docs/*'
+    'web/css/docs'
   ])
 
   // TODO: For each modules, create symlinks for the theme
