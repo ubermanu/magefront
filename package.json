@@ -17,8 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",

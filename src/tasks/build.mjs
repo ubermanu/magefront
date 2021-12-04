@@ -16,6 +16,6 @@ export const build = async (theme) => {
   }
 
   if (tasks.length > 0) {
-    return gulp.series(...tasks)
+    gulp.series(...tasks)()
   }
 }
