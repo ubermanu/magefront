@@ -73,10 +73,13 @@ export const getThemes = () => {
 // TODO: get the correct root path
 export const getThemeBuildConfig = async (name) => {
   const theme = getThemes()[name]
+  let customConfig = {}
 
-  const { default: customConfig } = await import(
-    `${process.cwd()}/${theme.src}/magefront.config.js`
-  )
+  const customConfigFile = `${process.cwd()}/${theme.src}/magefront.config.js`
+  if (fs.existsSync(customConfigFile)) {
+    const { default: defaults } = await import(customConfigFile)
+    customConfig = defaults
+  }
 
   const defaultConfig = {
     locales: ['en_US'],
