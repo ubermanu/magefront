@@ -2,13 +2,11 @@ import glob from 'fast-glob'
 import { parseString } from 'xml2js'
 import fs from 'fs'
 import less from '../plugins/less/plugin.mjs'
-import phpParser from 'php-parser'
 
 /**
  * Returns all the themes with their source path.
  * @return {{[key: string]: object}}
  */
-// TODO: Maybe create a magento module to output these data instead of parsing PHP files with JS
 export const getThemes = () => {
   let themes = {}
 
@@ -37,7 +35,6 @@ export const getThemes = () => {
   )
 
   composerThemes.forEach((pkg) => {
-    let fullName = pkg.name
     const src = `vendor/${pkg.name}`
     const themeXml = fs.readFileSync(`${src}/theme.xml`, 'utf8')
     let parent = false
@@ -46,27 +43,22 @@ export const getThemes = () => {
       parent = res.theme.parent ? res.theme.parent[0] : false
     })
 
-    const registration = phpParser.tokenGetAll(
-      fs.readFileSync(`${src}/registration.php`, 'utf8')
-    )
-
-    registration.forEach((token) => {
-      if (token[0] === 'T_CONSTANT_ENCAPSED_STRING') {
-        fullName = token[1].replace(/^['"]|['"]$/g, '')
-      }
-    })
-
-    const name = fullName.split('/').slice(1).join('/')
-    themes[name] = {
-      name,
-      src,
-      dest: `pub/static/${fullName}`,
-      area: fullName.split('/')[0],
-      parent
-    }
+    const registration = fs.readFileSync(`${src}/registration.php`, 'utf8')
+    registration
+      .match(/'(frontend|adminhtml)\/([\w\/]+)'/g)
+      .forEach((match) => {
+        match = match.replace(/'/g, '')
+        const name = match.split('/').slice(1).join('/')
+        const area = match.split('/')[0]
+        themes[name] = {
+          name,
+          src,
+          dest: `pub/static/${area}/${name}`,
+          area,
+          parent
+        }
+      })
   })
-
-  // console.log(themes)
 
   return themes
 }

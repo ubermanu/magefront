@@ -13,7 +13,6 @@ importers:
       gulp: ^4.0.2
       magefront-plugin-less: workspace:*
       magefront-plugin-sass: workspace:*
-      php-parser: ^3.0.3
       prettier: ^2.4.1
       xml2js: ^0.4.23
     dependencies:
@@ -26,7 +25,6 @@ importers:
       gulp: 4.0.2
       magefront-plugin-less: link:plugins/less
       magefront-plugin-sass: link:plugins/sass
-      php-parser: 3.0.3
       xml2js: 0.4.23
     devDependencies:
       prettier: 2.4.1
@@ -4163,10 +4161,6 @@ packages:
   /performance-now/2.1.0:
     resolution: {integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=}
     dev: true
-
-  /php-parser/3.0.3:
-    resolution: {integrity: sha512-WjbrtYrwmLY9hpoKoq1+mVqJhT0dEVDZRWSpNIw2MpTw3VM/K4C6e0WR4KlU6G/XROkV7tpH4NesV2dDiPxqaw==}
-    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
