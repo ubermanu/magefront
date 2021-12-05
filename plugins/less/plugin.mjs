@@ -12,7 +12,7 @@ export default (options) => (themeConfig) => {
   }
 
   return gulp
-    .src(`${themeConfig.src}/web/css/*.less`)
+    .src(`${themeConfig.src}/web/css/!(_)*.less`)
     .pipe(less(options))
     .pipe(gulp.dest(`${themeConfig.dest}/css`))
 }
