@@ -24,6 +24,7 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
     "browser-sync": "^2.27.7",
+    "chokidar": "^3.5.2",
     "commander": "^8.3.0",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",

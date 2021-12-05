@@ -3,6 +3,8 @@ import { Command } from 'commander'
 // import { version } from '../package.json'
 import { build } from './tasks/build.mjs'
 import { inheritance } from './tasks/inheritance.mjs'
+import { browserSync } from './tasks/browser-sync.mjs'
+import { watch } from './tasks/watch.mjs'
 
 const program = new Command()
 
@@ -22,9 +24,29 @@ program
   })
 
 program
+  .command('dev')
+  .description('Run a browser-sync proxy instance.')
+  .requiredOption('--theme <theme>', 'Theme name.')
+  .requiredOption('--url <url>', 'Url of your website.')
+  .action(async ({ theme, url }) => {
+    await browserSync(url)
+    await watch(theme)
+  })
+
+program
+  .command('watch')
+  .description('Watch the source files of a theme, and rebuild on change.')
+  .requiredOption('--theme <theme>', 'Theme name.')
+  .action(async ({ theme }) => {
+    await watch(theme)
+  })
+
+program
   .command('inheritance')
   .description('Create the inheritance symlinks in the cache.')
   .requiredOption('--theme <theme>', 'Theme name.')
-  .action(async ({ theme }) => await inheritance(theme))
+  .action(async ({ theme }) => {
+    await inheritance(theme)
+  })
 
 program.parse(process.argv)

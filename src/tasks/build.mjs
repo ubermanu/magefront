@@ -29,7 +29,7 @@ export const build = async (theme) => {
 
 // TODO: return default config if not defined
 // TODO: get the correct root path
-const getThemeBuildConfig = async (name) => {
+export const getThemeBuildConfig = async (name) => {
   const theme = getThemes()[name]
   let customConfig = {}
 
