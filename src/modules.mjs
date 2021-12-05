@@ -1,6 +1,5 @@
 import fs from 'fs'
 import glob from 'fast-glob'
-import { parseString } from 'xml2js'
 
 /**
  * Read the config file and return a list of enabled modules.
@@ -27,17 +26,14 @@ export function getModules() {
   )
 
   composerModules.forEach((pkg) => {
-    let name = ''
     const moduleXml = fs.readFileSync(
       `${process.cwd()}/vendor/${pkg.name}/etc/module.xml`,
       'utf8'
     )
-    parseString(moduleXml, (err, res) => {
-      name = res.config.module[0]['$']['name']
-    })
-    if (name) {
+    moduleXml.match(/<module[^>]+name="([^"]+)"/).forEach((match) => {
+      const name = match.replace(/<module[^>]+name="([^"]+)"/, (_, n) => n)
       modules[name].src = `vendor/${pkg.name}`
-    }
+    })
   })
 
   return modules

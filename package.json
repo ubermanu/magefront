@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -27,8 +27,7 @@
     "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
     "magefront-plugin-less": "workspace:*",
-    "magefront-plugin-sass": "workspace:*",
-    "xml2js": "^0.4.23"
+    "magefront-plugin-sass": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^2.4.1"

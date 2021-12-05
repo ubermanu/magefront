@@ -1,5 +1,4 @@
 import glob from 'fast-glob'
-import { parseString } from 'xml2js'
 import fs from 'fs'
 import less from '../plugins/less/plugin.mjs'
 
@@ -15,8 +14,8 @@ export const getThemes = () => {
     let parent = false
 
     const themeXml = fs.readFileSync(path, 'utf8')
-    parseString(themeXml, (err, res) => {
-      parent = res.theme.parent ? res.theme.parent[0] : false
+    themeXml.match(/<parent>(.*)<\/parent>/g)?.forEach((match) => {
+      parent = match.replace(/<parent>|<\/parent>/g, '')
     })
 
     themes[name] = {
@@ -36,11 +35,11 @@ export const getThemes = () => {
 
   composerThemes.forEach((pkg) => {
     const src = `vendor/${pkg.name}`
-    const themeXml = fs.readFileSync(`${src}/theme.xml`, 'utf8')
     let parent = false
 
-    parseString(themeXml, (err, res) => {
-      parent = res.theme.parent ? res.theme.parent[0] : false
+    const themeXml = fs.readFileSync(`${src}/theme.xml`, 'utf8')
+    themeXml.match(/<parent>(.*)<\/parent>/g)?.forEach((match) => {
+      parent = match.replace(/<parent>|<\/parent>/g, '')
     })
 
     const registration = fs.readFileSync(`${src}/registration.php`, 'utf8')
