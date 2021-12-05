@@ -26,6 +26,7 @@
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
+    "magefront-plugin-babel": "workspace:*",
     "magefront-plugin-less": "workspace:*",
     "magefront-plugin-sass": "workspace:*"
   },

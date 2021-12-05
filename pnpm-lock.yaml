@@ -11,6 +11,7 @@ importers:
       fast-glob: ^3.2.7
       fs-extra: ^10.0.0
       gulp: ^4.0.2
+      magefront-plugin-babel: workspace:*
       magefront-plugin-less: workspace:*
       magefront-plugin-sass: workspace:*
       prettier: ^2.4.1
@@ -22,10 +23,21 @@ importers:
       fast-glob: 3.2.7
       fs-extra: 10.0.0
       gulp: 4.0.2
+      magefront-plugin-babel: link:plugins/babel
       magefront-plugin-less: link:plugins/less
       magefront-plugin-sass: link:plugins/sass
     devDependencies:
       prettier: 2.4.1
+
+  plugins/babel:
+    specifiers:
+      '@babel/preset-env': ^7.16.4
+      gulp: ^4.0.2
+      gulp-babel: ^8.0.0
+    dependencies:
+      '@babel/preset-env': 7.16.4_@babel+core@7.16.0
+      gulp: 4.0.2
+      gulp-babel: 8.0.0_@babel+core@7.16.0
 
   plugins/less:
     specifiers:
@@ -2846,6 +2858,19 @@ packages:
 
   /graceful-fs/4.2.8:
     resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
+
+  /gulp-babel/8.0.0_@babel+core@7.16.0:
+    resolution: {integrity: sha512-oomaIqDXxFkg7lbpBou/gnUkX51/Y/M2ZfSjL2hdqXTAlSWZcgZtd2o0cOH0r/eE8LWD0+Q/PsLsr2DKOoqToQ==}
+    engines: {node: '>=6'}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+    dependencies:
+      '@babel/core': 7.16.0
+      plugin-error: 1.0.1
+      replace-ext: 1.0.1
+      through2: 2.0.5
+      vinyl-sourcemaps-apply: 0.2.1
+    dev: false
 
   /gulp-cli/2.3.0:
     resolution: {integrity: sha512-zzGBl5fHo0EKSXsHzjspp3y5CONegCm8ErO5Qh0UzFzk2y4tMvzLWhoDokADbarfZRL2pGpRp7yt6gfJX4ph7A==}
