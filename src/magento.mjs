@@ -1,6 +1,7 @@
 import glob from 'fast-glob'
 import fs from 'fs'
 import path from 'path'
+import logger from './logger.mjs'
 
 /**
  * Crawl the Magento project source code and return a list of all the modules.
@@ -25,11 +26,14 @@ export function getModules(projectRoot) {
       cwd: projectRoot
     })
     .forEach((codeSrc) => {
-      const name = getNameFromModuleXml(
-        path.join(projectRoot, codeSrc, 'etc/module.xml')
-      )
+      const moduleXmlFile = path.join(projectRoot, codeSrc, 'etc/module.xml')
+      if (!fs.existsSync(moduleXmlFile)) {
+        logger.warn(`Module XML file not found in ${codeSrc}`)
+        return
+      }
+      const name = getNameFromModuleXml(moduleXmlFile)
       if (!modules[name]) {
-        console.warn(`Module "${name}" not found in config.php`)
+        logger.warn(`Module "${name}" not found in config.php`)
         return
       }
       modules[name].src = codeSrc.split('/').slice(0, 4).join('/')
@@ -47,7 +51,7 @@ export function getModules(projectRoot) {
     .forEach((vendorSrc) => {
       const name = getNameFromModuleXml(path.join(projectRoot, vendorSrc))
       if (!modules[name]) {
-        console.warn(`Module "${name}" not found in config.php`)
+        logger.warn(`Module "${name}" not found in config.php`)
         return
       }
       modules[name].src = vendorSrc.split('/').slice(0, -2).join('/')
