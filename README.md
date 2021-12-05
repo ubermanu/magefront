@@ -1,4 +1,4 @@
-# Magefront
+![Magefront](docs/images/magefront-logo-title.svg)
 
 This project is a frontend tool for Magento 2.
 
