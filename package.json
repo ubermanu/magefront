@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -27,6 +27,7 @@
     "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
     "magefront-plugin-less": "workspace:*",
+    "magefront-plugin-sass": "workspace:*",
     "php-parser": "^3.0.3",
     "xml2js": "^0.4.23"
   },

@@ -1,0 +1,30 @@
+{
+  "name": "magefront-plugin-sass",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/sass"
+  },
+  "main": "plugin.mjs",
+  "files": [
+    "plugin.mjs"
+  ],
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.44.0"
+  },
+  "devDependencies": {
+    "node-sass": "^6.0.1"
+  }
+}
