@@ -1,8 +1,7 @@
 import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
-import { getThemes } from '../theme.mjs'
-import { getModules } from '../modules.mjs'
+import { getThemes, getModules } from '../magento.mjs'
 
 const themes = getThemes()
 

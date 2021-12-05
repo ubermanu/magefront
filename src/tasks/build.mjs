@@ -1,6 +1,7 @@
 import gulp from 'gulp'
-import { getThemeBuildConfig } from '../theme.mjs'
-import { getModules } from '../modules.mjs'
+import fs from 'fs'
+import less from '../../plugins/less/plugin.mjs'
+import { getModules, getThemes } from '../magento.mjs'
 
 // TODO: get config from the theme
 // TODO: Add support for multiple themes at once?
@@ -24,4 +25,28 @@ export const build = async (theme) => {
   if (tasks.length > 0) {
     gulp.series(...tasks)()
   }
+}
+
+// TODO: return default config if not defined
+// TODO: get the correct root path
+const getThemeBuildConfig = async (name) => {
+  const theme = getThemes()[name]
+  let customConfig = {}
+
+  const customConfigFile = `${process.cwd()}/${theme.src}/magefront.config.js`
+  if (fs.existsSync(customConfigFile)) {
+    const { default: defaults } = await import(customConfigFile)
+    customConfig = defaults
+  }
+
+  const defaultConfig = {
+    locales: ['en_US'],
+    plugins: [less()]
+  }
+
+  const config = Object.assign({}, defaultConfig, customConfig)
+  config.src = `var/view_preprocessed/magefront/${theme.dest}`
+  config.dest = `pub/static/frontend/${name.replace('_', '/')}`
+
+  return config
 }
