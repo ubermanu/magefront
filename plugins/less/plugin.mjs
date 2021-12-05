@@ -1,3 +1,4 @@
+import path from 'path'
 import gulp from 'gulp'
 import less from 'gulp-less'
 import magentoImport from './lib/magento-import-preprocessor.mjs'
@@ -11,8 +12,10 @@ export default (options) => (themeConfig) => {
     plugins: [magentoImport(themeConfig.modules), less23Compat()]
   }
 
+  const { src, dest } = options
+
   return gulp
-    .src(`${themeConfig.src}/web/css/!(_)*.less`)
+    .src(path.join(themeConfig.src, src || 'web/css/!(_)*.less'))
     .pipe(less(options))
-    .pipe(gulp.dest(`${themeConfig.dest}/css`))
+    .pipe(gulp.dest(path.join(themeConfig.dest, dest || 'css')))
 }
