@@ -29,6 +29,11 @@ class preProcessor {
       (match, v, calc) => `.lib-css(${v}, (${calc}));`
     )
 
+    // Fix an issue in the `Magento_Sales/web/css/source/_module.less` file, line 373.
+    // Somehow the ceil function there is not working properly.
+    // Wrap the first argument of the `ceil` function in parentheses.
+    src = src.replace(/ceil\((.*)\)/gim, (match, v) => `ceil((${v}));`)
+
     return src
   }
 }
