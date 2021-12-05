@@ -25,7 +25,7 @@ class preProcessor {
     // Fix the error "Operation on an invalid type in..." flagged into the `.media-width` mixins.
     // Wrap any calculation in the `.lib-css` mixin with parentheses.
     src = src.replace(
-      /\.lib-css\((.*),\s*([@\w_-]+\s[+-/*]+\s.*)\);/gim,
+      /\.lib-css\((.*),\s*([@\w_-]+\s[+\-/*]+\s.*)\);/gim,
       (match, v, calc) => `.lib-css(${v}, (${calc}));`
     )
 
