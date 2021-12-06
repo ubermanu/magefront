@@ -1,17 +1,14 @@
 import path from 'path'
 import chokidar from 'chokidar'
-import { getModules, getThemes } from '../magento.mjs'
+import { getModules, getTheme } from '../magento.mjs'
 import { build } from './build.mjs'
 import { instance } from './browser-sync.mjs'
 import { inheritance } from './inheritance.mjs'
+import { projectPath, tempPath } from '../config.mjs'
 
-const projectPath = process.cwd()
-const tempPath = path.join(projectPath, 'var/view_preprocessed/magefront')
-
-// TODO: Implement watch task
 export const watch = async (themeName) => {
   const watcherConfig = { ignoreInitial: true }
-  const theme = getThemes()[themeName]
+  const theme = getTheme(themeName)
   const modules = Object.values(getModules()).filter((m) => m.src && m.enabled)
 
   const themeTempSrc = path.join(tempPath, theme.dest)
@@ -29,18 +26,14 @@ export const watch = async (themeName) => {
   const tempWatcher = chokidar.watch(themeTempSrc, watcherConfig)
   const srcWatcher = chokidar.watch(themeSrc, watcherConfig)
 
-  async function reinitialize() {
-    await inheritance(themeName)
-  }
-
-  // Watch add / move / rename / delete events on source files
+  // When files are created, updated or deleted, rebuild the symlinks
+  const reinitialize = async () => await inheritance(themeName)
   srcWatcher
     .on('add', reinitialize)
     .on('addDir', reinitialize)
     .on('unlink', reinitialize)
     .on('unlinkDir', reinitialize)
 
-  // print msg when temp dir watcher is initialized
   tempWatcher.on('ready', () => {
     console.log(`Watching ${themeTempSrc}`)
   })

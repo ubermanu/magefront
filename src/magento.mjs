@@ -6,7 +6,7 @@ import logger from './logger.mjs'
 /**
  * Crawl the Magento project source code and return a list of all the modules.
  * @param projectRoot
- * @return {{}}
+ * @return {{name, enabled, src}}
  */
 export function getModules(projectRoot) {
   projectRoot = projectRoot || process.cwd()
@@ -61,9 +61,19 @@ export function getModules(projectRoot) {
 }
 
 /**
+ * Return a list of module names that are enabled in the Magento project.
+ * @return {[]}
+ */
+export const getEnabledModuleNames = () => {
+  return Object.values(getModules())
+    .filter((m) => m.enabled && m.src)
+    .map((m) => m.name)
+}
+
+/**
  * Crawl the Magento project source code and return a list of all the themes.
  * @param projectRoot
- * @return {{}}
+ * @return {{name, src, dest, area, parent}}
  */
 export const getThemes = (projectRoot) => {
   projectRoot = projectRoot || process.cwd()
@@ -108,6 +118,19 @@ export const getThemes = (projectRoot) => {
     })
 
   return themes
+}
+
+/**
+ * Get the theme by name.
+ * @param name
+ * @return {*}
+ */
+export const getTheme = (name) => {
+  const themes = getThemes()
+  if (!themes[name]) {
+    throw new Error(`Theme "${name}" not found`)
+  }
+  return themes[name]
 }
 
 /**

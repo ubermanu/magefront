@@ -1,23 +1,32 @@
+import path from 'path'
 import gulp from 'gulp'
-import fs from 'fs'
-import less from '../../plugins/less/plugin.mjs'
-import { getModules, getThemes } from '../magento.mjs'
+import { getEnabledModuleNames } from '../magento.mjs'
+import { getConfigForTheme } from '../config.mjs'
 
-// TODO: get config from the theme
-// TODO: Add support for multiple themes at once?
-export const build = async (theme) => {
-  const themeConfig = await getThemeBuildConfig(theme)
+/**
+ * Build the theme.
+ * If a configuration file is found, it will be used.
+ * TODO: Use a `-c` param to specify a configuration file.
+ *
+ * @param themeName
+ * @return {Promise<void>}
+ */
+export const build = async (themeName) => {
+  const themeConfig = await getConfigForTheme(themeName)
   const tasks = []
-  const modules = Object.values(getModules())
-    .filter((m) => m.enabled && m.src)
-    .map((m) => m.name)
+  const modules = getEnabledModuleNames()
 
   // Execute all the tasks for each locales
+  // The destination dir gets the locale appended to it
   for (const locale of themeConfig.locales) {
-    const localeDir = `${themeConfig.dest}/${locale}`
     for (const plugin of themeConfig.plugins) {
       tasks.push(() =>
-        plugin({ ...themeConfig, dest: localeDir, locale, modules })
+        plugin({
+          ...themeConfig,
+          dest: path.join(themeConfig.dest, locale),
+          locale,
+          modules
+        })
       )
     }
   }
@@ -25,28 +34,4 @@ export const build = async (theme) => {
   if (tasks.length > 0) {
     gulp.series(...tasks)()
   }
-}
-
-// TODO: return default config if not defined
-// TODO: get the correct root path
-export const getThemeBuildConfig = async (name) => {
-  const theme = getThemes()[name]
-  let customConfig = {}
-
-  const customConfigFile = `${process.cwd()}/${theme.src}/magefront.config.js`
-  if (fs.existsSync(customConfigFile)) {
-    const { default: defaults } = await import(customConfigFile)
-    customConfig = defaults
-  }
-
-  const defaultConfig = {
-    locales: ['en_US'],
-    plugins: [less()]
-  }
-
-  const config = Object.assign({}, defaultConfig, customConfig)
-  config.src = `var/view_preprocessed/magefront/${theme.dest}`
-  config.dest = `pub/static/frontend/${name.replace('_', '/')}`
-
-  return config
 }

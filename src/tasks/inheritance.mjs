@@ -1,12 +1,10 @@
 import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
-import { getThemes, getModules } from '../magento.mjs'
+import { getModules, getThemes } from '../magento.mjs'
+import { projectPath, tempPath } from '../config.mjs'
 
 const themes = getThemes()
-
-const projectPath = process.cwd()
-const tempPath = projectPath + '/var/view_preprocessed/magefront/'
 
 function createSymlink(srcPath, destPath) {
   fs.removeSync(destPath)
@@ -45,6 +43,7 @@ export const inheritance = async (name) => {
   fs.removeSync(themeDest)
 
   // Add the Magento/base resources as a dependency for everyone
+  // TODO: Might have too many ignores here (for backend theme)
   const libSrc = path.join(projectPath, 'lib')
   generateSymlinks(libSrc, themeDest, '', [
     'internal/*',
@@ -60,6 +59,7 @@ export const inheritance = async (name) => {
 
   modules.forEach((m) => {
     // Resolve the "base" area as well (common to frontend and adminhtml)
+    // TODO: Merge both symlinks method?
     generateSymlinks(
       path.join(projectPath, m.src, 'view', 'base'),
       path.join(themeDest, m.name),
