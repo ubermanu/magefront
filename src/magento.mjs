@@ -112,7 +112,7 @@ export const getThemes = (projectRoot) => {
       const [, area, name] = registration.match(
         /'(frontend|adminhtml)\/([\w\/]+)'/
       )
-      const dest = `pub/static/${vendorSrc.split('/').slice(1, -1).join('/')}`
+      const dest = `pub/static/${name}`
       const parent = getParentFromThemeXml(path.join(projectRoot, vendorSrc))
       themes[name] = { name, src, dest, area, parent }
     })
