@@ -5,7 +5,7 @@ import fs from 'fs'
 /**
  * Merge all the requirejs-config files into one.
  *
- * @param options
+ * @param {any} options
  * @return {(function(*): void)|*}
  */
 export default (options) => (themeConfig) => {
@@ -14,12 +14,23 @@ export default (options) => (themeConfig) => {
 
   let packed = ''
 
-  glob
-    .sync(path.join(themeConfig.src, src || '*/requirejs-config.js'))
-    .forEach((file) => {
-      const content = fs.readFileSync(file, 'utf8')
-      packed += `(function(){\n${content}\nrequire.config(config);\n})();\n`
-    })
+  const files = glob.sync(src || '*/requirejs-config.js', {
+    cwd: themeConfig.src
+  })
+
+  // Sort by module order (defined in the config.php)
+  // TODO: Handle errors
+  const modules = themeConfig.modules
+  files.sort((a, b) => {
+    const [, modA] = a.match(/^(\w+_\w+)\/requirejs-config\.js$/)
+    const [, modB] = b.match(/^(\w+_\w+)\/requirejs-config\.js$/)
+    return modules.indexOf(modA) - modules.indexOf(modB)
+  })
+
+  files.forEach((file) => {
+    const content = fs.readFileSync(path.join(themeConfig.src, file), 'utf8')
+    packed += `(function(){\n${content}\nrequire.config(config);\n})();\n`
+  })
 
   const file = path.join(themeConfig.dest, dest || 'requirejs-config.js')
   fs.writeFileSync(file, `(function(require){\n${packed}})(require);`)
