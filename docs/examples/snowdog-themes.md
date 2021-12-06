@@ -1,4 +1,11 @@
-# Snowdog blank Sass
+# Snowdog Themes
+
+Here is a list of themes that are applicable for this example:
+
+- [Snowdog/blank](https://github.com/SnowdogApps/magento2-theme-blank-sass)
+- [Snowdog/alpaca](https://github.com/SnowdogApps/magento2-alpaca-theme)
+
+### Prerequisites
 
 It is possible to replicate some of [Frontools](https://github.com/SnowdogApps/magento2-frontools) features:
 
@@ -23,6 +30,6 @@ export default {
 }
 ```
 
-Then you can run:
+### Usage
 
     magefront build --theme Snowdog/blank

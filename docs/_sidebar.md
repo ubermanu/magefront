@@ -3,5 +3,5 @@
 * [Configuration](configuration.md)
 
 * Examples
-  * [Magento blank](examples/magento-blank.md)
-  * [Snowdog blank Sass](examples/snowdog-blank-sass.md)
+  * [Magento Themes](examples/magento-themes.md)
+  * [Snowdog Themes](examples/snowdog-themes.md)
