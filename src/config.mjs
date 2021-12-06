@@ -1,7 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import { getTheme } from './magento.mjs'
-import less from 'magefront-plugin-less'
+import lessPlugin from 'magefront-plugin-less'
+import requirejsPlugin from 'magefront-plugin-requirejs'
 
 // This tool is meant to be run at root level of the project
 export const projectPath = process.cwd()
@@ -32,7 +33,7 @@ export const getConfigForTheme = async (themeName) => {
   const defaultConfig = {
     theme: themeName,
     locales: ['en_US'],
-    plugins: [less()],
+    plugins: [lessPlugin(), requirejsPlugin()],
     src: path.join(relTempPath, theme.dest),
     dest: theme.dest
   }

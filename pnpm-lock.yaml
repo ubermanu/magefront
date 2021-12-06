@@ -14,6 +14,7 @@ importers:
       gulp: ^4.0.2
       magefront-plugin-babel: workspace:*
       magefront-plugin-less: workspace:*
+      magefront-plugin-requirejs: workspace:*
       magefront-plugin-sass: workspace:*
       magefront-plugin-stylus: workspace:*
       prettier: ^2.4.1
@@ -30,6 +31,7 @@ importers:
       gulp: 4.0.2
       magefront-plugin-babel: link:plugins/babel
       magefront-plugin-less: link:plugins/less
+      magefront-plugin-requirejs: link:plugins/requirejs
       magefront-plugin-sass: link:plugins/sass
       magefront-plugin-stylus: link:plugins/stylus
       winston: 3.3.3
@@ -54,6 +56,12 @@ importers:
     dependencies:
       gulp: 4.0.2
       gulp-less: 5.0.0
+
+  plugins/requirejs:
+    specifiers:
+      fast-glob: ^3.2.7
+    dependencies:
+      fast-glob: 3.2.7
 
   plugins/sass:
     specifiers:

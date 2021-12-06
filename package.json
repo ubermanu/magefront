@@ -31,6 +31,7 @@
     "gulp": "^4.0.2",
     "magefront-plugin-babel": "workspace:*",
     "magefront-plugin-less": "workspace:*",
+    "magefront-plugin-requirejs": "workspace:*",
     "magefront-plugin-sass": "workspace:*",
     "magefront-plugin-stylus": "workspace:*",
     "winston": "^3.3.3"
