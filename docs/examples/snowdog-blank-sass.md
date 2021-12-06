@@ -1,11 +1,15 @@
 # Snowdog blank Sass
 
-This theme relies on [Frontools](https://github.com/SnowdogApps/magento2-frontools) by default.
+It is possible to replicate some of [Frontools](https://github.com/SnowdogApps/magento2-frontools) features:
 
-- It requires [node-sass](https://github.com/SnowdogApps/magento2-frontools#sass-compilerjson-structure) in order to compile the Sass files.
+- Use [node-sass](https://github.com/SnowdogApps/magento2-frontools#sass-compilerjson-structure) in order to compile the Sass files.
 - The scss files are located in the `styles` directory.
 
-## Configuration
+Install the following dependencies:
+
+    npm install node-sass
+
+Create the configuration file in your project:
 
 ```js
 // magefront.config.js
@@ -19,6 +23,6 @@ export default {
 }
 ```
 
-## Usage
+Then you can run:
 
     magefront build --theme Snowdog/blank
