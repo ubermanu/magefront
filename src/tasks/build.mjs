@@ -1,7 +1,7 @@
 import path from 'path'
-import gulp from 'gulp'
 import { getEnabledModuleNames } from '../magento.mjs'
 import { getConfigForTheme } from '../config.mjs'
+import logger from '../logger.mjs'
 
 /**
  * Build the theme.
@@ -13,25 +13,20 @@ import { getConfigForTheme } from '../config.mjs'
  */
 export const build = async (themeName) => {
   const themeConfig = await getConfigForTheme(themeName)
-  const tasks = []
   const modules = getEnabledModuleNames()
 
   // Execute all the tasks for each locales
   // The destination dir gets the locale appended to it
   for (const locale of themeConfig.locales) {
+    const dest = path.join(themeConfig.dest, locale)
     for (const plugin of themeConfig.plugins) {
-      tasks.push(() =>
-        plugin({
-          ...themeConfig,
-          dest: path.join(themeConfig.dest, locale),
-          locale,
-          modules
-        })
-      )
+      try {
+        plugin({ ...themeConfig, dest, locale, modules })
+      } catch (e) {
+        // TODO: Add new transport to the logger
+        console.error(e)
+        logger.error(e)
+      }
     }
-  }
-
-  if (tasks.length > 0) {
-    gulp.series(...tasks)()
   }
 }
