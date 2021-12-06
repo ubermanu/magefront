@@ -42,6 +42,7 @@ export default (options) => (themeConfig) => {
       if (err) {
         throw new Error(err)
       } else {
+        fs.mkdirSync(path.dirname(destPath), { recursive: true })
         fs.writeFileSync(destPath, output.css)
       }
     })
