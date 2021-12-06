@@ -87,11 +87,8 @@ export const getThemes = (projectRoot) => {
     .forEach((designSrc) => {
       const name = designSrc.split('/').slice(3, -1).join('/')
       const src = designSrc.split('/').slice(0, -1).join('/')
-      const dest = path.join(
-        'pub/static',
-        designSrc.split('/').slice(2, -1).join('/')
-      )
       const area = designSrc.split('/')[2]
+      const dest = path.join('pub/static', area, name)
       const parent = getParentFromThemeXml(path.join(projectRoot, designSrc))
       themes[name] = { name, src, dest, area, parent }
     })
@@ -112,7 +109,7 @@ export const getThemes = (projectRoot) => {
       const [, area, name] = registration.match(
         /'(frontend|adminhtml)\/([\w\/]+)'/
       )
-      const dest = `pub/static/${name}`
+      const dest = path.join('pub/static', area, name)
       const parent = getParentFromThemeXml(path.join(projectRoot, vendorSrc))
       themes[name] = { name, src, dest, area, parent }
     })
