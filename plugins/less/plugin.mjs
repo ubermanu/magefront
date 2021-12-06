@@ -1,7 +1,6 @@
 import path from 'path'
-import glob from 'fast-glob'
-import fs from 'fs'
-import less from 'less'
+import gulp from 'gulp'
+import less from 'gulp-less'
 import magentoImport from './lib/magento-import-preprocessor.mjs'
 import less23Compat from './lib/less-23-compat-preprocessor.mjs'
 
@@ -13,38 +12,17 @@ import less23Compat from './lib/less-23-compat-preprocessor.mjs'
  * @return {(function(*): void)|*}
  */
 export default (options) => (themeConfig) => {
-  // By default we load these two preprocessors,
-  // so the core Magento 2 themes can be compiled without any configuration.
-  const defaultOptions = {
+  // Allow custom options to be passed in via the `options` parameter.
+  // Get the modules list from the themeConfig
+  // https://github.com/gulp-community/gulp-less#options
+  options = options || {
     plugins: [magentoImport(themeConfig.modules), less23Compat()]
   }
 
-  // Merge the default options with the user-provided options.
-  options = Object.assign({}, defaultOptions, options || {})
   const { src, dest } = options
 
-  const files = glob.sync(
-    path.join(themeConfig.src, src || 'web/css/!(_)*.less')
-  )
-
-  files.forEach((file) => {
-    const destPath = path.join(
-      themeConfig.dest,
-      dest || 'css',
-      path.basename(file, '.less') + '.css'
-    )
-
-    const contents = fs.readFileSync(file, 'utf8')
-    const opts = Object.assign({}, options, { filename: file })
-
-    // Render the LESS file to CSS.
-    less.render(contents, opts, (err, output) => {
-      if (err) {
-        throw new Error(err)
-      } else {
-        fs.mkdirSync(path.dirname(destPath), { recursive: true })
-        fs.writeFileSync(destPath, output.css)
-      }
-    })
-  })
+  return gulp
+    .src(path.join(themeConfig.src, src || 'web/css/!(_)*.less'))
+    .pipe(less(options))
+    .pipe(gulp.dest(path.join(themeConfig.dest, dest || 'css')))
 }
