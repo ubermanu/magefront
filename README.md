@@ -14,18 +14,16 @@ Install the package at the root level of your website:
 
     npx magefront build --theme Magento/blank
 
-**Note**: If no configuration file is present in the theme, it will use the [LESS](plugins/less) plugin by default.
-
 ## Configuration
 
-The configuration file should be located in the root directory of the theme.
-
-It accepts a series of plugins, see the following example:
+The `magefront.config.js` file should be located in the root directory of your project.
 
 ```js
 // magefront.config.js
 import less from 'magefront-plugin-less';
 
+// This is considered as the "default" configuration,
+// so the original themes (blank, luma) can work without it.
 export default {
     locales: ['en_US'],
     plugins: [
@@ -33,3 +31,5 @@ export default {
     ]
 };
 ```
+
+For more information, check the [documentation](https://ubermanu.github.io/magefront/).
