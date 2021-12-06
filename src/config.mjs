@@ -18,11 +18,19 @@ export const tempPath = path.join(projectPath, relTempPath)
 export const getConfigForTheme = async (themeName) => {
   const theme = getTheme(themeName)
 
-  const customConfig = await getConfigFromFile(
+  let customConfig = await getConfigFromFile(
     path.join(projectPath, 'magefront.config.js')
   )
 
+  // Add support for array into the config file
+  // Look for the theme name in the array of objects
+  if (Array.isArray(customConfig)) {
+    customConfig =
+      customConfig.filter((entry) => entry.theme === themeName).shift() || {}
+  }
+
   const defaultConfig = {
+    theme: themeName,
     locales: ['en_US'],
     plugins: [less()],
     src: path.join(relTempPath, theme.dest),
