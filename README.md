@@ -1,8 +1,10 @@
 ![Magefront](docs/images/magefront-logo-title.svg)
 
-This project is a frontend tool for Magento 2.
+**Magefront** is a tool that gives you the choice of which technology your themes rely on.
 
-It gives the themes the ability to choose which technology they rely on, based on the `magefront.config.js` file.
+For example, it can be `less`, `sass`, `stylus`, or whatever you want! 🚀
+
+You can see a list of the available plugins [here](plugins).
 
 ## Install
 
