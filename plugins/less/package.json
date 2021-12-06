@@ -21,7 +21,6 @@
     "plugin.mjs"
   ],
   "dependencies": {
-    "gulp": "^4.0.2",
-    "gulp-less": "^5.0.0"
+    "less": "^4.1.2"
   }
 }
