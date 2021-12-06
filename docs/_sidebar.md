@@ -1,5 +1,7 @@
 * [Introduction](/)
 
+* [Configuration](configuration.md)
+
 * Examples
   * [Magento blank](examples/magento-blank.md)
-  * [Snowdog Theme Blank Sass](examples/snowdog-blank-sass.md)
+  * [Snowdog blank Sass](examples/snowdog-blank-sass.md)
