@@ -23,28 +23,26 @@ export default (options) => (themeConfig) => {
   options = Object.assign({}, defaultOptions, options || {})
   const { src, dest } = options
 
-  // Get the files
-  const files = glob.sync(
-    path.join(themeConfig.src, src || 'web/css/!(_)*.less')
-  )
+  glob
+    .sync(path.join(themeConfig.src, src || 'web/css/!(_)*.less'))
+    .forEach((file) => {
+      const destPath = path.join(
+        themeConfig.dest,
+        dest || 'css',
+        path.basename(file, '.less') + '.css'
+      )
 
-  for (const file of files) {
-    const destPath = path.join(
-      themeConfig.dest,
-      dest || 'css',
-      path.basename(file, '.less') + '.css'
-    )
+      const contents = fs.readFileSync(file, 'utf8')
+      const opts = Object.assign({}, options, { filename: file })
 
-    const contents = fs.readFileSync(file, 'utf8')
-    const opts = Object.assign({}, options, { filename: file })
-
-    less.render(contents, opts, (err, output) => {
-      if (err) {
-        throw new Error(err)
-      } else {
-        fs.mkdirSync(path.dirname(destPath), { recursive: true })
-        fs.writeFileSync(destPath, output.css)
-      }
+      // Render the LESS file to CSS.
+      less.render(contents, opts, (err, output) => {
+        if (err) {
+          throw new Error(err)
+        } else {
+          fs.mkdirSync(path.dirname(destPath), { recursive: true })
+          fs.writeFileSync(destPath, output.css)
+        }
+      })
     })
-  }
 }
