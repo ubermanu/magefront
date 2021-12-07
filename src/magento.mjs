@@ -97,17 +97,13 @@ export const getThemes = (projectRoot) => {
   // Might be nice to restore the previous behavior, which was
   // scanning the composer.lock before hand.
   glob
-    .sync('vendor/*/*/theme.xml', {
+    .sync('vendor/**/*/theme.xml', {
       cwd: projectRoot
     })
     .forEach((vendorSrc) => {
       const src = vendorSrc.split('/').slice(0, -1).join('/')
-      const registration = fs.readFileSync(
-        path.join(projectRoot, src, 'registration.php'),
-        'utf8'
-      )
-      const [, area, name] = registration.match(
-        /'(frontend|adminhtml)\/([\w\/]+)'/
+      const { name, area } = getNameAndAreaFromRegistrationPhp(
+        path.join(projectRoot, src, 'registration.php')
       )
       const dest = path.join('pub/static', area, name)
       const parent = getParentFromThemeXml(path.join(projectRoot, vendorSrc))
@@ -150,4 +146,15 @@ function getParentFromThemeXml(file) {
   const themeXml = fs.readFileSync(file, 'utf8')
   const match = themeXml.match(/<parent>(.*)<\/parent>/)
   return match ? match[1].trim() : false
+}
+
+/**
+ * Get the name and area of a theme from its `registration.php` file.
+ * @param file
+ * @return {{area: string, name: string}}
+ */
+function getNameAndAreaFromRegistrationPhp(file) {
+  const registration = fs.readFileSync(file, 'utf8')
+  const [, area, name] = registration.match(/'(frontend|adminhtml)\/([\w\/]+)'/)
+  return { name, area }
 }

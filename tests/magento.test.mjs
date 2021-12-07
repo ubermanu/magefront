@@ -17,6 +17,10 @@ test('Get all the themes from Magento source code', () => {
     'app/design/frontend/Andromeda/blank'
   )
   assert.is(
+    themes['Orion/blank'].src,
+    'vendor/orion/theme-frontend-orion-blank/src'
+  )
+  assert.is(
     themes['Sirius/parent'].src,
     'vendor/sirius/theme-frontend-sirius-parent'
   )
@@ -24,6 +28,7 @@ test('Get all the themes from Magento source code', () => {
     themes['Sirius/child'].src,
     'vendor/sirius/theme-frontend-sirius-child'
   )
+  assert.is(themes['Orion/blank'].parent, false)
   assert.is(themes['Sirius/parent'].parent, false)
   assert.is(themes['Sirius/child'].parent, 'Sirius/parent')
 })
