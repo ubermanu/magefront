@@ -44,19 +44,14 @@ export function getModules(projectRoot = null) {
   getComposerPackages(projectRoot)
     .filter((pkg) => pkg.type === 'magento2-module')
     .forEach((pkg) => {
-      // Get the registration files from the autoload section
-      const registrations = (pkg?.autoload?.files || []).filter((file) => file.endsWith('registration.php'))
-
-      // For each registration file, update the source path in the modules list.
-      registrations.forEach((registration) => {
-        const registrationPath = path.join('vendor', pkg.name, registration)
-        const vendorSrc = path.dirname(registrationPath)
-        const name = getNameFromModuleXml(path.join(projectRoot, vendorSrc, 'etc/module.xml'))
+      getPackageRegistrations(pkg).forEach((registration) => {
+        const src = path.join('vendor', pkg.name, path.dirname(registration))
+        const name = getNameFromModuleXml(path.join(projectRoot, src, 'etc/module.xml'))
         if (!modules[name]) {
           logger.warn(`Module "${name}" not found in config.php`)
           return
         }
-        modules[name].src = vendorSrc
+        modules[name].src = src
       })
     })
 
@@ -97,18 +92,17 @@ export const getThemes = (projectRoot = null) => {
     })
 
   // Get the themes from the vendor directory.
-  // Might be nice to restore the previous behavior, which was
-  // scanning the composer.lock before hand.
-  glob
-    .sync('vendor/**/*/theme.xml', {
-      cwd: projectRoot
-    })
-    .forEach((vendorSrc) => {
-      const src = vendorSrc.split('/').slice(0, -1).join('/')
-      const { name, area } = getThemeNameAndAreaFromRegistrationPhp(path.join(projectRoot, src, 'registration.php'))
-      const dest = path.join('pub/static', area, name)
-      const parent = getParentFromThemeXml(path.join(projectRoot, vendorSrc))
-      themes[name] = { name, src, dest, area, parent }
+  // For each package, get the subpackages according to the `registration.php` file.
+  getComposerPackages(projectRoot)
+    .filter((pkg) => pkg.type === 'magento2-theme')
+    .forEach((pkg) => {
+      getPackageRegistrations(pkg).forEach((registration) => {
+        const src = path.join('vendor', pkg.name, path.dirname(registration))
+        const { name, area } = getThemeNameAndAreaFromRegistrationPhp(path.join(projectRoot, src, 'registration.php'))
+        const dest = path.join('pub/static', area, name)
+        const parent = getParentFromThemeXml(path.join(projectRoot, src, 'theme.xml'))
+        themes[name] = { name, src, dest, area, parent }
+      })
     })
 
   return themes
@@ -173,4 +167,15 @@ function getThemeNameAndAreaFromRegistrationPhp(file) {
   const registration = fs.readFileSync(file, 'utf8')
   const [, area, name] = registration.match(/'(frontend|adminhtml)\/([\w\/]+)'/)
   return { name, area }
+}
+
+/**
+ * Return a list of registration files for the given
+ * composer package config.
+ * TODO: At one point this could be any file, not just `registration.php`.
+ * @param pkg
+ * @return {[]}
+ */
+function getPackageRegistrations(pkg) {
+  return (pkg?.autoload?.files || []).filter((file) => file.endsWith('registration.php'))
 }

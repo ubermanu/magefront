@@ -12,22 +12,10 @@ test('Get all the modules from Magento source code', () => {
 
 test('Get all the themes from Magento source code', () => {
   const themes = getThemes('tests/_fixtures')
-  assert.is(
-    themes['Andromeda/blank'].src,
-    'app/design/frontend/Andromeda/blank'
-  )
-  assert.is(
-    themes['Orion/blank'].src,
-    'vendor/orion/theme-frontend-orion-blank/src'
-  )
-  assert.is(
-    themes['Sirius/parent'].src,
-    'vendor/sirius/theme-frontend-sirius-parent'
-  )
-  assert.is(
-    themes['Sirius/child'].src,
-    'vendor/sirius/theme-frontend-sirius-child'
-  )
+  assert.is(themes['Andromeda/blank'].src, 'app/design/frontend/Andromeda/blank')
+  assert.is(themes['Orion/blank'].src, 'vendor/orion/theme-frontend-blank/src')
+  assert.is(themes['Sirius/parent'].src, 'vendor/sirius/theme-frontend-parent')
+  assert.is(themes['Sirius/child'].src, 'vendor/sirius/theme-frontend-child')
   assert.is(themes['Orion/blank'].parent, false)
   assert.is(themes['Sirius/parent'].parent, false)
   assert.is(themes['Sirius/child'].parent, 'Sirius/parent')
