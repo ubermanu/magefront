@@ -33,5 +33,6 @@ export default (options) => (themeConfig) => {
   })
 
   const file = path.join(themeConfig.dest, dest || 'requirejs-config.js')
+  fs.mkdirSync(path.dirname(file), { recursive: true })
   fs.writeFileSync(file, `(function(require){\n${packed}})(require);`)
 }
