@@ -8,7 +8,7 @@ import logger from './logger.mjs'
  * @param projectRoot
  * @return {{name, enabled, src}}
  */
-export function getModules(projectRoot) {
+export function getModules(projectRoot = null) {
   projectRoot = projectRoot || process.cwd()
   const modules = {}
 
@@ -40,21 +40,24 @@ export function getModules(projectRoot) {
     })
 
   // Get the list of modules in the vendor directory.
-  // Might be nice to restore the previous behavior, which was
-  // scanning the composer.lock before hand.
-  // The problem is that the module xml might be placed at different
-  // locations according to the module source code.
-  glob
-    .sync('vendor/**/*/etc/module.xml', {
-      cwd: projectRoot
-    })
-    .forEach((vendorSrc) => {
-      const name = getNameFromModuleXml(path.join(projectRoot, vendorSrc))
-      if (!modules[name]) {
-        logger.warn(`Module "${name}" not found in config.php`)
-        return
-      }
-      modules[name].src = vendorSrc.split('/').slice(0, -2).join('/')
+  // For each package, get the subpackages according to the `registration.php` file.
+  getComposerPackages(projectRoot)
+    .filter((pkg) => pkg.type === 'magento2-module')
+    .forEach((pkg) => {
+      // Get the registration files from the autoload section
+      const registrations = (pkg?.autoload?.files || []).filter((file) => file.endsWith('registration.php'))
+
+      // For each registration file, update the source path in the modules list.
+      registrations.forEach((registration) => {
+        const registrationPath = path.join('vendor', pkg.name, registration)
+        const vendorSrc = path.dirname(registrationPath)
+        const name = getNameFromModuleXml(path.join(projectRoot, vendorSrc, 'etc/module.xml'))
+        if (!modules[name]) {
+          logger.warn(`Module "${name}" not found in config.php`)
+          return
+        }
+        modules[name].src = vendorSrc
+      })
     })
 
   return modules
@@ -75,7 +78,7 @@ export const getEnabledModuleNames = () => {
  * @param projectRoot
  * @return {{name, src, dest, area, parent}}
  */
-export const getThemes = (projectRoot) => {
+export const getThemes = (projectRoot = null) => {
   projectRoot = projectRoot || process.cwd()
   const themes = {}
 
@@ -102,9 +105,7 @@ export const getThemes = (projectRoot) => {
     })
     .forEach((vendorSrc) => {
       const src = vendorSrc.split('/').slice(0, -1).join('/')
-      const { name, area } = getNameAndAreaFromRegistrationPhp(
-        path.join(projectRoot, src, 'registration.php')
-      )
+      const { name, area } = getThemeNameAndAreaFromRegistrationPhp(path.join(projectRoot, src, 'registration.php'))
       const dest = path.join('pub/static', area, name)
       const parent = getParentFromThemeXml(path.join(projectRoot, vendorSrc))
       themes[name] = { name, src, dest, area, parent }
@@ -124,6 +125,21 @@ export const getTheme = (name) => {
     throw new Error(`Theme "${name}" not found`)
   }
   return themes[name]
+}
+
+/**
+ * Get the list of packages installed.
+ * @param projectRoot
+ * @return {*}
+ */
+function getComposerPackages(projectRoot = null) {
+  projectRoot = projectRoot || process.cwd()
+  const composerLock = path.join(projectRoot, 'composer.lock')
+  if (!fs.existsSync(composerLock)) {
+    throw new Error(`composer.lock not found in ${projectRoot}`)
+  }
+  const lock = JSON.parse(fs.readFileSync(composerLock, 'utf8'))
+  return lock['packages'] || []
 }
 
 /**
@@ -153,7 +169,7 @@ function getParentFromThemeXml(file) {
  * @param file
  * @return {{area: string, name: string}}
  */
-function getNameAndAreaFromRegistrationPhp(file) {
+function getThemeNameAndAreaFromRegistrationPhp(file) {
   const registration = fs.readFileSync(file, 'utf8')
   const [, area, name] = registration.match(/'(frontend|adminhtml)\/([\w\/]+)'/)
   return { name, area }
