@@ -48,7 +48,7 @@ export function getModules(projectRoot = null) {
         const src = path.join('vendor', pkg.name, path.dirname(registration))
         const name = getNameFromModuleXml(path.join(projectRoot, src, 'etc/module.xml'))
         if (!modules[name]) {
-          logger.warn(`Module "${name}" not found in config.php`)
+          logger.debug(`Module "${name}" not found in config.php`)
           return
         }
         modules[name].src = src
