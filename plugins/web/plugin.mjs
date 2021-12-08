@@ -6,6 +6,7 @@ import through from 'through2'
  * Copy the content of the web dir into the correct destination.
  */
 export default (options) => (themeConfig) => {
+  options = options || {}
   const { src, dest } = options
   const paths = getMagentoWebPaths(themeConfig, src || '**/*')
 
