@@ -1,24 +1,28 @@
 import bs from 'browser-sync'
+import logger from '../logger.mjs'
 
 // Current instance of BrowserSync
 export let instance
 
-// TODO: Sanitize the url
 export const browserSync = async (url) => {
-  const config = {
-    proxy: url,
-    port: 3000,
-    rewriteRules: [
-      {
-        match: '.' + url,
-        replace: ''
-      }
-    ],
-    ui: {
-      port: 3001
+  try {
+    const u = new URL(url)
+    const config = {
+      proxy: u.hostname,
+      port: u.port || 3000,
+      ui: false,
+      open: false,
+      rewriteRules: [
+        {
+          match: '.' + u.hostname,
+          replace: ''
+        }
+      ]
     }
-  }
 
-  instance = bs.create()
-  instance.init(config)
+    instance = bs.create()
+    instance.init(config)
+  } catch (e) {
+    logger.error(e)
+  }
 }
