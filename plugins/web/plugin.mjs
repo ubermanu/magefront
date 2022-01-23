@@ -54,7 +54,8 @@ export const fixMagentoDestWebPaths = () => {
     // Remove the `web` part from the path
     // web/**/*.js --> **/*.js
     // Magento_Catalog/web/**/*.js --> Magento_Catalog/**/*.js
-    file.path = file.path.replace(/web\//, '')
+    const relPath = file.relative.replace(/^(\w+_\w+\/)?(web\/)/, '$1')
+    file.path = path.join(file.base, relPath)
 
     cb(null, file)
   })
