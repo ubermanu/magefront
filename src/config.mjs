@@ -33,12 +33,24 @@ export const getConfigForTheme = async (themeName) => {
   const defaultConfig = {
     theme: themeName,
     locales: ['en_US'],
-    plugins: [lessPlugin(), webCopyPlugin(), requirejsPlugin()],
+    plugins: [lessPlugin()],
+    copyWebDir: true,
+    concatRequireJs: true,
     src: path.join(relTempPath, theme.dest),
     dest: theme.dest
   }
 
-  return Object.assign({}, defaultConfig, customConfig)
+  const finalConfig = Object.assign({}, defaultConfig, customConfig)
+
+  if (finalConfig.copyWebDir) {
+    finalConfig.plugins.push(webCopyPlugin())
+  }
+
+  if (finalConfig.concatRequireJs) {
+    finalConfig.plugins.push(requirejsPlugin())
+  }
+
+  return finalConfig
 }
 
 /**

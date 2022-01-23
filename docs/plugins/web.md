@@ -8,9 +8,17 @@ The web plugin just copy the content of the `web` directories of your theme and 
 - `vendor/magento/module-<module-name>/web/`
 - ...
 
-> 💡 This plugin is enabled by default if no configuration is defined
+> 💡 This plugin is enabled by default
 
 ### Usage
+
+```js
+export default {
+    copyWebDir: true
+}
+```
+
+or using the dedicated plugin:
 
 ```js
 import copyWeb from 'magefront-plugin-web'
