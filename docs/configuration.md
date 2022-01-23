@@ -11,6 +11,8 @@ export default {
     theme: 'Magento/blank',
     locales: ['en_US'],
     plugins: [less()],
+    copyWebDir: true,
+    concatRequireJs: true,
     src: 'vendor/magento/theme-frontend-blank',
     dest: 'pub/static/frontend/Magento/blank',
 }
