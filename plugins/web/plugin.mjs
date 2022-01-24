@@ -51,6 +51,12 @@ export const fixMagentoDestWebPaths = () => {
       return
     }
 
+    // Ignore the CSS source files
+    if (/^(\w+_\w+\/)?web\/css\/source\/.*/.test(file.relative)) {
+      cb()
+      return
+    }
+
     // Remove the `web` part from the path
     // web/**/*.js --> **/*.js
     // Magento_Catalog/web/**/*.js --> Magento_Catalog/**/*.js
