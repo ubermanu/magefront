@@ -5,6 +5,7 @@ import { build } from './tasks/build.mjs'
 import { inheritance } from './tasks/inheritance.mjs'
 import { browserSync } from './tasks/browser-sync.mjs'
 import { watch } from './tasks/watch.mjs'
+import { list } from './tasks/list.mjs'
 
 const program = new Command()
 
@@ -47,6 +48,13 @@ program
   .requiredOption('--theme <theme>', 'Theme name.')
   .action(async ({ theme }) => {
     await inheritance(theme)
+  })
+
+program
+  .command('list')
+  .description('List the available themes.')
+  .action(() => {
+    list()
   })
 
 program.parse(process.argv)

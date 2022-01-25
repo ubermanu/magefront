@@ -8,6 +8,7 @@ importers:
       '@babel/preset-env': ^7.16.4
       browser-sync: ^2.27.7
       chokidar: ^3.5.2
+      cli-table: ^0.3.11
       commander: ^8.3.0
       fast-glob: ^3.2.7
       fs-extra: ^10.0.0
@@ -26,6 +27,7 @@ importers:
       '@babel/preset-env': 7.16.4_@babel+core@7.16.0
       browser-sync: 2.27.7
       chokidar: 3.5.2
+      cli-table: 0.3.11
       commander: 8.3.0
       fast-glob: 3.2.7
       fs-extra: 10.0.0
@@ -1963,6 +1965,13 @@ packages:
       static-extend: 0.1.2
     dev: false
 
+  /cli-table/0.3.11:
+    resolution: {integrity: sha512-IqLQi4lO0nIB4tcdTpN4LCB9FI3uqrJZK7RC515EnhZ6qBaglkIgICb1wjeAqpdoOabm1+SuQtkXIPdYC93jhQ==}
+    engines: {node: '>= 0.2.0'}
+    dependencies:
+      colors: 1.0.3
+    dev: false
+
   /cliui/2.1.0:
     resolution: {integrity: sha1-S0dXYP+AJkx2LDoXGQMukcf+oNE=}
     dependencies:
@@ -2077,6 +2086,11 @@ packages:
     dependencies:
       color-convert: 1.9.3
       color-string: 1.9.0
+    dev: false
+
+  /colors/1.0.3:
+    resolution: {integrity: sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=}
+    engines: {node: '>=0.1.90'}
     dev: false
 
   /colors/1.4.0:

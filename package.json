@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.10.3",
+  "version": "0.11.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -25,6 +25,7 @@
     "@babel/preset-env": "^7.16.4",
     "browser-sync": "^2.27.7",
     "chokidar": "^3.5.2",
+    "cli-table": "^0.3.11",
     "commander": "^8.3.0",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
