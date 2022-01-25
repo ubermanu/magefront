@@ -2,6 +2,12 @@
 
 * [Configuration](configuration.md)
 
+* CLI
+  * [Build](tasks/build.md)
+  * [Watch](tasks/watch.md)
+  * [Dev](tasks/dev.md)
+  * [List](tasks/list.md)
+
 * Plugins
   * [LESS](plugins/less.md)
   * [RequireJS](plugins/requirejs.md)
