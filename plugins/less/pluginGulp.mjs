@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import less from 'less'
+import less27 from 'less'
 import through2 from 'through2'
 import replaceExt from 'replace-ext'
 import applySourceMap from 'vinyl-sourcemaps-apply'
@@ -47,7 +47,7 @@ function inlineSources(map) {
 function renderLess(str, opts) {
   return new Promise(function (resolve, reject) {
     const { compiler } = opts
-    ;(compiler || less).render(str, opts, function (err, res) {
+    ;(compiler || less27).render(str, opts, function (err, res) {
       if (err) {
         reject(err)
       } else {
