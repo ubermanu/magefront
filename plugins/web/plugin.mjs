@@ -52,7 +52,7 @@ export const fixMagentoDestWebPaths = () => {
     }
 
     // Ignore the CSS source files
-    if (/^(\w+_\w+\/)?web\/css\/source\/.*/.test(file.relative)) {
+    if (/^(\w+_\w+\/)?web\/css\/.*/.test(file.relative) && path.extname(file.relative) !== '.css') {
       cb()
       return
     }
