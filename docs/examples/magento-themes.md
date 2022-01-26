@@ -3,8 +3,8 @@
 Here is the compatibility list, as of Magento ~2.4.0:
 
 - [x] Magento/blank
-- [ ] Magento/luma
-- [ ] Magento/backend
+- [x] Magento/luma
+- [x] Magento/backend
 
 ### Usage
 

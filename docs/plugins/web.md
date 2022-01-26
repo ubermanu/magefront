@@ -17,13 +17,3 @@ export default {
     copyWebDir: true
 }
 ```
-
-or using the dedicated plugin:
-
-```js
-import copyWeb from 'magefront-plugin-web'
-
-export default {
-    plugins: [copyWeb()]
-}
-```

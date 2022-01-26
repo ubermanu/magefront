@@ -13,13 +13,3 @@ export default {
     concatRequireJs: true
 }
 ```
-
-or using the dedicated plugin:
-
-```js
-import requirejs from 'magefront-plugin-requirejs'
-
-export default {
-    plugins: [requirejs()]
-}
-```
