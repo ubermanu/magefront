@@ -15,7 +15,7 @@ export const build = async (themeName) => {
   const themeConfig = await getConfigForTheme(themeName)
   const modules = getEnabledModuleNames()
 
-  // Execute all the tasks for each locales
+  // Execute all the tasks for each locale
   // The destination dir gets the locale appended to it
   for (const locale of themeConfig.locales) {
     const dest = path.join(themeConfig.dest, locale)
