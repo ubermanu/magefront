@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-less",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "type": "module",
   "keywords": [
     "magefront",
@@ -18,7 +18,8 @@
   "main": "plugin.mjs",
   "files": [
     "lib",
-    "plugin.mjs"
+    "plugin.mjs",
+    "pluginGulp.mjs"
   ],
   "dependencies": {
     "gulp": "^4.0.2",
