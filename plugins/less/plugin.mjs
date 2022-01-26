@@ -1,8 +1,7 @@
 import path from 'path'
 import gulp from 'gulp'
-import less from 'gulp-less'
+import less from './pluginGulp.mjs'
 import magentoImport from './lib/magento-import-preprocessor.mjs'
-import less23Compat from './lib/less-23-compat-preprocessor.mjs'
 
 /**
  * For all the `less` files in the `css` directory, compile them to CSS.
@@ -16,7 +15,7 @@ export default (options) => (themeConfig) => {
   // Get the modules list from the themeConfig
   // https://github.com/gulp-community/gulp-less#options
   options = options || {
-    plugins: [magentoImport(themeConfig.modules), less23Compat()]
+    plugins: [magentoImport(themeConfig.modules)]
   }
 
   const { src, dest } = options
