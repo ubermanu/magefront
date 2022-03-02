@@ -30,9 +30,9 @@ import less from 'magefront-plugin-less';
 // so the original themes (blank, luma) can work without it.
 export default {
     locales: ['en_US'],
-    plugins: [
-        less()
-    ]
+    plugins: [less()],
+    copyWebDir: true,
+    concatRequireJs: true,
 };
 ```
 
