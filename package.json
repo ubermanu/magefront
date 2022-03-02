@@ -17,6 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git"
   },
+  "module": "src/main.mjs",
   "scripts": {
     "test": "uvu tests"
   },
