@@ -1,5 +1,4 @@
 import bs from 'browser-sync'
-import logger from '../logger.mjs'
 
 // Current instance of BrowserSync
 export let instance
@@ -23,6 +22,6 @@ export const browserSync = async (url) => {
     instance = bs.create()
     instance.init(config)
   } catch (e) {
-    logger.error(e)
+    console.error(e)
   }
 }

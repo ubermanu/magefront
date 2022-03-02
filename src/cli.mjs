@@ -1,11 +1,9 @@
 import { Command } from 'commander'
-// FIXME: build the cli using rollup
-// import { version } from '../package.json'
-import { build } from './tasks/build.mjs'
-import { inheritance } from './tasks/inheritance.mjs'
-import { browserSync } from './tasks/browser-sync.mjs'
-import { watch } from './tasks/watch.mjs'
-import { list } from './tasks/list.mjs'
+import { build } from './actions/build.mjs'
+import { inheritance } from './actions/inheritance.mjs'
+import { browserSync } from './actions/browser-sync.mjs'
+import { watch } from './actions/watch.mjs'
+import { list } from './actions/list.mjs'
 
 const program = new Command()
 

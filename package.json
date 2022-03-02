@@ -35,8 +35,7 @@
     "magefront-plugin-requirejs": "workspace:*",
     "magefront-plugin-sass": "workspace:*",
     "magefront-plugin-stylus": "workspace:*",
-    "magefront-plugin-web": "workspace:*",
-    "winston": "^3.6.0"
+    "magefront-plugin-web": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

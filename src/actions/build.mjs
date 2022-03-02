@@ -1,8 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import { getEnabledModuleNames } from '../magento.mjs'
 import { getConfigForTheme } from '../config.mjs'
-import logger from '../logger.mjs'
+import { getModules } from '../main.mjs'
 
 /**
  * Build the theme.
@@ -15,15 +14,14 @@ import logger from '../logger.mjs'
  */
 export const build = async (themeName, clean = true) => {
   const themeConfig = await getConfigForTheme(themeName)
-  const modules = getEnabledModuleNames()
+
+  const modules = getModules()
+    .filter((mod) => mod.enabled && mod.src)
+    .map((mod) => mod.name)
 
   // Clean up the destination dir
   if (clean) {
-    fs.rmSync(themeConfig.dest, { recursive: true }, (err) => {
-      if (err) {
-        console.error(err)
-      }
-    })
+    fs.rmSync(themeConfig.dest, { recursive: true })
   }
 
   // Execute all the tasks for each locale
@@ -36,7 +34,6 @@ export const build = async (themeName, clean = true) => {
       } catch (e) {
         // TODO: Add new transport to the logger
         console.error(e)
-        logger.error(e)
       }
     }
   }

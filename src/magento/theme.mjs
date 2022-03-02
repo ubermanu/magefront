@@ -9,6 +9,7 @@ export class Theme extends Module {
   area
   parent = null
   modules = []
+  ignore = []
 
   get dest() {
     return path.join('pub/static', this.area + '/' + this.name)

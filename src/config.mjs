@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { getTheme } from './magento.mjs'
+import { getThemes } from './main.mjs'
 
 // Default configuration plugins
 import lessPlugin from 'magefront-plugin-less'
@@ -9,8 +9,7 @@ import requirejsPlugin from 'magefront-plugin-requirejs'
 
 // This tool is meant to be run at root level of the project
 export const projectPath = process.cwd()
-const relTempPath = 'var/view_preprocessed/magefront'
-export const tempPath = path.join(projectPath, relTempPath)
+export const tempPath = path.join(projectPath, 'var/view_preprocessed/magefront')
 
 /**
  * Get the configuration for the given theme name.
@@ -20,8 +19,9 @@ export const tempPath = path.join(projectPath, relTempPath)
  * @return {Promise<{locales, plugins, src, dest}>}
  */
 export const getConfigForTheme = async (themeName) => {
-  const theme = getTheme(themeName)
+  const theme = getThemes().find((t) => t.name === themeName)
 
+  // TODO: Add as an option '-c' to specify the config file
   let customConfig = await getConfigFromFile(path.join(projectPath, 'magefront.config.js'))
 
   // Add support for array into the config file
@@ -36,7 +36,7 @@ export const getConfigForTheme = async (themeName) => {
     plugins: [lessPlugin()],
     copyWebDir: true,
     concatRequireJs: true,
-    src: path.join(relTempPath, theme.dest),
+    src: path.join(tempPath, theme.dest),
     dest: theme.dest
   }
 
@@ -55,6 +55,7 @@ export const getConfigForTheme = async (themeName) => {
 
 /**
  * Get the configuration from a file.
+ *
  * @param file
  * @return {Promise<{}|*>}
  */
