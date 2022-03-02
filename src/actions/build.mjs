@@ -20,7 +20,7 @@ export const build = async (themeName, clean = true) => {
     .map((mod) => mod.name)
 
   // Clean up the destination dir
-  if (clean) {
+  if (clean && fs.existsSync(themeConfig.dest)) {
     fs.rmSync(themeConfig.dest, { recursive: true })
   }
 
