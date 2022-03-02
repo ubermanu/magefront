@@ -3,10 +3,10 @@
 * [Configuration](configuration.md)
 
 * CLI
-  * [Build](tasks/build.md)
-  * [Watch](tasks/watch.md)
-  * [Dev](tasks/dev.md)
-  * [List](tasks/list.md)
+  * [build](tasks/build.md)
+  * [watch](tasks/watch.md)
+  * [dev](tasks/dev.md)
+  * [list](tasks/list.md)
 
 * Plugins
   * [LESS](plugins/less.md)
