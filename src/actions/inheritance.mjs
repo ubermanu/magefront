@@ -21,7 +21,7 @@ function generateSymlinks(src, dest, replacePattern, ignore = []) {
       nodir: true
     })
     .forEach((srcPath) => {
-      createSymlink(srcPath, path.join(dest, srcPath).replace(src + '/', replacePattern + '/'))
+      createSymlink(srcPath, path.join(dest, srcPath.toString()).replace(src + '/', replacePattern + '/'))
     })
 }
 
@@ -51,14 +51,12 @@ export const inheritance = async (name) => {
   // For each enabled modules, create symlinks into the theme
   const modules = Object.values(getModules()).filter((m) => m.enabled && m.src)
   const area = findTheme(name).area
+  const ignore = ['page_layout', 'layout', 'templates']
 
   modules.forEach((m) => {
     // Resolve the "base" area as well (common to frontend and adminhtml)
-    generateSymlinks(path.join(projectPath, m.src, 'view', `base|${area}`), path.join(themeDest, m.name), '', [
-      'page_layout',
-      'layout',
-      'templates'
-    ])
+    generateSymlinks(path.join(projectPath, m.src, 'view', 'base'), path.join(themeDest, m.name), '', ignore)
+    generateSymlinks(path.join(projectPath, m.src, 'view', area), path.join(themeDest, m.name), '', ignore)
   })
 
   // Create symlinks for all the related themes
