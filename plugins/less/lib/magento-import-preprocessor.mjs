@@ -2,7 +2,7 @@
  * Replaces the commented `@magento_import` statements with
  * the actual import statements for each enabled modules.
  */
-class preProcessor {
+export class preProcessor {
   constructor(modules) {
     this.modules = modules
   }
