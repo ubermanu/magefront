@@ -4,15 +4,19 @@ import through from 'through2'
 
 /**
  * Copy the content of the web dir into the correct destination.
+ * TODO: Use glob format for ignores, and convert them to regex.
  */
 export default (options) => (themeConfig) => {
-  options = options || {}
-  const { src, dest } = options
+  options = options || {
+    ignore: [/^(\w+_\w+\/)?web\/css\/source\/.*/i]
+  }
+
+  const { src, dest, ignore } = options
   const paths = getMagentoWebPaths(themeConfig, src || '**/*')
 
   gulp
     .src(paths, { base: themeConfig.src, nodir: true })
-    .pipe(fixMagentoDestWebPaths())
+    .pipe(fixMagentoDestWebPaths({ ignore }))
     .pipe(gulp.dest(path.join(themeConfig.dest, dest || '')))
 }
 
@@ -38,7 +42,8 @@ export const getMagentoWebPaths = (themeConfig, src = '') => {
  *
  * @return {*}
  */
-export const fixMagentoDestWebPaths = () => {
+export const fixMagentoDestWebPaths = (options = {}) => {
+  const { ignore } = options
   return through.obj((file, enc, cb) => {
     if (file.isNull()) {
       cb()
@@ -51,8 +56,8 @@ export const fixMagentoDestWebPaths = () => {
       return
     }
 
-    // Ignore the CSS source files
-    if (/^(\w+_\w+\/)?web\/css\/.*/.test(file.relative) && path.extname(file.relative) !== '.css') {
+    // Ignore some files
+    if (ignore && ignore.some((regex) => regex.test(file.relative))) {
       cb()
       return
     }
