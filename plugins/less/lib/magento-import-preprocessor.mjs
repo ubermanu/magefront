@@ -17,6 +17,6 @@ class preProcessor {
 
 export default (modules) => ({
   install: function (less, pluginManager) {
-    pluginManager.addPreProcessor(new preProcessor(modules))
+    pluginManager.addPreProcessor(new preProcessor(modules), 1)
   }
 })
