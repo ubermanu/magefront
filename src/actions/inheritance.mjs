@@ -49,7 +49,7 @@ export const inheritance = async (name) => {
   generateSymlinks(libSrc, themeDest, '', ['internal/*', 'web/css/docs'])
 
   // For each enabled modules, create symlinks into the theme
-  const modules = Object.values(getModules()).filter((m) => m.enabled && m.src)
+  const modules = getModules().filter((m) => m.enabled && m.src)
   const area = findTheme(name).area
   const ignore = ['page_layout', 'layout', 'templates']
 
