@@ -1,31 +1,32 @@
 import gulp from 'gulp'
 import path from 'path'
 import through from 'through2'
+import globToRegExp from 'glob-to-regexp'
 
 /**
  * Copy the content of the web dir into the correct destination.
- * TODO: Use glob format for ignores, and convert them to regex.
+ * Uses glob format for ignores.
  */
-export default (options) => (themeConfig) => {
-  options = options || {
-    ignore: [/^(\w+_\w+\/)?web\/css\/source\/.*/i]
+export default (options = {}) => {
+  const { src, dest } = options
+  options.ignore ??= ['**/node_modules/**', '**/*.{less,scss,sass,styl,ts,tsx}']
+
+  return (themeConfig) => {
+    const paths = getMagentoWebPaths(themeConfig, src || '**/*')
+
+    gulp
+      .src(paths, { base: themeConfig.src, nodir: true })
+      .pipe(fixMagentoDestWebPaths({ ignore: options.ignore }))
+      .pipe(gulp.dest(path.join(themeConfig.dest, dest || '')))
   }
-
-  const { src, dest, ignore } = options
-  const paths = getMagentoWebPaths(themeConfig, src || '**/*')
-
-  gulp
-    .src(paths, { base: themeConfig.src, nodir: true })
-    .pipe(fixMagentoDestWebPaths({ ignore }))
-    .pipe(gulp.dest(path.join(themeConfig.dest, dest || '')))
 }
 
 /**
  * Return an array of web paths in the Magento project.
  * Usable in other plugins, e.g. for transpiling JS files.
  *
- * @param themeConfig
- * @param src
+ * @param {{src: string, modules: string[]}} themeConfig
+ * @param {string} src
  * @return {string[]}
  */
 export const getMagentoWebPaths = (themeConfig, src = '') => {
@@ -43,7 +44,10 @@ export const getMagentoWebPaths = (themeConfig, src = '') => {
  * @return {*}
  */
 export const fixMagentoDestWebPaths = (options = {}) => {
-  const { ignore } = options
+  // Transform the glob patterns to regex
+  // So we can test them against relative file paths
+  const ignore = (options.ignore ?? []).map((pattern) => globToRegExp(pattern, { extended: true }))
+
   return through.obj((file, enc, cb) => {
     if (file.isNull()) {
       cb()

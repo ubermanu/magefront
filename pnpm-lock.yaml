@@ -107,9 +107,11 @@ importers:
 
   plugins/web:
     specifiers:
+      glob-to-regexp: ^0.4.1
       gulp: ^4.0.2
       through2: ^4.0.2
     dependencies:
+      glob-to-regexp: 0.4.1
       gulp: 4.0.2
       through2: 4.0.2
 
@@ -3992,6 +3994,10 @@ packages:
       remove-trailing-separator: 1.1.0
       to-absolute-glob: 2.0.2
       unique-stream: 2.3.1
+    dev: false
+
+  /glob-to-regexp/0.4.1:
+    resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
     dev: false
 
   /glob-watcher/5.0.5:
