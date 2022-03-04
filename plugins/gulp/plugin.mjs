@@ -11,11 +11,11 @@ import gulp from 'gulp'
 export default (options) => (themeConfig) => {
   const { src, dest, pipe } = options
 
-  if (!src) {
+  if (src === undefined) {
     throw new Error('The `src` option is required.')
   }
 
-  if (!dest) {
+  if (dest === undefined) {
     throw new Error('The `dest` option is required.')
   }
 
