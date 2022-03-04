@@ -6,6 +6,7 @@ import { getThemes } from './main.mjs'
 import lessPlugin from 'magefront-plugin-less'
 import webCopyPlugin from 'magefront-plugin-web'
 import requirejsPlugin from 'magefront-plugin-requirejs'
+import gulpPlugin from 'magefront-plugin-gulp'
 
 // This tool is meant to be run at root level of the project
 export const projectPath = process.cwd()
@@ -57,5 +58,36 @@ export const getConfigForTheme = async (themeName) => {
     finalConfig.plugins.push(requirejsPlugin())
   }
 
+  // Add support for multiple plugin formats
+  // It can be 'string', 'object' or 'function'
+  await Promise.all(finalConfig.plugins.map(transformPlugin)).then((plugins) => {
+    finalConfig.plugins = plugins
+  })
+
   return finalConfig
+}
+
+/**
+ * Transform the plugin to a function if it is not already.
+ * If passed a string, import the plugin and return the default export.
+ * If passed an object, use the object as `gulpPlugin` options.
+ *
+ * @param {any} plugin
+ * @return {function}
+ */
+const transformPlugin = async (plugin) => {
+  if (typeof plugin === 'function') {
+    return plugin
+  }
+
+  if (typeof plugin === 'string') {
+    const { default: pluginModule } = await import(plugin)
+    return pluginModule()
+  }
+
+  if (typeof plugin === 'object' && !Array.isArray(plugin)) {
+    return gulpPlugin(plugin)
+  }
+
+  throw new Error(`Invalid plugin type: ${typeof plugin}`)
 }
