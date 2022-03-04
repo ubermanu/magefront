@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-web",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -17,11 +17,12 @@
   },
   "main": "plugin.mjs",
   "files": [
-    "plugin.mjs"
+    "plugin.mjs",
+    "gulpReplaceRelative.mjs"
   ],
   "dependencies": {
-    "glob-to-regexp": "^0.4.1",
     "gulp": "^4.0.2",
-    "through2": "^4.0.2"
+    "gulp-filter": "^7.0.0",
+    "through2": "^4.0.0"
   }
 }
