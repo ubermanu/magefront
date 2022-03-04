@@ -12,6 +12,7 @@
   * [LESS](plugins/less.md)
   * [RequireJS](plugins/requirejs.md)
   * [Copy web folders](plugins/web.md)
+  * [Gulp](plugins/gulp.md)
 
 * Examples
   * [Magento Themes](examples/magento-themes.md)
