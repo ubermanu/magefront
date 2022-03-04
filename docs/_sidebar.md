@@ -9,6 +9,7 @@
   * [list](tasks/list.md)
 
 * Plugins
+  * [Quick Start](plugins/intro.md)
   * [LESS](plugins/less.md)
   * [RequireJS](plugins/requirejs.md)
   * [Copy web folders](plugins/web.md)

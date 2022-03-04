@@ -5,12 +5,10 @@ The configuration is stored in the `magefront.config.js` file.
 Here is a full example:
 
 ```js
-import less from 'magefront-plugin-less';
-
 export default {
     theme: 'Magento/blank',
     locales: ['en_US'],
-    plugins: [less()],
+    plugins: ['magefront-plugin-less'],
     copyWebDir: true,
     concatRequireJs: true,
     src: 'vendor/magento/theme-frontend-blank',
