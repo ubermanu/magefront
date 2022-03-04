@@ -4,7 +4,7 @@ import { getThemes } from './main.mjs'
 
 // Default configuration plugins
 import lessPlugin from 'magefront-plugin-less'
-import webCopyPlugin from 'magefront-plugin-web'
+import webCopyPlugin, { gulpWeb as gulpWebPlugin } from 'magefront-plugin-web'
 import requirejsPlugin from 'magefront-plugin-requirejs'
 import gulpPlugin from 'magefront-plugin-gulp'
 
@@ -72,7 +72,7 @@ export const getConfigForTheme = async (themeName) => {
  * If passed a string, import the plugin and return the default export.
  * If passed an object, use the object as `gulpPlugin` options.
  *
- * @param {any} plugin
+ * @param {{web?: boolean, any}|{}} plugin
  * @return {function}
  */
 const transformPlugin = async (plugin) => {
@@ -85,8 +85,9 @@ const transformPlugin = async (plugin) => {
     return pluginModule()
   }
 
+  // If the `web` property is set to true, handles this in the web context
   if (typeof plugin === 'object' && !Array.isArray(plugin)) {
-    return gulpPlugin(plugin)
+    return plugin.web ? gulpWebPlugin(plugin) : gulpPlugin(plugin)
   }
 
   throw new Error(`Invalid plugin type: ${typeof plugin}`)
