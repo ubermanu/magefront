@@ -1,5 +1,5 @@
-import fs from 'fs'
 import path from 'path'
+import glob from 'fast-glob'
 import { getThemes } from './main.mjs'
 
 // Default configuration plugins
@@ -22,12 +22,19 @@ export const getConfigForTheme = async (themeName) => {
   const theme = getThemes().find((t) => t.name === themeName)
 
   // TODO: Add as an option '-c' to specify the config file
-  let customConfig = await getConfigFromFile(path.join(projectPath, 'magefront.config.js'))
+  const files = glob.sync('magefront.config.{js,mjs,cjs}', { cwd: projectPath })
+  let customConfig = {}
 
-  // Add support for array into the config file
-  // Look for the theme name in the array of objects
-  if (Array.isArray(customConfig)) {
-    customConfig = customConfig.filter((entry) => entry.theme === themeName).shift() || {}
+  if (files.length) {
+    let { default: config } = await import(path.join(projectPath, files[0]))
+
+    // Add support for array into the config file
+    if (!Array.isArray(config)) {
+      config = [config]
+    }
+
+    // Look for the theme name in the array of objects
+    customConfig = config.filter((entry) => entry.theme === themeName).shift() || {}
   }
 
   const defaultConfig = {
@@ -51,18 +58,4 @@ export const getConfigForTheme = async (themeName) => {
   }
 
   return finalConfig
-}
-
-/**
- * Get the configuration from a file.
- *
- * @param file
- * @return {Promise<{}|*>}
- */
-const getConfigFromFile = async (file) => {
-  if (fs.existsSync(file)) {
-    const { default: defaults } = await import(file)
-    return defaults
-  }
-  return {}
 }
