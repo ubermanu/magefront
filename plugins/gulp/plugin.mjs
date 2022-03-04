@@ -19,11 +19,11 @@ export default (options) => (themeConfig) => {
     throw new Error('The `dest` option is required.')
   }
 
-  const chain = gulp.src(path.join(themeConfig.src, src))
+  let chain = gulp.src(path.join(themeConfig.src, src))
 
   if (Array.isArray(pipe)) {
     for (const gulpPlugin of pipe) {
-      chain.pipe(gulpPlugin)
+      chain = chain.pipe(gulpPlugin)
     }
   }
 
