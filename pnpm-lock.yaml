@@ -13,6 +13,7 @@ importers:
       fast-glob: ^3.2.11
       fs-extra: ^10.0.1
       magefront-plugin-babel: workspace:*
+      magefront-plugin-gulp: workspace:*
       magefront-plugin-less: workspace:*
       magefront-plugin-requirejs: workspace:*
       magefront-plugin-sass: workspace:*
@@ -30,6 +31,7 @@ importers:
       fast-glob: 3.2.11
       fs-extra: 10.0.1
       magefront-plugin-babel: link:plugins/babel
+      magefront-plugin-gulp: link:plugins/gulp
       magefront-plugin-less: link:plugins/less
       magefront-plugin-requirejs: link:plugins/requirejs
       magefront-plugin-sass: link:plugins/sass
@@ -51,17 +53,25 @@ importers:
       gulp-babel: 8.0.0_@babel+core@7.17.5
       magefront-plugin-web: link:../web
 
-  plugins/less:
+  plugins/gulp:
     specifiers:
       gulp: ^4.0.2
+    dependencies:
+      gulp: 4.0.2
+
+  plugins/less:
+    specifiers:
+      gulp-sourcemaps: ^3.0.0
       less: '2.7'
+      magefront-plugin-gulp: workspace:*
       plugin-error: ^1.0.0
       replace-ext: ^2.0.0
       through2: ^4.0.0
       vinyl-sourcemaps-apply: ^0.2.0
     dependencies:
-      gulp: 4.0.2
+      gulp-sourcemaps: 3.0.0
       less: 2.7.3
+      magefront-plugin-gulp: link:../gulp
       plugin-error: 1.0.1
       replace-ext: 2.0.0
       through2: 4.0.2
@@ -75,21 +85,25 @@ importers:
 
   plugins/sass:
     specifiers:
-      gulp: ^4.0.2
       gulp-sass: ^5.0.0
+      gulp-sourcemaps: ^3.0.0
+      magefront-plugin-gulp: workspace:*
       sass: ^1.44.0
     dependencies:
-      gulp: 4.0.2
       gulp-sass: 5.0.0
+      gulp-sourcemaps: 3.0.0
+      magefront-plugin-gulp: link:../gulp
       sass: 1.44.0
 
   plugins/stylus:
     specifiers:
-      gulp: ^4.0.2
+      gulp-sourcemaps: ^3.0.0
       gulp-stylus: ^2.7.0
+      magefront-plugin-gulp: workspace:*
     dependencies:
-      gulp: 4.0.2
+      gulp-sourcemaps: 3.0.0
       gulp-stylus: 2.7.0
+      magefront-plugin-gulp: link:../gulp
 
   plugins/web:
     specifiers:
@@ -2156,6 +2170,25 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
+  /@gulp-sourcemaps/identity-map/2.0.1:
+    resolution: {integrity: sha512-Tb+nSISZku+eQ4X1lAkevcQa+jknn/OVUgZ3XCxEKIsLsqYuPoJwJOPQeaOk75X3WPftb29GWY1eqE7GLsXb1Q==}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      acorn: 6.4.2
+      normalize-path: 3.0.0
+      postcss: 7.0.39
+      source-map: 0.6.1
+      through2: 3.0.2
+    dev: false
+
+  /@gulp-sourcemaps/map-sources/1.0.0:
+    resolution: {integrity: sha1-iQrnxdjId/bThIYCFazp1+yUW9o=}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      normalize-path: 2.1.1
+      through2: 2.0.5
+    dev: false
+
   /@jridgewell/resolve-uri/3.0.5:
     resolution: {integrity: sha512-VPeQ7+wH0itvQxnG+lIzWgkysKIr3L9sslimFW55rHMdGu/qCQ5z5h9zq4gI8uBtqkpHhsF4Z/OwExufUCThew==}
     engines: {node: '>=6.0.0'}
@@ -2218,6 +2251,12 @@ packages:
       semver: 5.7.1
       uglify-js: 2.8.29
       when: 3.7.8
+    dev: false
+
+  /acorn/6.4.2:
+    resolution: {integrity: sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
     dev: false
 
   /after/0.8.2:
@@ -3212,6 +3251,14 @@ packages:
       urix: 0.1.0
     dev: false
 
+  /css/3.0.0:
+    resolution: {integrity: sha512-DG9pFfwOrzc+hawpmqX/dHYHJG+Bsdb0klhyi1sDneOgGOXy9wQIC8hzyVp1e4NRYDBdxcylvywPkkXCHAzTyQ==}
+    dependencies:
+      inherits: 2.0.4
+      source-map: 0.6.1
+      source-map-resolve: 0.6.0
+    dev: false
+
   /d/1.0.1:
     resolution: {integrity: sha512-m62ShEObQ39CfralilEQRjH6oAMtNCV1xJyEx5LpRYUVN+EviphDgUc/F3hnYbADmkiNs67Y+3ylmlG7Lnu+FA==}
     dependencies:
@@ -3226,6 +3273,14 @@ packages:
       assert-plus: 1.0.0
     dev: false
     optional: true
+
+  /debug-fabulous/1.1.0:
+    resolution: {integrity: sha512-GZqvGIgKNlUnHUPQhepnUZFIMoi3dgZKQBzKDeL2g7oJF9SNAji/AAu36dusFUas0O+pae74lNeoIPHqXWDkLg==}
+    dependencies:
+      debug: 3.1.0
+      memoizee: 0.4.15
+      object-assign: 4.1.1
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -3348,6 +3403,11 @@ packages:
 
   /detect-file/1.0.0:
     resolution: {integrity: sha1-8NZtA2cqglyxtzvbP+YjEMjlUrc=}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
+  /detect-newline/2.1.0:
+    resolution: {integrity: sha1-9B8cEL5LAOh7XxPaaAdZ8sW/0+I=}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -3544,6 +3604,13 @@ packages:
   /etag/1.8.1:
     resolution: {integrity: sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /event-emitter/0.3.5:
+    resolution: {integrity: sha1-34xp7vFkeSPHFXuc6DhAYQsCzDk=}
+    dependencies:
+      d: 1.0.1
+      es5-ext: 0.10.53
     dev: false
 
   /eventemitter3/4.0.7:
@@ -3831,7 +3898,7 @@ packages:
     resolution: {integrity: sha1-C3gV/DIBxqaeFNuYzgmMFpNSWes=}
     engines: {node: '>= 0.10'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       through2: 2.0.5
     dev: false
 
@@ -3983,10 +4050,6 @@ packages:
       sparkles: 1.0.1
     dev: false
 
-  /graceful-fs/4.2.8:
-    resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
-    dev: false
-
   /graceful-fs/4.2.9:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
     dev: false
@@ -4040,6 +4103,23 @@ packages:
       strip-ansi: 6.0.1
       transfob: 1.0.0
       vinyl-sourcemaps-apply: 0.2.1
+    dev: false
+
+  /gulp-sourcemaps/3.0.0:
+    resolution: {integrity: sha512-RqvUckJkuYqy4VaIH60RMal4ZtG0IbQ6PXMNkNsshEGJ9cldUPRb/YCgboYae+CLAs1HQNb4ADTKCx65HInquQ==}
+    engines: {node: '>= 6'}
+    dependencies:
+      '@gulp-sourcemaps/identity-map': 2.0.1
+      '@gulp-sourcemaps/map-sources': 1.0.0
+      acorn: 6.4.2
+      convert-source-map: 1.8.0
+      css: 3.0.0
+      debug-fabulous: 1.1.0
+      detect-newline: 2.1.0
+      graceful-fs: 4.2.9
+      source-map: 0.6.1
+      strip-bom-string: 1.0.0
+      through2: 2.0.5
     dev: false
 
   /gulp-stylus/2.7.0:
@@ -4463,6 +4543,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
+  /is-promise/2.2.2:
+    resolution: {integrity: sha512-+lP4/6lKUBfQjZ2pdxThZvLUAafmZb8OAxFb8XXtiQmS35INgr85hdOGoEs124ez1FCnZJt6jau/T+alh58QFQ==}
+    dev: false
+
   /is-relative/1.0.0:
     resolution: {integrity: sha512-Kw/ReK0iqwKeu0MITLFuj0jbPAmEiOsIwyIXvvbfa6QfmN9pkD1M+8pdk7Rl/dTKbH34/XBFMbgD4iMJhLQbGA==}
     engines: {node: '>=0.10.0'}
@@ -4687,7 +4771,7 @@ packages:
     hasBin: true
     optionalDependencies:
       errno: 0.1.8
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       image-size: 0.5.5
       mime: 1.4.1
       mkdirp: 0.5.5
@@ -4718,7 +4802,7 @@ packages:
     resolution: {integrity: sha1-lWkFcI1YtLq0wiYbBPWfMcmTdMA=}
     engines: {node: '>=0.10.0'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       parse-json: 2.2.0
       pify: 2.3.0
       pinkie-promise: 2.0.1
@@ -4849,6 +4933,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
+  /lru-queue/0.1.0:
+    resolution: {integrity: sha1-Jzi9nw089PhEkMVzbEhpmsYyzaM=}
+    dependencies:
+      es5-ext: 0.10.53
+    dev: false
+
   /make-iterator/1.0.1:
     resolution: {integrity: sha512-pxiuXh0iVEq7VM7KMIhs5gxsfxCux2URptUQaXo4iZZJxBAzTPOLE2BumO5dbfVYq/hBJFBR/a1mFDmOx5AGmw==}
     engines: {node: '>=0.10.0'}
@@ -4876,6 +4966,19 @@ packages:
       micromatch: 3.1.10
       resolve: 1.20.0
       stack-trace: 0.0.10
+    dev: false
+
+  /memoizee/0.4.15:
+    resolution: {integrity: sha512-UBWmJpLZd5STPm7PMUlOw/TSy972M+z8gcyQ5veOnSDRREz/0bmpyTfKt3/51DhEBqCZQn1udM/5flcSPYhkdQ==}
+    dependencies:
+      d: 1.0.1
+      es5-ext: 0.10.53
+      es6-weak-map: 2.0.3
+      event-emitter: 0.3.5
+      is-promise: 2.2.2
+      lru-queue: 0.1.0
+      next-tick: 1.1.0
+      timers-ext: 0.1.7
     dev: false
 
   /merge2/1.4.1:
@@ -5024,6 +5127,10 @@ packages:
     resolution: {integrity: sha1-yobR/ogoFpsBICCOPchCS524NCw=}
     dev: false
 
+  /next-tick/1.1.0:
+    resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
+    dev: false
+
   /node-releases/2.0.1:
     resolution: {integrity: sha512-CqyzN6z7Q6aMeF/ktcMVTzhAHCEpf8SOarwpzpf8pNBY2k5/oM34UHldUwp8VKI7uxct2HxSRdJjBaZeESzcxA==}
     dev: false
@@ -5069,6 +5176,11 @@ packages:
     resolution: {integrity: sha1-Rqarfwrq2N6unsBWV4C31O/rnUM=}
     dev: false
     optional: true
+
+  /object-assign/4.1.1:
+    resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /object-copy/0.1.0:
     resolution: {integrity: sha1-fn2Fi3gb18mRpBupde04EnVOmYw=}
@@ -5275,7 +5387,7 @@ packages:
     resolution: {integrity: sha1-WcRPfuSR2nBNpBXaWkBwuk+P5EE=}
     engines: {node: '>=0.10.0'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       pify: 2.3.0
       pinkie-promise: 2.0.1
     dev: false
@@ -5284,6 +5396,10 @@ packages:
     resolution: {integrity: sha1-M+8wxcd9TqIcWlOGnZG1bY8lVeU=}
     dev: false
     optional: true
+
+  /picocolors/0.2.1:
+    resolution: {integrity: sha512-cMlDqaLEqfSaW8Z7N5Jw+lyIW869EzT73/F5lhtY9cLGoVxSXznfgfXMO0Z5K0o0Q2TkTXq+0KFsdnSe3jDViA==}
+    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
@@ -5343,6 +5459,14 @@ packages:
   /posix-character-classes/0.1.1:
     resolution: {integrity: sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /postcss/7.0.39:
+    resolution: {integrity: sha512-yioayjNbHn6z1/Bywyb2Y4s3yvDAeXGOyxqD+LnVOinq6Mdmd++SW2wUNVzavyyHxd6+DxzWGIuosg6P1Rj8uA==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      picocolors: 0.2.1
+      source-map: 0.6.1
     dev: false
 
   /prettier/2.5.1:
@@ -5465,7 +5589,7 @@ packages:
     resolution: {integrity: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==}
     engines: {node: '>=0.10'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       micromatch: 3.1.10
       readable-stream: 2.3.7
     dev: false
@@ -5969,12 +6093,21 @@ packages:
 
   /source-map-resolve/0.5.3:
     resolution: {integrity: sha512-Htz+RnsXWk5+P2slx5Jh3Q66vhQj1Cllm0zvnaY98+NFx+Dv2CF/f5O/t8x+KaNdrdIAsruNzoh/KpialbqAnw==}
+    deprecated: See https://github.com/lydell/source-map-resolve#deprecated
     dependencies:
       atob: 2.1.2
       decode-uri-component: 0.2.0
       resolve-url: 0.2.1
       source-map-url: 0.4.1
       urix: 0.1.0
+    dev: false
+
+  /source-map-resolve/0.6.0:
+    resolution: {integrity: sha512-KXBr9d/fO/bWo97NXsPIAW1bFSBOuCnjbNTBMO7N59hsv5i9yzRDfcYwwt0l04+VqnKC+EwzvJZIP/qkuMgR/w==}
+    deprecated: See https://github.com/lydell/source-map-resolve#deprecated
+    dependencies:
+      atob: 2.1.2
+      decode-uri-component: 0.2.0
     dev: false
 
   /source-map-url/0.4.1:
@@ -6141,6 +6274,11 @@ packages:
       ansi-regex: 5.0.1
     dev: false
 
+  /strip-bom-string/1.0.0:
+    resolution: {integrity: sha1-5SEekiQ2n7uB1jOi8ABE3IztrZI=}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /strip-bom/2.0.0:
     resolution: {integrity: sha1-YhmoVhZSBJHzV4i9vxRHqZx+aw4=}
     engines: {node: '>=0.10.0'}
@@ -6219,6 +6357,13 @@ packages:
       xtend: 4.0.2
     dev: false
 
+  /through2/3.0.2:
+    resolution: {integrity: sha512-enaDQ4MUyP2W6ZyT6EsMzqBPZaM/avg8iuo+l2d3QCs0J+6RaqkHV/2/lOwDTueBHeJ/2LG9lrLW3d5rWPucuQ==}
+    dependencies:
+      inherits: 2.0.4
+      readable-stream: 3.6.0
+    dev: false
+
   /through2/4.0.2:
     resolution: {integrity: sha512-iOqSav00cVxEEICeD7TjLB1sueEL+81Wpzp2bY17uZjZN0pWZPuo4suZ/61VujxmqSGFfgOcNuTZ85QJwNZQpw==}
     dependencies:
@@ -6228,6 +6373,13 @@ packages:
   /time-stamp/1.1.0:
     resolution: {integrity: sha1-dkpaEa9QVhkhsTPztE5hhofg9cM=}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /timers-ext/0.1.7:
+    resolution: {integrity: sha512-b85NUNzTSdodShTIbky6ZF02e8STtVVfD+fu4aXXShEELpozH+bCpJLYMPZbsABN2wDH7fJpqIoXxJpzbf0NqQ==}
+    dependencies:
+      es5-ext: 0.10.53
+      next-tick: 1.1.0
     dev: false
 
   /to-absolute-glob/2.0.2:
@@ -6514,7 +6666,7 @@ packages:
     dependencies:
       fs-mkdirp-stream: 1.0.0
       glob-stream: 6.1.0
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       is-valid-glob: 1.0.0
       lazystream: 1.0.1
       lead: 1.0.0
@@ -6537,7 +6689,7 @@ packages:
     dependencies:
       append-buffer: 1.0.2
       convert-source-map: 1.8.0
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       normalize-path: 2.1.1
       now-and-later: 2.0.1
       remove-bom-buffer: 3.0.0

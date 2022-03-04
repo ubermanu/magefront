@@ -1,6 +1,6 @@
 {
-  "name": "magefront-plugin-stylus",
-  "version": "0.2.0",
+  "name": "magefront-plugin-gulp",
+  "version": "0.1.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -13,15 +13,13 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
-    "directory": "plugins/stylus"
+    "directory": "plugins/gulp"
   },
   "main": "plugin.mjs",
   "files": [
     "plugin.mjs"
   ],
   "dependencies": {
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-stylus": "^2.7.0",
-    "magefront-plugin-gulp": "workspace:*"
+    "gulp": "^4.0.2"
   }
 }

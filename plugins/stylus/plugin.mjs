@@ -1,13 +1,27 @@
-import path from 'path'
-import gulp from 'gulp'
+import gulp from 'magefront-plugin-gulp'
 import stylus from 'gulp-stylus'
+import gulpSourcemaps from 'gulp-sourcemaps'
 
-export default (options) => (themeConfig) => {
-  options = options || {}
-  const { src, dest } = options
+/**
+ * Transform Stylus files to CSS using Gulp.
+ *
+ * @param {{src?: string, dest?: string, sourcemaps?: boolean, any}} options
+ * @return {(function(*): *)|*}
+ */
+export default (options = {}) => {
+  const { src, dest, sourcemaps } = options
 
-  return gulp
-    .src(path.join(themeConfig.src, src || 'web/css/!(_)*.styl'))
-    .pipe(stylus(options))
-    .pipe(gulp.dest(path.join(themeConfig.dest, dest || 'css')))
+  const pipe = [stylus(options)]
+
+  // Add source maps if enabled
+  if (sourcemaps) {
+    pipe.unshift(gulpSourcemaps.init())
+    pipe.push(gulpSourcemaps.write())
+  }
+
+  return gulp({
+    src: src ?? 'web/css/!(_)*.styl',
+    dest: dest ?? 'css',
+    pipe
+  })
 }

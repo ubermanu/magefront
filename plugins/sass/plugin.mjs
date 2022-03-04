@@ -1,17 +1,32 @@
-import path from 'path'
-import gulp from 'gulp'
+import gulp from 'magefront-plugin-gulp'
 import gulpSass from 'gulp-sass'
+import gulpSourcemaps from 'gulp-sourcemaps'
 import dartSass from 'sass'
 
-export default (options) => (themeConfig) => {
-  options = options || {}
-  const { src, dest, compiler } = options
+/**
+ * Compile SCSS files to CSS using Gulp and dart-sass.
+ * You can use the `compiler` option to specify the sass compiler to use. (e.g. node-sass)
+ *
+ * @param {{src?: string, dest?: string, sourcemaps?: boolean, compiler?: any, any}} options
+ * @return {(function(*): *)|*}
+ */
+export default (options = {}) => {
+  const { src, dest, sourcemaps, compiler } = options
 
   // Instantiate the plugin with the dart port of sass by default
-  const sass = gulpSass(compiler || dartSass)
+  const sass = gulpSass(compiler ?? dartSass)
 
-  return gulp
-    .src(path.join(themeConfig.src, src || 'web/css/!(_)*.scss'))
-    .pipe(sass.sync(options).on('error', sass.logError))
-    .pipe(gulp.dest(path.join(themeConfig.dest, dest || 'css')))
+  const pipe = [sass.sync(options).on('error', sass.logError)]
+
+  // Add source maps if enabled
+  if (sourcemaps) {
+    pipe.unshift(gulpSourcemaps.init())
+    pipe.push(gulpSourcemaps.write())
+  }
+
+  return gulp({
+    src: src ?? 'web/css/!(_)*.scss',
+    dest: dest ?? 'css',
+    pipe
+  })
 }
