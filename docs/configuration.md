@@ -7,10 +7,7 @@ Here is a full example:
 ```js
 export default {
     theme: 'Magento/blank',
-    locales: ['en_US'],
     plugins: ['magefront-plugin-less'],
-    copyWebDir: true,
-    concatRequireJs: true,
     src: 'vendor/magento/theme-frontend-blank',
     dest: 'pub/static/frontend/Magento/blank',
 }
@@ -22,11 +19,11 @@ It can also be defined as an array of configuration:
 export default [
     {
         theme: 'Magento/blank',
-        locales: ['en_US'],
+        plugins: ['magefront-plugin-less'],
     },
     {
-        theme: 'Magento/luma',
-        locales: ['en_US'],
+        theme: 'Custom/blank',
+        plugins: ['magefront-plugin-sass'],
     }
 ]
 ```
