@@ -1,21 +1,29 @@
+import glob from 'fast-glob'
 import path from 'path'
-import gulp from 'gulp'
+import babel from '@babel/core'
 
-export default (options) => (themeConfig) => {
-  options = options || { presets: ['@babel/env'] }
-  const { src, dest } = options
+/**
+ * Transform your JS code with babel.
+ *
+ * @param {{src:string, ignore?:array}|{}} options
+ * @returns {(function(*): void)|*}
+ */
+export default (options = {}) => {
+  return (themeConfig) => {
+    options = options || {}
+    const { src, ignore } = options
 
-  // Get the paths to the public JS files
-  const paths = getMagentoWebPaths(themeConfig, src || '**/*.js')
+    if (!src) {
+      throw new Error('The `src` option is required')
+    }
 
-  gulp
-    .src(paths, { base: themeConfig.src, nodir: true })
-    .pipe(babel(options))
-    .on('error', (err) => {
-      // Limit the error message length
-      console.error(err.message.slice(0, 2000))
-      this.emit('end')
+    glob(src, { ignore: ignore ?? [], cwd: themeConfig.src }).then((files) => {
+      return Promise.all(
+        files.map((file) => {
+          const filePath = path.join(themeConfig.src, file)
+          return babel.transformFileAsync(filePath, options)
+        })
+      )
     })
-    .pipe(fixMagentoDestWebPaths())
-    .pipe(gulp.dest(path.join(themeConfig.dest, dest || '')))
+  }
 }

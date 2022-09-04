@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-babel",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -20,8 +20,7 @@
     "plugin.mjs"
   ],
   "dependencies": {
-    "@babel/preset-env": "^7.16.4",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0"
+    "@babel/core": "^7.17.5",
+    "fast-glob": "^3.2.11"
   }
 }
