@@ -31,10 +31,10 @@ export const watch = async (themeName) => {
 
   // prettier-ignore
   srcWatcher
-    .on('add', reinitialize)
-    .on('addDir', reinitialize)
-    .on('unlink', reinitialize)
-    .on('unlinkDir', reinitialize)
+        .on('add', reinitialize)
+        .on('addDir', reinitialize)
+        .on('unlink', reinitialize)
+        .on('unlinkDir', reinitialize)
 
   tempWatcher.on('ready', () => {
     console.log(`Watching ${themeTempSrc}`)
@@ -47,12 +47,8 @@ export const watch = async (themeName) => {
 
     // Files that require reload after save
     // TODO: Add more files to watch for reload
-    // prettier-ignore
-    if (
-      ['.html', '.phtml', '.xml', '.csv', '.js'].some(
-        (ext) => path.extname(filePath) === ext
-      )
-    ) {
+
+    if (['.html', '.phtml', '.xml', '.csv', '.js'].some((ext) => path.extname(filePath) === ext)) {
       if (instance) {
         instance.reload()
       }
