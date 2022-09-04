@@ -9,7 +9,10 @@ This is the same behavior as the Magento 2 PHP module (but in JS).
 ### Usage
 
 ```js
+// magefront.config.js
+import requireJsConfig from 'magefront-plugin-requirejs-config'
+
 export default {
-    concatRequireJs: true
+    plugins: [requireJsConfig()]
 }
 ```
