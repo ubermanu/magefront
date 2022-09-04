@@ -1,12 +1,11 @@
 {
   "name": "magefront",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "type": "module",
   "keywords": [
     "magefront",
     "magento",
-    "theme",
-    "plugin"
+    "theme"
   ],
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "license": "MIT",
@@ -22,19 +21,20 @@
     "test": "uvu tests"
   },
   "dependencies": {
-    "@babel/core": "^7.17.5",
-    "@babel/preset-env": "^7.16.11",
     "browser-sync": "^2.27.7",
     "chokidar": "^3.5.3",
     "cli-table": "^0.3.11",
     "commander": "^8.3.0",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
-    "magefront-plugin-babel": "workspace:*",
     "magefront-plugin-less": "workspace:*",
-    "magefront-plugin-requirejs-config": "workspace:*",
+    "magefront-plugin-requirejs-config": "workspace:*"
+  },
+  "optionalDependencies": {
+    "magefront-plugin-babel": "workspace:*",
     "magefront-plugin-sass": "workspace:*",
-    "magefront-plugin-stylus": "workspace:*"
+    "magefront-plugin-stylus": "workspace:*",
+    "magefront-plugin-svelte": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^2.5.1",
