@@ -6,4 +6,4 @@ This aims to be as close as possible from the native behavior (PHP).
 
 ## Usage
 
-    magefront build --theme Magento/blank
+    magefront build -t Magento/blank en_US

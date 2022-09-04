@@ -25,7 +25,7 @@ import nodeSass from 'node-sass'
 
 export default {
     plugins: [
-        sass({ src: 'styles/!(_)*.scss', compiler: nodeSass })
+        sass({ compiler: nodeSass })
     ]
 }
 ```
