@@ -1,7 +1,7 @@
-import fs from 'fs'
 import path from 'path'
 import { getConfigForTheme } from '../config.mjs'
 import { getModules } from '../main.mjs'
+import { deploy } from './deploy.mjs'
 
 /**
  * Build the theme.
@@ -10,20 +10,14 @@ import { getModules } from '../main.mjs'
  *
  * @param themeName
  * @param locale
- * @param clean
  * @return {Promise<void>}
  */
-export const build = async (themeName, locale = 'en_US', clean = true) => {
+export const build = async (themeName, locale = 'en_US') => {
   const themeConfig = await getConfigForTheme(themeName)
 
   const modules = getModules()
     .filter((mod) => mod.enabled && mod.src)
     .map((mod) => mod.name)
-
-  // Clean up the destination dir
-  if (clean && fs.existsSync(themeConfig.dest)) {
-    fs.rmSync(themeConfig.dest, { recursive: true })
-  }
 
   // Execute all the tasks for each locale
   // The destination dir gets the locale appended to it
@@ -36,4 +30,6 @@ export const build = async (themeName, locale = 'en_US', clean = true) => {
       console.error(e)
     }
   }
+
+  await deploy(themeName, locale)
 }
