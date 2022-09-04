@@ -16,7 +16,7 @@ Install the package at the root level of your website:
 
 ## Usage
 
-    npx magefront build --theme Magento/blank
+    npx magefront build -t Magento/blank en_US
 
 ## Configuration
 
@@ -24,16 +24,18 @@ The `magefront.config.js` file should be located in the root directory of your p
 
 ```js
 // magefront.config.js
-import less from 'magefront-plugin-less';
+import less from 'magefront-plugin-less'
+import requireJsConfig from 'magefront-plugin-requirejs-config'
 
-// This is considered as the "default" configuration,
-// so the original themes (blank, luma) can work without it.
 export default {
-    locales: ['en_US'],
-    plugins: [less()],
-    copyWebDir: true,
-    concatRequireJs: true,
-};
+    plugins: [
+        less(),
+        requireJsConfig()
+    ]
+}
 ```
+
+> This is considered as the "default" configuration,
+> so the original themes (blank, luma) can work without it.
 
 For more information, check the [documentation](https://ubermanu.github.io/magefront/).
