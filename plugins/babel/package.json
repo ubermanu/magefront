@@ -22,7 +22,6 @@
   "dependencies": {
     "@babel/preset-env": "^7.16.4",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "magefront-plugin-web": "workspace:*"
+    "gulp-babel": "^8.0.0"
   }
 }

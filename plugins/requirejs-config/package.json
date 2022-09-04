@@ -1,11 +1,12 @@
 {
-  "name": "magefront-plugin-requirejs",
-  "version": "0.3.0",
+  "name": "magefront-plugin-requirejs-config",
+  "version": "0.1.0",
   "type": "module",
   "keywords": [
     "magefront",
     "magento",
     "theme",
+    "requirejs",
     "plugin"
   ],
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
@@ -13,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
-    "directory": "plugins/requirejs"
+    "directory": "plugins/requirejs-config"
   },
   "main": "plugin.mjs",
   "files": [

@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-less",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -18,16 +18,10 @@
   "main": "plugin.mjs",
   "files": [
     "lib",
-    "plugin.mjs",
-    "pluginGulp.mjs"
+    "plugin.mjs"
   ],
   "dependencies": {
-    "gulp-sourcemaps": "^3.0.0",
-    "less": "2.7",
-    "magefront-plugin-gulp": "workspace:*",
-    "plugin-error": "^1.0.0",
-    "replace-ext": "^2.0.0",
-    "through2": "^4.0.0",
-    "vinyl-sourcemaps-apply": "^0.2.0"
+    "fast-glob": "^3.2.11",
+    "less": "2.7"
   }
 }

@@ -22,7 +22,6 @@
   "dependencies": {
     "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "magefront-plugin-gulp": "workspace:*",
     "sass": "^1.44.0"
   }
 }

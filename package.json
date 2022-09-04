@@ -31,12 +31,10 @@
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "magefront-plugin-babel": "workspace:*",
-    "magefront-plugin-gulp": "workspace:*",
     "magefront-plugin-less": "workspace:*",
-    "magefront-plugin-requirejs": "workspace:*",
+    "magefront-plugin-requirejs-config": "workspace:*",
     "magefront-plugin-sass": "workspace:*",
-    "magefront-plugin-stylus": "workspace:*",
-    "magefront-plugin-web": "workspace:*"
+    "magefront-plugin-stylus": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

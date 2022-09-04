@@ -13,12 +13,10 @@ importers:
       fast-glob: ^3.2.11
       fs-extra: ^10.0.1
       magefront-plugin-babel: workspace:*
-      magefront-plugin-gulp: workspace:*
       magefront-plugin-less: workspace:*
-      magefront-plugin-requirejs: workspace:*
+      magefront-plugin-requirejs-config: workspace:*
       magefront-plugin-sass: workspace:*
       magefront-plugin-stylus: workspace:*
-      magefront-plugin-web: workspace:*
       prettier: ^2.5.1
       uvu: ^0.5.3
     dependencies:
@@ -31,12 +29,10 @@ importers:
       fast-glob: 3.2.11
       fs-extra: 10.0.1
       magefront-plugin-babel: link:plugins/babel
-      magefront-plugin-gulp: link:plugins/gulp
       magefront-plugin-less: link:plugins/less
-      magefront-plugin-requirejs: link:plugins/requirejs
+      magefront-plugin-requirejs-config: link:plugins/requirejs-config
       magefront-plugin-sass: link:plugins/sass
       magefront-plugin-stylus: link:plugins/stylus
-      magefront-plugin-web: link:plugins/web
     devDependencies:
       prettier: 2.5.1
       uvu: 0.5.3
@@ -46,74 +42,42 @@ importers:
       '@babel/preset-env': ^7.16.4
       gulp: ^4.0.2
       gulp-babel: ^8.0.0
-      magefront-plugin-web: workspace:*
     dependencies:
       '@babel/preset-env': 7.16.4
       gulp: 4.0.2
       gulp-babel: 8.0.0
-      magefront-plugin-web: link:../web
-
-  plugins/gulp:
-    specifiers:
-      gulp: ^4.0.2
-    dependencies:
-      gulp: 4.0.2
 
   plugins/less:
     specifiers:
-      gulp-sourcemaps: ^3.0.0
+      fast-glob: ^3.2.11
       less: '2.7'
-      magefront-plugin-gulp: workspace:*
-      plugin-error: ^1.0.0
-      replace-ext: ^2.0.0
-      through2: ^4.0.0
-      vinyl-sourcemaps-apply: ^0.2.0
     dependencies:
-      gulp-sourcemaps: 3.0.0
+      fast-glob: 3.2.11
       less: 2.7.3
-      magefront-plugin-gulp: link:../gulp
-      plugin-error: 1.0.1
-      replace-ext: 2.0.0
-      through2: 4.0.2
-      vinyl-sourcemaps-apply: 0.2.1
 
-  plugins/requirejs:
+  plugins/requirejs-config:
     specifiers:
       fast-glob: ^3.2.7
     dependencies:
-      fast-glob: 3.2.7
+      fast-glob: 3.2.11
 
   plugins/sass:
     specifiers:
       gulp-sass: ^5.0.0
       gulp-sourcemaps: ^3.0.0
-      magefront-plugin-gulp: workspace:*
       sass: ^1.44.0
     dependencies:
       gulp-sass: 5.0.0
       gulp-sourcemaps: 3.0.0
-      magefront-plugin-gulp: link:../gulp
       sass: 1.44.0
 
   plugins/stylus:
     specifiers:
       gulp-sourcemaps: ^3.0.0
       gulp-stylus: ^2.7.0
-      magefront-plugin-gulp: workspace:*
     dependencies:
       gulp-sourcemaps: 3.0.0
       gulp-stylus: 2.7.0
-      magefront-plugin-gulp: link:../gulp
-
-  plugins/web:
-    specifiers:
-      gulp: ^4.0.2
-      gulp-filter: ^7.0.0
-      through2: ^4.0.0
-    dependencies:
-      gulp: 4.0.2
-      gulp-filter: 7.0.0_gulp@4.0.2
-      through2: 4.0.2
 
 packages:
 
@@ -2338,10 +2302,6 @@ packages:
       fastq: 1.13.0
     dev: false
 
-  /@types/minimatch/3.0.5:
-    resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
-    dev: false
-
   /accepts/1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
     engines: {node: '>= 0.6'}
@@ -2528,11 +2488,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /array-differ/3.0.0:
-    resolution: {integrity: sha512-THtfYS6KtME/yIAhKjZ2ul7XI96lQGHRputJQHO80LAWQnuGP4iCIN8vdMRboGbIEYBwU33q8Tch1os2+X0kMg==}
-    engines: {node: '>=8'}
-    dev: false
-
   /array-each/1.0.1:
     resolution: {integrity: sha1-p5SvDAWrF1KEbudTofIRoFugxE8=}
     engines: {node: '>=0.10.0'}
@@ -2572,11 +2527,6 @@ packages:
       kind-of: 5.1.0
     dev: false
 
-  /array-union/2.1.0:
-    resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
-    engines: {node: '>=8'}
-    dev: false
-
   /array-unique/0.3.2:
     resolution: {integrity: sha1-qJS3XUvE9s1nnvMkSp/Y9Gri1Cg=}
     engines: {node: '>=0.10.0'}
@@ -2584,11 +2534,6 @@ packages:
 
   /arraybuffer.slice/0.0.7:
     resolution: {integrity: sha512-wGUIVQXuehL5TCqQun8OW81jGzAWycqzFF8lFp+GOM5BXLYj3bKNsYC4daB7n6XjCqxQA/qgTJ+8ANR3acjrog==}
-    dev: false
-
-  /arrify/2.0.1:
-    resolution: {integrity: sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==}
-    engines: {node: '>=8'}
     dev: false
 
   /asap/2.0.6:
@@ -3870,17 +3815,6 @@ packages:
       micromatch: 4.0.4
     dev: false
 
-  /fast-glob/3.2.7:
-    resolution: {integrity: sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q==}
-    engines: {node: '>=8'}
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      '@nodelib/fs.walk': 1.2.8
-      glob-parent: 5.1.2
-      merge2: 1.4.1
-      micromatch: 4.0.4
-    dev: false
-
   /fast-levenshtein/1.1.4:
     resolution: {integrity: sha1-5qdUzI8V5YmHqpy9J69m/W9OWvk=}
     dev: false
@@ -4259,22 +4193,6 @@ packages:
       yargs: 7.1.2
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /gulp-filter/7.0.0_gulp@4.0.2:
-    resolution: {integrity: sha512-ZGWtJo0j1mHfP77tVuhyqem4MRA5NfNRjoVe6VAkLGeQQ/QGo2VsFwp7zfPTGDsd1rwzBmoDHhxpE6f5B3Zuaw==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      gulp: '>=4'
-    peerDependenciesMeta:
-      gulp:
-        optional: true
-    dependencies:
-      gulp: 4.0.2
-      multimatch: 5.0.0
-      plugin-error: 1.0.1
-      streamfilter: 3.0.0
-      to-absolute-glob: 2.0.2
     dev: false
 
   /gulp-sass/5.0.0:
@@ -4664,7 +4582,7 @@ packages:
     dev: false
 
   /is-extglob/2.1.1:
-    resolution: {integrity: sha1-qIwCU1eR8C7TfHahueqXc8gz+MI=}
+    resolution: {integrity: sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -5279,17 +5197,6 @@ packages:
 
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-    dev: false
-
-  /multimatch/5.0.0:
-    resolution: {integrity: sha512-ypMKuglUrZUD99Tk2bUQ+xNQj43lPEfAeX2o9cTteAmShXy2VHDJpuwu1o0xqoKCt9jLVAvwyFKdLTPXKAfJyA==}
-    engines: {node: '>=10'}
-    dependencies:
-      '@types/minimatch': 3.0.5
-      array-differ: 3.0.0
-      array-union: 2.1.0
-      arrify: 2.0.1
-      minimatch: 3.1.2
     dev: false
 
   /mute-stdout/1.0.1:
@@ -6337,7 +6244,7 @@ packages:
     dev: false
 
   /source-map/0.5.7:
-    resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=}
+    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -6445,13 +6352,6 @@ packages:
     dependencies:
       commander: 2.20.3
       limiter: 1.1.5
-    dev: false
-
-  /streamfilter/3.0.0:
-    resolution: {integrity: sha512-kvKNfXCmUyC8lAXSSHCIXBUlo/lhsLcCU/OmzACZYpRUdtKIH68xYhm/+HI15jFJYtNJGYtCgn2wmIiExY1VwA==}
-    engines: {node: '>=8.12.0'}
-    dependencies:
-      readable-stream: 3.6.0
     dev: false
 
   /string-width/1.0.2:
@@ -6592,12 +6492,6 @@ packages:
     resolution: {integrity: sha512-enaDQ4MUyP2W6ZyT6EsMzqBPZaM/avg8iuo+l2d3QCs0J+6RaqkHV/2/lOwDTueBHeJ/2LG9lrLW3d5rWPucuQ==}
     dependencies:
       inherits: 2.0.4
-      readable-stream: 3.6.0
-    dev: false
-
-  /through2/4.0.2:
-    resolution: {integrity: sha512-iOqSav00cVxEEICeD7TjLB1sueEL+81Wpzp2bY17uZjZN0pWZPuo4suZ/61VujxmqSGFfgOcNuTZ85QJwNZQpw==}
-    dependencies:
       readable-stream: 3.6.0
     dev: false
 
