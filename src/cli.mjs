@@ -17,9 +17,10 @@ program
   .command('build')
   .description('Build the theme.')
   .requiredOption('-t, --theme <theme>', 'Theme name.')
-  .action(async ({ theme }) => {
+  .argument('[locale]', 'Locale code.', 'en_US')
+  .action(async (locale, { theme }) => {
     await inheritance(theme)
-    await build(theme)
+    await build(theme, locale)
   })
 
 program

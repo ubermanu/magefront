@@ -6,13 +6,13 @@ import glob from 'fast-glob'
 export const deploy = async (themeName, locale = 'en_US', clean = true) => {
   const themeConfig = await getConfigForTheme(themeName)
 
-  // Clean up the destination dir
-  if (clean && fs.existsSync(themeConfig.dest)) {
-    fs.rmSync(themeConfig.dest, { recursive: true })
-  }
-
   // Append the local to the destination dir
   const dest = path.join(themeConfig.dest, locale)
+
+  // Clean up the destination dir
+  if (clean && fs.existsSync(dest)) {
+    fs.rmSync(dest, { recursive: true })
+  }
 
   // Get the web directories
   const sources = ['web/**/*', '[A-Z]*_[A-Z]*/web/**/*']
