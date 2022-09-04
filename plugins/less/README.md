@@ -12,7 +12,6 @@ Transforms LESS files into CSS files.
 import less from 'magefront-plugin-less'
 
 export default {
-    theme: 'Magento/blank',
     plugins: [
         less()
     ]

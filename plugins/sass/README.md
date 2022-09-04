@@ -12,7 +12,6 @@ Transforms SCSS files into CSS files.
 import sass from 'magefront-plugin-sass'
 
 export default {
-    theme: 'Magento/blank',
     plugins: [
         sass()
     ]
@@ -33,7 +32,7 @@ import sass from 'magefront-plugin-sass'
 import nodeSass from 'node-sass'
 
 export default {
-    theme: 'Magento/blank',
+    theme: 'Snowdog/blank',
     plugins: [
         sass({ compiler: nodeSass })
     ]
