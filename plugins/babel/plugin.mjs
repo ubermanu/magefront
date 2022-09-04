@@ -1,7 +1,5 @@
 import path from 'path'
 import gulp from 'gulp'
-import babel from 'gulp-babel'
-import { fixMagentoDestWebPaths, getMagentoWebPaths } from 'magefront-plugin-web'
 
 export default (options) => (themeConfig) => {
   options = options || { presets: ['@babel/env'] }
