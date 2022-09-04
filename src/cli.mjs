@@ -41,14 +41,6 @@ program
   })
 
 program
-  .command('inheritance')
-  .description('Create the inheritance symlinks in the cache.')
-  .requiredOption('--theme <theme>', 'Theme name.')
-  .action(async ({ theme }) => {
-    await inheritance(theme)
-  })
-
-program
   .command('list')
   .description('List the available themes.')
   .action(() => {
