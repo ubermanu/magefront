@@ -15,19 +15,18 @@ import magentoImport from './lib/magento-import-preprocessor.mjs'
  */
 export default (options = {}) => {
   return (themeConfig) => {
-    let { sourcemaps, compiler } = options
+    const { sourcemaps, compiler } = options
+    const less = compiler ?? less27
 
     // Add the default magento import plugin
     options.plugins ??= []
     options.plugins.unshift(magentoImport(themeConfig.modules))
 
-    compiler ??= less27
-
     glob('**/!(_)*.less', { cwd: themeConfig.src }).then((files) => {
       return Promise.all(
         files.map((file) => {
           const filePath = path.join(themeConfig.src, file)
-          return compiler.render(
+          return less.render(
             fs.readFileSync(filePath, 'utf8').toString(),
             {
               filename: path.resolve(filePath), // <- here we go
