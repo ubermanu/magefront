@@ -6,6 +6,7 @@
     "magefront",
     "magento",
     "theme",
+    "sass",
     "plugin"
   ],
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
@@ -20,8 +21,7 @@
     "plugin.mjs"
   ],
   "dependencies": {
-    "gulp-sass": "^5.0.0",
-    "gulp-sourcemaps": "^3.0.0",
+    "fast-glob": "^3.2.11",
     "sass": "^1.44.0"
   }
 }
