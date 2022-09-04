@@ -16,7 +16,7 @@ program
 program
   .command('build')
   .description('Build the theme.')
-  .requiredOption('--theme <theme>', 'Theme name.')
+  .requiredOption('-t, --theme <theme>', 'Theme name.')
   .action(async ({ theme }) => {
     await inheritance(theme)
     await build(theme)
@@ -25,7 +25,7 @@ program
 program
   .command('dev')
   .description('Run a browser-sync proxy instance.')
-  .requiredOption('--theme <theme>', 'Theme name.')
+  .requiredOption('-t, --theme <theme>', 'Theme name.')
   .requiredOption('--url <url>', 'Url of your website.')
   .action(async ({ theme, url }) => {
     await browserSync(url)
@@ -35,7 +35,7 @@ program
 program
   .command('watch')
   .description('Watch the source files of a theme, and rebuild on change.')
-  .requiredOption('--theme <theme>', 'Theme name.')
+  .requiredOption('-t, --theme <theme>', 'Theme name.')
   .action(async ({ theme }) => {
     await watch(theme)
   })
