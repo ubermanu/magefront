@@ -9,10 +9,11 @@ import { getModules } from '../main.mjs'
  * TODO: Use a `-c` param to specify a configuration file.
  *
  * @param themeName
+ * @param locale
  * @param clean
  * @return {Promise<void>}
  */
-export const build = async (themeName, clean = true) => {
+export const build = async (themeName, locale = 'en_US', clean = true) => {
   const themeConfig = await getConfigForTheme(themeName)
 
   const modules = getModules()
@@ -26,15 +27,13 @@ export const build = async (themeName, clean = true) => {
 
   // Execute all the tasks for each locale
   // The destination dir gets the locale appended to it
-  for (const locale of themeConfig.locales) {
-    const dest = path.join(themeConfig.dest, locale)
-    for (const plugin of themeConfig.plugins) {
-      try {
-        plugin({ ...themeConfig, dest, locale, modules })
-      } catch (e) {
-        // TODO: Add new transport to the logger
-        console.error(e)
-      }
+  const dest = path.join(themeConfig.dest, locale)
+  for (const plugin of themeConfig.plugins) {
+    try {
+      plugin({ ...themeConfig, dest, locale, modules })
+    } catch (e) {
+      // TODO: Add new transport to the logger
+      console.error(e)
     }
   }
 }

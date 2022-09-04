@@ -4,9 +4,7 @@ import { getThemes } from './main.mjs'
 
 // Default configuration plugins
 import lessPlugin from 'magefront-plugin-less'
-// import webCopyPlugin, { gulpWeb as gulpWebPlugin } from 'magefront-plugin-web'
-// import requirejsPlugin from 'magefront-plugin-requirejs'
-// import gulpPlugin from 'magefront-plugin-gulp'
+import requireJsConfig from 'magefront-plugin-requirejs-config'
 
 // This tool is meant to be run at root level of the project
 export const projectPath = process.cwd()
@@ -40,29 +38,38 @@ export const getConfigForTheme = async (themeName) => {
 
   const defaultConfig = {
     theme: themeName,
-    locales: ['en_US'],
-    plugins: [lessPlugin()],
-    copyWebDir: true,
-    concatRequireJs: true,
+    plugins: [lessPlugin(), requireJsConfig()],
     src: path.join(tempPath, theme.dest),
     dest: theme.dest
   }
 
   const finalConfig = Object.assign({}, defaultConfig, customConfig)
 
-  if (finalConfig.copyWebDir) {
-    // finalConfig.plugins.push(webCopyPlugin())
-  }
-
-  if (finalConfig.concatRequireJs) {
-    // finalConfig.plugins.push(requirejsPlugin())
-  }
-
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
-  await Promise.all(finalConfig.plugins).then((plugins) => {
+  await Promise.all(finalConfig.plugins.map(transformPlugin)).then((plugins) => {
     finalConfig.plugins = plugins
   })
 
   return finalConfig
+}
+
+/**
+ * Transform the plugin to a function if it is not already.
+ * If passed a string, import the plugin and return the default export.
+ *
+ * @param {*} plugin
+ * @return {function}
+ */
+const transformPlugin = async (plugin) => {
+  if (typeof plugin === 'function') {
+    return plugin
+  }
+
+  if (typeof plugin === 'string') {
+    const { default: pluginModule } = await import(plugin)
+    return pluginModule()
+  }
+
+  throw new Error(`Invalid plugin type: ${typeof plugin}`)
 }

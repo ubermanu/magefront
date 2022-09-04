@@ -29,7 +29,7 @@ export default (options = {}) => {
           return less.render(
             fs.readFileSync(filePath, 'utf8').toString(),
             {
-              filename: path.resolve(filePath), // <- here we go
+              filename: path.resolve(filePath),
               ...options
             },
             (err, output) => {

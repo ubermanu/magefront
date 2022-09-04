@@ -16,7 +16,6 @@ export default (options = {}) => {
     const sass = compiler ?? dartSass
 
     glob('**/!(_)*.scss', { cwd: themeConfig.src }).then((files) => {
-      console.log(files)
       return Promise.all(
         files.map((file) => {
           const filePath = path.join(themeConfig.src, file)
