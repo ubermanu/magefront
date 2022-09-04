@@ -11,9 +11,10 @@
 * Plugins
   * [Quick Start](plugins/intro.md)
   * [LESS](plugins/less.md)
-  * [RequireJS](plugins/requirejs.md)
-  * [Copy web folders](plugins/web.md)
-  * [Gulp](plugins/gulp.md)
+  * [SASS](plugins/sass.md)
+  * [Stylus](plugins/stylus.md)
+  * [Babel](plugins/babel.md)
+  * [RequireJS](plugins/requirejs-config.md)
 
 * Examples
   * [Magento Themes](examples/magento-themes.md)
