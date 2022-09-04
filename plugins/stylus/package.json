@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-stylus",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -20,7 +20,7 @@
     "plugin.mjs"
   ],
   "dependencies": {
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-stylus": "^2.7.0"
+    "fast-glob": "^3.2.11",
+    "stylus": "^0.59.0"
   }
 }
