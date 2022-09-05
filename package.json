@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "type": "module",
   "keywords": [
     "magefront",
@@ -34,7 +34,8 @@
     "magefront-plugin-babel": "workspace:*",
     "magefront-plugin-sass": "workspace:*",
     "magefront-plugin-stylus": "workspace:*",
-    "magefront-plugin-svelte": "workspace:*"
+    "magefront-plugin-svelte": "workspace:*",
+    "magefront-plugin-typescript": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

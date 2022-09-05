@@ -16,6 +16,7 @@ importers:
       magefront-plugin-sass: workspace:*
       magefront-plugin-stylus: workspace:*
       magefront-plugin-svelte: workspace:*
+      magefront-plugin-typescript: workspace:*
       prettier: ^2.5.1
       uvu: ^0.5.3
     dependencies:
@@ -32,6 +33,7 @@ importers:
       magefront-plugin-sass: link:plugins/sass
       magefront-plugin-stylus: link:plugins/stylus
       magefront-plugin-svelte: link:plugins/svelte
+      magefront-plugin-typescript: link:plugins/typescript
     devDependencies:
       prettier: 2.5.1
       uvu: 0.5.3
@@ -81,6 +83,14 @@ importers:
     dependencies:
       fast-glob: 3.2.11
       svelte: 3.50.0
+
+  plugins/typescript:
+    specifiers:
+      fast-glob: ^3.2.11
+      typescript: ^4.8.2
+    dependencies:
+      fast-glob: 3.2.11
+      typescript: 4.8.2
 
 packages:
 
@@ -2151,6 +2161,12 @@ packages:
     resolution: {integrity: sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=}
     dev: false
     optional: true
+
+  /typescript/4.8.2:
+    resolution: {integrity: sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: false
 
   /ua-parser-js/1.0.2:
     resolution: {integrity: sha512-00y/AXhx0/SsnI51fTc0rLRmafiGOM4/O+ny10Ps7f+j/b8p/ZY11ytMgznXkOVo4GQ+KwQG5UQLkLGirsACRg==}

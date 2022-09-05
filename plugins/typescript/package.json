@@ -1,0 +1,26 @@
+{
+  "name": "magefront-plugin-typescript",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/typescript"
+  },
+  "main": "plugin.mjs",
+  "files": [
+    "plugin.mjs"
+  ],
+  "dependencies": {
+    "fast-glob": "^3.2.11",
+    "typescript": "^4.8.2"
+  }
+}
