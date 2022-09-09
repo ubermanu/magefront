@@ -34,7 +34,7 @@ export const getConfigForTheme = async (themeName) => {
 
   const defaultConfig = {
     theme: themeName,
-    plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation', 'magefront-plugin-terser'],
+    plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
     src: path.join(tempPath, theme.dest),
     dest: theme.dest
   }
