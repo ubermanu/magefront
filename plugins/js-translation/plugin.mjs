@@ -50,7 +50,7 @@ export default (options = {}) => {
       packed += `${fs.readFileSync(file, 'utf8')}\n`
     })
 
-    const file = path.join(themeConfig.src, dest || 'js-translation.json')
+    const file = path.join(themeConfig.src, dest || 'web', 'js-translation.json')
     fs.mkdirSync(path.dirname(file), { recursive: true })
 
     // Parse the CSV file and generate the JSON file
