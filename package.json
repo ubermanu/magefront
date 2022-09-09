@@ -36,6 +36,7 @@
     "magefront-plugin-sass": "workspace:*",
     "magefront-plugin-stylus": "workspace:*",
     "magefront-plugin-svelte": "workspace:*",
+    "magefront-plugin-terser": "workspace:*",
     "magefront-plugin-typescript": "workspace:*"
   },
   "devDependencies": {
