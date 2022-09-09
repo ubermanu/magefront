@@ -50,9 +50,9 @@ importers:
 
   plugins/js-translation:
     specifiers:
-      csv: ^6.2.0
+      csv-parse: ^5.3.0
     dependencies:
-      csv: 6.2.0
+      csv-parse: 5.3.0
 
   plugins/less:
     specifiers:
@@ -815,26 +815,8 @@ packages:
     dev: false
     optional: true
 
-  /csv-generate/4.2.0:
-    resolution: {integrity: sha512-zlIESlGQaYqIhNYwBN2pj5KXNMYbAXZYMOgNoVSoYV8MQyGZwcNWX+kx5LHxocp+zQDqzSgeKh+e+AZs+nCq4Q==}
-    dev: false
-
   /csv-parse/5.3.0:
     resolution: {integrity: sha512-UXJCGwvJ2fep39purtAn27OUYmxB1JQto+zhZ4QlJpzsirtSFbzLvip1aIgziqNdZp/TptvsKEV5BZSxe10/DQ==}
-    dev: false
-
-  /csv-stringify/6.2.0:
-    resolution: {integrity: sha512-dcUbQLRTTDcgQxgEU8V9IctkaCwHZjZfzUZ5ZB3RY8Y+pXtdtl5iVQHfGzANytFFkRKanYzBXrkfpNdGR7eviA==}
-    dev: false
-
-  /csv/6.2.0:
-    resolution: {integrity: sha512-yT7dkCsJLJ36NUW0d0ei7parOcUCx/QVkK77puwA/rF4bMciTB5Kf+wuegL+7zh8s6revFM+BFQ2h+U2k4jgBQ==}
-    engines: {node: '>= 0.1.90'}
-    dependencies:
-      csv-generate: 4.2.0
-      csv-parse: 5.3.0
-      csv-stringify: 6.2.0
-      stream-transform: 3.2.0
     dev: false
 
   /dashdash/1.14.1:
@@ -2079,10 +2061,6 @@ packages:
     dependencies:
       commander: 2.20.3
       limiter: 1.1.5
-    dev: false
-
-  /stream-transform/3.2.0:
-    resolution: {integrity: sha512-M22v88wNknyJiIyHYoiIYI5RPl/R7tkf92j1YNkmrbe5XRGHW0jW8n458j1njOrR4Edcj8bwbpSV0iLIWon1hg==}
     dev: false
 
   /string-width/4.2.3:
