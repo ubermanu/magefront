@@ -38,7 +38,6 @@ export default (options = {}) => {
             if (err) {
               console.error(err)
             } else {
-              console.log(output.map)
               fs.writeFileSync(path.join(themeConfig.src, file).replace(/\.less$/, '.css'), output.css, 'utf8')
             }
           }
