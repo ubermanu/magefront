@@ -20,7 +20,7 @@ export const getLanguages = (projectRoot = process.cwd()) => {
 
   // Get the list of languages in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = getPackages(projectRoot).filter((pkg) => pkg.type === 'magento2-module')
+  const packages = getPackages(projectRoot).filter((pkg) => pkg.type === 'magento2-language')
 
   packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
