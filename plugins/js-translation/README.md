@@ -1,4 +1,4 @@
-# magefront-plugin-requirejs-config
+# magefront-plugin-translation
 
 Merge all the translations into the `js-translation.json` file.
 
