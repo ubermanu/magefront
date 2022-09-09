@@ -2,10 +2,6 @@ import path from 'path'
 import glob from 'fast-glob'
 import { getThemes } from './main.mjs'
 
-// Default configuration plugins
-import lessPlugin from 'magefront-plugin-less'
-import requireJsConfig from 'magefront-plugin-requirejs-config'
-
 // This tool is meant to be run at root level of the project
 export const projectPath = process.cwd()
 export const tempPath = path.join(projectPath, 'var/view_preprocessed/magefront')
@@ -38,7 +34,7 @@ export const getConfigForTheme = async (themeName) => {
 
   const defaultConfig = {
     theme: themeName,
-    plugins: [lessPlugin(), requireJsConfig()],
+    plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
     src: path.join(tempPath, theme.dest),
     dest: theme.dest
   }
