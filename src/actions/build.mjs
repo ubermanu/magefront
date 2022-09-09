@@ -26,7 +26,7 @@ export const build = async (themeName, locale = 'en_US') => {
   const dest = path.join(themeConfig.dest, locale)
   for (const plugin of themeConfig.plugins) {
     try {
-      plugin({ ...themeConfig, dest, locale, modules, moduleList, languageList })
+      await plugin({ ...themeConfig, dest, locale, modules, moduleList, languageList })
     } catch (e) {
       // TODO: Add new transport to the logger
       console.error(e)

@@ -14,7 +14,7 @@ import magentoImport from './lib/magento-import-preprocessor.mjs'
  * @return {(function(*): void)|*}
  */
 export default (options = {}) => {
-  return (themeConfig) => {
+  return async (themeConfig) => {
     const { sourcemaps, compiler } = options
     const less = compiler ?? less27
 
@@ -22,26 +22,26 @@ export default (options = {}) => {
     options.plugins ??= []
     options.plugins.unshift(magentoImport(themeConfig.modules))
 
-    glob('**/!(_)*.less', { cwd: themeConfig.src }).then((files) => {
-      return Promise.all(
-        files.map((file) => {
-          const filePath = path.join(themeConfig.src, file)
-          return less.render(
-            fs.readFileSync(filePath, 'utf8').toString(),
-            {
-              filename: path.resolve(filePath),
-              ...options
-            },
-            (err, output) => {
-              if (err) {
-                console.error(err)
-              } else {
-                fs.writeFileSync(path.join(themeConfig.src, file).replace(/\.less$/, '.css'), output.css, 'utf8')
-              }
+    const files = await glob('**/!(_)*.less', { cwd: themeConfig.src })
+
+    return Promise.all(
+      files.map((file) => {
+        const filePath = path.join(themeConfig.src, file)
+        return less.render(
+          fs.readFileSync(filePath, 'utf8').toString(),
+          {
+            filename: path.resolve(filePath),
+            ...options
+          },
+          (err, output) => {
+            if (err) {
+              console.error(err)
+            } else {
+              fs.writeFileSync(path.join(themeConfig.src, file).replace(/\.less$/, '.css'), output.css, 'utf8')
             }
-          )
-        })
-      )
-    })
+          }
+        )
+      })
+    )
   }
 }
