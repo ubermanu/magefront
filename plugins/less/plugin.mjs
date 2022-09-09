@@ -31,12 +31,14 @@ export default (options = {}) => {
           fs.readFileSync(filePath, 'utf8').toString(),
           {
             filename: path.resolve(filePath),
+            sourceMap: sourcemaps,
             ...options
           },
           (err, output) => {
             if (err) {
               console.error(err)
             } else {
+              console.log(output.map)
               fs.writeFileSync(path.join(themeConfig.src, file).replace(/\.less$/, '.css'), output.css, 'utf8')
             }
           }
