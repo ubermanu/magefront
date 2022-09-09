@@ -15,6 +15,7 @@
   * [Stylus](plugins/stylus.md)
   * [Babel](plugins/babel.md)
   * [RequireJS](plugins/requirejs-config.md)
+  * [JsTranslation](plugins/js-translation.md)
 
 * Examples
   * [Magento Themes](examples/magento-themes.md)
