@@ -5,34 +5,38 @@ import fs from 'fs'
 /**
  * Merge all the requirejs-config files into one.
  *
- * @param {{src?: string, dest?: string}} options
- * @return {(function(*): void)|*}
+ * @returns {function(*): Promise<Awaited<*>[]>}
  */
-export default (options = {}) => {
-  const { src, dest } = options
-  let packed = ''
+export default () => {
+  return async (themeConfig) => {
+    const files = []
 
-  return (themeConfig) => {
-    const files = glob.sync(src || '*/requirejs-config.js', {
-      cwd: themeConfig.src
+    // Get the `requirejs-config.js` files from the modules
+    // FIXME: Check for the module dependency tree (to get the correct order)
+    themeConfig.moduleList.forEach((mod) => {
+      const filePath = path.join(mod.src, 'view/frontend/requirejs-config.js')
+      if (fs.existsSync(filePath)) {
+        files.push(filePath)
+      }
     })
 
-    // Sort by module order (defined in the config.php)
-    // TODO: Handle errors
-    const modules = themeConfig.modules
-    files.sort((a, b) => {
-      const [, modA] = a.match(/^(\w+_\w+)\/requirejs-config\.js$/)
-      const [, modB] = b.match(/^(\w+_\w+)\/requirejs-config\.js$/)
-      return modules.indexOf(modA) - modules.indexOf(modB)
+    // Get the `requirejs-config.js` files from the theme
+    //FIXME: Might need to check for the parent themes as well.
+    const themeFiles = await glob(['requirejs-config.js', '[A-Z]*_[A-Z]*/requirejs-config.js'], { cwd: themeConfig.src })
+    themeFiles.forEach((file) => {
+      files.push(path.join(themeConfig.src, file))
     })
 
-    files.forEach((file) => {
-      const content = fs.readFileSync(path.join(themeConfig.src, file), 'utf8')
-      packed += `(function(){\n${content}\nrequire.config(config);\n})();\n`
-    })
+    const packed = await Promise.all(
+      files.map(async (filePath) => {
+        const fileContent = await fs.promises.readFile(filePath)
+        return `(function(){\n${fileContent}\nrequire.config(config);\n})();\n`
+      })
+    )
 
-    const file = path.join(themeConfig.src, dest || 'web', 'requirejs-config.js')
-    fs.mkdirSync(path.dirname(file), { recursive: true })
-    fs.writeFileSync(file, `(function(require){\n${packed}})(require);`)
+    // Output the final requirejs-config.js file into web, so it can be deployed
+    const file = path.join(themeConfig.src, 'web', 'requirejs-config.js')
+
+    return fs.promises.writeFile(file, `(function(require){\n${packed.join('')}})(require);`)
   }
 }
