@@ -18,7 +18,6 @@ jobs:
         with:
           version: 7.11.0
       - run: pnpm i
-      - run: pnpm test
       - run: pnpm publish -r --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
