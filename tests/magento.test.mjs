@@ -1,5 +1,7 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
+
+import './setup.mjs'
 import { getModules } from '../src/magento/module.mjs'
 import { getThemes } from '../src/magento/theme.mjs'
 
