@@ -6,14 +6,14 @@ import { minify } from 'terser'
 /**
  * Find all the `js` files in the preprocessed directory and minify them.
  *
- * @param {{src?:string, terserOptions?:any}} options
- * @return {function}
+ * @param {{src?:string, ignore?:any, terserOptions?:any}} options
+ * @returns {function(*): Promise<Awaited<void>[]>}
  */
 export default (options = {}) => {
-  const { src, terserOptions } = options
+  const { src, ignore, terserOptions } = options
 
   return async (themeConfig) => {
-    const files = await glob(src || '**/*.js', { cwd: themeConfig.src })
+    const files = await glob(src || '**/*.js', { ignore: ignore || [], cwd: themeConfig.src })
 
     return Promise.all(
       files.map(async (file) => {
