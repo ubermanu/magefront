@@ -16,14 +16,16 @@ jobs:
         with:
           version: 7.11.0
 
-      - uses: php-actions/composer@v6
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php_version: '8.1'
-          version: 2
-          args: --version
+          tools: composer:2
+          php-version: 8.1
+          coverage: none
 
-      - name: Add HTTP basic auth credentials
-        run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+      - name: Setup Magento Repository Credentials
+        run: |
+          composer global config http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_USERNAME}" "${MAGENTO_MARKETPLACE_PASSWORD}";
 
       - run: pnpm i
       - run: pnpm test

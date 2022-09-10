@@ -10,12 +10,6 @@ function createEnvironment() {
     process.exit(1)
   }
 
-  // Check for auth.json file
-  if (!fs.existsSync('auth.json')) {
-    console.error('auth.json file not found. Please create it first.')
-    process.exit(1)
-  }
-
   // Install Magento
   execSync(
     `${composer} create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition .test-magento`,
