@@ -18,7 +18,8 @@ export default (options = {}) => {
     return Promise.all(
       files.map(async (file) => {
         const filePath = path.join(themeConfig.src, file)
-        const { code } = await minify(fs.readFileSync(filePath, 'utf8').toString(), terserOptions || {})
+        const fileContent = await fs.promises.readFile(filePath, 'utf8')
+        const { code } = await minify(fileContent.toString(), terserOptions || {})
         return fs.promises.writeFile(filePath, code, 'utf8')
       })
     )
