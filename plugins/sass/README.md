@@ -20,6 +20,18 @@ export default {
 
 ## Options
 
+### `src`
+
+The source files to minify. Default is `**/!(_)*.scss`.
+
+### `ignore`
+
+A list of paths to ignore.
+
+### `sourcemaps`
+
+Enable sourcemaps. Default is `false`.
+
 ### `compiler`
 
 The sass compiler to use.<br>
@@ -39,6 +51,6 @@ export default {
 }
 ```
 
-### `sourcemaps`
+### `compilerOptions`
 
-Enable sourcemaps. Default is `false`.
+Options to pass to the sass compiler. See [sass docs](https://sass-lang.com/documentation/js-api) for more info.
