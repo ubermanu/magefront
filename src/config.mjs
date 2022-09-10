@@ -14,7 +14,7 @@ export const getConfigForTheme = async (themeName) => {
   const theme = getThemes().find((t) => t.name === themeName)
 
   // TODO: Add as an option '-c' to specify the config file
-  const files = glob.sync('magefront.config.{js,mjs,cjs}', { cwd: rootPath })
+  const files = await glob('magefront.config.{js,mjs,cjs}', { cwd: rootPath })
   let customConfig = {}
 
   if (files.length) {
@@ -33,7 +33,7 @@ export const getConfigForTheme = async (themeName) => {
     theme: themeName,
     plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
     src: path.join(rootPath, tempPath, theme.dest),
-    dest: theme.dest
+    dest: path.join(rootPath, theme.dest)
   }
 
   const finalConfig = Object.assign({}, defaultConfig, customConfig)
