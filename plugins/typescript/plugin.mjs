@@ -4,21 +4,28 @@ import fs from 'fs'
 import typescript from 'typescript'
 
 /**
- * @param {{compilerOptions?: {}, any}} options
- * @return {function}
+ * Transform TypeScript files to JavaScript.
+ *
+ * @param {{src?:any, ignore?:any, compilerOptions?: {}}} options
+ * @returns {function(*): Promise<Awaited<unknown>[]>}
  */
 export default (options = {}) => {
-  return (themeConfig) => {
-    const compilerOptions = options.compilerOptions ?? {}
+  const { src, ignore, compilerOptions } = options
 
-    glob('**/*.ts', { cwd: themeConfig.src }).then((files) => {
-      return Promise.all(
-        files.map((file) => {
-          const filePath = path.join(themeConfig.src, file)
-          const output = typescript.transpile(fs.readFileSync(filePath, 'utf-8').toString(), compilerOptions)
-          fs.writeFileSync(path.join(themeConfig.src, file.replace(/\.ts$/, '.js')), output)
-        })
-      )
+  return async (themeConfig) => {
+    const files = await glob(src ?? '**/*.ts', {
+      ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
+      cwd: themeConfig.src
     })
+
+    return Promise.all(
+      files.map(async (file) => {
+        const filePath = path.join(themeConfig.src, file)
+        const fileContent = await fs.promises.readFile(filePath)
+        const output = typescript.transpile(fileContent.toString(), compilerOptions ?? {})
+
+        return fs.promises.writeFile(filePath.replace(/\.ts$/, '.js'), output)
+      })
+    )
   }
 }
