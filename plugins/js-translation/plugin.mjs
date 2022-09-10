@@ -5,13 +5,10 @@ import { parse } from 'csv-parse'
 /**
  * Generate a `js-translation.json` file for the current locale.
  *
- * @param {{src?: string, dest?: string}} options
- * @return {(function(*): void)|*}
+ * @returns {(function(*): Promise<void>)|*}
  */
-export default (options = {}) => {
-  const { src, dest } = options
-
-  return (themeConfig) => {
+export default () => {
+  return async (themeConfig) => {
     const files = []
 
     const { locale, moduleList, languageList } = themeConfig
@@ -36,14 +33,15 @@ export default (options = {}) => {
         return
       }
 
-      const translationFile = path.join(mod.src, src || 'i18n', translationFilename)
+      const translationFile = path.join(mod.src, 'i18n', translationFilename)
       if (fs.existsSync(translationFile)) {
         files.push(translationFile)
       }
     })
 
     // Get the translation file from the theme
-    const themeTranslationFile = path.join(themeConfig.src, src || 'i18n', translationFilename)
+    // FIXME: Get the translations from the parent themes
+    const themeTranslationFile = path.join(themeConfig.src, 'i18n', translationFilename)
     if (fs.existsSync(themeTranslationFile)) {
       files.push(themeTranslationFile)
     }
@@ -69,15 +67,14 @@ export default (options = {}) => {
       }
     })
 
-    parser.on('end', function () {
-      const file = path.join(themeConfig.src, dest || 'web', 'js-translation.json')
-      fs.mkdirSync(path.dirname(file), { recursive: true })
+    parser.on('end', () => {
+      const file = path.join(themeConfig.src, 'web', 'js-translation.json')
       fs.writeFileSync(file, JSON.stringify(records, null, 2))
     })
 
     // Merge the translation files into one giant string
     files.forEach((file) => {
-      parser.write(fs.readFileSync(file, 'utf8').toString())
+      parser.write(fs.readFileSync(file).toString())
     })
 
     parser.end()
