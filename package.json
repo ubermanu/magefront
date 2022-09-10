@@ -18,7 +18,7 @@
   },
   "module": "src/main.mjs",
   "scripts": {
-    "test": "uvu tests"
+    "test": "uvu tests && uvu plugins/*/tests"
   },
   "dependencies": {
     "browser-sync": "^2.27.7",

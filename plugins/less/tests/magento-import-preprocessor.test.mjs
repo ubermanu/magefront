@@ -1,6 +1,6 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
-import { preProcessor } from '../plugins/less/lib/magento-import-preprocessor.mjs'
+import { preProcessor } from '../lib/magento-import-preprocessor.mjs'
 
 test('Replace the `@magento_import` statement with the correct one', () => {
   const pp = new preProcessor(['Magento_Catalog'])
