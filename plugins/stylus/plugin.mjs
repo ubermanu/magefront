@@ -6,33 +6,39 @@ import stylus from 'stylus'
 /**
  * Transform Stylus files to CSS.
  *
- * @param {{sourcemaps?: boolean, any}} options
+ * @param {{src?:any, ignore?:any, sourcemaps?:boolean, compilerOptions?:any}} options
  * @return {(function(*): *)|*}
  */
 export default (options = {}) => {
-  return (themeConfig) => {
-    const { sourcemaps } = options
+  const { src, ignore, sourcemaps, compilerOptions } = options
 
-    glob('**/!(_)*.styl', { cwd: themeConfig.src }).then((files) => {
-      return Promise.all(
-        files.map((file) => {
-          const filePath = path.join(themeConfig.src, file)
-          return stylus.render(
-            fs.readFileSync(filePath, 'utf8').toString(),
-            {
-              filename: path.resolve(filePath),
-              ...options
-            },
-            (err, output) => {
-              if (err) {
-                console.error(err)
-              } else {
-                fs.writeFileSync(path.join(themeConfig.src, file).replace(/\.styl$/, '.css'), output, 'utf8')
-              }
-            }
-          )
+  return async (themeConfig) => {
+    const files = await glob(src || '**/!(_)*.styl', { ignore: ignore ?? [], cwd: themeConfig.src })
+
+    return Promise.all(
+      files.map(async (file) => {
+        const filePath = path.join(themeConfig.src, file)
+        const fileContent = await fs.promises.readFile(filePath, 'utf8')
+
+        const style = stylus(fileContent.toString(), {
+          sourcemap: sourcemaps,
+          ...compilerOptions,
+          filename: path.resolve(filePath)
         })
-      )
-    })
+
+        style.render((err, css) => {
+          if (err) {
+            console.error(err)
+          } else {
+            const cssFilePath = filePath.replace(/\.styl$/, '.css')
+            fs.writeFileSync(cssFilePath, css, 'utf8')
+
+            if (sourcemaps) {
+              fs.writeFileSync(`${cssFilePath}.map`, JSON.stringify(style.sourcemap), 'utf8')
+            }
+          }
+        })
+      })
+    )
   }
 }
