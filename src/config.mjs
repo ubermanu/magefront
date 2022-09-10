@@ -67,5 +67,11 @@ const transformPlugin = async (plugin) => {
     return pluginModule()
   }
 
+  if (Array.isArray(plugin)) {
+    const [pluginName, options] = plugin
+    const { default: pluginModule } = await import(pluginName)
+    return pluginModule(options)
+  }
+
   throw new Error(`Invalid plugin type: ${typeof plugin}`)
 }
