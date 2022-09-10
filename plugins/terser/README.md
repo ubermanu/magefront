@@ -20,5 +20,10 @@ export default {
 
 ## Options
 
-You can check the list of options [here](https://terser.org/docs/api-reference#minify-options).
+### `src`
 
+The source files to minify. Default is `**/*.js`.
+
+### `terserOptions`
+
+Options to pass to the [terser](https://terser.org/docs/api-reference#minify-options) minifier.
