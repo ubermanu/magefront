@@ -4,21 +4,25 @@ import fs from 'fs'
 import { compile } from 'svelte/compiler'
 
 /**
- * @param {{compilerOptions?: {}, css?: any, any}} options
- * @return {function}
+ * Transform `*.svelte` files to `*.js` files.
+ *
+ * @param {{src?:any, ignore?:any, compilerOptions?: any}} options
+ * @returns {function(*): Promise<Awaited<*>[]>}
  */
 export default (options = {}) => {
-  return (themeConfig) => {
-    const compilerOptions = options.compilerOptions
+  const { src, ignore, compilerOptions } = options
 
-    glob('**/*.svelte', { cwd: themeConfig.src }).then((files) => {
-      return Promise.all(
-        files.map((file) => {
-          const filePath = path.join(themeConfig.src, file)
-          const output = compile(fs.readFileSync(filePath, 'utf-8'), compilerOptions)
-          fs.writeFileSync(path.join(themeConfig.src, file.replace(/\.svelte$/, '.js')), output.js.code)
-        })
-      )
-    })
+  return async (themeConfig) => {
+    const files = await glob(src || '**/*.svelte', { ignore: ignore ?? [], cwd: themeConfig.src })
+
+    return Promise.all(
+      files.map(async (file) => {
+        const filePath = path.join(themeConfig.src, file)
+        const fileContent = await fs.promises.readFile(filePath)
+        const output = compile(fileContent.toString(), compilerOptions)
+
+        return fs.promises.writeFile(filePath.replace(/\.svelte$/, '.js'), output.js.code)
+      })
+    )
   }
 }
