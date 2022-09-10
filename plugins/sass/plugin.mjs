@@ -8,7 +8,7 @@ import dartSass from 'sass'
  * You can use the `compiler` option to specify the sass compiler to use. (e.g. node-sass)
  *
  * @param {{src?: any, ignore?: any, sourcemaps?: boolean, compiler?: any, compilerOptions?: any}} options
- * @return {(function(*): *)|*}
+ * @returns {function(*): Promise<Awaited<*>[]>}
  */
 export default (options = {}) => {
   const { src, ignore, sourcemaps, compiler, compilerOptions } = options
