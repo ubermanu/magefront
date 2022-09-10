@@ -1,4 +1,4 @@
-import { getThemes } from '../main.mjs'
+import { getThemes } from '../magento/theme.mjs'
 import Table from 'cli-table'
 
 export const list = () => {
