@@ -2,6 +2,7 @@ import fs from 'fs'
 import glob from 'fast-glob'
 import path from 'path'
 import { getPackages, getRegistrations } from './composer.mjs'
+import { rootPath } from '../env.mjs'
 
 export class Module {
   name
@@ -13,12 +14,11 @@ export class Module {
  * Read the `config.php` file and return the modules list.
  * Resolve the modules paths from `app/code` then from the `vendor` directory.
  *
- * @param {string} projectRoot
  * @return Module[]
  */
-export const getModules = (projectRoot = process.cwd()) => {
+export const getModules = () => {
   const list = {}
-  const config = fs.readFileSync(`${projectRoot}/app/etc/config.php`, 'utf8')
+  const config = fs.readFileSync(`${rootPath}/app/etc/config.php`, 'utf8')
 
   // 1. Get the list of modules from the config file
   config.match(/'(\w+_\w+)'\s*=>\s*(\d)/g).forEach((match) => {
@@ -30,10 +30,10 @@ export const getModules = (projectRoot = process.cwd()) => {
   })
 
   // 2. Resolve the source path for the modules into `app/code/`
-  const appCode = glob.sync('app/code/*/*', { onlyDirectories: true, cwd: projectRoot })
+  const appCode = glob.sync('app/code/*/*', { onlyDirectories: true, cwd: rootPath })
 
   appCode.forEach((codeSrc) => {
-    const moduleXmlFile = path.join(projectRoot, codeSrc, 'etc/module.xml')
+    const moduleXmlFile = path.join(rootPath, codeSrc, 'etc/module.xml')
 
     if (!fs.existsSync(moduleXmlFile)) {
       console.warn(`Module XML file not found in ${codeSrc}`)
@@ -51,12 +51,12 @@ export const getModules = (projectRoot = process.cwd()) => {
 
   // 3. Get the list of modules in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = getPackages(projectRoot).filter((pkg) => pkg.type === 'magento2-module')
+  const packages = getPackages().filter((pkg) => pkg.type === 'magento2-module')
 
   packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
-      const name = fetchNameFromModuleXml(path.join(projectRoot, src, 'etc/module.xml'))
+      const name = fetchNameFromModuleXml(path.join(rootPath, src, 'etc/module.xml'))
 
       if (!list[name]) {
         console.warn(`Module "${name}" not found in config.php`)

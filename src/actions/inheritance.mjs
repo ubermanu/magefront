@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
 import { getModules, getThemes } from '../main.mjs'
-import { projectPath, tempPath } from '../config.mjs'
+import { rootPath, tempPath } from '../env.mjs'
 
 const themes = getThemes()
 
@@ -53,14 +53,14 @@ function getThemeDependencyTree(themeName, dependencyTree) {
 
 // TODO: Add predefined ignores for the core themes
 export const inheritance = async (themeName) => {
-  const themeDest = path.join(tempPath, findTheme(themeName).dest)
+  const themeDest = path.join(rootPath, tempPath, findTheme(themeName).dest)
 
   // Clean destination dir before generating new symlinks
   fs.removeSync(themeDest)
 
   // Add the Magento/base resources as a dependency for everyone
   // TODO: Might have too many ignores here (for backend theme)
-  const libSrc = path.join(projectPath, 'lib')
+  const libSrc = path.join(rootPath, 'lib')
   generateCopies(libSrc, themeDest, '', ['internal/*', 'web/css/docs'])
 
   // For each enabled modules, create symlinks into the theme
@@ -70,14 +70,14 @@ export const inheritance = async (themeName) => {
 
   modules.forEach((m) => {
     // Resolve the "base" area as well (common to frontend and adminhtml)
-    generateCopies(path.join(projectPath, m.src, 'view', 'base'), path.join(themeDest, m.name), '', ignore)
-    generateCopies(path.join(projectPath, m.src, 'view', area), path.join(themeDest, m.name), '', ignore)
+    generateCopies(path.join(rootPath, m.src, 'view', 'base'), path.join(themeDest, m.name), '', ignore)
+    generateCopies(path.join(rootPath, m.src, 'view', area), path.join(themeDest, m.name), '', ignore)
   })
 
   // Create symlinks for all the related themes
   getThemeDependencyTree(themeName).forEach((themeName) => {
     const theme = findTheme(themeName)
-    const themeSrc = path.join(projectPath, theme.src)
+    const themeSrc = path.join(rootPath, theme.src)
     generateCopies(themeSrc, themeDest, '', theme.ignore)
   })
 }

@@ -4,22 +4,22 @@ import { getModules, getThemes } from '../main.mjs'
 import { build } from './build.mjs'
 import { instance } from './browser-sync.mjs'
 import { inheritance } from './inheritance.mjs'
-import { projectPath, tempPath } from '../config.mjs'
+import { rootPath, tempPath } from '../env.mjs'
 
 export const watch = async (themeName) => {
   const watcherConfig = { ignoreInitial: true }
   const theme = getThemes().find((theme) => theme.name === themeName)
   const modules = getModules().filter((module) => module.src && module.enabled)
 
-  const themeTempSrc = path.join(tempPath, theme.dest)
-  const themeSrc = [path.join(projectPath, theme.src)]
+  const themeTempSrc = path.join(rootPath, tempPath, theme.dest)
+  const themeSrc = [path.join(rootPath, theme.src)]
 
   // Add modules source directories to theme source paths array
   // Ignore the sources of modules that are in the vendor directory
   modules
     .filter((m) => !m.src.startsWith('vendor'))
     .forEach((m) => {
-      themeSrc.push(path.join(projectPath, m.src))
+      themeSrc.push(path.join(rootPath, m.src))
     })
 
   // Initialize watchers

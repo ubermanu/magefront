@@ -3,6 +3,7 @@ import path from 'path'
 import fs from 'fs'
 import { getPackages, getRegistrations } from './composer.mjs'
 import { Module } from './module.mjs'
+import { rootPath } from '../env.mjs'
 
 export class Theme extends Module {
   enabled = true
@@ -19,37 +20,36 @@ export class Theme extends Module {
 /**
  * Crawl the Magento project source code and return a list of all the themes.
  *
- * @param projectRoot
  * @return Theme[]
  */
-export const getThemes = (projectRoot = process.cwd()) => {
+export const getThemes = () => {
   const list = {}
 
   // 1. Get the list of themes from the `app/design/` directory.
-  const appDesign = glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml', { cwd: projectRoot })
+  const appDesign = glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml', { cwd: rootPath })
 
   appDesign.forEach((designSrc) => {
     const theme = new Theme()
     theme.name = designSrc.split('/').slice(3, -1).join('/')
     theme.src = designSrc.split('/').slice(0, -1).join('/')
     theme.area = designSrc.split('/')[2]
-    theme.parent = getParentFromThemeXml(path.join(projectRoot, designSrc))
+    theme.parent = getParentFromThemeXml(path.join(rootPath, designSrc))
     list[theme.name] = theme
   })
 
   // 2. Get the themes from the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = getPackages(projectRoot).filter((pkg) => pkg.type === 'magento2-theme')
+  const packages = getPackages().filter((pkg) => pkg.type === 'magento2-theme')
 
   packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
       const theme = new Theme()
       const src = path.join('vendor', pkg.name, path.dirname(registration))
-      const { name, area } = getThemeNameAndAreaFromRegistrationPhp(path.join(projectRoot, src, 'registration.php'))
+      const { name, area } = getThemeNameAndAreaFromRegistrationPhp(path.join(rootPath, src, 'registration.php'))
       theme.name = name
       theme.src = src
       theme.area = area
-      theme.parent = getParentFromThemeXml(path.join(projectRoot, src, 'theme.xml'))
+      theme.parent = getParentFromThemeXml(path.join(rootPath, src, 'theme.xml'))
       list[name] = theme
     })
   })

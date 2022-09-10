@@ -11,7 +11,7 @@ export const deploy = async (themeName, locale = 'en_US', clean = true) => {
 
   // Clean up the destination dir
   if (clean && fs.existsSync(dest)) {
-    fs.rmSync(dest, { recursive: true })
+    await fs.promises.rm(dest, { recursive: true })
   }
 
   // Get the web directories
@@ -32,14 +32,14 @@ export const deploy = async (themeName, locale = 'en_US', clean = true) => {
 
   // Copy all the files from the src (tmp) dir to the dest dir
   // Remove the 'web' part from the path
-  glob(sources, { cwd: themeConfig.src, ignore: excludes }).then((files) => {
-    return Promise.all(
-      files.map((file) => {
-        const filePath = fs.realpathSync(path.join(themeConfig.src, file), 'utf8')
-        const destPath = path.join(dest, file.replace(/^(\w+_\w+\/)?(web\/)/, '$1'))
-        fs.mkdirSync(path.dirname(destPath), { recursive: true })
-        fs.copyFileSync(filePath, destPath)
-      })
-    )
-  })
+  const files = await glob(sources, { cwd: themeConfig.src, ignore: excludes })
+
+  return Promise.all(
+    files.map(async (file) => {
+      const filePath = await fs.promises.realpath(path.join(themeConfig.src, file))
+      const destPath = path.join(dest, file.replace(/^(\w+_\w+\/)?(web\/)/, '$1'))
+      await fs.promises.mkdir(path.dirname(destPath), { recursive: true })
+      await fs.promises.copyFile(filePath, destPath)
+    })
+  )
 }

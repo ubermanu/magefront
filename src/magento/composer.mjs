@@ -1,17 +1,17 @@
 import path from 'path'
 import fs from 'fs'
+import { rootPath } from '../env.mjs'
 
 /**
  * Get the list of packages installed.
  *
- * @param projectRoot
  * @return {[]}
  */
-export const getPackages = (projectRoot = process.cwd()) => {
-  const composerLock = path.join(projectRoot, 'composer.lock')
+export const getPackages = () => {
+  const composerLock = path.join(rootPath, 'composer.lock')
 
   if (!fs.existsSync(composerLock)) {
-    throw new Error(`composer.lock not found in ${projectRoot}`)
+    throw new Error(`composer.lock not found in ${rootPath}`)
   }
 
   /** @type {{packages: []}} */
@@ -28,5 +28,5 @@ export const getPackages = (projectRoot = process.cwd()) => {
  * @return {[]}
  */
 export const getRegistrations = (pkg) => {
-  return (pkg?.autoload?.files || []).filter((file) => file.endsWith('registration.php'))
+  return (pkg?.autoload?.files ?? []).filter((file) => file.endsWith('registration.php'))
 }

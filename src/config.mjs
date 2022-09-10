@@ -1,10 +1,7 @@
 import path from 'path'
 import glob from 'fast-glob'
 import { getThemes } from './main.mjs'
-
-// This tool is meant to be run at root level of the project
-export const projectPath = process.cwd()
-export const tempPath = path.join(projectPath, 'var/view_preprocessed/magefront')
+import { rootPath, tempPath } from './env.mjs'
 
 /**
  * Get the configuration for the given theme name.
@@ -17,11 +14,11 @@ export const getConfigForTheme = async (themeName) => {
   const theme = getThemes().find((t) => t.name === themeName)
 
   // TODO: Add as an option '-c' to specify the config file
-  const files = glob.sync('magefront.config.{js,mjs,cjs}', { cwd: projectPath })
+  const files = glob.sync('magefront.config.{js,mjs,cjs}', { cwd: rootPath })
   let customConfig = {}
 
   if (files.length) {
-    let { default: config } = await import(path.join(projectPath, files[0]))
+    let { default: config } = await import(path.join(rootPath, files[0]))
 
     // Add support for array into the config file
     if (!Array.isArray(config)) {
@@ -35,7 +32,7 @@ export const getConfigForTheme = async (themeName) => {
   const defaultConfig = {
     theme: themeName,
     plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
-    src: path.join(tempPath, theme.dest),
+    src: path.join(rootPath, tempPath, theme.dest),
     dest: theme.dest
   }
 
