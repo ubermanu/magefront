@@ -3,27 +3,40 @@ import * as assert from 'uvu/assert'
 import { getModules } from '../src/magento/module.mjs'
 import { getThemes } from '../src/magento/theme.mjs'
 
-function find(modules, name) {
-  return modules.find((module) => module.name === name)
-}
-
 test('Get all the modules from Magento source code', () => {
-  const modules = getModules('tests/_fixtures')
-  assert.is(find(modules, 'Andromeda_Test').src, 'app/code/Andromeda/Test')
-  assert.is(find(modules, 'Gemini_A').src, 'vendor/gemini/module-a')
-  assert.is(find(modules, 'Orion_Mod1').src, 'vendor/orion/module-packaged/src/mod1')
-  assert.is(find(modules, 'Orion_Mod2').src, 'vendor/orion/module-packaged/src/mod2')
+  const modules = getModules()
+
+  const catalog = modules.find((m) => m.name === 'Magento_Catalog')
+  assert.equal(catalog.name, 'Magento_Catalog')
+  assert.equal(catalog.src, 'vendor/magento/module-catalog')
+  assert.equal(catalog.enabled, true)
+
+  const twoFactorAuth = modules.find((m) => m.name === 'Magento_TwoFactorAuth')
+  assert.equal(twoFactorAuth.name, 'Magento_TwoFactorAuth')
+  assert.equal(twoFactorAuth.src, 'vendor/magento/module-two-factor-auth')
+  assert.equal(twoFactorAuth.enabled, false)
 })
 
 test('Get all the themes from Magento source code', () => {
-  const themes = getThemes('tests/_fixtures')
-  assert.is(find(themes, 'Andromeda/blank').src, 'app/design/frontend/Andromeda/blank')
-  assert.is(find(themes, 'Orion/blank').src, 'vendor/orion/theme-frontend-blank/src')
-  assert.is(find(themes, 'Sirius/parent').src, 'vendor/sirius/theme-frontend-parent')
-  assert.is(find(themes, 'Sirius/child').src, 'vendor/sirius/theme-frontend-child')
-  assert.is(find(themes, 'Orion/blank').parent, false)
-  assert.is(find(themes, 'Sirius/parent').parent, false)
-  assert.is(find(themes, 'Sirius/child').parent, 'Sirius/parent')
+  const themes = getThemes()
+
+  const blank = themes.find((t) => t.name === 'Magento/blank')
+  assert.is(blank.src, 'vendor/magento/theme-frontend-blank')
+  assert.is(blank.dest, 'pub/static/frontend/Magento/blank')
+  assert.is(blank.area, 'frontend')
+  assert.is(blank.parent, false)
+
+  const luma = themes.find((t) => t.name === 'Magento/luma')
+  assert.is(luma.src, 'vendor/magento/theme-frontend-luma')
+  assert.is(luma.dest, 'pub/static/frontend/Magento/luma')
+  assert.is(luma.area, 'frontend')
+  assert.is(luma.parent, 'Magento/blank')
+
+  const backend = themes.find((t) => t.name === 'Magento/backend')
+  assert.is(backend.src, 'vendor/magento/theme-adminhtml-backend')
+  assert.is(backend.dest, 'pub/static/adminhtml/Magento/backend')
+  assert.is(backend.area, 'adminhtml')
+  assert.is(backend.parent, false)
 })
 
 test.run()
