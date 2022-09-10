@@ -5,7 +5,7 @@ import fs from 'fs'
 /**
  * Merge all the requirejs-config files into one.
  *
- * @returns {function(*): Promise<Awaited<*>[]>}
+ * @returns {function(*): Promise<void>}
  */
 export default () => {
   return async (themeConfig) => {
