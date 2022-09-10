@@ -7,7 +7,7 @@ import stylus from 'stylus'
  * Transform Stylus files to CSS.
  *
  * @param {{src?:any, ignore?:any, sourcemaps?:boolean, compilerOptions?:any}} options
- * @return {(function(*): *)|*}
+ * @returns {function(*): Promise<Awaited<*>[]>}
  */
 export default (options = {}) => {
   const { src, ignore, sourcemaps, compilerOptions } = options
