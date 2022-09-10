@@ -29,7 +29,8 @@
     "fs-extra": "^10.0.1",
     "magefront-plugin-js-translation": "workspace:*",
     "magefront-plugin-less": "workspace:*",
-    "magefront-plugin-requirejs-config": "workspace:*"
+    "magefront-plugin-requirejs-config": "workspace:*",
+    "winston": "^3.8.2"
   },
   "optionalDependencies": {
     "magefront-plugin-babel": "workspace:*",

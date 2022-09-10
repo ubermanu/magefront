@@ -2,7 +2,7 @@ import fs from 'fs'
 import glob from 'fast-glob'
 import path from 'path'
 import { getPackages, getRegistrations } from './composer.mjs'
-import { rootPath } from '../env.mjs'
+import { rootPath, logger } from '../env.mjs'
 
 export class Module {
   name
@@ -36,13 +36,13 @@ export const getModules = () => {
     const moduleXmlFile = path.join(rootPath, codeSrc, 'etc/module.xml')
 
     if (!fs.existsSync(moduleXmlFile)) {
-      console.warn(`Module XML file not found in ${codeSrc}`)
+      logger.warn(`Module XML file not found in ${codeSrc}`)
       return
     }
 
     const name = fetchNameFromModuleXml(moduleXmlFile)
     if (!list[name]) {
-      console.warn(`Module "${name}" not found in config.php`)
+      logger.warn(`Module "${name}" not found in config.php`)
       return
     }
 
@@ -59,7 +59,7 @@ export const getModules = () => {
       const name = fetchNameFromModuleXml(path.join(rootPath, src, 'etc/module.xml'))
 
       if (!list[name]) {
-        console.warn(`Module "${name}" not found in config.php`)
+        logger.warn(`Module "${name}" not found in config.php`)
         return
       }
 

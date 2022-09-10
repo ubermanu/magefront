@@ -1,4 +1,7 @@
 import { Command } from 'commander'
+import winston from 'winston'
+
+import { logger } from './env.mjs'
 import { build } from './actions/build.mjs'
 import { inheritance } from './actions/inheritance.mjs'
 import { browserSync } from './actions/browser-sync.mjs'
@@ -19,8 +22,10 @@ program
   .requiredOption('-t, --theme <theme>', 'Theme name.')
   .argument('[locale]', 'Locale code.', 'en_US')
   .action(async (locale, { theme }) => {
+    logger.info(`Building theme ${theme} for locale ${locale}`)
     await inheritance(theme)
     await build(theme, locale)
+    logger.info('Done.')
   })
 
 program
@@ -47,5 +52,8 @@ program
   .action(() => {
     list()
   })
+
+// Set up the logger instance to go through console
+logger.add(new winston.transports.Console({ silent: false }))
 
 program.parse(process.argv)

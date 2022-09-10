@@ -1,8 +1,9 @@
 import path from 'path'
 import { getConfigForTheme } from '../config.mjs'
-import { getModules } from '../main.mjs'
+import { getModules } from '../magento/module.mjs'
 import { getLanguages } from '../magento/language.mjs'
 import { deploy } from './deploy.mjs'
+import { logger } from '../env.mjs'
 
 /**
  * Build the theme.
@@ -28,8 +29,7 @@ export const build = async (themeName, locale = 'en_US') => {
     try {
       await plugin({ ...themeConfig, dest, locale, modules, moduleList, languageList })
     } catch (e) {
-      // TODO: Add new transport to the logger
-      console.error(e)
+      logger.error(e)
     }
   }
 

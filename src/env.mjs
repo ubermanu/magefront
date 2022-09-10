@@ -1,4 +1,5 @@
 import path from 'path'
+import winston from 'winston'
 
 /**
  * The current project root path.
@@ -30,3 +31,14 @@ export const setRootPath = (newPath) => {
  * @returns {string}
  */
 export const tempPath = 'var/view_preprocessed/magefront'
+
+/**
+ * Instance of the logger with a silent console by default.
+ *
+ * @type {winston.Logger}
+ */
+export const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
+  transports: [new winston.transports.Console({ silent: true })]
+})
