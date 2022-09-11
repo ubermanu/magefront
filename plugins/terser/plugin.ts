@@ -1,0 +1,37 @@
+import glob from 'fast-glob'
+import path from 'path'
+import fs from 'fs'
+import { minify } from 'terser'
+import { Pattern } from 'fast-glob/out/types'
+
+export interface Options {
+  src?: string | string[]
+  ignore?: Pattern[]
+  terserOptions?: any
+}
+
+/**
+ * Find all the `js` files in the preprocessed directory and minify them.
+ *
+ * @param {Options} options
+ * @returns {function(*): Promise<Awaited<void>[]>}
+ */
+export default (options: Options = {}) => {
+  const { src, ignore, terserOptions } = options
+
+  // @ts-ignore
+  return async (themeConfig) => {
+    const files = await glob(src ?? '**/*.js', { ignore: ignore ?? [], cwd: themeConfig.src })
+
+    return Promise.all(
+      files.map(async (file: string) => {
+        const filePath = path.join(themeConfig.src, file)
+        const fileContent = await fs.promises.readFile(filePath)
+        const { code } = await minify(fileContent.toString(), terserOptions || {})
+        if (code) {
+          return fs.promises.writeFile(filePath, code)
+        }
+      })
+    )
+  }
+}
