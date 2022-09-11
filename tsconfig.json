@@ -1,25 +1,7 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist",
-    "sourceMap": false,
-    "target": "es2016",
-    "useDefineForClassFields": false,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowJs": false,
-    "strict": true,
-    "noUnusedLocals": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "removeComments": false,
-    "jsx": "preserve",
-    "lib": ["esnext", "dom"],
-    "types": ["node"],
-    "rootDir": "src"
-  },
+  "extends": "./tsconfig.base.json",
   "include": [
-    "src/**/*.ts"
-  ],
+    "src/**/*",
+    "tests/**/*"
+  ]
 }

@@ -2,7 +2,7 @@ import fs from 'fs'
 import dotenv from 'dotenv'
 
 // @ts-ignore
-import { setRootPath } from '../dist/env.js'
+import { setRootPath } from '../src/env'
 
 // Load test env file
 dotenv.config({ path: '.env.test' })
