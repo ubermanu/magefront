@@ -9,6 +9,7 @@ import { rootPath } from '../env'
 export interface MagentoTheme extends MagentoModule {
   area: string
   parent: string | false
+  dest: string
 }
 
 /**
@@ -24,12 +25,14 @@ export const getThemes = () => {
 
   appDesign.forEach((designSrc) => {
     const name = designSrc.split('/').slice(3, -1).join('/')
+    const area = designSrc.split('/')[2]
 
     list[name] = {
       name,
       src: designSrc.split('/').slice(0, -1).join('/'),
-      area: designSrc.split('/')[2],
+      area,
       parent: getParentFromThemeXml(path.join(rootPath, designSrc)),
+      dest: path.join('pub/static', area, name),
       enabled: true
     }
   })
@@ -48,6 +51,7 @@ export const getThemes = () => {
         src,
         area,
         parent: getParentFromThemeXml(path.join(rootPath, src, 'theme.xml')),
+        dest: path.join('pub/static', area, name),
         enabled: true
       }
     })

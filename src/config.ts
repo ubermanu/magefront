@@ -53,13 +53,11 @@ export const getConfigForTheme = async (themeName: string) => {
     customConfig = config.filter((entry: ThemeConfig) => entry.theme === themeName).shift() || {}
   }
 
-  const themeDest = path.join('pub/static', theme.area + '/' + theme.name)
-
   const defaultConfig = {
     theme: themeName,
     plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
-    src: path.join(rootPath, tempPath, themeDest),
-    dest: path.join(rootPath, themeDest)
+    src: path.join(rootPath, tempPath, theme.dest),
+    dest: path.join(rootPath, theme.dest)
   }
 
   const finalConfig = Object.assign({}, defaultConfig, customConfig)
