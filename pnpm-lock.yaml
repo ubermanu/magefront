@@ -74,11 +74,14 @@ importers:
 
   plugins/less:
     specifiers:
+      '@types/less': ^3.0.3
       fast-glob: ^3.2.11
       less: '2.7'
     dependencies:
       fast-glob: 3.2.11
       less: 2.7.3
+    devDependencies:
+      '@types/less': 3.0.3
 
   plugins/react:
     specifiers:
@@ -548,6 +551,10 @@ packages:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
       '@types/node': 18.7.16
+    dev: true
+
+  /@types/less/3.0.3:
+    resolution: {integrity: sha512-1YXyYH83h6We1djyoUEqTlVyQtCfJAFXELSKW2ZRtjHD4hQ82CC4lvrv5D0l0FLcKBaiPbXyi3MpMsI9ZRgKsw==}
     dev: true
 
   /@types/micromatch/2.3.31:
@@ -1481,6 +1488,7 @@ packages:
 
   /graceful-fs/4.2.9:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
+    requiresBuild: true
     dev: false
 
   /har-schema/1.0.5:
@@ -1855,6 +1863,7 @@ packages:
   /mime/1.4.1:
     resolution: {integrity: sha512-KI1+qOZu5DcW6wayYHSzR/tXKCDC5Om4s1z2QJjDULzLcmf3DvzS7oluY4HCTrc+9FiKmWUgeNLg7W3uIQvxtQ==}
     hasBin: true
+    requiresBuild: true
     dev: false
 
   /minimatch/3.1.2:
@@ -2350,6 +2359,7 @@ packages:
   /source-map/0.5.7:
     resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dev: false
 
   /source-map/0.6.1:

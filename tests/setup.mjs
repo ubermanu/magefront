@@ -1,6 +1,8 @@
 import fs from 'fs'
 import dotenv from 'dotenv'
-import { setRootPath } from '../src/env.mjs'
+
+// @ts-ignore
+import { setRootPath } from '../dist/env.js'
 
 // Load test env file
 dotenv.config({ path: '.env.test' })
