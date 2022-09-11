@@ -4,13 +4,22 @@ import fs from 'fs'
 import less27 from 'less'
 import magentoImport from './lib/magento-import-preprocessor.mjs'
 
+export interface Options {
+  src?: string | string[]
+  ignore?: string | string[]
+  sourcemaps?: boolean
+  compiler?: any
+  plugins?: any[]
+  compilerOptions?: any
+}
+
 /**
  * For all the `less` files in the `css` directory, compile them to CSS.
  *
- * @param {{src?: string|string[], ignore?: string|string[], sourcemaps?: boolean, compiler?: any, plugins?: [], lessOptions?: {}}} options
- * @returns {function(*): Promise<Awaited<*>[]>}
+ * @param {Options} options
+ * @returns {import('magefront').Plugin}
  */
-export default (options = {}) => {
+export default (options: Options = {}) => {
   const { src, ignore, compiler, sourcemaps, compilerOptions } = options
   const less = compiler ?? less27
   const plugins = options.plugins ?? []
@@ -23,7 +32,7 @@ export default (options = {}) => {
     const files = await glob(src ?? '**/!(_)*.less', { ignore: ignore ?? [], cwd: themeConfig.src })
 
     return Promise.all(
-      files.map(async (file) => {
+      files.map(async (file: string) => {
         const filePath = path.join(themeConfig.src, file)
         const fileContent = await fs.promises.readFile(filePath, 'utf8')
 
@@ -38,11 +47,11 @@ export default (options = {}) => {
             },
             false
           )
-          .catch((error) => {
+          .catch((error: any) => {
             // TODO: Throw error and catch it with logger
             console.error(error)
           })
-          .then((output) => output)
+          .then((output: any) => output)
 
         const cssFilePath = filePath.replace(/\.less$/, '.css')
 

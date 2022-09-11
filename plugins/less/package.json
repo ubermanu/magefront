@@ -23,5 +23,8 @@
   "dependencies": {
     "fast-glob": "^3.2.11",
     "less": "2.7"
+  },
+  "devDependencies": {
+    "@types/less": "^3.0.3"
   }
 }
