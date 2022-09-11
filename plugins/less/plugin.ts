@@ -1,4 +1,4 @@
-import glob from 'fast-glob'
+import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
 import less27 from 'less'
@@ -6,7 +6,7 @@ import magentoImport from './lib/magento-import-preprocessor'
 
 export interface Options {
   src?: string | string[]
-  ignore?: string | string[]
+  ignore?: Pattern[]
   sourcemaps?: boolean
   compiler?: any
   plugins?: any[]

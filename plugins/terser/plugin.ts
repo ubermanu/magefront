@@ -1,8 +1,7 @@
-import glob from 'fast-glob'
+import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
 import { minify } from 'terser'
-import { Pattern } from 'fast-glob/out/types'
 
 export interface Options {
   src?: string | string[]
