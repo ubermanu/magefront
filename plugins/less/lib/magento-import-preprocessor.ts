@@ -1,13 +1,24 @@
 /**
  * Replaces the commented `@magento_import` statements with
  * the actual import statements for each enabled modules.
+ *
+ * @type {import('less').PreProcessor}
  */
 export class preProcessor {
-  constructor(modules) {
+  private modules: string[]
+
+  /**
+   * @param {string[]} modules
+   */
+  constructor(modules: string[]) {
     this.modules = modules
   }
 
-  process(src) {
+  /**
+   * @param {string} src
+   * @returns {string}
+   */
+  process(src: string): string {
     return src.replace(/^\/\/@magento_import(.*);(.*)$/gm, (match, path) => {
       path = path.replace(/["']/g, '').trim()
       return this.modules.map((mod) => `@import (optional) '../../${mod}/web/css/${path}';`).join('\n')
@@ -15,8 +26,13 @@ export class preProcessor {
   }
 }
 
-export default (modules) => ({
-  install: function (less, pluginManager) {
+/**
+ * @param {string[]} modules
+ * @return {import('less').Plugin}
+ */
+export default (modules: string[]) => ({
+  // @ts-ignore
+  install: function (less: LessStatic, pluginManager) {
     pluginManager.addPreProcessor(new preProcessor(modules), 1)
   }
 })
