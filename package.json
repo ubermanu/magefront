@@ -20,6 +20,7 @@
   "module": "dist/main.js",
   "scripts": {
     "ts-check": "tsc --noEmit",
+    "types": "rimraf types && tsc --declaration --emitDeclarationOnly --outDir types",
     "build": "rimraf dist && tsc",
     "test": "rimraf dist && tsc -p tsconfig.test.json && uvu tests"
   },
