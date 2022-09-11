@@ -1,17 +1,24 @@
-import glob from 'fast-glob'
+import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
-import typescript from 'typescript'
+import typescript, { CompilerOptions } from 'typescript'
+
+export interface Options {
+  src?: string | string[]
+  ignore?: Pattern[]
+  compilerOptions?: CompilerOptions
+}
 
 /**
  * Transform TypeScript files to JavaScript.
  *
- * @param {{src?:any, ignore?:any, compilerOptions?: {}}} options
+ * @param {Options} options
  * @returns {function(*): Promise<Awaited<unknown>[]>}
  */
-export default (options = {}) => {
+export default (options: Options = {}) => {
   const { src, ignore, compilerOptions } = options
 
+  // @ts-ignore
   return async (themeConfig) => {
     const files = await glob(src ?? '**/*.ts', {
       ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
