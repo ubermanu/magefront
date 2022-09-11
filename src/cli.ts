@@ -1,14 +1,14 @@
 import { Command } from 'commander'
 import winston from 'winston'
 
-import { logger } from './env.mjs'
-import { build } from './actions/build.mjs'
-import { inheritance } from './actions/inheritance.mjs'
-import { deploy } from './actions/deploy.mjs'
-import { clean } from './actions/clean.mjs'
-import { browserSync } from './actions/browser-sync.mjs'
-import { watch } from './actions/watch.mjs'
-import { list } from './actions/list.mjs'
+import { logger } from './env'
+import { build } from './actions/build'
+import { inheritance } from './actions/inheritance'
+import { deploy } from './actions/deploy'
+import { clean } from './actions/clean'
+import { browserSync } from './actions/browser-sync'
+import { watch } from './actions/watch'
+import { list } from './actions/list'
 
 const program = new Command()
 

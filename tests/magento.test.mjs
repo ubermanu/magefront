@@ -2,7 +2,7 @@ import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
 import './setup.mjs'
-import { getModules } from '../src/magento/module.mjs'
+import { getModules } from '../src/magento/magentoModule.ts'
 import { getThemes } from '../src/magento/theme.mjs'
 
 test('Get all the modules from Magento source code', () => {

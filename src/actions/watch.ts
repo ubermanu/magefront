@@ -1,12 +1,12 @@
 import path from 'path'
 import chokidar from 'chokidar'
 
-import { build } from './build.mjs'
-import { instance } from './browser-sync.mjs'
-import { inheritance } from './inheritance.mjs'
-import { getModules } from '../magento/module.mjs'
-import { getThemes } from '../magento/theme.mjs'
-import { rootPath, tempPath } from '../env.mjs'
+import { build } from './build'
+import { instance } from './browser-sync'
+import { inheritance } from './inheritance'
+import { getModules } from '../magento/magentoModule'
+import { getThemes } from '../magento/theme'
+import { rootPath, tempPath } from '../env'
 
 export const watch = async (themeName) => {
   const watcherConfig = { ignoreInitial: true }

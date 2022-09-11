@@ -1,7 +1,8 @@
 import path from 'path'
 import glob from 'fast-glob'
-import { getThemes } from './main.mjs'
-import { rootPath, tempPath } from './env.mjs'
+
+import { getThemes } from './main'
+import { rootPath, tempPath } from './env'
 
 /**
  * The configuration filename.
@@ -10,6 +11,16 @@ import { rootPath, tempPath } from './env.mjs'
  * @type {string}
  */
 export let configFilename = 'magefront.config.{js,mjs,cjs}'
+
+/**
+ * The configuration object.
+ */
+export interface ThemeConfig {
+  theme: string
+  dest: string
+  src: string
+  plugins: any[]
+}
 
 /**
  * Get the configuration for the given theme name.
@@ -37,11 +48,13 @@ export const getConfigForTheme = async (themeName) => {
     customConfig = config.filter((entry) => entry.theme === themeName).shift() || {}
   }
 
+  const themeDest = path.join('pub/static', theme.area + '/' + theme.name)
+
   const defaultConfig = {
     theme: themeName,
     plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
-    src: path.join(rootPath, tempPath, theme.dest),
-    dest: path.join(rootPath, theme.dest)
+    src: path.join(rootPath, tempPath, themeDest),
+    dest: path.join(rootPath, themeDest)
   }
 
   const finalConfig = Object.assign({}, defaultConfig, customConfig)

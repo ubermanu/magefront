@@ -1,16 +1,16 @@
 import Table from 'cli-table'
 
-import { getThemes } from '../magento/theme.mjs'
+import { getThemes } from '../magento/theme'
 
 /**
  * List all the themes.
  */
 export const list = () => {
-  const themes = getThemes()
+  const themeList = getThemes()
   const table = new Table({ head: ['Theme', 'Area', 'Src', 'Parent'] })
 
-  for (let t of Object.values(themes)) {
-    table.push([t.name, t.area, t.src, t.parent || ''])
+  for (const theme of themeList) {
+    table.push([theme.name, theme.area, theme.src, theme.parent || ''])
   }
 
   console.log(table.toString())

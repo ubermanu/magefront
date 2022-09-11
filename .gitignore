@@ -2,6 +2,7 @@
 node_modules
 .pnpm-*
 .magefront-*
+dist
 
 # tests
 auth.json

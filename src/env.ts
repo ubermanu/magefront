@@ -15,7 +15,7 @@ export let rootPath = process.cwd()
  * @param {string} newPath
  * @internal
  */
-export const setRootPath = (newPath) => {
+export const setRootPath = (newPath: string) => {
   rootPath = path.resolve(newPath)
 }
 

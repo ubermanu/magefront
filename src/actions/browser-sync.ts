@@ -1,19 +1,19 @@
-import bs from 'browser-sync'
+import bs, { BrowserSyncInstance, Options } from 'browser-sync'
 
 // Current instance of BrowserSync
-export let instance
+export let instance: BrowserSyncInstance
 
-export const browserSync = async (url) => {
+export const browserSync = async (url: string) => {
   try {
     const u = new URL(url)
-    const config = {
+    const config: Options = {
       proxy: u.hostname,
-      port: u.port || 3000,
+      port: +u.port || 3000,
       ui: false,
       open: false,
       rewriteRules: [
         {
-          match: '.' + u.hostname,
+          match: new RegExp('.' + u.hostname),
           replace: ''
         }
       ]

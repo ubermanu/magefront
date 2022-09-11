@@ -1,32 +1,33 @@
 import fs from 'fs'
 import glob from 'fast-glob'
 import path from 'path'
-import { getPackages, getRegistrations } from './composer.mjs'
-import { rootPath, logger } from '../env.mjs'
 
-export class Module {
-  name
-  src
-  enabled
+import { getPackages, getRegistrations } from './composer'
+import { logger, rootPath } from '../env'
+
+export interface MagentoModule {
+  name: string
+  src: string
+  enabled: boolean
 }
 
 /**
  * Read the `config.php` file and return the modules list.
  * Resolve the modules paths from `app/code` then from the `vendor` directory.
  *
- * @return Module[]
+ * @return MagentoModule[]
  */
 export const getModules = () => {
   const list = {}
-  const config = fs.readFileSync(`${rootPath}/app/etc/config.php`, 'utf8')
+  const config = fs.readFileSync(path.join(rootPath, '/app/etc/config.php'))
 
   // 1. Get the list of modules from the config file
   config.match(/'(\w+_\w+)'\s*=>\s*(\d)/g).forEach((match) => {
     const [, name, enabled] = match.match(/'(\w+_\w+)'\s*=>\s*(\d)/)
-    const module = new Module()
-    module.name = name
-    module.enabled = enabled === '1'
-    list[name] = module
+    list[name] = {
+      name,
+      enabled: enabled === '1'
+    }
   })
 
   // 2. Resolve the source path for the modules into `app/code/`
@@ -76,8 +77,8 @@ export const getModules = () => {
  * @param {string} file
  * @return {string}
  */
-function fetchNameFromModuleXml(file) {
-  const moduleXml = fs.readFileSync(file, 'utf8')
+function fetchNameFromModuleXml(file: string) {
+  const moduleXml = fs.readFileSync(file).toString()
   const [, name] = moduleXml.match(/<module[^>]+name="([^"]+)"/)
   return name
 }

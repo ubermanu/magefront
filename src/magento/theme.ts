@@ -1,20 +1,18 @@
 import glob from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
-import { getPackages, getRegistrations } from './composer.mjs'
-import { Module } from './module.mjs'
-import { rootPath } from '../env.mjs'
 
-export class Theme extends Module {
+import { ComposerPackage, getPackages, getRegistrations } from './composer'
+import { MagentoModule } from './magentoModule'
+import { rootPath } from '../env'
+
+export interface MagentoTheme extends MagentoModule {
+  area: string
+  parent: string
+}
+
+export class Theme implements MagentoModule {
   enabled = true
-  area
-  parent = null
-  modules = []
-  ignore = []
-
-  get dest() {
-    return path.join('pub/static', this.area + '/' + this.name)
-  }
 }
 
 /**
@@ -39,9 +37,9 @@ export const getThemes = () => {
 
   // 2. Get the themes from the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = getPackages().filter((pkg) => pkg.type === 'magento2-theme')
+  const packages = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-theme')
 
-  packages.forEach((pkg) => {
+  packages.forEach((pkg: ComposerPackage) => {
     getRegistrations(pkg).forEach((registration) => {
       const theme = new Theme()
       const src = path.join('vendor', pkg.name, path.dirname(registration))
@@ -60,10 +58,10 @@ export const getThemes = () => {
 /**
  * Get the parent of a theme from its `theme.xml` file.
  *
- * @param file
+ * @param {string} file
  * @return {string|false}
  */
-function getParentFromThemeXml(file) {
+function getParentFromThemeXml(file: string) {
   const themeXml = fs.readFileSync(file, 'utf8')
   const match = themeXml.match(/<parent>(.*)<\/parent>/)
   return match ? match[1].trim() : false
@@ -72,11 +70,11 @@ function getParentFromThemeXml(file) {
 /**
  * Get the name and area of a theme from its `registration.php` file.
  *
- * @param file
+ * @param {string} file
  * @return {{area: string, name: string}}
  */
-function getThemeNameAndAreaFromRegistrationPhp(file) {
-  const registration = fs.readFileSync(file, 'utf8')
+function getThemeNameAndAreaFromRegistrationPhp(file: string) {
+  const registration = fs.readFileSync(file).toString()
   const [, area, name] = registration.match(/'(frontend|adminhtml)\/([\w\/]+)'/)
   return { name, area }
 }

@@ -1,11 +1,20 @@
 import path from 'path'
 import fs from 'fs'
-import { rootPath } from '../env.mjs'
+
+import { rootPath } from '../env'
+
+export interface ComposerPackage {
+  name: string
+  type: string
+  autoload?: {
+    files?: string[]
+  }
+}
 
 /**
  * Get the list of packages installed.
  *
- * @return {[]}
+ * @return {ComposerPackage[]}
  */
 export const getPackages = () => {
   const composerLock = path.join(rootPath, 'composer.lock')
@@ -24,9 +33,9 @@ export const getPackages = () => {
  * Return a list of registration files for the given composer package config.
  * FIXME: At one point this could be any file, not just `registration.php`.
  *
- * @param {{autoload?}} pkg
+ * @param {ComposerPackage} pkg
  * @return {[]}
  */
-export const getRegistrations = (pkg) => {
-  return (pkg?.autoload?.files ?? []).filter((file) => file.endsWith('registration.php'))
+export const getRegistrations = (pkg: ComposerPackage) => {
+  return (pkg?.autoload?.files ?? []).filter((file: string) => file.endsWith('registration.php'))
 }

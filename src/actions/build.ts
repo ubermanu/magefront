@@ -1,9 +1,9 @@
 import path from 'path'
 
-import { getConfigForTheme } from '../config.mjs'
-import { getModules } from '../magento/module.mjs'
-import { getLanguages } from '../magento/language.mjs'
-import { logger } from '../env.mjs'
+import { getConfigForTheme } from '../config'
+import { getModules, MagentoModule } from '../magento/magentoModule'
+import { getLanguages } from '../magento/language'
+import { logger } from '../env'
 
 /**
  * Build the theme.
@@ -14,11 +14,11 @@ import { logger } from '../env.mjs'
  * @param {string} locale
  * @return {Promise<void>}
  */
-export const build = async (themeName, locale = 'en_US') => {
+export const build = async (themeName: string, locale = 'en_US') => {
   const themeConfig = await getConfigForTheme(themeName)
 
   const moduleList = getModules()
-  const modules = moduleList.filter((mod) => mod.enabled && mod.src).map((mod) => mod.name)
+  const modules = moduleList.filter((mod: MagentoModule) => mod.enabled && mod.src).map((mod) => mod.name)
 
   const languageList = getLanguages()
 
