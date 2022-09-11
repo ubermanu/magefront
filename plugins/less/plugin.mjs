@@ -7,7 +7,7 @@ import magentoImport from './lib/magento-import-preprocessor.mjs'
 /**
  * For all the `less` files in the `css` directory, compile them to CSS.
  *
- * @param {{src?: any, ignore?: any, sourcemaps?: boolean, compiler?: any, plugins?: [], lessOptions?: {}}} options
+ * @param {{src?: string|string[], ignore?: string|string[], sourcemaps?: boolean, compiler?: any, plugins?: [], lessOptions?: {}}} options
  * @returns {function(*): Promise<Awaited<*>[]>}
  */
 export default (options = {}) => {
@@ -20,7 +20,7 @@ export default (options = {}) => {
     // Necessary to resolve the "//@magento_import" statements in the core styles
     plugins.unshift(magentoImport(themeConfig.modules))
 
-    const files = await glob(src || '**/!(_)*.less', { ignore: ignore ?? [], cwd: themeConfig.src })
+    const files = await glob(src ?? '**/!(_)*.less', { ignore: ignore ?? [], cwd: themeConfig.src })
 
     return Promise.all(
       files.map(async (file) => {
