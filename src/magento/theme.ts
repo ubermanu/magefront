@@ -3,7 +3,7 @@ import path from 'path'
 import fs from 'fs'
 
 import { ComposerPackage, getPackages, getRegistrations } from './composer'
-import { MagentoModule } from './magentoModule'
+import { MagentoModule } from './module'
 import { rootPath } from '../env'
 
 export interface MagentoTheme extends MagentoModule {

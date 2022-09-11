@@ -2,7 +2,7 @@ import fs from 'fs'
 import glob from 'fast-glob'
 import path from 'path'
 
-import { getPackages, getRegistrations } from './composer'
+import { ComposerPackage, getPackages, getRegistrations } from './composer'
 import { logger, rootPath } from '../env'
 
 export interface MagentoModule {
@@ -18,15 +18,21 @@ export interface MagentoModule {
  * @return MagentoModule[]
  */
 export const getModules = () => {
-  const list = {}
-  const config = fs.readFileSync(path.join(rootPath, '/app/etc/config.php'))
+  const list: { [name: string]: MagentoModule } = {}
+  const config = fs.readFileSync(path.join(rootPath, '/app/etc/config.php')).toString()
+
+  if (!config) {
+    logger.error('No config.php file found.')
+    return []
+  }
 
   // 1. Get the list of modules from the config file
-  config.match(/'(\w+_\w+)'\s*=>\s*(\d)/g).forEach((match) => {
+  config.match(/'(\w+_\w+)'\s*=>\s*(\d)/g)?.forEach((match) => {
     const [, name, enabled] = match.match(/'(\w+_\w+)'\s*=>\s*(\d)/)
     list[name] = {
       name,
-      enabled: enabled === '1'
+      enabled: enabled === '1',
+      src: ''
     }
   })
 
@@ -52,9 +58,9 @@ export const getModules = () => {
 
   // 3. Get the list of modules in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = getPackages().filter((pkg) => pkg.type === 'magento2-module')
+  const packages = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-module')
 
-  packages.forEach((pkg) => {
+  packages.forEach((pkg: ComposerPackage) => {
     getRegistrations(pkg).forEach((registration) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
       const name = fetchNameFromModuleXml(path.join(rootPath, src, 'etc/module.xml'))
@@ -79,6 +85,7 @@ export const getModules = () => {
  */
 function fetchNameFromModuleXml(file: string) {
   const moduleXml = fs.readFileSync(file).toString()
+  // @ts-ignore
   const [, name] = moduleXml.match(/<module[^>]+name="([^"]+)"/)
   return name
 }

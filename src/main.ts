@@ -5,6 +5,6 @@
 
 export * from './env'
 export * from './magento/composer'
-export * from './magento/magentoModule'
+export * from './magento/module'
 export * from './magento/theme'
 export * from './magento/language'

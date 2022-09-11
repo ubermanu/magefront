@@ -1,7 +1,7 @@
 import path from 'path'
 import glob from 'fast-glob'
 
-import { getThemes } from './main'
+import { getThemes, MagentoTheme } from './main'
 import { rootPath, tempPath } from './env'
 
 /**
@@ -28,10 +28,14 @@ export interface ThemeConfig {
  * TODO: Rename to getThemeConfig
  *
  * @param {string} themeName
- * @return {Promise<{locales, plugins, src, dest}>}
+ * @return {Promise<ThemeConfig>}
  */
-export const getConfigForTheme = async (themeName) => {
-  const theme = getThemes().find((t) => t.name === themeName)
+export const getConfigForTheme = async (themeName: string) => {
+  const theme: MagentoTheme | undefined = getThemes().find((t: MagentoTheme) => t.name === themeName)
+
+  if (!theme) {
+    throw new Error(`Theme '${themeName}' not found.`)
+  }
 
   const files = await glob(configFilename, { cwd: rootPath })
   let customConfig = {}
@@ -45,7 +49,7 @@ export const getConfigForTheme = async (themeName) => {
     }
 
     // Look for the theme name in the array of objects
-    customConfig = config.filter((entry) => entry.theme === themeName).shift() || {}
+    customConfig = config.filter((entry: ThemeConfig) => entry.theme === themeName).shift() || {}
   }
 
   const themeDest = path.join('pub/static', theme.area + '/' + theme.name)
@@ -72,10 +76,10 @@ export const getConfigForTheme = async (themeName) => {
  * Transform the plugin to a function if it is not already.
  * If passed a string, import the plugin and return the default export.
  *
- * @param {*} plugin
+ * @param {any} plugin
  * @return {function}
  */
-const transformPlugin = async (plugin) => {
+const transformPlugin = async (plugin: any) => {
   if (typeof plugin === 'function') {
     return plugin
   }
