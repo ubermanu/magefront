@@ -1,17 +1,25 @@
-import glob from 'fast-glob'
+import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
-import stylus from 'stylus'
+import stylus, { RenderOptions } from 'stylus'
+
+export interface Options {
+  src?: string | string[]
+  ignore?: Pattern[]
+  sourcemaps?: boolean
+  compilerOptions?: RenderOptions
+}
 
 /**
  * Transform Stylus files to CSS.
  *
- * @param {{src?:any, ignore?:any, sourcemaps?:boolean, compilerOptions?:any}} options
+ * @param {Options} options
  * @returns {function(*): Promise<Awaited<*>[]>}
  */
-export default (options = {}) => {
+export default (options: Options = {}) => {
   const { src, ignore, sourcemaps, compilerOptions } = options
 
+  // @ts-ignore
   return async (themeConfig) => {
     const files = await glob(src || '**/!(_)*.styl', { ignore: ignore ?? [], cwd: themeConfig.src })
 
@@ -21,6 +29,7 @@ export default (options = {}) => {
         const fileContent = await fs.promises.readFile(filePath, 'utf8')
 
         const style = stylus(fileContent.toString(), {
+          // @ts-ignore TODO: the option is not recognized
           sourcemap: sourcemaps,
           ...compilerOptions,
           filename: path.resolve(filePath)
@@ -34,7 +43,7 @@ export default (options = {}) => {
             fs.writeFileSync(cssFilePath, css, 'utf8')
 
             if (sourcemaps) {
-              fs.writeFileSync(`${cssFilePath}.map`, JSON.stringify(style.sourcemap), 'utf8')
+              // fs.writeFileSync(`${cssFilePath}.map`, JSON.stringify(style.sourcemap), 'utf8')
             }
           }
         })

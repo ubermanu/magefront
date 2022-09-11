@@ -112,11 +112,14 @@ importers:
 
   plugins/stylus:
     specifiers:
+      '@types/stylus': ^0.48.38
       fast-glob: ^3.2.11
       stylus: ^0.59.0
     dependencies:
       fast-glob: 3.2.11
       stylus: 0.59.0
+    devDependencies:
+      '@types/stylus': 0.48.38
 
   plugins/svelte:
     specifiers:
@@ -605,6 +608,12 @@ packages:
     resolution: {integrity: sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==}
     dependencies:
       '@types/mime': 3.0.1
+      '@types/node': 18.7.16
+    dev: true
+
+  /@types/stylus/0.48.38:
+    resolution: {integrity: sha512-B5otJekvD6XM8iTrnO6e2twoTY2tKL9VkL/57/2Lo4tv3EatbCaufdi68VVtn/h4yjO+HVvYEyrNQd0Lzj6riw==}
+    dependencies:
       '@types/node': 18.7.16
     dev: true
 
