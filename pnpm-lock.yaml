@@ -104,11 +104,14 @@ importers:
 
   plugins/sass:
     specifiers:
+      '@types/sass': ^1.43.1
       fast-glob: ^3.2.11
       sass: ^1.44.0
     dependencies:
       fast-glob: 3.2.11
       sass: 1.44.0
+    devDependencies:
+      '@types/sass': 1.43.1
 
   plugins/stylus:
     specifiers:
@@ -602,6 +605,12 @@ packages:
 
   /@types/parse-glob/3.0.29:
     resolution: {integrity: sha512-OFwMPH5eJOhtwR92GMjTNWukaKTdWQC12cBgRvrTQl5CwhruSq6734wi1CTSh5Qjm/pMJWaKOOPKZOp6FpIkXQ==}
+    dev: true
+
+  /@types/sass/1.43.1:
+    resolution: {integrity: sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==}
+    dependencies:
+      '@types/node': 18.7.16
     dev: true
 
   /@types/serve-static/1.15.0:

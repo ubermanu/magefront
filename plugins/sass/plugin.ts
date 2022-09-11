@@ -1,21 +1,30 @@
-import glob from 'fast-glob'
+import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
-import dartSass from 'sass'
+import dartSass, { Options as RenderOptions, SassException, Result as SassResult } from 'sass'
+
+export interface Options {
+  src?: string | string[]
+  ignore?: Pattern[]
+  sourcemaps?: boolean
+  compiler?: any
+  compilerOptions?: RenderOptions
+}
 
 /**
  * Compile SCSS files to CSS.
  * You can use the `compiler` option to specify the sass compiler to use. (e.g. node-sass)
  *
- * @param {{src?: any, ignore?: any, sourcemaps?: boolean, compiler?: any, compilerOptions?: any}} options
+ * @param {Options} options
  * @returns {function(*): Promise<Awaited<*>[]>}
  */
-export default (options = {}) => {
+export default (options: Options = {}) => {
   const { src, ignore, sourcemaps, compiler, compilerOptions } = options
   const sass = compiler ?? dartSass
 
+  // @ts-ignore
   return async (themeConfig) => {
-    const files = await glob(src || '**/!(_)*.scss', { ignore: ignore ?? [], cwd: themeConfig.src })
+    const files = await glob(src ?? '**/!(_)*.scss', { ignore: ignore ?? [], cwd: themeConfig.src })
 
     return Promise.all(
       files.map(async (file) => {
@@ -26,7 +35,7 @@ export default (options = {}) => {
             ...compilerOptions,
             file: filePath
           },
-          (err, output) => {
+          (err: SassException, output: SassResult) => {
             if (err) {
               console.error(err)
             } else {
