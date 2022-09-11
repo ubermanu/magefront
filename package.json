@@ -20,8 +20,8 @@
   "module": "dist/main.js",
   "scripts": {
     "ts-check": "tsc --noEmit",
-    "build": "tsc",
-    "test": "tsc -p tsconfig.test.json && uvu tests"
+    "build": "rimraf dist && tsc",
+    "test": "rimraf dist && tsc -p tsconfig.test.json && uvu tests"
   },
   "dependencies": {
     "browser-sync": "^2.27.7",
@@ -51,6 +51,7 @@
     "@types/node": "^18.7.16",
     "dotenv": "^16.0.2",
     "prettier": "^2.5.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.8.2",
     "uvu": "^0.5.3"
   },
