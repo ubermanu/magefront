@@ -18,11 +18,13 @@
     "url": "git+https://github.com/ubermanu/magefront.git"
   },
   "module": "dist/main.js",
+  "types": "types/main.d.ts",
   "scripts": {
     "ts-check": "tsc --noEmit",
     "types": "rimraf types && tsc --declaration --emitDeclarationOnly --outDir types",
     "build": "rimraf dist && tsc",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "prepublishOnly": "npm run build && npm run types"
   },
   "dependencies": {
     "browser-sync": "^2.27.7",
