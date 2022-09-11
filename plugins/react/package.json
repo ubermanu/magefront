@@ -15,10 +15,14 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/react"
   },
-  "main": "plugin.mjs",
+  "main": "dist/plugin.js",
   "files": [
-    "plugin.mjs"
+    "plugin.ts",
+    "dist"
   ],
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "@babel/preset-react": "^7.18.6",
     "magefront-plugin-babel": "workspace:*",
