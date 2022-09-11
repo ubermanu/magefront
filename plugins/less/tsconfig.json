@@ -1,11 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "rootDir": ".",
+    "baseUrl": ".",
     "outDir": "dist"
   },
   "include": [
     "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

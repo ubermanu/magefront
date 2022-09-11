@@ -24,11 +24,13 @@ export default (options: Options = {}) => {
   const less = compiler ?? less27
   const plugins = options.plugins ?? []
 
+  // @ts-ignore
   return async (themeConfig) => {
     // Add the default magento import plugin
     // Necessary to resolve the "//@magento_import" statements in the core styles
     plugins.unshift(magentoImport(themeConfig.modules))
 
+    // @ts-ignore
     const files = await glob(src ?? '**/!(_)*.less', { ignore: ignore ?? [], cwd: themeConfig.src })
 
     return Promise.all(
