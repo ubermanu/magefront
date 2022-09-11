@@ -1,18 +1,23 @@
-import { getConfigForTheme } from '../config.mjs'
 import fs from 'fs'
 import path from 'path'
 import glob from 'fast-glob'
 
-export const deploy = async (themeName, locale = 'en_US', clean = true) => {
+import { getConfigForTheme } from '../config.mjs'
+
+/**
+ * Deploy the built theme files from the temp directory to the `pub/static` dir.
+ * Only the files in the `web` directory are deployed.
+ * This is the third step in the build process.
+ *
+ * @param {string} themeName
+ * @param {string} locale
+ * @returns {Promise<Awaited<unknown>[]>}
+ */
+export const deploy = async (themeName, locale = 'en_US') => {
   const themeConfig = await getConfigForTheme(themeName)
 
   // Append the local to the destination dir
   const dest = path.join(themeConfig.dest, locale)
-
-  // Clean up the destination dir
-  if (clean && fs.existsSync(dest)) {
-    await fs.promises.rm(dest, { recursive: true })
-  }
 
   // Get the web directories
   const sources = ['web/**/*', '[A-Z]*_[A-Z]*/web/**/*']

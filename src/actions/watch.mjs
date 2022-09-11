@@ -1,9 +1,11 @@
 import path from 'path'
 import chokidar from 'chokidar'
-import { getModules, getThemes } from '../main.mjs'
+
 import { build } from './build.mjs'
 import { instance } from './browser-sync.mjs'
 import { inheritance } from './inheritance.mjs'
+import { getModules } from '../magento/module.mjs'
+import { getThemes } from '../magento/theme.mjs'
 import { rootPath, tempPath } from '../env.mjs'
 
 export const watch = async (themeName) => {

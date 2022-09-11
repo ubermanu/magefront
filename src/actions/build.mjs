@@ -1,8 +1,8 @@
 import path from 'path'
+
 import { getConfigForTheme } from '../config.mjs'
 import { getModules } from '../magento/module.mjs'
 import { getLanguages } from '../magento/language.mjs'
-import { deploy } from './deploy.mjs'
 import { logger } from '../env.mjs'
 
 /**
@@ -10,8 +10,8 @@ import { logger } from '../env.mjs'
  * If a configuration file is found, it will be used.
  * TODO: Use a `-c` param to specify a configuration file.
  *
- * @param themeName
- * @param locale
+ * @param {string} themeName
+ * @param {string} locale
  * @return {Promise<void>}
  */
 export const build = async (themeName, locale = 'en_US') => {
@@ -32,6 +32,4 @@ export const build = async (themeName, locale = 'en_US') => {
       logger.error(e)
     }
   }
-
-  await deploy(themeName, locale)
 }

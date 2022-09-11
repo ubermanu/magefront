@@ -4,6 +4,8 @@ import winston from 'winston'
 import { logger } from './env.mjs'
 import { build } from './actions/build.mjs'
 import { inheritance } from './actions/inheritance.mjs'
+import { deploy } from './actions/deploy.mjs'
+import { clean } from './actions/clean.mjs'
 import { browserSync } from './actions/browser-sync.mjs'
 import { watch } from './actions/watch.mjs'
 import { list } from './actions/list.mjs'
@@ -23,8 +25,10 @@ program
   .argument('[locale]', 'Locale code.', 'en_US')
   .action(async (locale, { theme }) => {
     logger.info(`Building theme ${theme} for locale ${locale}`)
+    await clean(theme)
     await inheritance(theme)
     await build(theme, locale)
+    await deploy(theme, locale)
     logger.info('Done.')
   })
 
