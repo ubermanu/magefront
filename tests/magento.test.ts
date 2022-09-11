@@ -1,4 +1,3 @@
-import './setup'
 import { getModules } from '../src/magento/module'
 import { getThemes } from '../src/magento/theme'
 

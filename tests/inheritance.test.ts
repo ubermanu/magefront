@@ -1,7 +1,6 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-import './setup'
 import { clean } from '../src/actions/clean'
 import { inheritance } from '../src/actions/inheritance'
 import { rootPath, tempPath } from '../src/env'
