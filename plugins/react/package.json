@@ -1,0 +1,27 @@
+{
+  "name": "magefront-plugin-react",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/react"
+  },
+  "main": "plugin.mjs",
+  "files": [
+    "plugin.mjs"
+  ],
+  "dependencies": {
+    "@babel/preset-react": "^7.18.6",
+    "magefront-plugin-babel": "workspace:*",
+    "react": "^18.2.0"
+  }
+}

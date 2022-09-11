@@ -34,6 +34,7 @@
   },
   "optionalDependencies": {
     "magefront-plugin-babel": "workspace:*",
+    "magefront-plugin-react": "workspace:*",
     "magefront-plugin-sass": "workspace:*",
     "magefront-plugin-stylus": "workspace:*",
     "magefront-plugin-svelte": "workspace:*",
@@ -41,6 +42,7 @@
     "magefront-plugin-typescript": "workspace:*"
   },
   "devDependencies": {
+    "dotenv": "^16.0.2",
     "prettier": "^2.5.1",
     "uvu": "^0.5.3"
   },
