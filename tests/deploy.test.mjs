@@ -10,7 +10,7 @@ import { build } from '../src/actions/build.mjs'
 import { deploy } from '../src/actions/deploy.mjs'
 import { rootPath } from '../src/env.mjs'
 
-test('Build the Magento/blank theme', async () => {
+test('Build and deploy the Magento/blank theme', async () => {
   await clean('Magento/blank')
   await inheritance('Magento/blank')
   await build('Magento/blank')
@@ -23,7 +23,7 @@ test('Build the Magento/blank theme', async () => {
   assert.ok(await fs.exists(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/js-translation.json')))
 })
 
-test('Build the Magento/luma theme', async () => {
+test('Build and deploy the Magento/luma theme', async () => {
   await clean('Magento/luma')
   await inheritance('Magento/luma')
   await build('Magento/luma')
