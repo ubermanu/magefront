@@ -19,9 +19,9 @@
   },
   "module": "dist/main.js",
   "scripts": {
-    "ts-check": "tsc -p tsconfig.json --noEmit",
-    "build": "tsc -p tsconfig.json",
-    "test": "uvu tests"
+    "ts-check": "tsc --noEmit",
+    "build": "tsc",
+    "test": "tsc -p tsconfig.test.json && uvu tests"
   },
   "dependencies": {
     "browser-sync": "^2.27.7",
