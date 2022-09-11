@@ -1,4 +1,3 @@
-// @ts-ignore
 import babel, { Options as BabelOptions } from 'magefront-plugin-babel'
 
 export interface Options extends BabelOptions {}

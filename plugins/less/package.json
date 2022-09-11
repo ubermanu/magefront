@@ -15,7 +15,8 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/less"
   },
-  "main": "dist/plugin.js",
+  "module": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
   "files": [
     "lib",
     "plugin.ts",
@@ -23,8 +24,8 @@
     "dist/lib/**/*"
   ],
   "scripts": {
-    "build": "tsc",
-    "test": "tsc && uvu dist/tests"
+    "build": "rimraf dist && tsc",
+    "test": "pnpm run build && uvu dist/tests"
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
