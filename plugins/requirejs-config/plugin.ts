@@ -8,12 +8,16 @@ import fs from 'fs'
  * @returns {function(*): Promise<void>}
  */
 export default () => {
+  // @ts-ignore
   return async (themeConfig) => {
-    const files = []
+    const files: string[] = []
+
+    // @ts-ignore
     const moduleList = themeConfig.moduleList.filter((mod) => mod.enabled && mod.src)
 
     // Get the `requirejs-config.js` files from the modules
     // FIXME: Check for the module dependency tree (to get the correct order)
+    // @ts-ignore
     moduleList.forEach((mod) => {
       const filePath = path.join(mod.src, 'view/frontend/requirejs-config.js')
       if (fs.existsSync(filePath)) {

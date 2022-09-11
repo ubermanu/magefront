@@ -16,10 +16,14 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/requirejs-config"
   },
-  "main": "plugin.mjs",
+  "main": "dist/plugin.js",
   "files": [
-    "plugin.mjs"
+    "plugin.ts",
+    "dist"
   ],
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "fast-glob": "^3.2.7"
   }
