@@ -1,7 +1,4 @@
-import { test } from 'uvu'
-import * as assert from 'uvu/assert'
-
-import './setup.mjs'
+import './setup'
 import { getModules } from '../src/magento/module'
 import { getThemes } from '../src/magento/theme'
 
@@ -9,41 +6,54 @@ test('Get all the modules from Magento source code', () => {
   const modules = getModules()
 
   const catalog = modules.find((m) => m.name === 'Magento_Catalog')
-  assert.ok(catalog)
-  assert.equal(catalog.name, 'Magento_Catalog')
-  assert.equal(catalog.src, 'vendor/magento/module-catalog')
-  assert.equal(catalog.enabled, true)
+  expect(catalog).not.toBe(undefined)
+
+  if (catalog) {
+    expect(catalog.name).toEqual('Magento_Catalog')
+    expect(catalog.src).toEqual('vendor/magento/module-catalog')
+    expect(catalog.enabled).toEqual(true)
+  }
 
   const twoFactorAuth = modules.find((m) => m.name === 'Magento_TwoFactorAuth')
-  assert.ok(twoFactorAuth)
-  assert.equal(twoFactorAuth.name, 'Magento_TwoFactorAuth')
-  assert.equal(twoFactorAuth.src, 'vendor/magento/module-two-factor-auth')
-  assert.equal(twoFactorAuth.enabled, false)
+  expect(catalog).not.toBe(undefined)
+
+  if (twoFactorAuth) {
+    expect(twoFactorAuth.name).toEqual('Magento_TwoFactorAuth')
+    expect(twoFactorAuth.src).toEqual('vendor/magento/module-two-factor-auth')
+    expect(twoFactorAuth.enabled).toEqual(false)
+  }
 })
 
 test('Get all the themes from Magento source code', () => {
   const themes = getThemes()
 
   const blank = themes.find((t) => t.name === 'Magento/blank')
-  assert.ok(blank)
-  assert.is(blank.src, 'vendor/magento/theme-frontend-blank')
-  assert.is(blank.dest, 'pub/static/frontend/Magento/blank')
-  assert.is(blank.area, 'frontend')
-  assert.is(blank.parent, false)
+  expect(blank).not.toBe(undefined)
+
+  if (blank) {
+    expect(blank.src).toEqual('vendor/magento/theme-frontend-blank')
+    expect(blank.dest).toEqual('pub/static/frontend/Magento/blank')
+    expect(blank.area).toEqual('frontend')
+    expect(blank.parent).toEqual(false)
+  }
 
   const luma = themes.find((t) => t.name === 'Magento/luma')
-  assert.ok(luma)
-  assert.is(luma.src, 'vendor/magento/theme-frontend-luma')
-  assert.is(luma.dest, 'pub/static/frontend/Magento/luma')
-  assert.is(luma.area, 'frontend')
-  assert.is(luma.parent, 'Magento/blank')
+  expect(luma).not.toBe(undefined)
+
+  if (luma) {
+    expect(luma.src).toEqual('vendor/magento/theme-frontend-luma')
+    expect(luma.dest).toEqual('pub/static/frontend/Magento/luma')
+    expect(luma.area).toEqual('frontend')
+    expect(luma.parent).toEqual('Magento/blank')
+  }
 
   const backend = themes.find((t) => t.name === 'Magento/backend')
-  assert.ok(backend)
-  assert.is(backend.src, 'vendor/magento/theme-adminhtml-backend')
-  assert.is(backend.dest, 'pub/static/adminhtml/Magento/backend')
-  assert.is(backend.area, 'adminhtml')
-  assert.is(backend.parent, false)
-})
+  expect(backend).not.toBe(undefined)
 
-test.run()
+  if (backend) {
+    expect(backend.src).toEqual('vendor/magento/theme-adminhtml-backend')
+    expect(backend.dest).toEqual('pub/static/adminhtml/Magento/backend')
+    expect(backend.area).toEqual('adminhtml')
+    expect(backend.parent).toEqual(false)
+  }
+})

@@ -22,7 +22,7 @@
     "ts-check": "tsc --noEmit",
     "types": "rimraf types && tsc --declaration --emitDeclarationOnly --outDir types",
     "build": "rimraf dist && tsc",
-    "test": "rimraf dist && tsc -p tsconfig.test.json && jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
   },
   "dependencies": {
     "browser-sync": "^2.27.7",
@@ -61,6 +61,12 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
+    "transform": {},
+    "moduleNameMapper": {
+      "^magefront-plugin-less$": "<rootDir>/plugins/less/plugin.ts",
+      "^magefront-plugin-requirejs-config$": "<rootDir>/plugins/requirejs-config/plugin.ts",
+      "^magefront-plugin-js-translation$": "<rootDir>/plugins/js-translation/plugin.ts"
+    },
     "testMatch": [
       "**/tests/*.test.ts"
     ]
