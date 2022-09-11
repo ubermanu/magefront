@@ -20,12 +20,10 @@
   "files": [
     "lib",
     "plugin.ts",
-    "dist/plugin.*",
-    "dist/lib/**/*"
+    "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc",
-    "test": "pnpm run build && uvu dist/tests"
+    "build": "rimraf dist && tsc"
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
