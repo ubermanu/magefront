@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",
+    "module": "esnext",
     "lib": ["esnext"],
     "strict": true,
     "strictNullChecks": true,
