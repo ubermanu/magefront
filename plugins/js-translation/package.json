@@ -15,10 +15,14 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/js-translation"
   },
-  "main": "plugin.mjs",
+  "main": "dist/plugin.js",
   "files": [
-    "plugin.mjs"
+    "plugin.ts",
+    "dist"
   ],
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "csv-parse": "^5.3.0"
   }

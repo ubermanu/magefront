@@ -8,6 +8,7 @@ import { parse } from 'csv-parse'
  * @returns {(function(*): Promise<void>)|*}
  */
 export default () => {
+  // @ts-ignore
   return async (themeConfig) => {
     const files = []
 
@@ -15,6 +16,7 @@ export default () => {
     const translationFilename = locale + '.csv'
 
     // Get the translation files from the language packs
+    // @ts-ignore
     languageList.forEach((lang) => {
       if (lang.code !== locale) {
         return
@@ -28,6 +30,7 @@ export default () => {
 
     // Get the translation files from the modules
     // TODO: Sort the modules by dependencies tree
+    // @ts-ignore
     moduleList.forEach((mod) => {
       if (!mod.enabled || !mod.src) {
         return
@@ -46,7 +49,7 @@ export default () => {
       files.push(themeTranslationFile)
     }
 
-    let records = {}
+    let records: { [key: string]: string } = {}
 
     const parser = parse({
       delimiter: ',',
