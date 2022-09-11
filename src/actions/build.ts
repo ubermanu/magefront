@@ -1,8 +1,9 @@
 import path from 'path'
 
 import { getConfigForTheme } from '../config'
-import { getModules, MagentoModule } from '../magento/magentoModule'
+import { getModules, MagentoModule } from '../magento/module'
 import { getLanguages } from '../magento/language'
+import { PluginContext } from '../plugin'
 import { logger } from '../env'
 
 /**
@@ -17,8 +18,8 @@ import { logger } from '../env'
 export const build = async (themeName: string, locale = 'en_US') => {
   const themeConfig = await getConfigForTheme(themeName)
 
-  const moduleList = getModules()
-  const modules = moduleList.filter((mod: MagentoModule) => mod.enabled && mod.src).map((mod) => mod.name)
+  const moduleList = getModules().filter((m) => m.enabled && m.src)
+  const modules: string[] = moduleList.map((m: MagentoModule) => m.name)
 
   const languageList = getLanguages()
 
@@ -27,7 +28,8 @@ export const build = async (themeName: string, locale = 'en_US') => {
   const dest = path.join(themeConfig.dest, locale)
   for (const plugin of themeConfig.plugins) {
     try {
-      await plugin({ ...themeConfig, dest, locale, modules, moduleList, languageList })
+      // @ts-ignore
+      await plugin({ ...themeConfig, dest, locale, modules, moduleList, languageList } as PluginContext)
     } catch (e) {
       logger.error(e)
     }

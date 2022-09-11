@@ -4,6 +4,8 @@
  */
 
 export * from './env'
+export * from './config'
+export * from './plugin'
 export * from './magento/composer'
 export * from './magento/module'
 export * from './magento/theme'

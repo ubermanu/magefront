@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-import { getConfigForTheme } from '../config.mjs'
+import { getConfigForTheme } from '../config'
 
 /**
  * Clean up all the generated files.
@@ -8,7 +8,7 @@ import { getConfigForTheme } from '../config.mjs'
  * @param {string} themeName
  * @returns {Promise<void>}
  */
-export const clean = async (themeName) => {
+export const clean = async (themeName: string) => {
   const themeConfig = await getConfigForTheme(themeName)
 
   // Cleanup the `temp` folder

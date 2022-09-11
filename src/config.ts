@@ -1,7 +1,8 @@
 import path from 'path'
 import glob from 'fast-glob'
 
-import { getThemes, MagentoTheme } from './main'
+import { getThemes, MagentoTheme } from './magento/theme'
+import { Plugin } from './plugin'
 import { rootPath, tempPath } from './env'
 
 /**
@@ -19,7 +20,7 @@ export interface ThemeConfig {
   theme: string
   dest: string
   src: string
-  plugins: any[]
+  plugins: Plugin[]
 }
 
 /**

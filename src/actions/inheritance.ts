@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import glob from 'fast-glob'
 import path from 'path'
 
-import { getModules } from '../magento/magentoModule'
+import { getModules } from '../magento/module'
 import { getThemes } from '../magento/theme'
 import { rootPath, tempPath } from '../env'
 

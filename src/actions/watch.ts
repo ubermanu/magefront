@@ -4,11 +4,11 @@ import chokidar from 'chokidar'
 import { build } from './build'
 import { instance } from './browser-sync'
 import { inheritance } from './inheritance'
-import { getModules } from '../magento/magentoModule'
+import { getModules } from '../magento/module'
 import { getThemes } from '../magento/theme'
 import { rootPath, tempPath } from '../env'
 
-export const watch = async (themeName) => {
+export const watch = async (themeName: string) => {
   const watcherConfig = { ignoreInitial: true }
   const theme = getThemes().find((theme) => theme.name === themeName)
   const modules = getModules().filter((module) => module.src && module.enabled)
