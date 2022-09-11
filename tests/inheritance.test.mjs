@@ -4,10 +4,12 @@ import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
 import './setup.mjs'
+import { clean } from '../src/actions/clean.mjs'
 import { inheritance } from '../src/actions/inheritance.mjs'
 import { rootPath, tempPath } from '../src/env.mjs'
 
 test('Gather the Magento/blank theme files', async () => {
+  await clean('Magento/blank')
   await inheritance('Magento/blank')
 
   assert.ok(await fs.exists(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/css/styles-m.less')))
