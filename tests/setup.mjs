@@ -8,11 +8,11 @@ dotenv.config({ path: '.env.test' })
 const magentoPath = process.env.MAGEFRONT_TEST_MAGENTO_ROOT
 
 if (!magentoPath) {
-  throw new Error('MAGENTO_ROOT_PATH env variable is not set')
+  throw new Error('MAGEFRONT_TEST_MAGENTO_ROOT env variable is not set')
 }
 
 if (!fs.existsSync(magentoPath)) {
-  throw new Error(`MAGENTO_ROOT_PATH env variable points to a non-existing directory: ${magentoPath}`)
+  throw new Error(`MAGEFRONT_TEST_MAGENTO_ROOT env variable points to a non-existing directory: ${magentoPath}`)
 }
 
 // Set the root path to the magento test instance.
