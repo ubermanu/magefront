@@ -4,17 +4,25 @@ import { getThemes } from './main.mjs'
 import { rootPath, tempPath } from './env.mjs'
 
 /**
+ * The configuration filename.
+ * TODO: Add as an option '-c' to specify the config file
+ *
+ * @type {string}
+ */
+export let configFilename = 'magefront.config.{js,mjs,cjs}'
+
+/**
  * Get the configuration for the given theme name.
  * The theme config is passed to the plugins.
+ * TODO: Rename to getThemeConfig
  *
- * @param themeName
+ * @param {string} themeName
  * @return {Promise<{locales, plugins, src, dest}>}
  */
 export const getConfigForTheme = async (themeName) => {
   const theme = getThemes().find((t) => t.name === themeName)
 
-  // TODO: Add as an option '-c' to specify the config file
-  const files = await glob('magefront.config.{js,mjs,cjs}', { cwd: rootPath })
+  const files = await glob(configFilename, { cwd: rootPath })
   let customConfig = {}
 
   if (files.length) {
