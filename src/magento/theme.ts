@@ -8,31 +8,30 @@ import { rootPath } from '../env'
 
 export interface MagentoTheme extends MagentoModule {
   area: string
-  parent: string
-}
-
-export class Theme implements MagentoModule {
-  enabled = true
+  parent: string | false
 }
 
 /**
  * Crawl the Magento project source code and return a list of all the themes.
  *
- * @return Theme[]
+ * @return MagentoTheme[]
  */
 export const getThemes = () => {
-  const list = {}
+  const list: { [name: string]: MagentoTheme } = {}
 
   // 1. Get the list of themes from the `app/design/` directory.
   const appDesign = glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml', { cwd: rootPath })
 
   appDesign.forEach((designSrc) => {
-    const theme = new Theme()
-    theme.name = designSrc.split('/').slice(3, -1).join('/')
-    theme.src = designSrc.split('/').slice(0, -1).join('/')
-    theme.area = designSrc.split('/')[2]
-    theme.parent = getParentFromThemeXml(path.join(rootPath, designSrc))
-    list[theme.name] = theme
+    const name = designSrc.split('/').slice(3, -1).join('/')
+
+    list[name] = {
+      name,
+      src: designSrc.split('/').slice(0, -1).join('/'),
+      area: designSrc.split('/')[2],
+      parent: getParentFromThemeXml(path.join(rootPath, designSrc)),
+      enabled: true
+    }
   })
 
   // 2. Get the themes from the vendor directory.
@@ -41,14 +40,16 @@ export const getThemes = () => {
 
   packages.forEach((pkg: ComposerPackage) => {
     getRegistrations(pkg).forEach((registration) => {
-      const theme = new Theme()
       const src = path.join('vendor', pkg.name, path.dirname(registration))
       const { name, area } = getThemeNameAndAreaFromRegistrationPhp(path.join(rootPath, src, 'registration.php'))
-      theme.name = name
-      theme.src = src
-      theme.area = area
-      theme.parent = getParentFromThemeXml(path.join(rootPath, src, 'theme.xml'))
-      list[name] = theme
+
+      list[name] = {
+        name,
+        src,
+        area,
+        parent: getParentFromThemeXml(path.join(rootPath, src, 'theme.xml')),
+        enabled: true
+      }
     })
   })
 
@@ -75,6 +76,7 @@ function getParentFromThemeXml(file: string) {
  */
 function getThemeNameAndAreaFromRegistrationPhp(file: string) {
   const registration = fs.readFileSync(file).toString()
+  // @ts-ignore
   const [, area, name] = registration.match(/'(frontend|adminhtml)\/([\w\/]+)'/)
   return { name, area }
 }
