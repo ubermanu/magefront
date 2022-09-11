@@ -16,4 +16,6 @@ export interface PluginContext extends ThemeConfig {
 /**
  * The plugin interface.
  */
-export interface Plugin extends Function {}
+export interface Plugin extends Function {
+  (context: PluginContext): Promise<void>
+}
