@@ -15,10 +15,14 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/svelte"
   },
-  "main": "plugin.mjs",
+  "main": "dist/plugin.js",
   "files": [
-    "plugin.mjs"
+    "plugin.ts",
+    "dist"
   ],
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "fast-glob": "^3.2.11",
     "svelte": "^3.50.0"
