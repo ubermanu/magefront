@@ -6,3 +6,4 @@ node_modules
 # tests
 auth.json
 .test-*
+.env.test

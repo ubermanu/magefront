@@ -32,5 +32,15 @@ jobs:
         run: |
           composer global config http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_USERNAME}" "${MAGENTO_MARKETPLACE_PASSWORD}";
 
+      - name: Define Magento ROOT for tests
+        run: echo "Set Magento root to $WORKSPACE"
+        env:
+          MAGEFRONT_TEST_MAGENTO_ROOT: ${{ github.workspace }}/magento
+
+      - name: Create Magento Project
+        run: |
+          composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition "$GITHUB_WORKSPACE/magento";
+          cp tests/fixtures/config.php.dist "$GITHUB_WORKSPACE/magento/app/etc/config.php";
+
       - run: pnpm i
       - run: pnpm test

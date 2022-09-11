@@ -1,30 +1,19 @@
 import fs from 'fs'
-import { execSync } from 'child_process'
+import dotenv from 'dotenv'
 import { setRootPath } from '../src/env.mjs'
 
-function createEnvironment() {
-  // Check for composer
-  const composer = execSync('which composer').toString().trim()
-  if (!composer) {
-    console.error('Composer is not installed. Please install it first.')
-    process.exit(1)
-  }
+// Load test env file
+dotenv.config({ path: '.env.test' })
 
-  // Install Magento
-  execSync(
-    `${composer} create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition .test-magento`,
-    { stdio: 'inherit' }
-  )
+const magentoPath = process.env.MAGEFRONT_TEST_MAGENTO_ROOT
 
-  // Copy config.php file (so we don't have to `setup:upgrade`)
-  fs.copyFileSync('tests/_fixtures/config.php.dist', '.test-magento/app/etc/config.php')
+if (!magentoPath) {
+  throw new Error('MAGENTO_ROOT_PATH env variable is not set')
 }
 
-// Check if the environment is already created
-// If not, create it
-if (!fs.existsSync('.test-magento')) {
-  createEnvironment()
+if (!fs.existsSync(magentoPath)) {
+  throw new Error(`MAGENTO_ROOT_PATH env variable points to a non-existing directory: ${magentoPath}`)
 }
 
 // Set the root path to the magento test instance.
-setRootPath('.test-magento')
+setRootPath(magentoPath)
