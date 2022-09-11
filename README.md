@@ -41,3 +41,12 @@ export default {
 > so the original themes (blank, luma) can work without it.
 
 For more information, check the [documentation](https://ubermanu.github.io/magefront/).
+
+## Tests
+
+You can test `magefront` on a Magento 2 instance by doing the following:
+
+1. Clone this repository
+2. Copy the `.env.test.dist` file to `.env.test` and fill in your Magento path
+3. Install the dependencies: `pnpm install`
+4. Run the tests: `pnpm test`
