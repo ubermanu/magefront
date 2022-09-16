@@ -21,7 +21,7 @@ export class preProcessor {
   process(src: string): string {
     return src.replace(/^\/\/@magento_import(.*);(.*)$/gm, (match, path) => {
       path = path.replace(/["']/g, '').trim()
-      return this.modules.map((mod) => `@import (optional) '../../${mod}/web/css/${path}';`).join('\n')
+      return this.modules.map((mod) => `@import (optional) '../${mod}/css/${path}';`).join('\n')
     })
   }
 }
