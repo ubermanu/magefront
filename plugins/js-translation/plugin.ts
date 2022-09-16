@@ -81,5 +81,10 @@ export default () => {
     })
 
     parser.end()
+
+    await new Promise((resolve, reject) => {
+      parser.on('error', reject)
+      parser.on('finish', resolve)
+    })
   }
 }
