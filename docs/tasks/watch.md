@@ -6,4 +6,4 @@ When a change is detected, build the theme.
 
 ## Usage
 
-    magefront watch --theme Magento/blank
+    magefront watch -t Magento/blank
