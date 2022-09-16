@@ -13,6 +13,8 @@ export interface PluginContext extends ThemeConfig {
   moduleList: MagentoModule[]
   languageList: MagentoLanguage[]
   themeList: MagentoTheme[]
+  themeDependencyTree: string[]
+  cwd: string
 }
 
 /**
