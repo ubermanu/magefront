@@ -80,20 +80,26 @@ export const inheritance = async (themeName: string) => {
   const area = currentTheme.area
   const ignore = ['page_layout', 'layout', 'templates', 'ui_component', 'layouts.xml', 'email']
 
-  modules.forEach(async (m: MagentoModule) => {
-    // Resolve the "base" area as well (common to frontend and adminhtml)
-    await generateCopies(path.join(m.src, 'view', 'base'), path.join(themeDest, m.name), ignore)
-    await generateCopies(path.join(m.src, 'view', area), path.join(themeDest, m.name), ignore)
-  })
+  await Promise.all(
+    modules.map(async (m: MagentoModule) => {
+      // Resolve the "base" area as well (common to frontend and adminhtml)
+      await generateCopies(path.join(m.src, 'view', 'base'), path.join(themeDest, m.name), ignore)
+      await generateCopies(path.join(m.src, 'view', area), path.join(themeDest, m.name), ignore)
+    })
+  )
 
-  // Create symlinks for all the related themes
-  getThemeDependencyTree(themeName).forEach(async (themeName) => {
-    const theme = findTheme(themeName)
-    if (!theme) {
-      return
-    }
-    // TODO: Implement custom ignore property in the theme config
-    // TODO: Add support for a `.magefrontignore` file?
-    await generateCopies(theme.src, themeDest, ['composer.json', '*.txt', 'etc', 'i18n', '*.php'])
-  })
+  // Copy the files from the themes
+  // TODO: Get the theme dependency tree beforehand
+  await Promise.all(
+    getThemeDependencyTree(themeName).map(async (themeName) => {
+      const theme = findTheme(themeName)
+      if (!theme) {
+        return
+      }
+
+      // TODO: Implement custom ignore property in the theme config
+      // TODO: Add support for a `.magefrontignore` file?
+      await generateCopies(theme.src, themeDest, ['composer.json', '*.txt', 'etc', 'i18n', '*.php'])
+    })
+  )
 }
