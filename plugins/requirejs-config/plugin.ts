@@ -39,8 +39,8 @@ export default () => {
       })
     )
 
-    // Output the final requirejs-config.js file into web, so it can be deployed
-    const file = path.join(themeConfig.src, 'web', 'requirejs-config.js')
+    // Output the final requirejs-config.js file, so it can be deployed
+    const file = path.join(themeConfig.src, 'requirejs-config.js')
 
     return fs.promises.writeFile(file, `(function(require){\n${packed.join('')}})(require);`)
   }

@@ -71,7 +71,7 @@ export default () => {
     })
 
     parser.on('end', () => {
-      const file = path.join(themeConfig.src, 'web', 'js-translation.json')
+      const file = path.join(themeConfig.src, 'js-translation.json')
       fs.writeFileSync(file, JSON.stringify(records, null, 2))
     })
 
