@@ -32,3 +32,14 @@ test('Build and deploy the Magento/luma theme', async () => {
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/luma/en_US/requirejs-config.js'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/luma/en_US/js-translation.json'))).toBe(true)
 }, 30000)
+
+test('Build and deploy the Magento/backend theme', async () => {
+  await clean('Magento/backend')
+  await inheritance('Magento/backend')
+  await build('Magento/backend')
+  await deploy('Magento/backend')
+
+  expect(fs.existsSync(path.join(rootPath, 'pub/static/adminhtml/Magento/backend/en_US/css/styles.css'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, 'pub/static/adminhtml/Magento/backend/en_US/requirejs-config.js'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, 'pub/static/adminhtml/Magento/backend/en_US/js-translation.json'))).toBe(true)
+}, 30000)
