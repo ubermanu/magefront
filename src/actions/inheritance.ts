@@ -36,8 +36,10 @@ export const inheritance = async (themeName: string) => {
       onlyFiles: true
     })
     await Promise.all(
-      files.map((srcPath) => {
-        return fs.copy(path.join(rootPath, srcPath), path.join(dest, srcPath.replace(src + '/', '/')))
+      files.map(async (srcPath) => {
+        const destPath = path.join(dest, srcPath.replace(src + '/', '/'))
+        await fs.rm(destPath, { recursive: true, force: true })
+        return fs.copy(path.join(rootPath, srcPath), destPath)
       })
     )
   }
