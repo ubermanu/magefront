@@ -1,6 +1,7 @@
 import { ThemeConfig } from './config'
 import { MagentoModule } from './magento/module'
 import { MagentoLanguage } from './magento/language'
+import { MagentoTheme } from './magento/theme'
 
 /**
  * Extends the themeConfig with additional values to be passed
@@ -11,6 +12,7 @@ export interface PluginContext extends ThemeConfig {
   modules: string[]
   moduleList: MagentoModule[]
   languageList: MagentoLanguage[]
+  themeList: MagentoTheme[]
 }
 
 /**
