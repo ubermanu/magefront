@@ -99,7 +99,7 @@ export const inheritance = async (themeName: string) => {
 
       // TODO: Implement custom ignore property in the theme config
       // TODO: Add support for a `.magefrontignore` file?
-      await generateCopies(theme.src, themeDest, ['composer.json', '*.txt', 'etc', 'i18n', '*.php'])
+      await generateCopies(theme.src, themeDest, ['theme.xml', 'composer.json', '*.txt', 'etc', 'i18n', '*.php'])
     })
   )
 }
