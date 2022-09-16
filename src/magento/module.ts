@@ -58,7 +58,7 @@ export const getModules = () => {
 
   // 3. Get the list of modules in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-module')
+  const packages: ComposerPackage[] = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-module')
 
   packages.forEach((pkg: ComposerPackage) => {
     getRegistrations(pkg).forEach((registration) => {

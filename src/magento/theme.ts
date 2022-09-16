@@ -39,7 +39,7 @@ export const getThemes = () => {
 
   // 2. Get the themes from the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-theme')
+  const packages: ComposerPackage[] = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-theme')
 
   packages.forEach((pkg: ComposerPackage) => {
     getRegistrations(pkg).forEach((registration) => {
