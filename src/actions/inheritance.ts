@@ -1,62 +1,66 @@
-// @ts-nocheck
 import fs from 'fs-extra'
-import glob from 'fast-glob'
+import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 
 import { getModules } from '../magento/module'
-import { getThemes } from '../magento/theme'
-import { rootPath, tempPath } from '../env'
+import { getThemes, MagentoTheme } from '../magento/theme'
+import { logger, rootPath, tempPath } from '../env'
 
-const themes = getThemes()
+/**
+ * Gather all the theme files and copy them to the temporary directory.
+ * When this is done, the `build` task should be run afterwards.
+ * TODO: Use promises for a faster copy.
+ *
+ * @param {string} themeName
+ */
+export const inheritance = async (themeName: string) => {
+  const themeList: MagentoTheme[] = getThemes()
 
-function findTheme(name) {
-  return themes.find((theme) => theme.name === name)
-}
+  /**
+   * @param {string} name
+   * @return MagentoTheme|undefined
+   */
+  function findTheme(name: string) {
+    return themeList.find((theme) => theme.name === name)
+  }
 
-function createSymlink(srcPath, destPath) {
-  fs.removeSync(destPath)
-  fs.ensureSymlinkSync(srcPath, destPath)
-}
+  /**
+   * Copy a file from the source to the destination.
+   * TODO: Remove the `removeSync` call and use `fs.copy` instead.
+   * @param srcPath
+   * @param destPath
+   */
+  function createCopy(srcPath: string, destPath: string) {
+    fs.removeSync(destPath)
+    fs.copySync(srcPath, destPath)
+  }
 
-function generateSymlinks(src, dest, replacePattern, ignore = []) {
-  glob
-    .sync([src + '/**'].concat(ignore.map((pattern) => '!**/' + pattern)), {
-      nodir: true
-    })
-    .forEach((srcPath) => {
-      createSymlink(srcPath, path.join(dest, srcPath.toString()).replace(src + '/', replacePattern + '/'))
-    })
-}
-
-function createCopy(srcPath, destPath) {
-  fs.removeSync(destPath)
-  fs.copySync(srcPath, destPath)
-}
-
-function generateCopies(src, dest, replacePattern, ignore = []) {
-  glob
-    .sync([src + '/**'].concat(ignore.map((pattern) => '!**/' + pattern)), {
-      nodir: true
-    })
-    .forEach((srcPath) => {
+  function generateCopies(src: string, dest: string, replacePattern: string, ignore: Pattern[] = []) {
+    glob.sync(src + '/**', { ignore, onlyFiles: true }).forEach((srcPath) => {
       createCopy(srcPath, path.join(dest, srcPath.toString()).replace(src + '/', replacePattern + '/'))
     })
-}
-
-function getThemeDependencyTree(themeName, dependencyTree) {
-  dependencyTree = dependencyTree ? dependencyTree : []
-  dependencyTree.push(themeName)
-
-  if (findTheme(themeName).parent) {
-    return getThemeDependencyTree(findTheme(themeName).parent, dependencyTree)
-  } else {
-    return dependencyTree.reverse()
   }
-}
 
-// TODO: Add predefined ignores for the core themes
-export const inheritance = async (themeName) => {
-  const themeDest = path.join(rootPath, tempPath, findTheme(themeName).dest)
+  function getThemeDependencyTree(themeName: string, dependencyTree: string[] = []): string[] {
+    dependencyTree = dependencyTree ? dependencyTree : []
+    dependencyTree.push(themeName)
+    const theme = findTheme(themeName)
+
+    if (theme && theme.parent) {
+      return getThemeDependencyTree(theme.parent, dependencyTree)
+    } else {
+      return dependencyTree.reverse()
+    }
+  }
+
+  const currentTheme = findTheme(themeName)
+
+  if (!currentTheme) {
+    logger.error(`Theme "${themeName}" not found.`)
+    return
+  }
+
+  const themeDest = path.join(rootPath, tempPath, currentTheme.dest)
 
   // Clean destination dir before generating new symlinks
   fs.removeSync(themeDest)
@@ -68,7 +72,7 @@ export const inheritance = async (themeName) => {
 
   // For each enabled modules, create symlinks into the theme
   const modules = getModules().filter((m) => m.enabled && m.src)
-  const area = findTheme(themeName).area
+  const area = currentTheme.area
   const ignore = ['page_layout', 'layout', 'templates']
 
   modules.forEach((m) => {
@@ -80,7 +84,12 @@ export const inheritance = async (themeName) => {
   // Create symlinks for all the related themes
   getThemeDependencyTree(themeName).forEach((themeName) => {
     const theme = findTheme(themeName)
+    if (!theme) {
+      return
+    }
     const themeSrc = path.join(rootPath, theme.src)
-    generateCopies(themeSrc, themeDest, '', theme.ignore)
+    // TODO: Implement custom ignore property in the theme config
+    // TODO: Add support for a `.magefrontignore` file?
+    generateCopies(themeSrc, themeDest, '', [])
   })
 }
