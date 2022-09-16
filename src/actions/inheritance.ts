@@ -9,7 +9,6 @@ import { rootPath, tempPath } from '../env'
 /**
  * Gather all the theme files and copy them to the temporary directory.
  * When this is done, the `build` task should be run afterwards.
- * TODO: Use promises for a faster copy.
  *
  * @param {string} themeName
  */
