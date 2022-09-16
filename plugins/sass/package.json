@@ -31,5 +31,8 @@
   },
   "devDependencies": {
     "@types/sass": "^1.43.1"
+  },
+  "peerDependencies": {
+    "magefront": "workspace:*"
   }
 }

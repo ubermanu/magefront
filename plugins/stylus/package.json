@@ -30,5 +30,8 @@
   },
   "devDependencies": {
     "@types/stylus": "^0.48.38"
+  },
+  "peerDependencies": {
+    "magefront": "workspace:*"
   }
 }
