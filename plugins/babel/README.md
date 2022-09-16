@@ -13,7 +13,7 @@ import babel from 'magefront-plugin-babel'
 
 export default {
     plugins: [
-        babel({ src: 'web/js/source/**/*.js' })
+        babel({ src: 'js/source/**/*.js' })
     ]
 }
 ```
