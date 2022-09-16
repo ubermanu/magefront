@@ -20,7 +20,7 @@ export default () => {
     // FIXME: Check for the module dependency tree (to get the correct order)
     // @ts-ignore
     moduleList.forEach((mod) => {
-      const baseFilePath = path.join(context.cwd, mod.src, 'view', 'frontend', 'requirejs-config.js')
+      const baseFilePath = path.join(context.cwd, mod.src, 'view', 'base', 'requirejs-config.js')
       if (fs.existsSync(baseFilePath)) {
         files.push(baseFilePath)
       }
