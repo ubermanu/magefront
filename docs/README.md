@@ -1,15 +1,19 @@
 ![Magefront](images/magefront-logo-title.svg)
 
-**Magefront** is a tool that gives you the choice of which technology your themes rely on.
+The main goal of **magefront** is to provide a way of developing Magento 2 themes in a Node.js environment.
 
-For example, it can be `less`, `sass`, `stylus`, or whatever you want! 🚀
+Initially, all the Magento 2 themes are deployed using PHP, which is a very poor solution for frontend development.
+
+All the assets deployment is handled by **magefront**, no need to run `bin/magento setup:static-content:deploy` anymore! 🕊
 
 ## Install
 
-Install the package at the root level of your website:
+Install the package at the root level of your project:
 
     npm install magefront
 
 ## Usage
 
-    npx magefront build --theme Magento/blank
+    npx magefront build --theme Magento/blank en_US
+
+> This will build the `Magento/blank` theme, with the locale `en_US` into the `pub/static` folder.

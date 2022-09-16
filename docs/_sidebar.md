@@ -1,5 +1,6 @@
 * [Introduction](/)
 
+* [Getting Started](getting-started.md)
 * [Configuration](configuration.md)
 
 * CLI
@@ -9,13 +10,12 @@
   * [list](tasks/list.md)
 
 * Plugins
-  * [Quick Start](plugins/intro.md)
   * [LESS](plugins/less.md)
   * [SASS](plugins/sass.md)
   * [Stylus](plugins/stylus.md)
   * [Babel](plugins/babel.md)
   * [RequireJS](plugins/requirejs-config.md)
-  * [JsTranslation](plugins/js-translation.md)
+  * [JS Translation](plugins/js-translation.md)
 
 * Examples
   * [Magento Themes](examples/magento-themes.md)
