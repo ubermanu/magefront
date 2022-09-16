@@ -13,4 +13,4 @@ test('Gather the Magento/blank theme files', async () => {
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/css/styles-l.less'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/css/source/lib/_lib.less'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/jquery.js'))).toBe(true)
-})
+}, 30000)

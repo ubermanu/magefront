@@ -16,7 +16,7 @@ test('Build the Magento/blank theme', async () => {
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/css/print.css'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/requirejs-config.js'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/js-translation.json'))).toBe(true)
-})
+}, 30000)
 
 test('Build the Magento/luma theme', async () => {
   await clean('Magento/luma')
@@ -28,4 +28,4 @@ test('Build the Magento/luma theme', async () => {
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/css/print.css'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/requirejs-config.js'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/js-translation.json'))).toBe(true)
-})
+}, 30000)
