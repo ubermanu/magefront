@@ -91,23 +91,21 @@ export const inheritance = async (themeName: string) => {
 
   // Copy the files from the themes
   // TODO: Get the theme dependency tree beforehand
-  await Promise.all(
-    getThemeDependencyTree(themeName).map(async (themeName) => {
-      const theme = findTheme(themeName)
-      if (!theme) {
-        return
-      }
+  for (const themeDependency of getThemeDependencyTree(themeName)) {
+    const theme = findTheme(themeDependency)
+    if (!theme) {
+      return
+    }
 
-      // TODO: Implement custom ignore property in the theme config
-      // TODO: Add support for a `.magefrontignore` file?
-      await generateCopies(path.join(theme.src, 'web'), themeDest, ignore)
+    // TODO: Implement custom ignore property in the theme config
+    // TODO: Add support for a `.magefrontignore` file?
+    await generateCopies(path.join(theme.src, 'web'), themeDest, ignore)
 
-      // Add the submodule source files
-      await Promise.all(
-        modules.map(async (m: MagentoModule) => {
-          await generateCopies(path.join(theme.src, m.name, 'web'), path.join(themeDest, m.name), ignore)
-        })
-      )
-    })
-  )
+    // Add the submodule source files
+    await Promise.all(
+      modules.map((m: MagentoModule) => {
+        return generateCopies(path.join(theme.src, m.name, 'web'), path.join(themeDest, m.name), ignore)
+      })
+    )
+  }
 }
