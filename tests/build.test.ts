@@ -11,11 +11,11 @@ test('Build the Magento/blank theme', async () => {
   await inheritance('Magento/blank')
   await build('Magento/blank')
 
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/css/styles-m.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/css/styles-l.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/css/print.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/requirejs-config.js'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/web/js-translation.json'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/css/styles-m.css'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/css/styles-l.css'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/css/print.css'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/requirejs-config.js'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/blank/js-translation.json'))).toBe(true)
 }, 30000)
 
 test('Build the Magento/luma theme', async () => {
@@ -23,9 +23,9 @@ test('Build the Magento/luma theme', async () => {
   await inheritance('Magento/luma')
   await build('Magento/luma')
 
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/css/styles-m.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/css/styles-l.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/css/print.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/requirejs-config.js'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/web/js-translation.json'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/css/styles-m.css'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/css/styles-l.css'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/css/print.css'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/requirejs-config.js'))).toBe(true)
+  expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/frontend/Magento/luma/js-translation.json'))).toBe(true)
 }, 30000)
