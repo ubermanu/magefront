@@ -37,7 +37,7 @@ export const inheritance = async (themeName: string) => {
     })
     await Promise.all(
       files.map((srcPath) => {
-        return fs.copy(path.join(rootPath, srcPath), path.join(dest, srcPath).replace(src + '/', '/'))
+        return fs.copy(path.join(rootPath, srcPath), path.join(dest, srcPath.replace(src + '/', '/')))
       })
     )
   }
@@ -67,23 +67,23 @@ export const inheritance = async (themeName: string) => {
 
   const themeDest = path.join(rootPath, tempPath, currentTheme.dest)
 
-  // Clean destination dir before generating new symlinks
+  // Clean destination dir
   fs.removeSync(themeDest)
 
   // Add the Magento core lib resources as a dependency for everyone
   // Ignore the css docs and txt files
-  await generateCopies('lib', themeDest, ['web/css/docs', '**/*.txt', 'web/i18n'])
+  await generateCopies(path.join('lib', 'web'), themeDest, ['css/docs', '**/*.txt', 'i18n'])
 
-  // For each enabled modules, create symlinks into the theme
+  // For each enabled modules, copy the web resources into the theme temp dir
   const modules: MagentoModule[] = getModules().filter((m) => m.enabled && m.src)
   const area = currentTheme.area
-  const ignore = ['page_layout', 'layout', 'templates', 'ui_component', 'layouts.xml', 'email']
+  const ignore = ['**/node_modules/**']
 
   await Promise.all(
     modules.map(async (m: MagentoModule) => {
       // Resolve the "base" area as well (common to frontend and adminhtml)
-      await generateCopies(path.join(m.src, 'view', 'base'), path.join(themeDest, m.name), ignore)
-      await generateCopies(path.join(m.src, 'view', area), path.join(themeDest, m.name), ignore)
+      await generateCopies(path.join(m.src, 'view', 'base', 'web'), path.join(themeDest, m.name), ignore)
+      await generateCopies(path.join(m.src, 'view', area, 'web'), path.join(themeDest, m.name), ignore)
     })
   )
 
@@ -98,7 +98,14 @@ export const inheritance = async (themeName: string) => {
 
       // TODO: Implement custom ignore property in the theme config
       // TODO: Add support for a `.magefrontignore` file?
-      await generateCopies(theme.src, themeDest, ['theme.xml', 'composer.json', '*.txt', 'etc', 'i18n', '*.php'])
+      await generateCopies(path.join(theme.src, 'web'), themeDest, ignore)
+
+      // Add the submodule source files
+      await Promise.all(
+        modules.map(async (m: MagentoModule) => {
+          await generateCopies(path.join(theme.src, m.name, 'web'), path.join(themeDest, m.name), ignore)
+        })
+      )
     })
   )
 }
