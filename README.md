@@ -1,6 +1,6 @@
 ![Magefront](docs/images/magefront-logo-title.svg)
 
-[![Build](https://github.com/ubermanu/magefront/actions/workflows/build.yml/badge.svg)](https://github.com/ubermanu/magefront/actions/workflows/build.yml) &nbsp; [![Test](https://github.com/ubermanu/magefront/actions/workflows/test.yml/badge.svg)](https://github.com/ubermanu/magefront/actions/workflows/test.yml)
+![npm](https://img.shields.io/npm/v/magefront) &nbsp; [![Build](https://github.com/ubermanu/magefront/actions/workflows/build.yml/badge.svg)](https://github.com/ubermanu/magefront/actions/workflows/build.yml) &nbsp; [![Test](https://github.com/ubermanu/magefront/actions/workflows/test.yml/badge.svg)](https://github.com/ubermanu/magefront/actions/workflows/test.yml)
 
 **Magefront** is a tool that gives you the choice of which technology your themes rely on.
 
