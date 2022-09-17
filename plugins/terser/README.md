@@ -18,16 +18,4 @@ export default {
 }
 ```
 
-## Options
-
-### `src`
-
-The source files to minify. Default is `**/*.js`.
-
-### `ignore`
-
-A list of paths to ignore.
-
-### `terserOptions`
-
-Options to pass to the [terser](https://terser.org/docs/api-reference#minify-options) minifier.
+See the [documentation](https://ubermanu.github.io/magefront/#/plugins/terser) for more information.

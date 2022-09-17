@@ -2,19 +2,18 @@
 
 * [Configuration](configuration.md)
 
-* CLI
-  * [build](tasks/build.md)
-  * [watch](tasks/watch.md)
-  * [dev](tasks/dev.md)
-  * [list](tasks/list.md)
+* [CLI](cli.md)
 
-* Plugins
-  * [LESS](plugins/less.md)
+* [Plugins](plugins.md)
+  * [Less](plugins/less.md)
   * [RequireJS](plugins/requirejs-config.md)
   * [JS Translation](plugins/js-translation.md)
-  * [SASS](plugins/sass.md)
-  * [Stylus](plugins/stylus.md)
   * [Babel](plugins/babel.md)
+  * [Sass](plugins/sass.md)
+  * [Stylus](plugins/stylus.md)
+  * [Svelte](plugins/svelte.md)
+  * [Terser](plugins/terser.md)
+  * [Typescript](plugins/typescript.md)
 
 * Examples
   * [Magento Themes](examples/magento-themes.md)

@@ -18,16 +18,4 @@ export default {
 }
 ```
 
-## Options
-
-### `src`
-
-The source files to transform. Default is `**/*.svelte`.
-
-### `ignore`
-
-A list of paths to ignore.
-
-### `compilerOptions`
-
-The svelte compiler options. See [svelte docs](https://svelte.dev/docs#svelte_compile) for more info.
+See the [documentation](https://ubermanu.github.io/magefront/#/plugins/svelte) for more information.
