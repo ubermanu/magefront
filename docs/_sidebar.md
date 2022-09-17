@@ -14,7 +14,3 @@
   * [Svelte](plugins/svelte.md)
   * [Terser](plugins/terser.md)
   * [Typescript](plugins/typescript.md)
-
-* Examples
-  * [Magento Themes](examples/magento-themes.md)
-  * [Snowdog Themes](examples/snowdog-themes.md)
