@@ -8,7 +8,7 @@ All the assets deployment is handled by **magefront**, no need to run `bin/magen
 
 ## Install
 
-Install the package at the root level of your project:
+Install the package at the root level of your **Magento 2** project:
 
     npm install magefront
 
