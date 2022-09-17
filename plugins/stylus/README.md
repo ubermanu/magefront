@@ -18,20 +18,4 @@ export default {
 }
 ```
 
-## Options
-
-### `src`
-
-The source files to minify. Default is `**/!(_)*.styl`.
-
-### `ignore`
-
-A list of paths to ignore.
-
-### `sourcemaps`
-
-Enable sourcemaps. Default is `false`.
-
-### `compilerOptions`
-
-Options to pass to the stylus compiler. See [stylus docs](http://stylus-lang.com/docs/js.html#options) for more info.
+See the [documentation](https://ubermanu.github.io/magefront/#/plugins/stylus) for more information.

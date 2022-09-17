@@ -18,6 +18,4 @@ export default {
 }
 ```
 
-## Note
-
-This is a mandatory plugin if your theme uses the Magento 2 `requirejs` implementation.
+See the [documentation](https://ubermanu.github.io/magefront/#/plugins/requirejs-config) for more information.

@@ -1,18 +1,25 @@
 # RequireJS
 
-The RequireJS plugin wraps all the `requirejs-config.js` files from the project into a single file.
+Merge all the `requirejs-config.js` files into one.
 
-This is the same behavior as the Magento 2 PHP module (but in JS).
+## Install
 
-> 💡 This plugin is enabled by default
+    npm i magefront-plugin-requirejs-config
 
-### Usage
+## Usage
 
 ```js
-// magefront.config.js
 import requireJsConfig from 'magefront-plugin-requirejs-config'
 
 export default {
-    plugins: [requireJsConfig()]
+    plugins: [
+        requireJsConfig()
+    ]
 }
 ```
+
+> 💡 This plugin is enabled by default
+
+## Note
+
+This is a mandatory plugin if your theme uses the **Magento 2** [RequireJS](https://developer.adobe.com/commerce/frontend-core/javascript/requirejs/) implementation.

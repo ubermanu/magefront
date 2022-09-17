@@ -1,18 +1,25 @@
 # JS Translation
 
-The JsTranslation plugin wraps all the locale `*.csv` files and output it as a JSON file.
+Merge all the translations into the `js-translation.json` file.
 
-This is the same behavior as the Magento 2 PHP module (but in JS).
+## Install
 
-> 💡 This plugin is enabled by default
+    npm i magefront-plugin-js-translation
 
-### Usage
+## Usage
 
 ```js
-// magefront.config.js
 import jsTranslation from 'magefront-plugin-js-translation'
 
 export default {
-    plugins: [jsTranslation()]
+    plugins: [
+        jsTranslation()
+    ]
 }
 ```
+
+> 💡 This plugin is enabled by default
+
+## Note
+
+This is a mandatory plugin if you want to use [mage/translate](https://devdocs.magento.com/guides/v2.3/frontend-dev-guide/translations/translate_theory.html) in your JS files.

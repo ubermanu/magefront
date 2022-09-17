@@ -1,14 +1,37 @@
 # STYLUS
 
-The Stylus plugin transpiles STYL files to CSS.
+Transforms STYL files into CSS files.
 
-### Usage
+## Install
+
+    npm i magefront-plugin-stylus
+
+## Usage
 
 ```js
-// magefront.config.js
 import stylus from 'magefront-plugin-stylus'
 
 export default {
-    plugins: [stylus()]
+    plugins: [
+        stylus()
+    ]
 }
 ```
+
+## Options
+
+### `src`
+
+The source files to minify. Default is `**/!(_)*.styl`.
+
+### `ignore`
+
+A list of paths to ignore.
+
+### `sourcemaps`
+
+Enable sourcemaps. Default is `false`.
+
+### `compilerOptions`
+
+Options to pass to the stylus compiler. See [stylus docs](http://stylus-lang.com/docs/js.html#options) for more info.

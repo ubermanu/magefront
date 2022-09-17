@@ -1,24 +1,51 @@
 # SASS
 
-The SASS plugin transpiles SCSS files to CSS.
+Transforms SCSS files into CSS files.
 
-### Usage
+## Install
+
+    npm i magefront-plugin-sass
+
+## Usage
 
 ```js
-// magefront.config.js
 import sass from 'magefront-plugin-sass'
 
 export default {
-    plugins: [sass()]
+    plugins: [
+        sass()
+    ]
 }
 ```
 
-### Node Sass
+## Options
 
-The plugin uses the dart port of sass by default. If you want to use the node-sass implementation, you can pass the compiler as an option:
+### `src`
+
+The source files to minify. Default is `**/!(_)*.scss`.
+
+### `ignore`
+
+A list of paths to ignore.
+
+### `sourcemaps`
+
+Enable sourcemaps. Default is `false`.
+
+### `compiler`
+
+The sass compiler to use.
+
+### `compilerOptions`
+
+Options to pass to the sass compiler. See [sass docs](https://sass-lang.com/documentation/js-api) for more info.
+
+## Node Sass
+
+The plugin uses the dart port of sass by default.\
+If you want to use the node-sass implementation, you can pass the compiler as an option:
 
 ```js
-// magefront.config.js
 import sass from 'magefront-plugin-sass'
 import nodeSass from 'node-sass'
 

@@ -18,6 +18,4 @@ export default {
 }
 ```
 
-## Note
-
-This is a mandatory plugin if you [disabled the static content deploy process](https://github.com/ubermanu/magento2-deploy-disabled/).
+See the [documentation](https://ubermanu.github.io/magefront/#/plugins/js-translation) for more information.
