@@ -25,14 +25,28 @@
         --theme-color: #ff2a2a;
       }
 
+      .app-name-link {
+        display: block;
+      }
+
       .app-name-link > img {
         width: 30%;
+        transition: transform 0.5s ease;
+      }
+
+      .app-name-link:hover > img {
+        transform: rotate(180deg) scale(1.2);
       }
 
       .app-name-link > p {
         margin: 0;
         color: var(--base-color);
         font-family: 'Open Sans', sans-serif;
+        transition: transform 0.5s ease;
+      }
+
+      .app-name-link:hover > p {
+        transform: scale(1.2);
       }
     </style>
   </head>
