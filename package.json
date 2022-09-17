@@ -11,6 +11,7 @@
   "license": "MIT",
   "files": [
     "dist",
+    "types",
     "src"
   ],
   "repository": {
@@ -24,7 +25,7 @@
     "types": "rimraf types && tsc --declaration --emitDeclarationOnly --outDir types",
     "build": "rimraf dist && tsc",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
-    "prepublishOnly": "pnpm run build && pnpm run types && pnpm run -r build"
+    "prepublishOnly": "pnpm run build && pnpm run types"
   },
   "dependencies": {
     "browser-sync": "^2.27.7",

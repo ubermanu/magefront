@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-terser",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -22,13 +22,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
     "terser": "^5.15.0"
-  },
-  "peerDependencies": {
-    "magefront": "workspace:*"
   }
 }

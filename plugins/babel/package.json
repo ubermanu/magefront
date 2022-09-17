@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-babel",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -22,7 +22,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@babel/core": "^7.17.5",
@@ -30,8 +31,5 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.19"
-  },
-  "peerDependencies": {
-    "magefront": "workspace:*"
   }
 }

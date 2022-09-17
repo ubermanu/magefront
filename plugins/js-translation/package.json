@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-js-translation",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -22,12 +22,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "csv-parse": "^5.3.0"
-  },
-  "peerDependencies": {
-    "magefront": "workspace:*"
   }
 }
