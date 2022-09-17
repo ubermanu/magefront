@@ -15,3 +15,7 @@
   * [React](plugins/react.md)
   * [Terser](plugins/terser.md)
   * [Typescript](plugins/typescript.md)
+
+<br>
+
+[![](https://img.shields.io/npm/v/magefront)](https://www.npmjs.com/package/magefront)
