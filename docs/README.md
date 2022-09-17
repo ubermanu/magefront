@@ -1,4 +1,4 @@
-![Magefront](images/magefront-logo-title.svg)
+# Getting Started
 
 The main goal of **magefront** is to provide a way of developing Magento 2 themes in a Node.js environment.
 
