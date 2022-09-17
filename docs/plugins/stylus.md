@@ -1,4 +1,4 @@
-# STYLUS
+# Stylus
 
 Transforms STYL files into CSS files.
 
