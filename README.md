@@ -10,7 +10,7 @@
 
 For example, it can be `less`, `sass`, `stylus`, or whatever you want! 🚀
 
-You can see a list of the available plugins [here](plugins).
+You can see a list of the available plugins [here](https://ubermanu.github.io/magefront/#/plugins).
 
 ## Install
 
