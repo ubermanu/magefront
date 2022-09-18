@@ -26,7 +26,7 @@ export default [
     input: 'src/cli.ts',
     output: {
       file: 'dist/bin/magefront.js',
-      format: 'cjs',
+      format: 'es',
       banner: '#!/usr/bin/env node',
       sourcemap: false
     },
