@@ -10,9 +10,7 @@
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "license": "MIT",
   "files": [
-    "dist",
-    "types",
-    "src"
+    "dist"
   ],
   "repository": {
     "type": "git",

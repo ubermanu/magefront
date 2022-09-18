@@ -18,7 +18,6 @@
   "module": "dist/plugin.js",
   "types": "dist/plugin.d.ts",
   "files": [
-    "plugin.ts",
     "dist"
   ],
   "scripts": {
