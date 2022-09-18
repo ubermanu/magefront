@@ -2,6 +2,8 @@
 
 Compress CSS files.
 
+This plugin is based on [magefront-plugin-postcss](plugins/postcss.md).
+
 ## Install
 
     npm i magefront-plugin-cssnano postcss cssnano cssnano-preset-default --save-dev
