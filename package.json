@@ -37,17 +37,6 @@
     "magefront-plugin-requirejs-config": "workspace:*",
     "winston": "^3.8.2"
   },
-  "optionalDependencies": {
-    "magefront-plugin-babel": "workspace:*",
-    "magefront-plugin-cssnano": "workspace:*",
-    "magefront-plugin-postcss": "workspace:*",
-    "magefront-plugin-react": "workspace:*",
-    "magefront-plugin-sass": "workspace:*",
-    "magefront-plugin-stylus": "workspace:*",
-    "magefront-plugin-svelte": "workspace:*",
-    "magefront-plugin-terser": "workspace:*",
-    "magefront-plugin-typescript": "workspace:*"
-  },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.5.0",
     "@types/browser-sync": "^2.26.3",
