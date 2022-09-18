@@ -35,5 +35,11 @@
   "peerDependencies": {
     "cssnano-preset-default": "^5.2.12",
     "postcss": "^8.4.16"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
   }
 }

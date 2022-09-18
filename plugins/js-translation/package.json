@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-js-translation",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -26,5 +26,11 @@
   },
   "dependencies": {
     "csv-parse": "^5.3.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
   }
 }

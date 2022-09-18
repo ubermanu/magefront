@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-less",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -30,5 +30,11 @@
   },
   "devDependencies": {
     "@types/less": "^3.0.3"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
   }
 }

@@ -33,5 +33,11 @@
   },
   "peerDependencies": {
     "@babel/core": "^7.17.5"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
   }
 }

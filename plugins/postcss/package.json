@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-postcss",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -32,5 +32,11 @@
   },
   "peerDependencies": {
     "postcss": "^8.4.16"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
   }
 }

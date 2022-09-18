@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.20.3",
+  "version": "0.21.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -72,5 +72,12 @@
   },
   "bin": {
     "magefront": "dist/bin/magefront.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/magefront.mjs",
+      "require": "./dist/magefront.cjs"
+    },
+    "./package.json": "./package.json"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-react",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -36,5 +36,11 @@
     "@babel/core": "^7.17.5",
     "@babel/preset-react": "^7.18.6",
     "react": "^18.2.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
   }
 }
