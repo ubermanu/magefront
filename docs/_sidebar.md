@@ -11,6 +11,8 @@
   * [Babel](plugins/babel.md)
   * [SASS](plugins/sass.md)
   * [Stylus](plugins/stylus.md)
+  * [PostCSS](plugins/postcss.md)
+  * [CSSNano](plugins/cssnano.md)
   * [Svelte](plugins/svelte.md)
   * [React](plugins/react.md)
   * [Terser](plugins/terser.md)

@@ -9,6 +9,8 @@ Here is a list of available plugins:
 - [magefront-plugin-less](plugins/less.md) 💡
 - [magefront-plugin-sass](plugins/sass.md)
 - [magefront-plugin-stylus](plugins/stylus.md)
+- [magefront-plugin-postcss](plugins/postcss.md)
+- [magefront-plugin-cssnano](plugins/cssnano.md)
 
 ## JS
 
