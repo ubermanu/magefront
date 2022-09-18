@@ -21,5 +21,4 @@ jobs:
           version: 7.11.0
       - run: pnpm i
       - run: pnpm build
-      - run: pnpm types
       - run: pnpm -r build
