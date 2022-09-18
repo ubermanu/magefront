@@ -2,11 +2,13 @@
 
 Transforms *.jsx files into *.js files using [Babel](https://babeljs.io/).
 
-This plugin is based on [magefront-plugin-babel](babel.md).
+This plugin is based on [magefront-plugin-babel](plugins/babel.md).
 
 ## Install
 
-    npm i magefront-plugin-react
+    npm i magefront-plugin-react react @babel/core @babel/preset-react --save-dev
+
+> `react`, `@babel/core` and `@babel/preset-react` are peer dependencies of this plugin.
 
 ## Usage
 
