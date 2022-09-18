@@ -8,7 +8,7 @@ This plugin is based on [magefront-plugin-babel](plugins/babel.md).
 
     npm i magefront-plugin-react react @babel/core @babel/preset-react --save-dev
 
-> `react`, `@babel/core` and `@babel/preset-react` are peer dependencies of this plugin.
+> 💡 `react`, `@babel/core` and `@babel/preset-react` are peer dependencies and must be installed.
 
 ## Usage
 

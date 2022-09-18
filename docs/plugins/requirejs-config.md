@@ -18,7 +18,7 @@ export default {
 }
 ```
 
-> 💡 This plugin is enabled by default
+> 💡 This plugin is enabled by default if no configuration is defined.
 
 ## Note
 

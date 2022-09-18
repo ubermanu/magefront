@@ -6,7 +6,7 @@ Transpile JS files with [Babel](https://babeljs.io/).
 
     npm i magefront-plugin-babel @babel/core --save-dev
 
-> `@babel/core` is a peer dependency of this plugin.
+> 💡 `@babel/core` is a peer dependency and must be installed.
 
 ## Usage
 

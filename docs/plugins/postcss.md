@@ -6,7 +6,7 @@ PostCSS plugin for **magefront**.
 
     npm i magefront-plugin-postcss postcss --save-dev
 
-> `postcss` is a peer dependency of this plugin.
+> 💡 `postcss` is a peer dependency and must be installed.
 
 ## Usage
 
