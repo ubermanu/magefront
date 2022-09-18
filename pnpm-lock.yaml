@@ -165,6 +165,7 @@ importers:
       svelte: ^3.50.0
     dependencies:
       fast-glob: 3.2.11
+    devDependencies:
       svelte: 3.50.0
 
   plugins/terser:
@@ -4509,7 +4510,7 @@ packages:
   /svelte/3.50.0:
     resolution: {integrity: sha512-zXeOUDS7+85i+RxLN+0iB6PMbGH7OhEgjETcD1fD8ZrhuhNFxYxYEHU41xuhkHIulJavcu3PKbPyuCrBxdxskQ==}
     engines: {node: '>= 8'}
-    dev: false
+    dev: true
 
   /svgo/2.8.0:
     resolution: {integrity: sha512-+N/Q9kV1+F+UeWYoSiULYo4xYSDQlTgb+ayMobAXPwMnLvop7oxKMo9OzIrX5x3eS4L4f2UHhc9axXwY8DpChg==}
