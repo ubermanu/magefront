@@ -11,7 +11,7 @@
     "experimentalDecorators": true,
     "noUnusedLocals": true,
     "skipLibCheck": true,
-    "sourceMap": true,
+    "inlineSourceMap": true,
     "moduleResolution": "node",
     "outDir": "dist"
   },
