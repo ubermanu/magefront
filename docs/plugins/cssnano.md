@@ -4,7 +4,9 @@ Compress CSS files.
 
 ## Install
 
-    npm i magefront-plugin-cssnano
+    npm i magefront-plugin-cssnano postcss cssnano cssnano-preset-default --save-dev
+
+> `postcss`, `cssnano` and `cssnano-preset-default` are peer dependencies of this plugin.
 
 ## Usage
 
