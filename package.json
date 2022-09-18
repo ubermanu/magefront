@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "type": "module",
   "keywords": [
     "magefront",
@@ -32,9 +32,9 @@
     "commander": "^8.3.0",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
-    "magefront-plugin-js-translation": "workspace:*",
-    "magefront-plugin-less": "workspace:*",
-    "magefront-plugin-requirejs-config": "workspace:*",
+    "magefront-plugin-js-translation": "workspace:~",
+    "magefront-plugin-less": "workspace:~",
+    "magefront-plugin-requirejs-config": "workspace:~",
     "winston": "^3.8.2"
   },
   "devDependencies": {
