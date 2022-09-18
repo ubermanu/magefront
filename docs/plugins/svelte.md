@@ -4,7 +4,7 @@ Compile *.svelte files into JS files.
 
 ## Install
 
-    npm i magefront-plugin-svelte
+    npm i magefront-plugin-svelte --save-dev
 
 ## Usage
 

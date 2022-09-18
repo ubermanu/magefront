@@ -4,7 +4,7 @@ Merge all the `requirejs-config.js` files into one.
 
 ## Install
 
-    npm i magefront-plugin-requirejs-config
+    npm i magefront-plugin-requirejs-config --save-dev
 
 ## Usage
 
