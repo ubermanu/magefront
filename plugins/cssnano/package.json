@@ -1,0 +1,40 @@
+{
+  "name": "magefront-plugin-cssnano",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/cssnano"
+  },
+  "module": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "files": [
+    "plugin.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "cssnano": "^5.1.13",
+    "magefront-plugin-postcss": "workspace:*"
+  },
+  "devDependencies": {
+    "cssnano-preset-default": "^5.2.12",
+    "postcss": "^8.4.16"
+  },
+  "peerDependencies": {
+    "cssnano-preset-default": "^5.2.12",
+    "postcss": "^8.4.16"
+  }
+}

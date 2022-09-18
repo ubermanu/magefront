@@ -41,6 +41,8 @@
   },
   "optionalDependencies": {
     "magefront-plugin-babel": "workspace:*",
+    "magefront-plugin-cssnano": "workspace:*",
+    "magefront-plugin-postcss": "workspace:*",
     "magefront-plugin-react": "workspace:*",
     "magefront-plugin-sass": "workspace:*",
     "magefront-plugin-stylus": "workspace:*",

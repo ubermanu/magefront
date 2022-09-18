@@ -1,0 +1,37 @@
+{
+  "name": "magefront-plugin-postcss",
+  "version": "0.1.0",
+  "type": "module",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/postcss"
+  },
+  "module": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "files": [
+    "plugin.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.11"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.16"
+  },
+  "peerDependencies": {
+    "postcss": "^8.4.16"
+  }
+}
