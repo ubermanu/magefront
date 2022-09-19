@@ -10,7 +10,7 @@ export interface Options {
 }
 
 /**
- * Transform Stylus files to CSS.
+ * Optimize SVG files.
  *
  * @param {Options} options
  * @returns {function(*): Promise<Awaited<*>[]>}
