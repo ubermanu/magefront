@@ -63,3 +63,27 @@ export default {
     ]
 }
 ```
+
+## Magento imports
+
+A preprocessor is automatically shipped with this plugin to handle the `@magento_import` directive.
+
+You can find this kind of imports into the `styles-m.less` file, for example:
+
+```less
+//@magento_import 'source/_module.less';
+```
+
+This will be transformed into:
+
+```css
+/* ... */
+@import '../../Magento_AdvancedSearch/css/source/_module.less';
+@import '../../Magento_Bundle/css/source/_module.less';
+@import '../../Magento_Captcha/css/source/_module.less';
+@import '../../Magento_Catalog/css/source/_module.less';
+@import '../../Magento_CatalogSearch/css/source/_module.less';
+/* ... */
+```
+
+> The order of the imports is related to the one from your `config.php` file.
