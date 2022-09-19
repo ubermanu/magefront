@@ -19,7 +19,7 @@ export default (options: Options = {}) => {
     plugins: [
       cssnano({
         preset: preset ?? 'default',
-        plugins: plugins ?? []
+        plugins
       })
     ]
   })
