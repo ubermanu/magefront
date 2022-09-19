@@ -29,3 +29,7 @@ These plugins are specific to **Magento 2**.
 
 - [magefront-plugin-requirejs-config](plugins/requirejs-config.md) 💡
 - [magefront-plugin-js-translation](plugins/js-translation.md) 💡
+
+## Image
+
+- [magefront-plugin-svgo](plugins/svgo.md)

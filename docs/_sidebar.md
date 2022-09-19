@@ -17,6 +17,7 @@
   * [React](plugins/react.md)
   * [Terser](plugins/terser.md)
   * [Typescript](plugins/typescript.md)
+  * [SVGO](plugins/svgo.md)
 
 <br>
 
