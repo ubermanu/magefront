@@ -43,6 +43,10 @@ Enable sourcemaps. Default is `false`.
 
 A list of plugins to use. See [less docs](http://lesscss.org/usage/#plugins) for more info.<br>
 
+### `magentoImport`
+
+Enable the [magento import](#magento-imports) feature. Default is `true`.
+
 ### `compilerOptions`
 
 Options to pass to the less compiler. See [less docs](http://lesscss.org/usage/#programmatic-usage) for more info.

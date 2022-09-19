@@ -2,13 +2,14 @@ import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
 import less27 from 'less'
-import magentoImport from './lib/magento-import-preprocessor'
+import magentoImportPreprocessor from './lib/magento-import-preprocessor'
 
 export interface Options {
   src?: string | string[]
   ignore?: Pattern[]
   sourcemaps?: boolean
   compiler?: any
+  magentoImport?: boolean
   plugins?: any[]
   compilerOptions?: any
 }
@@ -20,7 +21,7 @@ export interface Options {
  * @returns {import('magefront').Plugin}
  */
 export default (options: Options = {}) => {
-  const { src, ignore, compiler, sourcemaps, compilerOptions } = options
+  const { src, ignore, compiler, sourcemaps, compilerOptions, magentoImport } = options
   const less = compiler ?? less27
   const plugins = options.plugins ?? []
 
@@ -28,10 +29,11 @@ export default (options: Options = {}) => {
   return async (themeConfig) => {
     // Add the default magento import plugin
     // Necessary to resolve the "//@magento_import" statements in the core styles
-    plugins.unshift(magentoImport(themeConfig.modules))
+    if (magentoImport) {
+      plugins.unshift(magentoImportPreprocessor(themeConfig.modules))
+    }
 
-    // @ts-ignore
-    const files = await glob(src ?? '**/!(_)*.less', { ignore: ignore ?? [], cwd: themeConfig.src })
+    const files = await glob(src ?? '**/!(_)*.less', { ignore, cwd: themeConfig.src })
 
     return Promise.all(
       files.map(async (file: string) => {
