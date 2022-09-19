@@ -28,15 +28,11 @@ The `magefront.config.js` file should be located in the root directory of your p
 
 ```js
 // magefront.config.js
-import less from 'magefront-plugin-less'
-import requireJsConfig from 'magefront-plugin-requirejs-config'
-import jsTranslation from 'magefront-plugin-js-translation'
-
 export default {
     plugins: [
-        less(),
-        requireJsConfig(),
-        jsTranslation()
+        'magefront-plugin-less',
+        'magefront-plugin-requirejs-config',
+        'magefront-plugin-js-translation'
     ]
 }
 ```
