@@ -21,9 +21,10 @@ export interface Options {
  * @returns {import('magefront').Plugin}
  */
 export default (options: Options = {}) => {
-  const { src, ignore, compiler, sourcemaps, compilerOptions, magentoImport } = options
+  const { src, ignore, compiler, sourcemaps, compilerOptions } = options
   const less = compiler ?? less27
   const plugins = options.plugins ?? []
+  const magentoImport = options.magentoImport ?? true
 
   // @ts-ignore
   return async (themeConfig) => {
