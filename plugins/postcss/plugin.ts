@@ -26,13 +26,14 @@ export default (options: Options = {}) => {
         const fileContent = await fs.promises.readFile(filePath)
         const compiler = await postcss(plugins ?? [])
 
-        compiler.process(fileContent, { from: filePath, to: filePath }).then((result) => {
-          result.warnings().forEach((warn) => {
-            console.warn(warn.toString())
-          })
+        const result = await compiler.process(fileContent, { from: filePath, to: filePath })
 
-          fs.promises.writeFile(filePath, result.css)
+        // TODO: Forward to logger
+        result.warnings().forEach((warn) => {
+          console.warn(warn.toString())
         })
+
+        return fs.promises.writeFile(filePath, result.css)
       })
     )
   }
