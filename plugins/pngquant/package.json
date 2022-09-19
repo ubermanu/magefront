@@ -1,0 +1,38 @@
+{
+  "name": "magefront-plugin-pngquant",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/pngquant"
+  },
+  "module": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "exit 0",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "fast-glob": "^3.2.11",
+    "pngquant": "^4.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
+  }
+}
