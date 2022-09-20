@@ -33,3 +33,7 @@ These plugins are specific to **Magento 2**.
 ## Image
 
 - [magefront-plugin-svgo](plugins/svgo.md)
+
+## Misc
+
+- [magefront-plugin-concat](plugins/concat.md)
