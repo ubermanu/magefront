@@ -5,9 +5,7 @@ Compile *.svelte files into JS files.
 ## Install
 
 
-    npm i magefront-plugin-svelte svelte --save-dev
-
-> 💡 `svelte` is a peer dependency and must be installed.
+    npm i magefront-plugin-svelte --save-dev
 
 ## Usage
 

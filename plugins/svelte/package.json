@@ -25,12 +25,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "fast-glob": "^3.2.11"
-  },
-  "devDependencies": {
-    "svelte": "^3.50.0"
-  },
-  "peerDependencies": {
+    "fast-glob": "^3.2.11",
     "svelte": "^3.50.0"
   },
   "exports": {
