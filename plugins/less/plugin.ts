@@ -72,3 +72,5 @@ export default (options: Options = {}) => {
     )
   }
 }
+
+export { magentoImportPreprocessor }
