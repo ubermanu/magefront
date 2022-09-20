@@ -7,11 +7,15 @@ import { rootPath, tempPath } from './env'
 
 /**
  * The configuration filename.
- * TODO: Add as an option '-c' to specify the config file
- *
  * @type {string}
  */
 export let configFilename = 'magefront.config.{js,mjs,cjs}'
+
+/**
+ * If set to true, the configuration file will be loaded.
+ * TODO: Implement the `-c` option in the CLI.
+ */
+export let useConfigFile = true
 
 /**
  * The configuration object.
@@ -24,51 +28,65 @@ export interface ThemeConfig {
 }
 
 /**
+ * Get the `ThemeConfig` list from the configuration file.
+ *
+ * @return {Promise<ThemeConfig[]>}
+ */
+export const getConfigFromFile = async () => {
+  const files = await glob(configFilename, { cwd: rootPath })
+  let fileConfig = []
+
+  if (files.length > 0) {
+    let { default: config } = await import(path.join(rootPath, files[0]))
+    fileConfig = config
+  }
+
+  // Add support for array into the config file
+  if (!Array.isArray(fileConfig)) {
+    fileConfig = [fileConfig]
+  }
+
+  return fileConfig
+}
+
+/**
  * Get the configuration for the given theme name.
  * The theme config is passed to the plugins.
- * TODO: Rename to getThemeConfig
  *
  * @param {string} themeName
  * @return {Promise<ThemeConfig>}
  */
-export const getConfigForTheme = async (themeName: string) => {
+export const getThemeConfig = async (themeName: string) => {
   const theme: MagentoTheme | undefined = getThemes().find((t: MagentoTheme) => t.name === themeName)
 
   if (!theme) {
     throw new Error(`Theme '${themeName}' not found.`)
   }
 
-  const files = await glob(configFilename, { cwd: rootPath })
-  let customConfig = {}
-
-  if (files.length) {
-    let { default: config } = await import(path.join(rootPath, files[0]))
-
-    // Add support for array into the config file
-    if (!Array.isArray(config)) {
-      config = [config]
-    }
-
-    // Look for the theme name in the array of objects
-    customConfig = config.filter((entry: ThemeConfig) => entry.theme === themeName).shift() || {}
-  }
-
-  const defaultConfig = {
+  let themeConfig = {
     theme: themeName,
     plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
     src: path.join(rootPath, tempPath, theme.dest),
     dest: path.join(rootPath, theme.dest)
   }
 
-  const finalConfig = Object.assign({}, defaultConfig, customConfig)
+  // Override the themeConfig with the one from the
+  // configuration file, if the flag is set
+  if (useConfigFile) {
+    const fileConfig = await getConfigFromFile()
+    const itemConfig = fileConfig.find((config) => !config.theme || config.theme === themeName)
+    if (itemConfig) {
+      themeConfig = Object.assign({}, themeConfig, itemConfig)
+    }
+  }
 
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
-  await Promise.all(finalConfig.plugins.map(transformPlugin)).then((plugins) => {
-    finalConfig.plugins = plugins
+  await Promise.all(themeConfig.plugins.map(transformPlugin)).then((plugins) => {
+    themeConfig.plugins = plugins
   })
 
-  return finalConfig
+  return themeConfig
 }
 
 /**
@@ -76,7 +94,7 @@ export const getConfigForTheme = async (themeName: string) => {
  * If passed a string, import the plugin and return the default export.
  *
  * @param {any} plugin
- * @return {function}
+ * @return {Promise<Plugin>}
  */
 const transformPlugin = async (plugin: any) => {
   if (typeof plugin === 'function') {

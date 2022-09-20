@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-import { getConfigForTheme } from '../config'
+import { getThemeConfig } from '../config'
 
 /**
  * Clean up all the generated files.
@@ -9,7 +9,7 @@ import { getConfigForTheme } from '../config'
  * @returns {Promise<void>}
  */
 export const clean = async (themeName: string) => {
-  const themeConfig = await getConfigForTheme(themeName)
+  const themeConfig = await getThemeConfig(themeName)
 
   // Cleanup the `temp` folder
   if (fs.existsSync(themeConfig.src)) {

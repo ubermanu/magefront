@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import glob from 'fast-glob'
 
-import { getConfigForTheme } from '../config'
+import { getThemeConfig } from '../config'
 
 /**
  * Deploy the built theme files from the temp directory to the `pub/static` dir.
@@ -13,7 +13,7 @@ import { getConfigForTheme } from '../config'
  * @returns {Promise<Awaited<unknown>[]>}
  */
 export const deploy = async (themeName: string, locale: string = 'en_US') => {
-  const themeConfig = await getConfigForTheme(themeName)
+  const themeConfig = await getThemeConfig(themeName)
 
   // Append the local to the destination dir
   const dest = path.join(themeConfig.dest, locale)
