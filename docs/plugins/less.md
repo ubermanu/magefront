@@ -82,11 +82,11 @@ This will be transformed into:
 
 ```css
 /* ... */
-@import '../../Magento_AdvancedSearch/css/source/_module.less';
-@import '../../Magento_Bundle/css/source/_module.less';
-@import '../../Magento_Captcha/css/source/_module.less';
-@import '../../Magento_Catalog/css/source/_module.less';
-@import '../../Magento_CatalogSearch/css/source/_module.less';
+@import '../Magento_AdvancedSearch/css/source/_module.less';
+@import '../Magento_Bundle/css/source/_module.less';
+@import '../Magento_Captcha/css/source/_module.less';
+@import '../Magento_Catalog/css/source/_module.less';
+@import '../Magento_CatalogSearch/css/source/_module.less';
 /* ... */
 ```
 
