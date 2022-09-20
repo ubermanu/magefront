@@ -1,0 +1,34 @@
+{
+  "name": "magefront-plugin-js-bundle",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "plugins/js-bundle"
+  },
+  "module": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "pnpm run build"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.js"
+    },
+    "./package.json": "./package.json"
+  }
+}
