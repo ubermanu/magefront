@@ -1,5 +1,5 @@
 {
-  "name": "magefront-plugin-js-concat",
+  "name": "magefront-plugin-concat",
   "version": "0.1.0",
   "private": true,
   "type": "module",
