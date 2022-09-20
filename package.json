@@ -60,7 +60,7 @@
     "testEnvironment": "node",
     "transform": {},
     "moduleNameMapper": {
-      "^magefront-plugin-less$": "<rootDir>/plugins/less/plugin.ts",
+      "^magefront-plugin-less$": "<rootDir>/plugins/less/src/plugin.ts",
       "^magefront-plugin-requirejs-config$": "<rootDir>/plugins/requirejs-config/plugin.ts",
       "^magefront-plugin-js-translation$": "<rootDir>/plugins/js-translation/plugin.ts"
     },

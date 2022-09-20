@@ -1,4 +1,4 @@
-import { preProcessor } from '../lib/magento-import-preprocessor'
+import { preProcessor } from '../src/magento-import-preprocessor'
 
 test('Replace the `@magento_import` statement with the correct one', () => {
   const pp = new preProcessor(['Magento_Catalog'])

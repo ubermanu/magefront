@@ -1,7 +1,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-  entries: ['plugin'],
+  entries: ['src/plugin'],
   externals: ['fast-glob', 'path', 'less', 'fs'],
   clean: true,
   declaration: true,

@@ -2,7 +2,7 @@ import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
 import less27 from 'less'
-import magentoImportPreprocessor from './lib/magento-import-preprocessor'
+import magentoImportPreprocessor from './magento-import-preprocessor'
 
 export interface Options {
   src?: string | string[]
