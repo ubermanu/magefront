@@ -1,0 +1,43 @@
+{
+  "name": "magefront-preset-default",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "preset"
+  ],
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "presets/default"
+  },
+  "module": "dist/preset.js",
+  "types": "dist/preset.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts":{
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "magefront-plugin-js-translation": "workspace:~",
+    "magefront-plugin-less": "workspace:~",
+    "magefront-plugin-requirejs-config": "workspace:~"
+  },
+  "optionalDependencies": {
+    "magefront-plugin-cssnano": "workspace:~",
+    "magefront-plugin-terser": "workspace:~"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/preset.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

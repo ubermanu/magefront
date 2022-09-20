@@ -192,6 +192,21 @@ importers:
       fast-glob: 3.2.11
       typescript: 4.8.2
 
+  presets/default:
+    specifiers:
+      magefront-plugin-cssnano: workspace:~
+      magefront-plugin-js-translation: workspace:~
+      magefront-plugin-less: workspace:~
+      magefront-plugin-requirejs-config: workspace:~
+      magefront-plugin-terser: workspace:~
+    dependencies:
+      magefront-plugin-js-translation: link:../../plugins/js-translation
+      magefront-plugin-less: link:../../plugins/less
+      magefront-plugin-requirejs-config: link:../../plugins/requirejs-config
+    optionalDependencies:
+      magefront-plugin-cssnano: link:../../plugins/cssnano
+      magefront-plugin-terser: link:../../plugins/terser
+
 packages:
 
   /@adobe/css-tools/4.0.1:
