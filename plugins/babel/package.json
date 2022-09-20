@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-babel",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "type": "module",
   "keywords": [
     "magefront",
