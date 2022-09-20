@@ -1,10 +1,12 @@
 /**
  * The original options from the command line.
- * TODO: Implement mergeCss and mergeJs options.
  */
 export interface Options {
   minifyJs?: boolean
   minifyCss?: boolean
+  mergeCss?: boolean
+  mergeJs?: boolean
+  bundleJs?: boolean
 }
 
 /**
@@ -15,7 +17,7 @@ export interface Options {
  * @return {import('magefront').PresetThemeConfig}
  */
 export default (options: Options = {}) => {
-  const { minifyJs, minifyCss } = options
+  const { minifyJs, minifyCss, mergeCss, mergeJs, bundleJs } = options
 
   const plugins = [
     // prettier-ignore
@@ -30,6 +32,18 @@ export default (options: Options = {}) => {
 
   if (minifyCss) {
     plugins.push('magefront-plugin-cssnano')
+  }
+
+  if (mergeCss) {
+    console.warn('The mergeCss option is not implemented yet.')
+  }
+
+  if (mergeJs) {
+    console.warn('The mergeJs option is not implemented yet.')
+  }
+
+  if (bundleJs) {
+    console.warn('The bundleJs option is not implemented yet.')
   }
 
   return { plugins }
