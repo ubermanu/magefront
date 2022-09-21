@@ -1,7 +1,7 @@
-// @ts-nocheck
 import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
+// @ts-ignore
 import pngquant from 'pngquant'
 
 export interface Options {

@@ -112,10 +112,10 @@ importers:
   plugins/pngquant:
     specifiers:
       fast-glob: ^3.2.11
-      pngquant: ^4.0.0
+      pngquant: ^4.1.0
     dependencies:
       fast-glob: 3.2.11
-      pngquant: 4.0.0
+      pngquant: 4.1.0
 
   plugins/postcss:
     specifiers:
@@ -5449,8 +5449,8 @@ packages:
     dev: false
     optional: true
 
-  /pngquant/4.0.0:
-    resolution: {integrity: sha512-RFAxCNTV6QNTKFSrxyExjYWtAB8AqoxP8FAdprXU8V+aYAaHb3scVCknpujYf2etT1RaX6wgCWgvWotm2QSarw==}
+  /pngquant/4.1.0:
+    resolution: {integrity: sha512-eHtmDimStLYYKYWIZKYKkOEkEhC5jo9P+JTeLjnK4u4HbPSF+1hVvlP3ZOe5r44PB14HhvK8qMW4Z6a2xzUSLw==}
     dependencies:
       memoizeasync: 1.1.0
       which: 2.0.2

@@ -22,12 +22,12 @@
     "dist"
   ],
   "scripts": {
-    "build": "exit 0",
+    "build": "rimraf dist && tsc",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
-    "pngquant": "^4.0.0"
+    "pngquant": "^4.1.0"
   },
   "exports": {
     ".": {
