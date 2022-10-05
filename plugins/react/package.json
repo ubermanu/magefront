@@ -15,7 +15,7 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/react"
   },
-  "main": "dist/plugin.mjs",
+  "main": "dist/plugin.cjs",
   "module": "dist/plugin.mjs",
   "types": "dist/plugin.d.ts",
   "files": [
@@ -31,7 +31,8 @@
     "react": ">=18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5"
+    "@babel/core": "^7.17.5",
+    "@types/babel__core": "^7.1.19"
   },
   "exports": {
     ".": {
