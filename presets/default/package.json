@@ -22,7 +22,7 @@
     "dist"
   ],
   "scripts":{
-    "build": "rimraf dist && tsc",
+    "build": "unbuild",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
@@ -37,7 +37,6 @@
   "exports": {
     ".": {
       "import": "./dist/preset.js"
-    },
-    "./package.json": "./package.json"
+    }
   }
 }

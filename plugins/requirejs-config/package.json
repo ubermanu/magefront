@@ -16,13 +16,14 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "plugins/requirejs-config"
   },
-  "module": "dist/plugin.js",
+  "main": "dist/plugin.cjs",
+  "module": "dist/plugin.mjs",
   "types": "dist/plugin.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "unbuild",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
@@ -30,8 +31,8 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/plugin.js"
-    },
-    "./package.json": "./package.json"
+      "import": "./dist/plugin.mjs",
+      "require": "./dist/plugin.cjs"
+    }
   }
 }

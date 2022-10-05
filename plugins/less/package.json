@@ -36,8 +36,8 @@
     ".": {
       "types": "./dist/plugin.d.ts",
       "require": "./dist/plugin.cjs",
-      "import": "./dist/plugin.mjs"
-    },
-    "./package.json": "./package.json"
+      "import": "./dist/plugin.mjs",
+      "require": "./dist/plugin.cjs"
+    }
   }
 }

@@ -1,11 +1,6 @@
 {
   "extends": "../../shared/tsconfig.base.json",
-  "compilerOptions": {
-    "declaration": true,
-    "baseUrl": ".",
-    "outDir": "dist"
-  },
   "include": [
-    "**/*.ts"
+    "src/**/*.ts",
   ]
 }
