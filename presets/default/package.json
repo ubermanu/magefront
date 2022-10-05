@@ -16,7 +16,8 @@
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "presets/default"
   },
-  "module": "dist/preset.js",
+  "main": "dist/preset.cjs",
+  "module": "dist/preset.mjs",
   "types": "dist/preset.d.ts",
   "files": [
     "dist"
@@ -36,7 +37,8 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/preset.js"
+      "import": "./dist/preset.mjs",
+      "require": "./dist/preset.cjs"
     }
   }
 }
