@@ -36,7 +36,6 @@
     ".": {
       "import": "./dist/plugin.mjs",
       "require": "./dist/plugin.cjs"
-    },
-    "./package.json": "./package.json"
+    }
   }
 }
