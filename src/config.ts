@@ -24,7 +24,7 @@ export interface ThemeConfig {
   theme: string
   dest: string
   src: string
-  plugins: Plugin[]
+  plugins: Plugin[] | string[]
 }
 
 /**
@@ -63,7 +63,7 @@ export const getThemeConfig = async (themeName: string) => {
     throw new Error(`Theme '${themeName}' not found.`)
   }
 
-  let themeConfig = {
+  let themeConfig: ThemeConfig = {
     theme: themeName,
     plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
     src: path.join(rootPath, tempPath, theme.dest),
@@ -82,9 +82,7 @@ export const getThemeConfig = async (themeName: string) => {
 
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
-  await Promise.all(themeConfig.plugins.map(transformPlugin)).then((plugins) => {
-    themeConfig.plugins = plugins
-  })
+  themeConfig.plugins = await Promise.all(themeConfig.plugins.map(transformPluginDefinition))
 
   return themeConfig
 }
@@ -93,24 +91,37 @@ export const getThemeConfig = async (themeName: string) => {
  * Transform the plugin to a function if it is not already.
  * If passed a string, import the plugin and return the default export.
  *
- * @param {any} plugin
+ * @param {any} definition
  * @return {Promise<Plugin>}
  */
-const transformPlugin = async (plugin: any) => {
-  if (typeof plugin === 'function') {
-    return plugin
+async function transformPluginDefinition(definition: any): Promise<Plugin> {
+  if (typeof definition === 'function') {
+    return definition
   }
 
-  if (typeof plugin === 'string') {
-    const { default: pluginModule } = await import(plugin)
+  if (typeof definition === 'string') {
+    const { default: pluginModule } = await import(resolveModuleNameFromPluginStr(definition))
     return pluginModule()
   }
 
-  if (Array.isArray(plugin)) {
-    const [pluginName, options] = plugin
-    const { default: pluginModule } = await import(pluginName)
+  if (Array.isArray(definition)) {
+    const [pluginName, options] = definition
+    const { default: pluginModule } = await import(resolveModuleNameFromPluginStr(pluginName))
     return pluginModule(options)
   }
 
-  throw new Error(`Invalid plugin type: ${typeof plugin}`)
+  throw new Error(`Invalid plugin type: ${typeof definition}`)
+}
+
+/**
+ * Return the full module name from the given plugin string.
+ *
+ * @param {string} str
+ * @return {string}
+ */
+function resolveModuleNameFromPluginStr(str: string): string {
+  if (str.startsWith('magefront-plugin-')) {
+    return str
+  }
+  return `magefront-plugin-${str}`
 }
