@@ -1,5 +1,6 @@
 import path from 'path'
 import fs from 'fs'
+import memo from 'memoizee'
 
 import { rootPath } from '../env'
 
@@ -16,7 +17,7 @@ export interface ComposerPackage {
  *
  * @return {ComposerPackage[]}
  */
-export const getPackages = () => {
+export const getPackages = memo(() => {
   const composerLock = path.join(rootPath, 'composer.lock')
 
   if (!fs.existsSync(composerLock)) {
@@ -27,7 +28,7 @@ export const getPackages = () => {
   const lock = JSON.parse(fs.readFileSync(composerLock, 'utf8'))
 
   return lock.packages ?? []
-}
+})
 
 /**
  * Return a list of registration files for the given composer package config.

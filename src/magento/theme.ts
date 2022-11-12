@@ -1,6 +1,7 @@
 import glob from 'fast-glob'
 import path from 'path'
 import fs from 'fs'
+import memo from 'memoizee'
 
 import { ComposerPackage, getPackages, getRegistrations } from './composer'
 import { MagentoModule } from './module'
@@ -17,7 +18,7 @@ export interface MagentoTheme extends MagentoModule {
  *
  * @return MagentoTheme[]
  */
-export const getThemes = () => {
+export const getThemes = memo(() => {
   const list: { [name: string]: MagentoTheme } = {}
 
   // 1. Get the list of themes from the `app/design/` directory.
@@ -58,7 +59,7 @@ export const getThemes = () => {
   })
 
   return Object.values(list)
-}
+})
 
 /**
  * Get the parent of a theme from its `theme.xml` file.

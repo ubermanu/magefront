@@ -1,6 +1,7 @@
 import fs from 'fs'
 import glob from 'fast-glob'
 import path from 'path'
+import memo from 'memoizee'
 
 import { ComposerPackage, getPackages, getRegistrations } from './composer'
 import { logger, rootPath } from '../env'
@@ -17,7 +18,7 @@ export interface MagentoModule {
  *
  * @return MagentoModule[]
  */
-export const getModules = () => {
+export const getModules = memo(() => {
   const list: { [name: string]: MagentoModule } = {}
   const config = fs.readFileSync(path.join(rootPath, '/app/etc/config.php')).toString()
 
@@ -75,7 +76,7 @@ export const getModules = () => {
   })
 
   return Object.values(list)
-}
+})
 
 /**
  * Get the name of a module from its `etc/module.xml` file.

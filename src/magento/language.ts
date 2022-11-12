@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import memo from 'memoizee'
 
 import { ComposerPackage, getPackages, getRegistrations } from './composer'
 import { MagentoModule } from './module'
@@ -14,7 +15,7 @@ export interface MagentoLanguage extends MagentoModule {
  *
  * @return MagentoLanguage[]
  */
-export const getLanguages = () => {
+export const getLanguages = memo(() => {
   const list: { [name: string]: MagentoLanguage } = {}
 
   // Get the list of languages in the vendor directory.
@@ -37,7 +38,7 @@ export const getLanguages = () => {
   })
 
   return Object.values(list)
-}
+})
 
 /**
  * Get the locale code of a language pkg from its `language.xml` file.
