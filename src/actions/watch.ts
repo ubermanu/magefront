@@ -8,8 +8,9 @@ import { deploy } from './deploy'
 import { getModules } from '../magento/module'
 import { getThemes } from '../magento/theme'
 import { logger, rootPath } from '../env'
+import { instance } from './browser-sync'
 
-export const watch = async (themeName: string) => {
+export const watch = async (themeName: string, locale: string) => {
   const watcherConfig = { ignoreInitial: true }
   const theme = getThemes().find((theme) => theme.name === themeName)
   const modules = getModules().filter((module) => module.src && module.enabled)
@@ -27,13 +28,20 @@ export const watch = async (themeName: string) => {
   // Initialize watcher
   const srcWatcher = chokidar.watch(themeSrc, watcherConfig)
 
+  let isBuilding = false
+
   // When files are created, updated or deleted, rebuild the theme
   const rebuild = async () => {
+    if (isBuilding) {
+      return
+    }
+    isBuilding = true
     logger.info('Rebuilding theme...')
-    await inheritance(themeName)
-    await build(themeName)
-    await deploy(themeName)
+    await inheritance(themeName, locale)
+    await build(themeName, locale)
+    await deploy(themeName, locale)
     logger.info('Done.')
+    isBuilding = false
   }
 
   // TODO: Only build the plugins that are affected by the change
@@ -44,6 +52,11 @@ export const watch = async (themeName: string) => {
     .on('unlinkDir', rebuild)
     .on('change', async (filePath) => {
       await rebuild()
+      if (['.less', '.scss', '*.styl', '.css'].includes(path.extname(filePath))) {
+        if (instance) {
+          instance.reload('*.css')
+        }
+      }
       if (['.html', '.phtml', '.xml', '.csv', '.js'].some((ext) => path.extname(filePath) === ext)) {
         if (instance) {
           instance.reload()

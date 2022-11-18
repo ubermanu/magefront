@@ -37,18 +37,20 @@ program
   .description('Run a browser-sync proxy instance.')
   .requiredOption('-t, --theme <theme>', 'Theme name.')
   .requiredOption('--url <url>', 'Url of your website.')
-  .action(async ({ theme, url }) => {
+  .argument('[locale]', 'Locale code.', 'en_US')
+  .action(async (locale, { theme, url }) => {
     await browserSync(url)
-    await watch(theme)
+    await watch(theme, locale)
   })
 
 program
   .command('watch')
   .description('Watch the source files of a theme, and rebuild on change.')
   .requiredOption('-t, --theme <theme>', 'Theme name.')
-  .action(async ({ theme }) => {
+  .argument('[locale]', 'Locale code.', 'en_US')
+  .action(async (locale, { theme }) => {
     await clean(theme)
-    await watch(theme)
+    await watch(theme, locale)
   })
 
 program
