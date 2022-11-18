@@ -2,19 +2,18 @@
 import path from 'path'
 import chokidar from 'chokidar'
 
-import { build } from './build'
-import { instance } from './browser-sync'
 import { inheritance } from './inheritance'
+import { build } from './build'
+import { deploy } from './deploy'
 import { getModules } from '../magento/module'
 import { getThemes } from '../magento/theme'
-import { rootPath, tempPath } from '../env'
+import { logger, rootPath } from '../env'
 
 export const watch = async (themeName: string) => {
   const watcherConfig = { ignoreInitial: true }
   const theme = getThemes().find((theme) => theme.name === themeName)
   const modules = getModules().filter((module) => module.src && module.enabled)
 
-  const themeTempSrc = path.join(rootPath, tempPath, theme.dest)
   const themeSrc = [path.join(rootPath, theme.src)]
 
   // Add modules source directories to theme source paths array
@@ -25,36 +24,34 @@ export const watch = async (themeName: string) => {
       themeSrc.push(path.join(rootPath, m.src))
     })
 
-  // Initialize watchers
-  const tempWatcher = chokidar.watch(themeTempSrc, watcherConfig)
+  // Initialize watcher
   const srcWatcher = chokidar.watch(themeSrc, watcherConfig)
 
-  // When files are created, updated or deleted, rebuild the symlinks
-  const reinitialize = async () => await inheritance(themeName)
-
-  // prettier-ignore
-  srcWatcher
-        .on('add', reinitialize)
-        .on('addDir', reinitialize)
-        .on('unlink', reinitialize)
-        .on('unlinkDir', reinitialize)
-
-  tempWatcher.on('ready', () => {
-    console.log(`Watching ${themeTempSrc}`)
-  })
-
-  // Events handling
-  tempWatcher.on('change', async (filePath) => {
-    console.log(`File ${filePath} has been changed`)
+  // When files are created, updated or deleted, rebuild the theme
+  const rebuild = async () => {
+    logger.info('Rebuilding theme...')
+    await inheritance(themeName)
     await build(themeName)
+    await deploy(themeName)
+    logger.info('Done.')
+  }
 
-    // Files that require reload after save
-    // TODO: Add more files to watch for reload
-
-    if (['.html', '.phtml', '.xml', '.csv', '.js'].some((ext) => path.extname(filePath) === ext)) {
-      if (instance) {
-        instance.reload()
+  // TODO: Only build the plugins that are affected by the change
+  srcWatcher
+    .on('add', rebuild)
+    .on('addDir', rebuild)
+    .on('unlink', rebuild)
+    .on('unlinkDir', rebuild)
+    .on('change', async (filePath) => {
+      await rebuild()
+      if (['.html', '.phtml', '.xml', '.csv', '.js'].some((ext) => path.extname(filePath) === ext)) {
+        if (instance) {
+          instance.reload()
+        }
       }
-    }
+    })
+
+  srcWatcher.on('ready', () => {
+    logger.info(`Watching source files...`)
   })
 }

@@ -47,6 +47,7 @@ program
   .description('Watch the source files of a theme, and rebuild on change.')
   .requiredOption('-t, --theme <theme>', 'Theme name.')
   .action(async ({ theme }) => {
+    await clean(theme)
     await watch(theme)
   })
 
