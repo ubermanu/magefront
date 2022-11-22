@@ -13,7 +13,6 @@ importers:
       browser-sync: ^2.27.7
       chokidar: ^3.5.3
       cli-table: ^0.3.11
-      commander: ^8.3.0
       dotenv: ^16.0.2
       fast-glob: ^3.2.11
       fs-extra: ^10.0.1
@@ -24,6 +23,7 @@ importers:
       memoizee: ^0.4.15
       prettier: ^2.5.1
       rimraf: ^3.0.2
+      sade: ^1.8.1
       ts-jest: ^29.0.0
       tslib: ^2.4.0
       typescript: ^4.8.2
@@ -33,13 +33,13 @@ importers:
       browser-sync: 2.27.7
       chokidar: 3.5.3
       cli-table: 0.3.11
-      commander: 8.3.0
       fast-glob: 3.2.11
       fs-extra: 10.0.1
       magefront-plugin-js-translation: link:plugins/js-translation
       magefront-plugin-less: link:plugins/less
       magefront-plugin-requirejs-config: link:plugins/requirejs-config
       memoizee: 0.4.15
+      sade: 1.8.1
       winston: 3.8.2
     devDependencies:
       '@types/browser-sync': 2.26.3
@@ -2136,11 +2136,6 @@ packages:
   /commander/7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
-    dev: false
-
-  /commander/8.3.0:
-    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
-    engines: {node: '>= 12'}
     dev: false
 
   /commondir/1.0.1:
@@ -5096,7 +5091,6 @@ packages:
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
-    dev: true
 
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
@@ -6180,6 +6174,13 @@ packages:
     engines: {npm: '>=2.0.0'}
     dependencies:
       symbol-observable: 1.0.1
+    dev: false
+
+  /sade/1.8.1:
+    resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
+    engines: {node: '>=6'}
+    dependencies:
+      mri: 1.2.0
     dev: false
 
   /safe-buffer/5.1.2:

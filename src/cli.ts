@@ -1,65 +1,70 @@
-import { Command } from 'commander'
+import path from 'path'
+import sade from 'sade'
 import winston from 'winston'
 
 import { version } from '../package.json' assert { type: 'json' }
 import { logger } from './env'
+import { setConfigFilename, setUseConfigFile } from './config'
 import { build } from './actions/build'
 import { inheritance } from './actions/inheritance'
 import { deploy } from './actions/deploy'
 import { clean } from './actions/clean'
 import { browserSync } from './actions/browser-sync'
 import { watch } from './actions/watch'
-import { list } from './actions/list'
 
-const program = new Command()
-
-program
-  .name('magefront')
-  .version(version, '-v, --version', 'Output the current version.')
-  .helpOption('-h, --help', 'Show this command summary.')
-  .addHelpCommand(false)
+// TODO: Implement an option to list all available themes
+const program = sade('magefront', true)
 
 program
-  .command('build')
-  .description('Build the theme.')
-  .requiredOption('-t, --theme <theme>', 'Theme name.')
-  .argument('[locale]', 'Locale code.', 'en_US')
-  .action(async (locale, { theme }) => {
-    logger.info(`Building theme ${theme} for locale ${locale}`)
-    await clean(theme)
-    await inheritance(theme)
-    await build(theme, locale)
-    await deploy(theme, locale)
-    logger.info('Done.')
-  })
+  .version(version)
+  .option('-t, --theme <theme>', 'Theme name.')
+  .option('-c, --config <config>', 'Configuration file.')
+  .option('-w, --watch', 'Watch the source files of a theme, and rebuild on change.', false)
+  .option('-d, --dev <url>', 'Run a browser-sync proxy instance.', false)
 
-program
-  .command('dev')
-  .description('Run a browser-sync proxy instance.')
-  .requiredOption('-t, --theme <theme>', 'Theme name.')
-  .requiredOption('--url <url>', 'Url of your website.')
-  .argument('[locale]', 'Locale code.', 'en_US')
-  .action(async (locale, { theme, url }) => {
-    await browserSync(url)
+program.action(async (opts) => {
+  const { theme, _: locales, watch: watchMode, dev: devMode, config } = opts
+
+  if (!theme) {
+    logger.error('You must provide a theme name.')
+    return
+  }
+
+  if (devMode && !devMode.length) {
+    logger.error('The dev mode requires a URL to proxy.')
+    return
+  }
+
+  if (config) {
+    setUseConfigFile(true)
+    if (typeof config === 'string' && config.length > 0) {
+      logger.info(`Using configuration file: ${config}`)
+      setConfigFilename(path.resolve(process.cwd(), config))
+    }
+  }
+
+  // Use the default `en_US` locale if none is provided
+  // TODO: Add support for multiple locales (when building)
+  const locale = locales[0] || 'en_US'
+
+  logger.info(`Gathering files for theme: ${theme}`)
+  await clean(theme)
+  await inheritance(theme)
+  logger.info(`Building theme ${theme} for locale ${locale}`)
+  await build(theme, locale)
+  await deploy(theme, locale)
+  logger.info('Done.')
+
+  if (devMode) {
+    logger.info('Starting browser-sync proxy...')
+    await browserSync(devMode)
+  }
+
+  if (devMode || watchMode) {
+    logger.info('Watching for changes...')
     await watch(theme, locale)
-  })
-
-program
-  .command('watch')
-  .description('Watch the source files of a theme, and rebuild on change.')
-  .requiredOption('-t, --theme <theme>', 'Theme name.')
-  .argument('[locale]', 'Locale code.', 'en_US')
-  .action(async (locale, { theme }) => {
-    await clean(theme)
-    await watch(theme, locale)
-  })
-
-program
-  .command('list')
-  .description('List the available themes.')
-  .action(() => {
-    list()
-  })
+  }
+})
 
 // Set up the logger instance to go through console
 logger.add(new winston.transports.Console({ silent: false }))

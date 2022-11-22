@@ -11,11 +11,19 @@ import { rootPath, tempPath } from './env'
  */
 export let configFilename = 'magefront.config.{js,mjs,cjs}'
 
+export const setConfigFilename = (newFilename: string) => {
+  configFilename = newFilename
+}
+
 /**
  * If set to true, the configuration file will be loaded.
  * TODO: Implement the `-c` option in the CLI.
  */
 export let useConfigFile = true
+
+export const setUseConfigFile = (value: boolean) => {
+  useConfigFile = value
+}
 
 /**
  * The configuration object.
