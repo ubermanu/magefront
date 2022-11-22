@@ -18,7 +18,7 @@ export const setConfigFilename = (newFilename: string) => {
 /**
  * If set to true, the configuration file will be loaded.
  */
-export let useConfigFile = true
+export let useConfigFile = false
 
 export const setUseConfigFile = (value: boolean) => {
   useConfigFile = value
@@ -42,6 +42,10 @@ export interface ThemeConfig {
 export const getConfigFromFile = async () => {
   const files = await glob(configFilename, { cwd: rootPath })
   let fileConfig = []
+
+  if (!files.length) {
+    throw new Error(`No configuration file found. Searched for: ${configFilename}`)
+  }
 
   if (files.length > 0) {
     let { default: config } = await import(path.join(rootPath, files[0]))

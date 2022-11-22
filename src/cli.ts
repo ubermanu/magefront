@@ -47,13 +47,18 @@ program.action(async (opts) => {
   // TODO: Add support for multiple locales (when building)
   const locale = locales[0] || 'en_US'
 
-  logger.info(`Gathering files for theme: ${theme}`)
-  await clean(theme)
-  await inheritance(theme)
-  logger.info(`Building theme ${theme} for locale ${locale}`)
-  await build(theme, locale)
-  await deploy(theme, locale)
-  logger.info('Done.')
+  try {
+    logger.info(`Gathering files for theme: ${theme}`)
+    await clean(theme)
+    await inheritance(theme)
+    logger.info(`Building theme ${theme} for locale ${locale}`)
+    await build(theme, locale)
+    await deploy(theme, locale)
+    logger.info('Done.')
+  } catch (error) {
+    logger.error(error)
+    process.exit(1)
+  }
 
   if (devMode) {
     logger.info('Starting browser-sync proxy...')
