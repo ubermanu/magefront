@@ -17,7 +17,6 @@ export const setConfigFilename = (newFilename: string) => {
 
 /**
  * If set to true, the configuration file will be loaded.
- * TODO: Implement the `-c` option in the CLI.
  */
 export let useConfigFile = true
 
