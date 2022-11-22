@@ -1,5 +1,6 @@
 import path from 'path'
 import glob from 'fast-glob'
+import memo from 'memoizee'
 
 import { getThemes, MagentoTheme } from './magento/theme'
 import type { Plugin } from './plugin'
@@ -75,7 +76,7 @@ export const getConfigFromFile = async () => {
  * The theme config is passed to the plugins.
  * Prepend `presets` plugins to the root plugins.
  */
-export const getThemeConfig = async (themeName: string) => {
+export const getThemeConfig = memo(async (themeName: string) => {
   const theme: MagentoTheme | undefined = getThemes().find((t: MagentoTheme) => t.name === themeName)
 
   if (!theme) {
@@ -120,7 +121,7 @@ export const getThemeConfig = async (themeName: string) => {
 
   // TODO: Clean up the config object
   return { theme: themeName, src, dest, plugins } as ThemeConfig
-}
+})
 
 /**
  * Transform the plugin to a function if it is not already.
