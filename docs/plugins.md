@@ -2,7 +2,7 @@
 
 Here is a list of available plugins:
 
-<small>💡 = Included in the default configuration</small>
+<small>💡 = Included in the [default preset](presets/default.md)</small>
 
 ## CSS
 

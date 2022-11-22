@@ -8,6 +8,16 @@ If no configuration is provided, magefront will use the following defaults:
 
 ```js
 export default {
+    presets: [
+        'magefront-preset-default'
+    ]
+}
+```
+
+Which is equivalent to:
+
+```js
+export default {
     plugins: [
         'magefront-plugin-less',
         'magefront-plugin-requirejs-config',
@@ -18,7 +28,7 @@ export default {
 
 This default configuration is required for the core **Magento 2** themes.
 
-> You can disable them by setting the `plugins` option to an empty array.
+> You can disable them by passing an empty configuration object.
 
 
 ## Custom

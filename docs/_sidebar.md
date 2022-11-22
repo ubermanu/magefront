@@ -20,6 +20,9 @@
   * [SVGO](plugins/svgo.md)
   * [Concat](plugins/concat.md)
 
+* Presets
+  * [Default](presets/default.md)
+
 <br>
 
 [![](https://img.shields.io/npm/v/magefront)](https://www.npmjs.com/package/magefront)
