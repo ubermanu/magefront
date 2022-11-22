@@ -17,9 +17,7 @@ importers:
       fast-glob: ^3.2.11
       fs-extra: ^10.0.1
       jest: ^29.0.3
-      magefront-plugin-js-translation: workspace:~
-      magefront-plugin-less: workspace:~
-      magefront-plugin-requirejs-config: workspace:~
+      magefront-preset-default: workspace:~
       memoizee: ^0.4.15
       prettier: ^2.5.1
       rimraf: ^3.0.2
@@ -35,9 +33,7 @@ importers:
       cli-table: 0.3.11
       fast-glob: 3.2.11
       fs-extra: 10.0.1
-      magefront-plugin-js-translation: link:plugins/js-translation
-      magefront-plugin-less: link:plugins/less
-      magefront-plugin-requirejs-config: link:plugins/requirejs-config
+      magefront-preset-default: link:presets/default
       memoizee: 0.4.15
       sade: 1.8.1
       winston: 3.8.2

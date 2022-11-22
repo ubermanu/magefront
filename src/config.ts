@@ -2,7 +2,8 @@ import path from 'path'
 import glob from 'fast-glob'
 
 import { getThemes, MagentoTheme } from './magento/theme'
-import { Plugin } from './plugin'
+import type { Plugin } from './plugin'
+import type { Preset } from './preset'
 import { rootPath, tempPath } from './env'
 
 /**
@@ -25,23 +26,32 @@ export const setUseConfigFile = (value: boolean) => {
 }
 
 /**
- * The configuration object.
+ * The user configuration object, before it's parsed.
+ * Preset and plugins are transformed to functions.
+ */
+export interface UserConfig {
+  theme?: string
+  presets?: Array<Preset | string | [string, any]>
+  plugins?: Array<Plugin | string | [string, any]>
+}
+
+/**
+ * The configuration object that is passed as build context.
+ * The preset plugins are resolved and merged into the plugins array.
  */
 export interface ThemeConfig {
   theme: string
   dest: string
   src: string
-  plugins: Plugin[] | string[]
+  plugins: Plugin[]
 }
 
 /**
- * Get the `ThemeConfig` list from the configuration file.
- *
- * @return {Promise<ThemeConfig[]>}
+ * Get the `UserConfig` list from the configuration file.
  */
 export const getConfigFromFile = async () => {
   const files = await glob(configFilename, { cwd: rootPath })
-  let fileConfig = []
+  let fileConfig: UserConfig[] = []
 
   if (!files.length) {
     throw new Error(`No configuration file found. Searched for: ${configFilename}`)
@@ -63,9 +73,7 @@ export const getConfigFromFile = async () => {
 /**
  * Get the configuration for the given theme name.
  * The theme config is passed to the plugins.
- *
- * @param {string} themeName
- * @return {Promise<ThemeConfig>}
+ * Prepend `presets` plugins to the root plugins.
  */
 export const getThemeConfig = async (themeName: string) => {
   const theme: MagentoTheme | undefined = getThemes().find((t: MagentoTheme) => t.name === themeName)
@@ -74,36 +82,49 @@ export const getThemeConfig = async (themeName: string) => {
     throw new Error(`Theme '${themeName}' not found.`)
   }
 
-  let themeConfig: ThemeConfig = {
-    theme: themeName,
-    plugins: ['magefront-plugin-less', 'magefront-plugin-requirejs-config', 'magefront-plugin-js-translation'],
-    src: path.join(rootPath, tempPath, theme.dest),
-    dest: path.join(rootPath, theme.dest)
-  }
+  const src = path.join(rootPath, tempPath, theme.dest)
+  const dest = path.join(rootPath, theme.dest)
 
-  // Override the themeConfig with the one from the
-  // configuration file, if the flag is set
+  let userConfig: UserConfig | null = null
+
+  // Override the themeConfig with the one from the config file
   if (useConfigFile) {
     const fileConfig = await getConfigFromFile()
     const itemConfig = fileConfig.find((config) => !config.theme || config.theme === themeName)
     if (itemConfig) {
-      themeConfig = Object.assign({}, themeConfig, itemConfig)
+      userConfig = itemConfig
     }
+  }
+
+  // Set the default config if not defined yet
+  if (!userConfig) {
+    userConfig = {
+      presets: ['magefront-preset-default']
+    }
+  }
+
+  const pluginList: Plugin[] | string[] = []
+
+  // Add the preset plugins to the plugin list
+  if (userConfig.presets) {
+    const presets = await Promise.all(userConfig.presets.map(transformPresetDefinition))
+    presets.forEach((preset) => {
+      // @ts-ignore
+      pluginList.push(...preset.plugins)
+    })
   }
 
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
-  themeConfig.plugins = await Promise.all(themeConfig.plugins.map(transformPluginDefinition))
+  const plugins = await Promise.all(pluginList.map(transformPluginDefinition))
 
-  return themeConfig
+  // TODO: Clean up the config object
+  return { theme: themeName, src, dest, plugins } as ThemeConfig
 }
 
 /**
  * Transform the plugin to a function if it is not already.
  * If passed a string, import the plugin and return the default export.
- *
- * @param {any} definition
- * @return {Promise<Plugin>}
  */
 async function transformPluginDefinition(definition: any): Promise<Plugin> {
   if (typeof definition === 'function') {
@@ -126,13 +147,43 @@ async function transformPluginDefinition(definition: any): Promise<Plugin> {
 
 /**
  * Return the full module name from the given plugin string.
- *
- * @param {string} str
- * @return {string}
  */
 function resolveModuleNameFromPluginStr(str: string): string {
   if (str.startsWith('magefront-plugin-')) {
     return str
   }
   return `magefront-plugin-${str}`
+}
+
+/**
+ * Transform the preset to a function if it is not already.
+ * If passed a string, import the preset and return the default export.
+ */
+async function transformPresetDefinition(definition: any): Promise<Preset> {
+  if (typeof definition === 'string') {
+    const { default: presetModule } = await import(resolveModuleNameFromPresetStr(definition))
+    return presetModule()
+  }
+
+  if (Array.isArray(definition)) {
+    const [presetName, options] = definition
+    const { default: presetModule } = await import(resolveModuleNameFromPresetStr(presetName))
+    return presetModule(options)
+  }
+
+  if (typeof definition === 'object') {
+    return definition
+  }
+
+  throw new Error(`Invalid plugin type: ${typeof definition}`)
+}
+
+/**
+ * Return the full module name from the given preset string.
+ */
+function resolveModuleNameFromPresetStr(str: string): string {
+  if (str.startsWith('magefront-preset-')) {
+    return str
+  }
+  return `magefront-preset-${str}`
 }

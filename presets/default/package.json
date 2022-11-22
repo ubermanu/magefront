@@ -1,7 +1,6 @@
 {
   "name": "magefront-preset-default",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "keywords": [
     "magefront",
@@ -22,7 +21,7 @@
   "files": [
     "dist"
   ],
-  "scripts":{
+  "scripts": {
     "build": "unbuild",
     "prepublishOnly": "pnpm run build"
   },

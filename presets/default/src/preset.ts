@@ -1,3 +1,9 @@
+import less from 'magefront-plugin-less'
+import requireJsConfig from 'magefront-plugin-requirejs-config'
+import jsTranslation from 'magefront-plugin-js-translation'
+// import terser from 'magefront-plugin-terser'
+// import cssnano from 'magefront-plugin-cssnano'
+
 /**
  * The original options from the command line.
  */
@@ -14,24 +20,26 @@ export interface Options {
  * It is meant to be compatible with the default Magento themes.
  *
  * @param {Options} options
- * @return {import('magefront').PresetThemeConfig}
+ * @return {import('magefront').Preset}
  */
 export default (options: Options = {}) => {
   const { minifyJs, minifyCss, mergeCss, mergeJs, bundleJs } = options
 
   const plugins = [
     // prettier-ignore
-    'magefront-plugin-less',
-    'magefront-plugin-requirejs-config',
-    'magefront-plugin-js-translation'
+    less(),
+    requireJsConfig(),
+    jsTranslation()
   ]
 
   if (minifyJs) {
-    plugins.push('magefront-plugin-terser')
+    console.warn('The minifyJs option is not implemented yet.')
+    // plugins.push(terser())
   }
 
   if (minifyCss) {
-    plugins.push('magefront-plugin-cssnano')
+    console.warn('The minifyCss option is not implemented yet.')
+    // plugins.push(cssnano())
   }
 
   if (mergeCss) {

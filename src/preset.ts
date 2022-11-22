@@ -1,8 +1,9 @@
 import type { Plugin } from './plugin'
 
 /**
- * The configuration object.
+ * The preset configuration object.
+ * Contains already defined plugins (because we cannot resolve them at the module level).
  */
-export interface PresetThemeConfig {
-  plugins?: Array<string | Plugin>
+export interface Preset {
+  plugins?: Plugin[]
 }

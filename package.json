@@ -31,9 +31,7 @@
     "cli-table": "^0.3.11",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
-    "magefront-plugin-js-translation": "workspace:~",
-    "magefront-plugin-less": "workspace:~",
-    "magefront-plugin-requirejs-config": "workspace:~",
+    "magefront-preset-default": "workspace:~",
     "memoizee": "^0.4.15",
     "sade": "^1.8.1",
     "winston": "^3.8.2"
@@ -61,7 +59,8 @@
     "moduleNameMapper": {
       "^magefront-plugin-less$": "<rootDir>/plugins/less/src/plugin.ts",
       "^magefront-plugin-requirejs-config$": "<rootDir>/plugins/requirejs-config/src/plugin.ts",
-      "^magefront-plugin-js-translation$": "<rootDir>/plugins/js-translation/src/plugin.ts"
+      "^magefront-plugin-js-translation$": "<rootDir>/plugins/js-translation/src/plugin.ts",
+      "^magefront-preset-default": "<rootDir>/presets/default/src/preset.ts"
     },
     "testMatch": [
       "**/tests/*.test.ts"

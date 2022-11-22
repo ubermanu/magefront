@@ -33,10 +33,8 @@ The `magefront.config.js` file should be located in the root directory of your p
 ```js
 // magefront.config.js
 export default {
-    plugins: [
-        'magefront-plugin-less',
-        'magefront-plugin-requirejs-config',
-        'magefront-plugin-js-translation'
+    presets: [
+        'magefront-preset-default'
     ]
 }
 ```
