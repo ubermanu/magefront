@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-less",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "type": "module",
   "keywords": [
     "magefront",
@@ -36,8 +36,7 @@
     ".": {
       "types": "./dist/plugin.d.ts",
       "require": "./dist/plugin.cjs",
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.cjs"
+      "import": "./dist/plugin.mjs"
     }
   }
 }
