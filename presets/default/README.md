@@ -21,7 +21,9 @@ And these plugins are included, if configured:
 import defaultPreset from 'magefront-preset-default'
 
 export default {
-    preset: defaultPreset()
+    presets: [
+        defaultPreset()
+    ]
 }
 ```
 
