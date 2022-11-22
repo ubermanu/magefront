@@ -1,4 +1,3 @@
-// @ts-nocheck
 import path from 'path'
 import chokidar from 'chokidar'
 
@@ -14,6 +13,11 @@ export const watch = async (themeName: string, locale: string) => {
   const watcherConfig = { ignoreInitial: true }
   const theme = getThemes().find((theme) => theme.name === themeName)
   const modules = getModules().filter((module) => module.src && module.enabled)
+
+  if (!theme) {
+    logger.error(`Theme ${themeName} not found.`)
+    return
+  }
 
   const themeSrc = [path.join(rootPath, theme.src)]
 
@@ -37,7 +41,7 @@ export const watch = async (themeName: string, locale: string) => {
     }
     isBuilding = true
     logger.info('Rebuilding theme...')
-    await inheritance(themeName, locale)
+    await inheritance(themeName)
     await build(themeName, locale)
     await deploy(themeName, locale)
     logger.info('Done.')
