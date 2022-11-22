@@ -1,6 +1,7 @@
 import { Command } from 'commander'
 import winston from 'winston'
 
+import { version } from '../package.json' assert { type: 'json' }
 import { logger } from './env'
 import { build } from './actions/build'
 import { inheritance } from './actions/inheritance'
@@ -14,7 +15,7 @@ const program = new Command()
 
 program
   .name('magefront')
-  .version('0', '-v, --version', 'Output the current version.')
+  .version(version, '-v, --version', 'Output the current version.')
   .helpOption('-h, --help', 'Show this command summary.')
   .addHelpCommand(false)
 
