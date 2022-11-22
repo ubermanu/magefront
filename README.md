@@ -20,7 +20,11 @@ Install the package at the root level of your website:
 
 ## Usage
 
-    npx magefront build -t Magento/blank en_US
+    npx magefront [options] [locale]
+
+Example:
+
+    npx magefront -t Magento/blank en_US
 
 ## Configuration
 
