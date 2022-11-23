@@ -20,7 +20,7 @@ export default (options: Options = {}) => {
 
   // @ts-ignore
   return async (themeConfig) => {
-    const files = await glob(src ?? '**/*.js', { ignore: ignore ?? [], cwd: themeConfig.src })
+    const files = await glob(src ?? '**/*.js', { ignore, cwd: themeConfig.src })
 
     return Promise.all(
       files.map(async (file: string) => {
