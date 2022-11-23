@@ -1,11 +1,16 @@
 {
   "name": "magefront",
-  "version": "0.22.0",
+  "version": "0.22.2",
   "type": "module",
   "keywords": [
     "magefront",
     "magento",
-    "theme"
+    "theme",
+    "builder",
+    "frontend",
+    "less",
+    "sass",
+    "stylus"
   ],
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "license": "MIT",
@@ -31,6 +36,7 @@
     "cli-table": "^0.3.11",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
+    "kleur": "^4.1.5",
     "magefront-preset-default": "workspace:~",
     "memoizee": "^0.4.15",
     "sade": "^1.8.1",

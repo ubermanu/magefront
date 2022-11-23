@@ -1,6 +1,7 @@
 import path from 'path'
 import sade from 'sade'
 import winston from 'winston'
+import k from 'kleur'
 
 import { version } from '../package.json' assert { type: 'json' }
 import { logger } from './env'
@@ -17,10 +18,14 @@ const program = sade('magefront', true)
 
 program
   .version(version)
-  .option('-t, --theme <theme>', 'Theme name.')
-  .option('-c, --config <config>', 'Configuration file.')
-  .option('-w, --watch', 'Watch the source files of a theme, and rebuild on change.', false)
-  .option('-d, --dev <url>', 'Run a browser-sync proxy instance.', false)
+  .option('-t, --theme <theme>', 'Theme identifier')
+  .option('-c, --config <config>', 'Path to the configuration file')
+  .option('-w, --watch', 'Watch the source files of a theme, and rebuild on change', false)
+  .option('-d, --dev <url>', 'Run a browser-sync proxy instance')
+
+program.example('-t Magento/blank')
+program.example('-t Magento/blank -c -w')
+program.example('-t Magento/blank -c --dev https://magento.ddev.site')
 
 program.action(async (opts) => {
   const { theme, _: locales, watch: watchMode, dev: devMode, config } = opts
@@ -48,13 +53,13 @@ program.action(async (opts) => {
   const locale = locales[0] || 'en_US'
 
   try {
-    logger.info(`Gathering files for theme: ${theme}`)
+    logger.info(`Gathering files for ${k.bold(theme)}...`)
     await clean(theme)
     await inheritance(theme)
-    logger.info(`Building theme ${theme} for locale ${locale}`)
+    logger.info(`Building ${k.bold(theme)} for locale ${k.bold(locale)}...`)
     await build(theme, locale)
     await deploy(theme, locale)
-    logger.info('Done.')
+    logger.info('Done!')
   } catch (error) {
     logger.error(error)
     process.exit(1)
@@ -66,7 +71,6 @@ program.action(async (opts) => {
   }
 
   if (devMode || watchMode) {
-    logger.info('Watching for changes...')
     await watch(theme, locale)
   }
 })
