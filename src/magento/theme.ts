@@ -3,8 +3,9 @@ import path from 'path'
 import fs from 'fs'
 import memo from 'memoizee'
 
-import { ComposerPackage, getPackages, getRegistrations } from './composer'
-import { MagentoModule } from './module'
+import { getPackages, getRegistrations } from './composer'
+import type { ComposerPackage } from './composer'
+import type { MagentoModule } from './module'
 import { rootPath } from '../env'
 
 export interface MagentoTheme extends MagentoModule {

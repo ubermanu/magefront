@@ -1,7 +1,7 @@
-import { ThemeConfig } from './config'
-import { MagentoModule } from './magento/module'
-import { MagentoLanguage } from './magento/language'
-import { MagentoTheme } from './magento/theme'
+import type { ThemeConfig } from './config'
+import type { MagentoModule } from './magento/module'
+import type { MagentoLanguage } from './magento/language'
+import type { MagentoTheme } from './magento/theme'
 
 /**
  * Extends the themeConfig with additional values to be passed

@@ -1,10 +1,11 @@
 import path from 'path'
 
 import { getThemeConfig } from '../config'
-import { getModules, MagentoModule } from '../magento/module'
+import { getModules } from '../magento/module'
+import type { MagentoModule } from '../magento/module'
 import { getLanguages } from '../magento/language'
 import { getThemeDependencyTree, getThemes } from '../magento/theme'
-import { PluginContext } from '../plugin'
+import type { PluginContext } from '../plugin'
 import { logger, rootPath } from '../env'
 
 /**

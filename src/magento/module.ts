@@ -3,7 +3,8 @@ import glob from 'fast-glob'
 import path from 'path'
 import memo from 'memoizee'
 
-import { ComposerPackage, getPackages, getRegistrations } from './composer'
+import { getPackages, getRegistrations } from './composer'
+import type { ComposerPackage } from './composer'
 import { logger, rootPath } from '../env'
 
 export interface MagentoModule {

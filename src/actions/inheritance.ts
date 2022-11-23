@@ -2,7 +2,8 @@ import fs from 'fs-extra'
 import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 
-import { getModules, MagentoModule } from '../magento/module'
+import { getModules } from '../magento/module'
+import type { MagentoModule } from '../magento/module'
 import { findTheme, getThemeDependencyTree } from '../magento/theme'
 import { rootPath, tempPath } from '../env'
 
