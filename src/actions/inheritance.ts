@@ -3,7 +3,7 @@ import glob, { Pattern } from 'fast-glob'
 import path from 'path'
 
 import { getModules, MagentoModule } from '../magento/module'
-import { getThemes, MagentoTheme } from '../magento/theme'
+import { findTheme, getThemeDependencyTree } from '../magento/theme'
 import { rootPath, tempPath } from '../env'
 
 /**
@@ -13,16 +13,6 @@ import { rootPath, tempPath } from '../env'
  * @param {string} themeName
  */
 export const inheritance = async (themeName: string) => {
-  const themeList: MagentoTheme[] = getThemes()
-
-  /**
-   * @param {string} name
-   * @return MagentoTheme|undefined
-   */
-  function findTheme(name: string) {
-    return themeList.find((theme) => theme.name === name)
-  }
-
   /**
    * Copy the files from the src to the destination directory.
    * @param src
@@ -42,23 +32,6 @@ export const inheritance = async (themeName: string) => {
         return fs.copy(path.join(rootPath, srcPath), destPath)
       })
     )
-  }
-
-  /**
-   * Return the list of all the parent themes.
-   * @param themeName
-   * @param dependencyTree
-   */
-  function getThemeDependencyTree(themeName: string, dependencyTree: string[] = []): string[] {
-    dependencyTree = dependencyTree ? dependencyTree : []
-    dependencyTree.push(themeName)
-    const theme = findTheme(themeName)
-
-    if (theme && theme.parent) {
-      return getThemeDependencyTree(theme.parent, dependencyTree)
-    } else {
-      return dependencyTree.reverse()
-    }
   }
 
   const currentTheme = findTheme(themeName)

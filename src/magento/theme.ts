@@ -85,3 +85,35 @@ function getThemeNameAndAreaFromRegistrationPhp(file: string) {
   const [, area, name] = registration.match(/'(frontend|adminhtml)\/([\w\/]+)'/)
   return { name, area }
 }
+
+/**
+ * Get a theme by its name.
+ * @memoized
+ */
+export const findTheme = memo((themeName: string) => {
+  return getThemes().find((theme) => theme.name === themeName)
+})
+
+/**
+ * @param themeName
+ */
+export const getThemeDependencyTree = memo((themeName: string): string[] => {
+  return __resolveThemeDependencyTree(themeName)
+})
+
+/**
+ * @param themeName
+ * @param dependencyTree
+ * @internal
+ */
+function __resolveThemeDependencyTree(themeName: string, dependencyTree: string[] = []): string[] {
+  dependencyTree = dependencyTree ? dependencyTree : []
+  dependencyTree.push(themeName)
+  const theme = findTheme(themeName)
+
+  if (theme && theme.parent) {
+    return __resolveThemeDependencyTree(theme.parent, dependencyTree)
+  } else {
+    return dependencyTree.reverse()
+  }
+}
