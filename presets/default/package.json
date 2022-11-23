@@ -28,9 +28,7 @@
   "dependencies": {
     "magefront-plugin-js-translation": "workspace:~",
     "magefront-plugin-less": "workspace:~",
-    "magefront-plugin-requirejs-config": "workspace:~"
-  },
-  "optionalDependencies": {
+    "magefront-plugin-requirejs-config": "workspace:~",
     "magefront-plugin-cssnano": "workspace:~",
     "magefront-plugin-terser": "workspace:~"
   },

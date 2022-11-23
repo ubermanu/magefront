@@ -1,8 +1,8 @@
 import less from 'magefront-plugin-less'
 import requireJsConfig from 'magefront-plugin-requirejs-config'
 import jsTranslation from 'magefront-plugin-js-translation'
-// import terser from 'magefront-plugin-terser'
-// import cssnano from 'magefront-plugin-cssnano'
+import terser from 'magefront-plugin-terser'
+import cssnano from 'magefront-plugin-cssnano'
 
 /**
  * The original options from the command line.
@@ -33,13 +33,12 @@ export default (options: Options = {}) => {
   ]
 
   if (minifyJs) {
-    console.warn('The minifyJs option is not implemented yet.')
-    // plugins.push(terser())
+    // The following files are ignore by default because they cause an issue with requireJs
+    plugins.push(terser({ ignore: ['**/*.min.js', 'mage/utils/main.js', 'Magento_Ui/**/*.js'] }))
   }
 
   if (minifyCss) {
-    console.warn('The minifyCss option is not implemented yet.')
-    // plugins.push(cssnano())
+    plugins.push(cssnano())
   }
 
   if (mergeCss) {
