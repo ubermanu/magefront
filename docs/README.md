@@ -14,7 +14,7 @@ Install the package at the root level of your **Magento 2** project:
 
 ## Usage
 
-    npx magefront build --theme Magento/blank en_US
+    npx magefront -t Magento/blank en_US
 
 > This will build the `Magento/blank` theme, with the locale `en_US` into the `pub/static` folder.
 
