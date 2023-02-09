@@ -49,6 +49,7 @@ jobs:
 
       - run: pnpm i
       - run: pnpm build
+      - run: pnpm -r build
 
       - run: pnpm test
         env:
