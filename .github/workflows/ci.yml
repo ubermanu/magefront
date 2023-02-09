@@ -48,6 +48,7 @@ jobs:
           cp tests/_fixtures/config.php.dist "$GITHUB_WORKSPACE/magento/app/etc/config.php";
 
       - run: pnpm i
+      - run: pnpm build
 
       - run: pnpm test
         env:
