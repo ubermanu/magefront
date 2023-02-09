@@ -2,6 +2,8 @@ import path from 'path'
 import sade from 'sade'
 import winston from 'winston'
 import k from 'kleur'
+import { performance } from 'perf_hooks'
+import prettyMilliseconds from 'pretty-ms'
 
 import { version } from '../package.json' assert { type: 'json' }
 import { logger } from './env'
@@ -53,13 +55,14 @@ program.action(async (opts) => {
   const locale = locales[0] || 'en_US'
 
   try {
+    const now = performance.now()
     logger.info(`Gathering files for ${k.bold(theme)}...`)
     await clean(theme)
     await inheritance(theme)
     logger.info(`Building ${k.bold(theme)} for locale ${k.bold(locale)}...`)
     await build(theme, locale)
     await deploy(theme, locale)
-    logger.info('Done!')
+    logger.info(`Done in ${prettyMilliseconds(performance.now() - now)}`)
   } catch (error) {
     logger.error(error)
     process.exit(1)

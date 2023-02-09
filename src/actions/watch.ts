@@ -1,5 +1,7 @@
 import path from 'path'
 import chokidar from 'chokidar'
+import { performance } from 'perf_hooks'
+import prettyMilliseconds from 'pretty-ms'
 
 import { inheritance } from './inheritance'
 import { build } from './build'
@@ -41,10 +43,11 @@ export const watch = async (themeName: string, locale: string) => {
     }
     isBuilding = true
     logger.info('Rebuilding theme...')
+    const now = performance.now()
     await inheritance(themeName)
     await build(themeName, locale)
     await deploy(themeName, locale)
-    logger.info('Done.')
+    logger.info(`Done in ${prettyMilliseconds(performance.now() - now)}`)
     isBuilding = false
   }
 
