@@ -16,7 +16,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.17.0
+          version: 8.2.0
       - run: pnpm i
       - run: pnpm publish -r --no-git-checks
         env:
