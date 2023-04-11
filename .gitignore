@@ -5,6 +5,7 @@ node_modules
 dist
 types
 _*.md
+.turbo
 
 # tests
 auth.json
