@@ -1,3 +1,6 @@
+// Hacky way to import less type definitions
+import 'less'
+
 /** Replaces the commented `@magento_import` statements with the actual import statements for each enabled modules. */
 export class preProcessor implements Less.PreProcessor {
   private modules: string[]
