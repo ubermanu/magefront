@@ -1,7 +1,7 @@
-import glob, { Pattern } from 'fast-glob'
+import glob, { type Pattern } from 'fast-glob'
 import fs from 'fs'
-import path from 'path'
-import postcss, { AcceptedPlugin } from 'postcss'
+import path from 'node:path'
+import postcss, { type AcceptedPlugin } from 'postcss'
 
 export interface Options {
   src?: string | string[]

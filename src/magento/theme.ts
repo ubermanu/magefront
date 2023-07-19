@@ -1,7 +1,7 @@
 import glob from 'fast-glob'
 import fs from 'fs'
 import memo from 'memoizee'
-import path from 'path'
+import path from 'node:path'
 
 import { rootPath } from '../env'
 import type { ComposerPackage } from './composer'

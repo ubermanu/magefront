@@ -1,6 +1,6 @@
-import babel, { TransformOptions } from '@babel/core'
-import glob, { Pattern } from 'fast-glob'
-import path from 'path'
+import babel, { type TransformOptions } from '@babel/core'
+import glob, { type Pattern } from 'fast-glob'
+import path from 'node:path'
 
 export interface Options {
   src?: string | string[]

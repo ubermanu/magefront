@@ -26,11 +26,9 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
+    "@types/stylus": "^0.48.38",
     "fast-glob": "^3.2.11",
     "stylus": "^0.59.0"
-  },
-  "devDependencies": {
-    "@types/stylus": "^0.48.38"
   },
   "exports": {
     ".": {

@@ -1,13 +1,11 @@
-import glob, { Pattern } from 'fast-glob'
-import fs from 'fs'
-import path from 'path'
-// @ts-ignore
-import pngquant from 'pngquant'
+import glob, { type Pattern } from 'fast-glob'
+import path from 'node:path'
+import PngQuant from 'pngquant'
 
 export interface Options {
   src?: string | string[]
   ignore?: Pattern[]
-  args?: Array<string | number>
+  args?: string[]
 }
 
 /**
@@ -17,7 +15,11 @@ export interface Options {
  * @returns {function( any ): Promise<Awaited< any >[]>}
  */
 export default (options: Options = {}) => {
-  const { src, ignore, args } = options
+  const { src, ignore, args = [] } = options
+
+  const compress = (filename: string): void => {
+    new PngQuant([...args, '--force', filename])
+  }
 
   // @ts-ignore
   return async (buildContext) => {
@@ -29,13 +31,11 @@ export default (options: Options = {}) => {
     await Promise.all(
       files.map(async (file) => {
         const filePath = path.join(buildContext.src, file)
-        const fileContent = await fs.promises.readFile(filePath)
-        const result = await pngquant(args)(fileContent)
 
-        if (result) {
-          return fs.promises.writeFile(filePath, result)
-        } else {
-          console.error('PNGQUANT error', result)
+        try {
+          compress(filePath)
+        } catch (e) {
+          console.error('PNGQUANT error', e)
         }
       })
     )

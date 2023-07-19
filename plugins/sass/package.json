@@ -27,11 +27,9 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
+    "@types/sass": "^1.43.1",
     "fast-glob": "^3.2.11",
     "sass": "^1.44.0"
-  },
-  "devDependencies": {
-    "@types/sass": "^1.43.1"
   },
   "exports": {
     ".": {

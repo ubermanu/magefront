@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 
 import { getThemeConfig } from '../config'
 import { logger, rootPath } from '../env'

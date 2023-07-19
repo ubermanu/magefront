@@ -26,13 +26,11 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.18.6",
-    "magefront-plugin-babel": "workspace:~",
-    "react": ">=18.2.0"
+    "@babel/preset-react": "^7.22.5",
+    "magefront-plugin-babel": "workspace:~"
   },
-  "devDependencies": {
-    "@babel/core": "^7.17.5",
-    "@types/babel__core": "^7.1.19"
+  "peerDependencies": {
+    "react": ">=18"
   },
   "exports": {
     ".": {

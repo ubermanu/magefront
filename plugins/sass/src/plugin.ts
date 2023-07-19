@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
 import fs from 'fs'
-import path from 'path'
+import path from 'node:path'
 import dartSass, { Options as RenderOptions, SassException, Result as SassResult } from 'sass'
 
 export interface Options {

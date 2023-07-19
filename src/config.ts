@@ -1,6 +1,6 @@
 import glob from 'fast-glob'
 import memo from 'memoizee'
-import path from 'path'
+import path from 'node:path'
 
 import { rootPath, tempPath } from './env'
 import type { MagentoTheme } from './magento/theme'

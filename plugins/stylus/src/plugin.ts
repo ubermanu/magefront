@@ -1,7 +1,7 @@
-import glob, { Pattern } from 'fast-glob'
+import glob, { type Pattern } from 'fast-glob'
 import fs from 'fs'
-import path from 'path'
-import stylus, { RenderOptions } from 'stylus'
+import path from 'node:path'
+import stylus, { type RenderOptions } from 'stylus'
 
 export interface Options {
   src?: string | string[]

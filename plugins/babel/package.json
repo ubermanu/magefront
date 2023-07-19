@@ -26,11 +26,9 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@babel/core": "^7.17.5",
-    "fast-glob": "^3.2.11"
-  },
-  "devDependencies": {
-    "@types/babel__core": "^7.1.19"
+    "@babel/core": "7.x",
+    "fast-glob": "^3.3.0",
+    "@types/babel__core": "7.x"
   },
   "exports": {
     ".": {

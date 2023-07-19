@@ -1,5 +1,5 @@
 import k from 'kleur'
-import path from 'path'
+import path from 'node:path'
 import { performance } from 'perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
 import sade from 'sade'

@@ -1,7 +1,7 @@
 import glob, { Pattern } from 'fast-glob'
 import fs from 'fs'
 import less27 from 'less'
-import path from 'path'
+import path from 'node:path'
 import magentoImportPreprocessor from './magento-import-preprocessor'
 
 export interface Options {

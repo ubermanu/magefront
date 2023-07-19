@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
 import fs from 'fs-extra'
-import path from 'path'
+import path from 'node:path'
 
 import { rootPath, tempPath } from '../env'
 import type { MagentoModule } from '../magento/module'

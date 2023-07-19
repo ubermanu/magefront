@@ -1,8 +1,8 @@
-import glob, { Pattern } from 'fast-glob'
+import glob, { type Pattern } from 'fast-glob'
 import fs from 'fs'
-import path from 'path'
+import path from 'node:path'
 import { compile } from 'svelte/compiler'
-import { CompileOptions } from 'svelte/types/compiler'
+import { type CompileOptions } from 'svelte/types/compiler'
 
 export interface Options {
   src?: string | string[]

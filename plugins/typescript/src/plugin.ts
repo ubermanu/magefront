@@ -1,7 +1,7 @@
-import glob, { Pattern } from 'fast-glob'
+import glob, { type Pattern } from 'fast-glob'
 import fs from 'fs'
-import path from 'path'
-import typescript, { CompilerOptions } from 'typescript'
+import path from 'node:path'
+import typescript, { type CompilerOptions } from 'typescript'
 
 export interface Options {
   src?: string | string[]

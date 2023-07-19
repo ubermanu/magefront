@@ -1,6 +1,6 @@
 import { parse } from 'csv-parse'
 import fs from 'fs'
-import path from 'path'
+import path from 'node:path'
 
 /**
  * Generate a `js-translation.json` file for the current locale.

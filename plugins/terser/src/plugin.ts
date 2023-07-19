@@ -1,6 +1,6 @@
-import glob, { Pattern } from 'fast-glob'
+import glob, { type Pattern } from 'fast-glob'
 import fs from 'fs'
-import path from 'path'
+import path from 'node:path'
 import { minify } from 'terser'
 
 export interface Options {
