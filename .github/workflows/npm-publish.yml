@@ -23,6 +23,8 @@ jobs:
         with:
           version: 8.2.0
       - run: pnpm i
+      - run: pnpm build
+      - run: pnpm -r build
       - run: pnpm publish -r --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
