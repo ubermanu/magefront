@@ -1,11 +1,11 @@
-import path from 'path'
-import fs from 'fs'
 import { parse } from 'csv-parse'
+import fs from 'fs'
+import path from 'path'
 
 /**
  * Generate a `js-translation.json` file for the current locale.
  *
- * @returns {(function(*): Promise<void>)|*}
+ * @returns {(function( any ): Promise<void>)| any}
  */
 export default () => {
   // @ts-ignore
@@ -56,7 +56,7 @@ export default () => {
       escape: '"',
       columns: false,
       skipEmptyLines: true,
-      skipRecordsWithError: true
+      skipRecordsWithError: true,
     })
 
     // Only output the translation targeted to `lib`

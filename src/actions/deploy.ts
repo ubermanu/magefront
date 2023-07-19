@@ -1,12 +1,11 @@
+import glob from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'path'
-import glob from 'fast-glob'
 
 import { getThemeConfig } from '../config'
 
 /**
- * Deploy the built theme files from the temp directory to the `pub/static` dir.
- * This is the third step in the build process.
+ * Deploy the built theme files from the temp directory to the `pub/static` dir. This is the third step in the build process.
  *
  * @param {string} themeName
  * @param {string} locale
@@ -28,7 +27,7 @@ export const deploy = async (themeName: string, locale: string = 'en_US') => {
     '**/*.tsx',
     '**/*.jsx',
     '**/*.svelte',
-    '**/*.vue'
+    '**/*.vue',
   ]
 
   // Copy all the files from the src (tmp) dir to the `pub/static` dir

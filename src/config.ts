@@ -1,15 +1,16 @@
-import path from 'path'
 import glob from 'fast-glob'
 import memo from 'memoizee'
+import path from 'path'
 
-import { getThemes } from './magento/theme'
+import { rootPath, tempPath } from './env'
 import type { MagentoTheme } from './magento/theme'
+import { getThemes } from './magento/theme'
 import type { Plugin } from './plugin'
 import type { Preset } from './preset'
-import { rootPath, tempPath } from './env'
 
 /**
  * The configuration filename.
+ *
  * @type {string}
  */
 export let configFilename = 'magefront.config.{js,mjs,cjs}'
@@ -18,29 +19,21 @@ export const setConfigFilename = (newFilename: string) => {
   configFilename = newFilename
 }
 
-/**
- * If set to true, the configuration file will be loaded.
- */
+/** If set to true, the configuration file will be loaded. */
 export let useConfigFile = false
 
 export const setUseConfigFile = (value: boolean) => {
   useConfigFile = value
 }
 
-/**
- * The user configuration object, before it's parsed.
- * Preset and plugins are transformed to functions.
- */
+/** The user configuration object, before it's parsed. Preset and plugins are transformed to functions. */
 export interface UserConfig {
   theme?: string
   presets?: Array<Preset | string | [string, any]>
   plugins?: Array<Plugin | string | [string, any]>
 }
 
-/**
- * The configuration object that is passed as build context.
- * The preset plugins are resolved and merged into the plugins array.
- */
+/** The configuration object that is passed as build context. The preset plugins are resolved and merged into the plugins array. */
 export interface ThemeConfig {
   theme: string
   dest: string
@@ -48,9 +41,7 @@ export interface ThemeConfig {
   plugins: Plugin[]
 }
 
-/**
- * Get the `UserConfig` list from the configuration file.
- */
+/** Get the `UserConfig` list from the configuration file. */
 export const getConfigFromFile = async () => {
   const files = await glob(configFilename, { cwd: rootPath })
   let fileConfig: UserConfig[] = []
@@ -72,11 +63,7 @@ export const getConfigFromFile = async () => {
   return fileConfig
 }
 
-/**
- * Get the configuration for the given theme name.
- * The theme config is passed to the plugins.
- * Prepend `presets` plugins to the root plugins.
- */
+/** Get the configuration for the given theme name. The theme config is passed to the plugins. Prepend `presets` plugins to the root plugins. */
 export const getThemeConfig = memo(async (themeName: string) => {
   const theme: MagentoTheme | undefined = getThemes().find((t: MagentoTheme) => t.name === themeName)
 
@@ -101,7 +88,7 @@ export const getThemeConfig = memo(async (themeName: string) => {
   // Set the default config if not defined yet
   if (!userConfig) {
     userConfig = {
-      presets: ['magefront-preset-default']
+      presets: ['magefront-preset-default'],
     }
   }
 
@@ -124,10 +111,7 @@ export const getThemeConfig = memo(async (themeName: string) => {
   return { theme: themeName, src, dest, plugins } as ThemeConfig
 })
 
-/**
- * Transform the plugin to a function if it is not already.
- * If passed a string, import the plugin and return the default export.
- */
+/** Transform the plugin to a function if it is not already. If passed a string, import the plugin and return the default export. */
 async function transformPluginDefinition(definition: any): Promise<Plugin> {
   if (typeof definition === 'function') {
     return definition
@@ -147,9 +131,7 @@ async function transformPluginDefinition(definition: any): Promise<Plugin> {
   throw new Error(`Invalid plugin type: ${typeof definition}`)
 }
 
-/**
- * Return the full module name from the given plugin string.
- */
+/** Return the full module name from the given plugin string. */
 function resolveModuleNameFromPluginStr(str: string): string {
   if (str.startsWith('magefront-plugin-')) {
     return str
@@ -157,10 +139,7 @@ function resolveModuleNameFromPluginStr(str: string): string {
   return `magefront-plugin-${str}`
 }
 
-/**
- * Transform the preset to a function if it is not already.
- * If passed a string, import the preset and return the default export.
- */
+/** Transform the preset to a function if it is not already. If passed a string, import the preset and return the default export. */
 async function transformPresetDefinition(definition: any): Promise<Preset> {
   if (typeof definition === 'string') {
     const { default: presetModule } = await import(resolveModuleNameFromPresetStr(definition))
@@ -180,9 +159,7 @@ async function transformPresetDefinition(definition: any): Promise<Preset> {
   throw new Error(`Invalid plugin type: ${typeof definition}`)
 }
 
-/**
- * Return the full module name from the given preset string.
- */
+/** Return the full module name from the given preset string. */
 function resolveModuleNameFromPresetStr(str: string): string {
   if (str.startsWith('magefront-preset-')) {
     return str

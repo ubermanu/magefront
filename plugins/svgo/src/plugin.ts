@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import svgo, { OptimizeOptions } from 'svgo'
 
 export interface Options {
@@ -13,14 +13,17 @@ export interface Options {
  * Optimize SVG files.
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<*>[]>}
+ * @returns {function( any ): Promise<Awaited< any >[]>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, optimizeOptions } = options
 
   // @ts-ignore
   return async (buildContext) => {
-    const files = await glob(src ?? '**/*.svg', { ignore, cwd: buildContext.src })
+    const files = await glob(src ?? '**/*.svg', {
+      ignore,
+      cwd: buildContext.src,
+    })
 
     await Promise.all(
       files.map(async (file) => {

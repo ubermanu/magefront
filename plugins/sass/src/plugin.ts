@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import dartSass, { Options as RenderOptions, SassException, Result as SassResult } from 'sass'
 
 export interface Options {
@@ -12,11 +12,10 @@ export interface Options {
 }
 
 /**
- * Compile SCSS files to CSS.
- * You can use the `compiler` option to specify the sass compiler to use. (e.g. node-sass)
+ * Compile SCSS files to CSS. You can use the `compiler` option to specify the sass compiler to use. (e.g. node-sass)
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<*>[]>}
+ * @returns {function( any ): Promise<Awaited< any >[]>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, sourcemaps, compiler, compilerOptions } = options
@@ -24,7 +23,10 @@ export default (options: Options = {}) => {
 
   // @ts-ignore
   return async (themeConfig) => {
-    const files = await glob(src ?? '**/!(_)*.scss', { ignore: ignore ?? [], cwd: themeConfig.src })
+    const files = await glob(src ?? '**/!(_)*.scss', {
+      ignore: ignore ?? [],
+      cwd: themeConfig.src,
+    })
 
     return Promise.all(
       files.map(async (file) => {
@@ -33,7 +35,7 @@ export default (options: Options = {}) => {
         return sass.render(
           {
             ...compilerOptions,
-            file: filePath
+            file: filePath,
           },
           (err: SassException, output: SassResult) => {
             if (err) {

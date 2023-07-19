@@ -1,11 +1,11 @@
-import fs from 'fs'
 import glob from 'fast-glob'
-import path from 'path'
+import fs from 'fs'
 import memo from 'memoizee'
+import path from 'path'
 
-import { getPackages, getRegistrations } from './composer'
-import type { ComposerPackage } from './composer'
 import { logger, rootPath } from '../env'
+import type { ComposerPackage } from './composer'
+import { getPackages, getRegistrations } from './composer'
 
 export interface MagentoModule {
   name: string
@@ -14,10 +14,9 @@ export interface MagentoModule {
 }
 
 /**
- * Read the `config.php` file and return the modules list.
- * Resolve the modules paths from `app/code` then from the `vendor` directory.
+ * Read the `config.php` file and return the modules list. Resolve the modules paths from `app/code` then from the `vendor` directory.
  *
- * @return MagentoModule[]
+ * @returns MagentoModule[]
  */
 export const getModules = memo(() => {
   const list: { [name: string]: MagentoModule } = {}
@@ -34,12 +33,15 @@ export const getModules = memo(() => {
     list[name] = {
       name,
       enabled: enabled === '1',
-      src: ''
+      src: '',
     }
   })
 
   // 2. Resolve the source path for the modules into `app/code/`
-  const appCode = glob.sync('app/code/*/*', { onlyDirectories: true, cwd: rootPath })
+  const appCode = glob.sync('app/code/*/*', {
+    onlyDirectories: true,
+    cwd: rootPath,
+  })
 
   appCode.forEach((codeSrc) => {
     const moduleXmlFile = path.join(rootPath, codeSrc, 'etc/module.xml')
@@ -83,7 +85,7 @@ export const getModules = memo(() => {
  * Get the name of a module from its `etc/module.xml` file.
  *
  * @param {string} file
- * @return {string}
+ * @returns {string}
  */
 function fetchNameFromModuleXml(file: string) {
   const moduleXml = fs.readFileSync(file).toString()

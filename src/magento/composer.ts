@@ -1,6 +1,6 @@
-import path from 'path'
 import fs from 'fs'
 import memo from 'memoizee'
+import path from 'path'
 
 import { rootPath } from '../env'
 
@@ -15,7 +15,7 @@ export interface ComposerPackage {
 /**
  * Get the list of packages installed.
  *
- * @return {ComposerPackage[]}
+ * @returns {ComposerPackage[]}
  */
 export const getPackages = memo(() => {
   const composerLock = path.join(rootPath, 'composer.lock')
@@ -24,18 +24,18 @@ export const getPackages = memo(() => {
     throw new Error(`composer.lock not found in ${rootPath}`)
   }
 
-  /** @type {{packages: []}} */
+  /** @type {{ packages: [] }} */
   const lock = JSON.parse(fs.readFileSync(composerLock, 'utf8'))
 
   return lock.packages ?? []
 })
 
 /**
- * Return a list of registration files for the given composer package config.
- * FIXME: At one point this could be any file, not just `registration.php`.
+ * Return a list of registration files for the given composer package config. FIXME: At one point this could be any file, not just
+ * `registration.php`.
  *
  * @param {ComposerPackage} pkg
- * @return {[]}
+ * @returns {[]}
  */
 export const getRegistrations = (pkg: ComposerPackage) => {
   return (pkg?.autoload?.files ?? []).filter((file: string) => file.endsWith('registration.php'))

@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 
 export interface Options {
   src: string | string[]
@@ -13,7 +13,7 @@ export interface Options {
  * Merge files into one.
  *
  * @param {Options} options
- * @returns {(function(*): Promise<void>)|*}
+ * @returns {(function( any ): Promise<void>)| any}
  */
 export default (options: Options) => {
   const { src, ignore, dest, remove } = options

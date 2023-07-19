@@ -1,5 +1,5 @@
-import bs from 'browser-sync'
 import type { BrowserSyncInstance, Options } from 'browser-sync'
+import bs from 'browser-sync'
 
 // Current instance of BrowserSync
 export let instance: BrowserSyncInstance
@@ -15,9 +15,9 @@ export const browserSync = async (url: string) => {
       rewriteRules: [
         {
           match: new RegExp(u.hostname.replace(/\./g, '\\.'), 'g'),
-          replace: 'localhost:' + 3000
-        }
-      ]
+          replace: 'localhost:' + 3000,
+        },
+      ],
     }
 
     instance = bs.create()

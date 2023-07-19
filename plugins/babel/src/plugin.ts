@@ -1,6 +1,6 @@
+import babel, { TransformOptions } from '@babel/core'
 import glob, { Pattern } from 'fast-glob'
 import path from 'path'
-import babel, { TransformOptions } from '@babel/core'
 
 export interface Options {
   src?: string | string[]
@@ -12,7 +12,7 @@ export interface Options {
  * Transform your JS code with babel.
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<*>[]>}
+ * @returns {function( any ): Promise<Awaited< any >[]>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, compilerOptions } = options
@@ -23,7 +23,10 @@ export default (options: Options = {}) => {
 
   // @ts-ignore
   return async (themeConfig) => {
-    const files = await glob(src, { ignore: ignore ?? [], cwd: themeConfig.src })
+    const files = await glob(src, {
+      ignore: ignore ?? [],
+      cwd: themeConfig.src,
+    })
 
     return Promise.all(
       files.map((file) => {

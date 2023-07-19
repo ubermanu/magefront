@@ -1,11 +1,11 @@
 import fs from 'fs'
-import path from 'path'
 import memo from 'memoizee'
+import path from 'path'
 
-import { getPackages, getRegistrations } from './composer'
-import type { ComposerPackage } from './composer'
-import type { MagentoModule } from './module'
 import { rootPath } from '../env'
+import type { ComposerPackage } from './composer'
+import { getPackages, getRegistrations } from './composer'
+import type { MagentoModule } from './module'
 
 export interface MagentoLanguage extends MagentoModule {
   code: string | false
@@ -14,7 +14,7 @@ export interface MagentoLanguage extends MagentoModule {
 /**
  * Get all the languages loaded from the `composer.lock` file.
  *
- * @return MagentoLanguage[]
+ * @returns MagentoLanguage[]
  */
 export const getLanguages = memo(() => {
   const list: { [name: string]: MagentoLanguage } = {}
@@ -33,7 +33,7 @@ export const getLanguages = memo(() => {
         name,
         code,
         src,
-        enabled: true
+        enabled: true,
       }
     })
   })
@@ -45,7 +45,7 @@ export const getLanguages = memo(() => {
  * Get the locale code of a language pkg from its `language.xml` file.
  *
  * @param {string} file
- * @return {string|false}
+ * @returns {string | false}
  */
 function getCodeFromLanguageXml(file: string) {
   const languageXml = fs.readFileSync(file).toString()

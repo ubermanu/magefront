@@ -1,7 +1,7 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
 import less27 from 'less'
+import path from 'path'
 import magentoImportPreprocessor from './magento-import-preprocessor'
 
 export interface Options {
@@ -34,7 +34,10 @@ export default (options: Options = {}) => {
       plugins.unshift(magentoImportPreprocessor(themeConfig.modules))
     }
 
-    const files = await glob(src ?? '**/!(_)*.less', { ignore, cwd: themeConfig.src })
+    const files = await glob(src ?? '**/!(_)*.less', {
+      ignore,
+      cwd: themeConfig.src,
+    })
 
     return Promise.all(
       files.map(async (file: string) => {
@@ -48,7 +51,7 @@ export default (options: Options = {}) => {
               sourceMap: sourcemaps,
               plugins,
               ...compilerOptions,
-              filename: path.resolve(filePath)
+              filename: path.resolve(filePath),
             },
             false
           )

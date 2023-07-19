@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import { minify } from 'terser'
 
 export interface Options {
@@ -13,7 +13,7 @@ export interface Options {
  * Find all the `js` files in the preprocessed directory and minify them.
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<void>[]>}
+ * @returns {function( any ): Promise<Awaited<void>[]>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, terserOptions } = options

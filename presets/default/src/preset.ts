@@ -1,12 +1,10 @@
+import cssnano from 'magefront-plugin-cssnano'
+import jsTranslation from 'magefront-plugin-js-translation'
 import less from 'magefront-plugin-less'
 import requireJsConfig from 'magefront-plugin-requirejs-config'
-import jsTranslation from 'magefront-plugin-js-translation'
 import terser from 'magefront-plugin-terser'
-import cssnano from 'magefront-plugin-cssnano'
 
-/**
- * The original options from the command line.
- */
+/** The original options from the command line. */
 export interface Options {
   minifyJs?: boolean
   minifyCss?: boolean
@@ -16,11 +14,10 @@ export interface Options {
 }
 
 /**
- * Return the default preset.
- * It is meant to be compatible with the default Magento themes.
+ * Return the default preset. It is meant to be compatible with the default Magento themes.
  *
  * @param {Options} options
- * @return {import('magefront').Preset}
+ * @returns {import('magefront').Preset}
  */
 export default (options: Options = {}) => {
   const { minifyJs, minifyCss, mergeCss, mergeJs, bundleJs } = options
@@ -29,12 +26,16 @@ export default (options: Options = {}) => {
     // prettier-ignore
     less(),
     requireJsConfig(),
-    jsTranslation()
+    jsTranslation(),
   ]
 
   if (minifyJs) {
     // The following files are ignore by default because they cause an issue with requireJs
-    plugins.push(terser({ ignore: ['**/*.min.js', 'mage/utils/main.js', 'Magento_Ui/**/*.js'] }))
+    plugins.push(
+      terser({
+        ignore: ['**/*.min.js', 'mage/utils/main.js', 'Magento_Ui/**/*.js'],
+      })
+    )
   }
 
   if (minifyCss) {

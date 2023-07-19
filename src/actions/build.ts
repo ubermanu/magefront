@@ -1,20 +1,19 @@
 import path from 'path'
 
 import { getThemeConfig } from '../config'
-import { getModules } from '../magento/module'
-import type { MagentoModule } from '../magento/module'
+import { logger, rootPath } from '../env'
 import { getLanguages } from '../magento/language'
+import type { MagentoModule } from '../magento/module'
+import { getModules } from '../magento/module'
 import { getThemeDependencyTree, getThemes } from '../magento/theme'
 import type { PluginContext } from '../plugin'
-import { logger, rootPath } from '../env'
 
 /**
- * Build the theme.
- * If a configuration file is found, it will be used.
+ * Build the theme. If a configuration file is found, it will be used.
  *
  * @param {string} themeName
  * @param {string} locale
- * @return {Promise<void>}
+ * @returns {Promise<void>}
  */
 export const build = async (themeName: string, locale = 'en_US') => {
   const themeConfig = await getThemeConfig(themeName)
@@ -40,7 +39,7 @@ export const build = async (themeName: string, locale = 'en_US') => {
         languageList,
         themeList,
         themeDependencyTree: getThemeDependencyTree(themeName),
-        cwd: rootPath
+        cwd: rootPath,
       } as PluginContext)
     } catch (e) {
       logger.error(e)

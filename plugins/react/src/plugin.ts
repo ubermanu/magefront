@@ -6,7 +6,7 @@ export interface Options extends BabelOptions {}
  * Transform `*.jsx` files to `*.js` files.
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<unknown>[]>}
+ * @returns {function( any ): Promise<Awaited<unknown>[]>}
  */
 export default (options: Options = {}) => {
   // @ts-ignore
@@ -17,11 +17,15 @@ export default (options: Options = {}) => {
       [
         '@babel/preset-react',
         {
-          runtime: 'automatic'
-        }
-      ]
-    ]
+          runtime: 'automatic',
+        },
+      ],
+    ],
   }
 
-  return babel({ src, ignore, compilerOptions: compilerOptions ?? babelReactPreset })
+  return babel({
+    src,
+    ignore,
+    compilerOptions: compilerOptions ?? babelReactPreset,
+  })
 }

@@ -5,16 +5,16 @@ export default defineBuildConfig({
     {
       input: './src/main',
       name: 'magefront',
-      declaration: true
+      declaration: true,
     },
     {
       input: './src/cli',
-      declaration: false
-    }
+      declaration: false,
+    },
   ],
   rollup: {
-    emitCJS: true
+    emitCJS: true,
   },
   clean: true,
-  declaration: true
+  declaration: true,
 })

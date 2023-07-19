@@ -1,19 +1,19 @@
-import path from 'path'
-import sade from 'sade'
-import winston from 'winston'
 import k from 'kleur'
+import path from 'path'
 import { performance } from 'perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
+import sade from 'sade'
+import winston from 'winston'
 
 import { version } from '../package.json' assert { type: 'json' }
-import { logger } from './env'
-import { setConfigFilename, setUseConfigFile } from './config'
-import { build } from './actions/build'
-import { inheritance } from './actions/inheritance'
-import { deploy } from './actions/deploy'
-import { clean } from './actions/clean'
 import { browserSync } from './actions/browser-sync'
+import { build } from './actions/build'
+import { clean } from './actions/clean'
+import { deploy } from './actions/deploy'
+import { inheritance } from './actions/inheritance'
 import { watch } from './actions/watch'
+import { setConfigFilename, setUseConfigFile } from './config'
+import { logger } from './env'
 
 // TODO: Implement an option to list all available themes
 const program = sade('magefront', true)

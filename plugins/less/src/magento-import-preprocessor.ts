@@ -1,15 +1,12 @@
 /**
- * Replaces the commented `@magento_import` statements with
- * the actual import statements for each enabled modules.
+ * Replaces the commented `@magento_import` statements with the actual import statements for each enabled modules.
  *
  * @type {import('less').PreProcessor}
  */
 export class preProcessor {
   private modules: string[]
 
-  /**
-   * @param {string[]} modules
-   */
+  /** @param {string[]} modules */
   constructor(modules: string[]) {
     this.modules = modules
   }
@@ -28,11 +25,11 @@ export class preProcessor {
 
 /**
  * @param {string[]} modules
- * @return {import('less').Plugin}
+ * @returns {import('less').Plugin}
  */
 export default (modules: string[]) => ({
   // @ts-ignore
   install: function (less: LessStatic, pluginManager) {
     pluginManager.addPreProcessor(new preProcessor(modules), 1)
-  }
+  },
 })

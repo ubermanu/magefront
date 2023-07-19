@@ -1,21 +1,21 @@
-import fs from 'fs-extra'
 import glob, { Pattern } from 'fast-glob'
+import fs from 'fs-extra'
 import path from 'path'
 
-import { getModules } from '../magento/module'
-import type { MagentoModule } from '../magento/module'
-import { findTheme, getThemeDependencyTree } from '../magento/theme'
 import { rootPath, tempPath } from '../env'
+import type { MagentoModule } from '../magento/module'
+import { getModules } from '../magento/module'
+import { findTheme, getThemeDependencyTree } from '../magento/theme'
 
 /**
- * Gather all the theme files and copy them to the temporary directory.
- * When this is done, the `build` task should be run afterwards.
+ * Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards.
  *
  * @param {string} themeName
  */
 export const inheritance = async (themeName: string) => {
   /**
    * Copy the files from the src to the destination directory.
+   *
    * @param src
    * @param dest
    * @param ignore
@@ -24,7 +24,7 @@ export const inheritance = async (themeName: string) => {
     const files = await glob(src + '/**', {
       cwd: rootPath,
       ignore: ignore.map((pattern) => path.join(src, pattern)),
-      onlyFiles: true
+      onlyFiles: true,
     })
     await Promise.all(
       files.map(async (srcPath) => {

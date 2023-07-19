@@ -1,15 +1,15 @@
-import path from 'path'
 import chokidar from 'chokidar'
+import path from 'path'
 import { performance } from 'perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
 
-import { inheritance } from './inheritance'
-import { build } from './build'
-import { deploy } from './deploy'
+import { logger, rootPath } from '../env'
 import { getModules } from '../magento/module'
 import { getThemes } from '../magento/theme'
-import { logger, rootPath } from '../env'
 import { instance } from './browser-sync'
+import { build } from './build'
+import { deploy } from './deploy'
+import { inheritance } from './inheritance'
 
 export const watch = async (themeName: string, locale: string) => {
   const watcherConfig = { ignoreInitial: true }

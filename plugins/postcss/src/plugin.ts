@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import postcss, { AcceptedPlugin } from 'postcss'
 
 export interface Options {
@@ -11,14 +11,17 @@ export interface Options {
 
 /**
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<void>>}
+ * @returns {function( any ): Promise<Awaited<void>>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, plugins } = options
 
   // @ts-ignore
   return async (buildContext) => {
-    const files = await glob(src ?? '**/!(_)*.css', { ignore: ignore ?? [], cwd: buildContext.src })
+    const files = await glob(src ?? '**/!(_)*.css', {
+      ignore: ignore ?? [],
+      cwd: buildContext.src,
+    })
 
     await Promise.all(
       files.map(async (file) => {
@@ -26,7 +29,10 @@ export default (options: Options = {}) => {
         const fileContent = await fs.promises.readFile(filePath)
         const compiler = await postcss(plugins ?? [])
 
-        const result = await compiler.process(fileContent, { from: filePath, to: filePath })
+        const result = await compiler.process(fileContent, {
+          from: filePath,
+          to: filePath,
+        })
 
         // TODO: Forward to logger
         result.warnings().forEach((warn) => {

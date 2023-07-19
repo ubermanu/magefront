@@ -1,11 +1,11 @@
-import path from 'path'
 import glob from 'fast-glob'
 import fs from 'fs'
+import path from 'path'
 
 /**
  * Merge all the requirejs-config files into one.
  *
- * @returns {function(*): Promise<void>}
+ * @returns {function( any ): Promise<void>}
  */
 export default () => {
   // @ts-ignore

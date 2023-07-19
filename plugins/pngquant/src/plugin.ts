@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 // @ts-ignore
 import pngquant from 'pngquant'
 
@@ -14,14 +14,17 @@ export interface Options {
  * Optimize PNG files.
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<*>[]>}
+ * @returns {function( any ): Promise<Awaited< any >[]>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, args } = options
 
   // @ts-ignore
   return async (buildContext) => {
-    const files = await glob(src ?? '**/*.png', { ignore, cwd: buildContext.src })
+    const files = await glob(src ?? '**/*.png', {
+      ignore,
+      cwd: buildContext.src,
+    })
 
     await Promise.all(
       files.map(async (file) => {

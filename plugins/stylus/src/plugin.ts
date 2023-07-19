@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import stylus, { RenderOptions } from 'stylus'
 
 export interface Options {
@@ -14,14 +14,17 @@ export interface Options {
  * Transform Stylus files to CSS.
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<*>[]>}
+ * @returns {function( any ): Promise<Awaited< any >[]>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, sourcemaps, compilerOptions } = options
 
   // @ts-ignore
   return async (themeConfig) => {
-    const files = await glob(src || '**/!(_)*.styl', { ignore: ignore ?? [], cwd: themeConfig.src })
+    const files = await glob(src || '**/!(_)*.styl', {
+      ignore: ignore ?? [],
+      cwd: themeConfig.src,
+    })
 
     return Promise.all(
       files.map(async (file) => {
@@ -32,7 +35,7 @@ export default (options: Options = {}) => {
           // @ts-ignore TODO: the option is not recognized
           sourcemap: sourcemaps,
           ...compilerOptions,
-          filename: path.resolve(filePath)
+          filename: path.resolve(filePath),
         })
 
         style.render((err, css) => {

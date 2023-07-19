@@ -2,9 +2,7 @@ import Table from 'cli-table'
 
 import { getThemes } from '../magento/theme'
 
-/**
- * List all the themes.
- */
+/** List all the themes. */
 export const list = () => {
   const themeList = getThemes()
   const table = new Table({ head: ['Theme', 'Area', 'Src', 'Parent'] })

@@ -6,7 +6,7 @@ export interface Options {
  * Merge files into one.
  *
  * @param {Options} options
- * @returns {(function(*): Promise<void>)|*}
+ * @returns {(function( any ): Promise<void>)| any}
  */
 export default (options: Options) => {
   // @ts-ignore

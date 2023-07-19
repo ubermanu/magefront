@@ -1,5 +1,5 @@
-import postcss, { Options as PostcssOptions } from 'magefront-plugin-postcss'
 import cssnano from 'cssnano'
+import postcss, { Options as PostcssOptions } from 'magefront-plugin-postcss'
 
 export interface Options extends PostcssOptions {
   preset?: any
@@ -8,7 +8,7 @@ export interface Options extends PostcssOptions {
 
 /**
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<void>>}
+ * @returns {function( any ): Promise<Awaited<void>>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, preset, plugins } = options
@@ -19,8 +19,8 @@ export default (options: Options = {}) => {
     plugins: [
       cssnano({
         preset: preset ?? 'default',
-        plugins
-      })
-    ]
+        plugins,
+      }),
+    ],
   })
 }

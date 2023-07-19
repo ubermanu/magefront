@@ -1,10 +1,10 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-import { clean } from '../src/actions/clean'
-import { inheritance } from '../src/actions/inheritance'
 import { build } from '../src/actions/build'
+import { clean } from '../src/actions/clean'
 import { deploy } from '../src/actions/deploy'
+import { inheritance } from '../src/actions/inheritance'
 import { rootPath, tempPath } from '../src/env'
 
 describe('Build and deploy the Magento/luma theme', () => {

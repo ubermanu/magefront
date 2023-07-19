@@ -1,6 +1,6 @@
 import glob, { Pattern } from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 import typescript, { CompilerOptions } from 'typescript'
 
 export interface Options {
@@ -13,7 +13,7 @@ export interface Options {
  * Transform TypeScript files to JavaScript.
  *
  * @param {Options} options
- * @returns {function(*): Promise<Awaited<unknown>[]>}
+ * @returns {function( any ): Promise<Awaited<unknown>[]>}
  */
 export default (options: Options = {}) => {
   const { src, ignore, compilerOptions } = options
@@ -22,7 +22,7 @@ export default (options: Options = {}) => {
   return async (themeConfig) => {
     const files = await glob(src ?? '**/*.ts', {
       ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
-      cwd: themeConfig.src
+      cwd: themeConfig.src,
     })
 
     return Promise.all(

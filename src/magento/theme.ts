@@ -1,12 +1,12 @@
 import glob from 'fast-glob'
-import path from 'path'
 import fs from 'fs'
 import memo from 'memoizee'
+import path from 'path'
 
-import { getPackages, getRegistrations } from './composer'
-import type { ComposerPackage } from './composer'
-import type { MagentoModule } from './module'
 import { rootPath } from '../env'
+import type { ComposerPackage } from './composer'
+import { getPackages, getRegistrations } from './composer'
+import type { MagentoModule } from './module'
 
 export interface MagentoTheme extends MagentoModule {
   area: string
@@ -17,13 +17,15 @@ export interface MagentoTheme extends MagentoModule {
 /**
  * Crawl the Magento project source code and return a list of all the themes.
  *
- * @return MagentoTheme[]
+ * @returns MagentoTheme[]
  */
 export const getThemes = memo(() => {
   const list: { [name: string]: MagentoTheme } = {}
 
   // 1. Get the list of themes from the `app/design/` directory.
-  const appDesign = glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml', { cwd: rootPath })
+  const appDesign = glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml', {
+    cwd: rootPath,
+  })
 
   appDesign.forEach((designSrc) => {
     const name = designSrc.split('/').slice(3, -1).join('/')
@@ -35,7 +37,7 @@ export const getThemes = memo(() => {
       area,
       parent: getParentFromThemeXml(path.join(rootPath, designSrc)),
       dest: path.join('pub/static', area, name),
-      enabled: true
+      enabled: true,
     }
   })
 
@@ -54,7 +56,7 @@ export const getThemes = memo(() => {
         area,
         parent: getParentFromThemeXml(path.join(rootPath, src, 'theme.xml')),
         dest: path.join('pub/static', area, name),
-        enabled: true
+        enabled: true,
       }
     })
   })
@@ -66,7 +68,7 @@ export const getThemes = memo(() => {
  * Get the parent of a theme from its `theme.xml` file.
  *
  * @param {string} file
- * @return {string|false}
+ * @returns {string | false}
  */
 function getParentFromThemeXml(file: string) {
   const themeXml = fs.readFileSync(file, 'utf8')
@@ -78,7 +80,7 @@ function getParentFromThemeXml(file: string) {
  * Get the name and area of a theme from its `registration.php` file.
  *
  * @param {string} file
- * @return {{area: string, name: string}}
+ * @returns {{ area: string; name: string }}
  */
 function getThemeNameAndAreaFromRegistrationPhp(file: string) {
   const registration = fs.readFileSync(file).toString()
@@ -89,15 +91,14 @@ function getThemeNameAndAreaFromRegistrationPhp(file: string) {
 
 /**
  * Get a theme by its name.
+ *
  * @memoized
  */
 export const findTheme = memo((themeName: string) => {
   return getThemes().find((theme) => theme.name === themeName)
 })
 
-/**
- * @param themeName
- */
+/** @param themeName */
 export const getThemeDependencyTree = memo((themeName: string): string[] => {
   return __resolveThemeDependencyTree(themeName)
 })
