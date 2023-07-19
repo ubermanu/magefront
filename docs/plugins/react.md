@@ -6,6 +6,7 @@ This plugin is based on [magefront-plugin-babel](plugins/babel.md).
 
 ## Install
 
+    npm i react --save-dev
     npm i magefront-plugin-react --save-dev
 
 ## Usage
