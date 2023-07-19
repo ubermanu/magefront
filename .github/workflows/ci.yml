@@ -3,8 +3,9 @@ name: continuous-integration
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+# FIXME: Enable pull request ci (currently disabled due to Magento Marketplace credentials)
+#  pull_request:
+#    branches: [ main ]
 
 concurrency:
   group: 'continuous-integration'
