@@ -29,7 +29,6 @@ export const build = async (themeName: string, locale = 'en_US') => {
   const dest = path.join(themeConfig.dest, locale)
   for (const plugin of themeConfig.plugins) {
     try {
-      // @ts-ignore
       await plugin({
         ...themeConfig,
         dest,

@@ -92,15 +92,21 @@ export const getThemeConfig = memo(async (themeName: string) => {
     }
   }
 
-  const pluginList: Plugin[] | string[] = []
+  const pluginList: Array<Plugin | string | [string, any]> = []
 
   // Add the preset plugins to the plugin list
   if (userConfig.presets) {
     const presets = await Promise.all(userConfig.presets.map(transformPresetDefinition))
     presets.forEach((preset) => {
-      // @ts-ignore
-      pluginList.push(...preset.plugins)
+      if (Array.isArray(preset.plugins)) {
+        preset.plugins.forEach((plugin) => pluginList.push(plugin))
+      }
     })
+  }
+
+  // Add the user plugins to the plugin list
+  if (userConfig.plugins) {
+    userConfig.plugins.forEach((plugin) => pluginList.push(plugin))
   }
 
   // Add support for multiple plugin formats
