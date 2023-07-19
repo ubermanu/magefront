@@ -1,6 +1,8 @@
+// @ts-ignore
 import dotenv from 'dotenv'
+import { setRootPath } from 'magefront/src/env'
+// @ts-ignore
 import fs from 'node:fs'
-import { setRootPath } from '../src/env'
 
 // Load test env file
 dotenv.config({ path: '.env.test' })
