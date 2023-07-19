@@ -8,9 +8,39 @@ importers:
 
   .:
     dependencies:
-      magefront:
-        specifier: workspace:*
-        version: link:packages/magefront
+      browser-sync:
+        specifier: ^2.29.3
+        version: 2.29.3
+      chokidar:
+        specifier: ^3.5.3
+        version: 3.5.3
+      cli-table:
+        specifier: ^0.3.11
+        version: 0.3.11
+      fast-glob:
+        specifier: ^3.3.0
+        version: 3.3.0
+      fs-extra:
+        specifier: ^10.1.0
+        version: 10.1.0
+      kleur:
+        specifier: ^4.1.5
+        version: 4.1.5
+      magefront-preset-default:
+        specifier: workspace:~
+        version: link:presets/default
+      memoizee:
+        specifier: ^0.4.15
+        version: 0.4.15
+      pretty-ms:
+        specifier: ^8.0.0
+        version: 8.0.0
+      sade:
+        specifier: ^1.8.1
+        version: 1.8.1
+      winston:
+        specifier: ^3.10.0
+        version: 3.10.0
     devDependencies:
       '@types/browser-sync':
         specifier: ^2.27.0
@@ -61,42 +91,6 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
 
-  packages/magefront:
-    dependencies:
-      browser-sync:
-        specifier: ^2.29.3
-        version: 2.29.3
-      chokidar:
-        specifier: ^3.5.3
-        version: 3.5.3
-      cli-table:
-        specifier: ^0.3.11
-        version: 0.3.11
-      fast-glob:
-        specifier: ^3.3.0
-        version: 3.3.0
-      fs-extra:
-        specifier: ^10.1.0
-        version: 10.1.0
-      kleur:
-        specifier: ^4.1.5
-        version: 4.1.5
-      magefront-preset-default:
-        specifier: workspace:~
-        version: link:../../presets/default
-      memoizee:
-        specifier: ^0.4.15
-        version: 0.4.15
-      pretty-ms:
-        specifier: ^8.0.0
-        version: 8.0.0
-      sade:
-        specifier: ^1.8.1
-        version: 1.8.1
-      winston:
-        specifier: ^3.10.0
-        version: 3.10.0
-
   plugins/babel:
     dependencies:
       '@babel/core':
@@ -110,7 +104,7 @@ importers:
         version: 3.3.0
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
 
   plugins/concat:
     dependencies:
@@ -119,7 +113,7 @@ importers:
         version: 3.2.12
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
 
   plugins/cssnano:
     dependencies:
@@ -131,7 +125,7 @@ importers:
         version: 5.2.12(postcss@8.4.16)
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       magefront-plugin-postcss:
         specifier: workspace:~
         version: link:../postcss
@@ -144,7 +138,7 @@ importers:
     dependencies:
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
 
   plugins/js-translation:
     dependencies:
@@ -153,7 +147,7 @@ importers:
         version: 5.3.0
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
 
   plugins/less:
     dependencies:
@@ -168,7 +162,7 @@ importers:
         version: 2.7.3
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
 
   plugins/pngquant:
     dependencies:
@@ -177,7 +171,7 @@ importers:
         version: 3.3.0
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       pngquant:
         specifier: ^4.1.0
         version: 4.1.0
@@ -189,7 +183,7 @@ importers:
         version: 3.2.11
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       postcss:
         specifier: ^8.4.16
         version: 8.4.16
@@ -201,7 +195,7 @@ importers:
         version: 7.22.5(@babel/core@7.22.9)
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       magefront-plugin-babel:
         specifier: workspace:~
         version: link:../babel
@@ -216,7 +210,7 @@ importers:
         version: 3.2.11
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
 
   plugins/sass:
     dependencies:
@@ -225,7 +219,7 @@ importers:
         version: 3.3.0
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       sass:
         specifier: ^1.63.6
         version: 1.63.6
@@ -240,7 +234,7 @@ importers:
         version: 3.2.11
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       stylus:
         specifier: ^0.59.0
         version: 0.59.0
@@ -252,7 +246,7 @@ importers:
         version: 3.2.11
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       svelte:
         specifier: 4.x
         version: 4.0.0
@@ -267,7 +261,7 @@ importers:
         version: 3.2.11
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       svgo:
         specifier: ^2.8.0
         version: 2.8.0
@@ -279,7 +273,7 @@ importers:
         version: 3.2.11
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       terser:
         specifier: ^5.19.1
         version: 5.19.1
@@ -291,7 +285,7 @@ importers:
         version: 3.2.11
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       typescript:
         specifier: ^4.8.2
         version: 4.8.2
@@ -300,7 +294,7 @@ importers:
     dependencies:
       magefront:
         specifier: workspace:^
-        version: link:../../packages/magefront
+        version: link:../..
       magefront-plugin-cssnano:
         specifier: workspace:~
         version: link:../../plugins/cssnano
@@ -1669,6 +1663,10 @@ packages:
   /@types/node@18.16.19:
     resolution: {integrity: sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==}
 
+  /@types/node@20.4.2:
+    resolution: {integrity: sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==}
+    dev: false
+
   /@types/parse-glob@3.0.29:
     resolution: {integrity: sha512-OFwMPH5eJOhtwR92GMjTNWukaKTdWQC12cBgRvrTQl5CwhruSq6734wi1CTSh5Qjm/pMJWaKOOPKZOp6FpIkXQ==}
     dev: true
@@ -1703,13 +1701,13 @@ packages:
   /@types/stylus@0.48.38:
     resolution: {integrity: sha512-B5otJekvD6XM8iTrnO6e2twoTY2tKL9VkL/57/2Lo4tv3EatbCaufdi68VVtn/h4yjO+HVvYEyrNQd0Lzj6riw==}
     dependencies:
-      '@types/node': 18.16.19
+      '@types/node': 20.4.2
     dev: false
 
   /@types/svgo@2.6.4:
     resolution: {integrity: sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==}
     dependencies:
-      '@types/node': 18.16.19
+      '@types/node': 20.4.2
     dev: false
 
   /@types/triple-beam@1.3.2:

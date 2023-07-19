@@ -1,18 +1,48 @@
 {
-  "name": "magefront-monorepo",
-  "private": true,
+  "name": "magefront",
+  "version": "0.23.1",
+  "type": "module",
+  "description": "A modern Magento 2 theme builder",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "builder",
+    "frontend",
+    "less",
+    "sass",
+    "stylus"
+  ],
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git"
   },
+  "main": "dist/magefront.cjs",
+  "module": "dist/magefront.mjs",
+  "types": "dist/magefront.d.ts",
   "scripts": {
-    "build": "npx turbo build",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
+    "ts-check": "tsc --noEmit",
+    "build": "unbuild",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "magefront": "workspace:*"
+    "browser-sync": "^2.29.3",
+    "chokidar": "^3.5.3",
+    "cli-table": "^0.3.11",
+    "fast-glob": "^3.3.0",
+    "fs-extra": "^10.1.0",
+    "kleur": "^4.1.5",
+    "magefront-preset-default": "workspace:~",
+    "memoizee": "^0.4.15",
+    "pretty-ms": "^8.0.0",
+    "sade": "^1.8.1",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@types/browser-sync": "^2.27.0",
@@ -51,5 +81,15 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "bin": {
+    "magefront": "dist/cli.mjs"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/magefront.mjs",
+      "require": "./dist/magefront.cjs",
+      "types": "./dist/magefront.d.ts"
+    }
   }
 }
