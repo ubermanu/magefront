@@ -38,7 +38,8 @@
   "exports": {
     ".": {
       "import": "./dist/preset.mjs",
-      "require": "./dist/preset.cjs"
+      "require": "./dist/preset.cjs",
+      "types": "./dist/preset.d.ts"
     }
   }
 }
