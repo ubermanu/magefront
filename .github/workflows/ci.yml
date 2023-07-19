@@ -39,17 +39,28 @@ jobs:
 
       - name: Setup Magento Repository Credentials
         run: |
-          composer global config http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_USERNAME}" "${MAGENTO_MARKETPLACE_PASSWORD}";
+          composer global config http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_USERNAME}" "${MAGENTO_MARKETPLACE_PASSWORD}"
 
       - name: Define Magento ROOT for tests
         run: echo "Set Magento root to $WORKSPACE"
         env:
           MAGEFRONT_TEST_MAGENTO_ROOT: ${{ github.workspace }}/magento
 
+      - name: Cache Composer packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
       - name: Create Magento Project
+        id: create-project
         run: |
-          composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition "$GITHUB_WORKSPACE/magento";
-          cp tests/_fixtures/config.php.dist "$GITHUB_WORKSPACE/magento/app/etc/config.php";
+          if [ ! -d "$GITHUB_WORKSPACE/magento/vendor" ]; then
+            composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition "$GITHUB_WORKSPACE/magento"
+            cp tests/_fixtures/config.php.dist "$GITHUB_WORKSPACE/magento/app/etc/config.php"
+          fi
 
       - run: pnpm i
       - run: pnpm build
