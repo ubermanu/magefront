@@ -29,6 +29,9 @@
     "fast-glob": "^3.2.11",
     "postcss": "^8.4.16"
   },
+  "peerDependencies": {
+    "magefront": "workspace:^"
+  },
   "exports": {
     ".": {
       "import": "./dist/plugin.mjs",

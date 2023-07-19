@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import fs from 'fs'
+import fs from 'node:fs'
 import { setRootPath } from '../src/env'
 
 // Load test env file

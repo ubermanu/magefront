@@ -1,7 +1,8 @@
-import glob, { Pattern } from 'fast-glob'
-import fs from 'fs'
+import glob, { type Pattern } from 'fast-glob'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs'
 import path from 'node:path'
-import dartSass, { Options as RenderOptions, SassException, Result as SassResult } from 'sass'
+import dartSass, { type Options as RenderOptions, type SassException, type Result as SassResult } from 'sass'
 
 export interface Options {
   src?: string | string[]
@@ -11,26 +12,20 @@ export interface Options {
   compilerOptions?: RenderOptions
 }
 
-/**
- * Compile SCSS files to CSS. You can use the `compiler` option to specify the sass compiler to use. (e.g. node-sass)
- *
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited< any >[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, sourcemaps, compiler, compilerOptions } = options
+/** Compile SCSS files to CSS. You can use the `compiler` option to specify the sass compiler to use. (e.g. node-sass) */
+export default (options: Options = {}): Plugin => {
+  const { src, ignore, sourcemaps, compiler, compilerOptions } = { ...options }
   const sass = compiler ?? dartSass
 
-  // @ts-ignore
-  return async (themeConfig) => {
+  return async (context) => {
     const files = await glob(src ?? '**/!(_)*.scss', {
       ignore: ignore ?? [],
-      cwd: themeConfig.src,
+      cwd: context.src,
     })
 
-    return Promise.all(
+    await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(themeConfig.src, file)
+        const filePath = path.join(context.src, file)
 
         return sass.render(
           {

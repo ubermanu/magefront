@@ -26,6 +26,9 @@
     "build": "unbuild",
     "prepublishOnly": "pnpm run build"
   },
+  "peerDependencies": {
+    "magefront": "workspace:^"
+  },
   "exports": {
     ".": {
       "import": "./dist/plugin.mjs",

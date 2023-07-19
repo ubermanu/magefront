@@ -1,3 +1,4 @@
+import type { Preset } from 'magefront'
 import cssnano from 'magefront-plugin-cssnano'
 import jsTranslation from 'magefront-plugin-js-translation'
 import less from 'magefront-plugin-less'
@@ -13,14 +14,9 @@ export interface Options {
   bundleJs?: boolean
 }
 
-/**
- * Return the default preset. It is meant to be compatible with the default Magento themes.
- *
- * @param {Options} options
- * @returns {import('magefront').Preset}
- */
-export default (options: Options = {}) => {
-  const { minifyJs, minifyCss, mergeCss, mergeJs, bundleJs } = options
+/** Return the default preset. It is meant to be compatible with the default Magento themes. */
+export default (options?: Options): Preset => {
+  const { minifyJs, minifyCss, mergeCss, mergeJs, bundleJs } = { ...options }
 
   const plugins = [
     // prettier-ignore

@@ -1,24 +1,17 @@
 import glob from 'fast-glob'
-import fs from 'fs'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs'
 import path from 'node:path'
 
-/**
- * Merge all the requirejs-config files into one.
- *
- * @returns {function( any ): Promise<void>}
- */
-export default () => {
-  // @ts-ignore
+/** Merge all the requirejs-config files into one. */
+export default (): Plugin => {
   return async (context) => {
     const files: string[] = []
     const { themeList, themeDependencyTree } = context
-
-    // @ts-ignore
     const moduleList = context.moduleList.filter((mod) => mod.enabled && mod.src)
 
     // Get the `requirejs-config.js` files from the modules
     // FIXME: Check for the module dependency tree (to get the correct order)
-    // @ts-ignore
     moduleList.forEach((mod) => {
       const baseFilePath = path.join(context.cwd, mod.src, 'view', 'base', 'requirejs-config.js')
       if (fs.existsSync(baseFilePath)) {

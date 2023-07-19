@@ -1,5 +1,6 @@
 import glob, { type Pattern } from 'fast-glob'
-import fs from 'fs'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs'
 import path from 'node:path'
 import stylus, { type RenderOptions } from 'stylus'
 
@@ -10,25 +11,19 @@ export interface Options {
   compilerOptions?: RenderOptions
 }
 
-/**
- * Transform Stylus files to CSS.
- *
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited< any >[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, sourcemaps, compilerOptions } = options
+/** Transform Stylus files to CSS. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, sourcemaps, compilerOptions } = { ...options }
 
-  // @ts-ignore
-  return async (themeConfig) => {
+  return async (context) => {
     const files = await glob(src || '**/!(_)*.styl', {
       ignore: ignore ?? [],
-      cwd: themeConfig.src,
+      cwd: context.src,
     })
 
-    return Promise.all(
+    await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(themeConfig.src, file)
+        const filePath = path.join(context.src, file)
         const fileContent = await fs.promises.readFile(filePath, 'utf8')
 
         const style = stylus(fileContent.toString(), {

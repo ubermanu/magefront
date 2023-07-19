@@ -1,5 +1,6 @@
-import glob, { Pattern } from 'fast-glob'
-import fs from 'fs'
+import glob, { type Pattern } from 'fast-glob'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 
 export interface Options {
@@ -9,17 +10,11 @@ export interface Options {
   remove?: boolean
 }
 
-/**
- * Merge files into one.
- *
- * @param {Options} options
- * @returns {(function( any ): Promise<void>)| any}
- */
-export default (options: Options) => {
-  const { src, ignore, dest, remove } = options
+/** Merges multiple files into one. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, dest, remove = true } = { ...options }
 
-  // @ts-ignore
-  return async (buildContext) => {
+  return async (context) => {
     if (!src) {
       throw new Error('Missing "src" option')
     }
@@ -28,26 +23,26 @@ export default (options: Options) => {
       throw new Error('Missing "dest" option')
     }
 
-    const files = await glob(src, { ignore, cwd: buildContext.src })
+    const files = await glob(src, { ignore, cwd: context.src })
 
     const packed = await Promise.all(
       files.map((file: string) => {
-        const filePath = path.join(buildContext.src, file)
-        return fs.promises.readFile(filePath, 'utf8')
+        const filePath = path.join(context.src, file)
+        return fs.readFile(filePath, 'utf8')
       })
     )
-
-    // Write the merged file
-    await fs.promises.writeFile(path.join(buildContext.src, dest), packed.join('\n'), 'utf8')
 
     // Delete the original files
     if (remove ?? true) {
       await Promise.all(
         files.map((file: string) => {
-          const filePath = path.join(buildContext.src, file)
-          return fs.promises.unlink(filePath)
+          const filePath = path.join(context.src, file)
+          return fs.unlink(filePath)
         })
       )
     }
+
+    // Write the merged file (after deleting the original files)
+    await fs.writeFile(path.join(context.src, dest), packed.join('\n'), 'utf8')
   }
 }

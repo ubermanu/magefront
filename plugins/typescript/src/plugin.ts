@@ -1,5 +1,6 @@
 import glob, { type Pattern } from 'fast-glob'
-import fs from 'fs'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import typescript, { type CompilerOptions } from 'typescript'
 
@@ -9,29 +10,23 @@ export interface Options {
   compilerOptions?: CompilerOptions
 }
 
-/**
- * Transform TypeScript files to JavaScript.
- *
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited<unknown>[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, compilerOptions } = options
+/** Transform TypeScript files to JavaScript. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, compilerOptions } = { ...options }
 
-  // @ts-ignore
-  return async (themeConfig) => {
+  return async (context) => {
     const files = await glob(src ?? '**/*.ts', {
       ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
-      cwd: themeConfig.src,
+      cwd: context.src,
     })
 
-    return Promise.all(
+    await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(themeConfig.src, file)
-        const fileContent = await fs.promises.readFile(filePath)
+        const filePath = path.join(context.src, file)
+        const fileContent = await fs.readFile(filePath)
         const output = typescript.transpile(fileContent.toString(), compilerOptions ?? {})
 
-        return fs.promises.writeFile(filePath.replace(/\.ts$/, '.js'), output)
+        return fs.writeFile(filePath.replace(/\.ts$/, '.js'), output)
       })
     )
   }

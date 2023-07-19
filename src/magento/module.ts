@@ -1,6 +1,6 @@
 import glob from 'fast-glob'
-import fs from 'fs'
 import memo from 'memoizee'
+import fs from 'node:fs'
 import path from 'node:path'
 
 import { logger, rootPath } from '../env'

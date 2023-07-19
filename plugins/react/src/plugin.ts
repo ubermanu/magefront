@@ -1,15 +1,11 @@
+import type { Plugin } from 'magefront'
 import babel, { type Options as BabelOptions } from 'magefront-plugin-babel'
 
 export interface Options extends BabelOptions {}
 
-/**
- * Transform `*.jsx` files to `*.js` files.
- *
- * @param {Options} options
- * @returns {function(any): Promise<Awaited<unknown>[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, compilerOptions } = options
+/** Transform `*.jsx` files to `*.js` files. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, compilerOptions } = { ...options }
 
   const babelReactPreset = {
     presets: [

@@ -1,5 +1,6 @@
 import glob, { type Pattern } from 'fast-glob'
-import fs from 'fs'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import postcss, { type AcceptedPlugin } from 'postcss'
 
@@ -9,24 +10,20 @@ export interface Options {
   plugins?: AcceptedPlugin[]
 }
 
-/**
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited<void>>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, plugins } = options
+/** Transforms CSS files using PostCSS. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, plugins } = { ...options }
 
-  // @ts-ignore
-  return async (buildContext) => {
+  return async (context) => {
     const files = await glob(src ?? '**/!(_)*.css', {
       ignore: ignore ?? [],
-      cwd: buildContext.src,
+      cwd: context.src,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(buildContext.src, file)
-        const fileContent = await fs.promises.readFile(filePath)
+        const filePath = path.join(context.src, file)
+        const fileContent = await fs.readFile(filePath)
         const compiler = await postcss(plugins ?? [])
 
         const result = await compiler.process(fileContent, {
@@ -39,7 +36,7 @@ export default (options: Options = {}) => {
           console.warn(warn.toString())
         })
 
-        return fs.promises.writeFile(filePath, result.css)
+        return fs.writeFile(filePath, result.css)
       })
     )
   }

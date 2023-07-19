@@ -1,17 +1,15 @@
 import cssnano from 'cssnano'
-import postcss, { Options as PostcssOptions } from 'magefront-plugin-postcss'
+import type { Plugin } from 'magefront'
+import postcss, { type Options as PostcssOptions } from 'magefront-plugin-postcss'
 
 export interface Options extends PostcssOptions {
   preset?: any
   configFile?: string
 }
 
-/**
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited<void>>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, preset, plugins } = options
+/** Minifies CSS files. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, preset, plugins } = { ...options }
 
   return postcss({
     src,

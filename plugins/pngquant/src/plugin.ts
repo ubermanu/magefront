@@ -1,5 +1,7 @@
 import glob, { type Pattern } from 'fast-glob'
+import type { Plugin } from 'magefront'
 import path from 'node:path'
+// @ts-ignore
 import PngQuant from 'pngquant'
 
 export interface Options {
@@ -8,29 +10,23 @@ export interface Options {
   args?: string[]
 }
 
-/**
- * Optimize PNG files.
- *
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited< any >[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, args = [] } = options
+/** Optimize PNG files. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, args = [] } = { ...options }
 
   const compress = (filename: string): void => {
     new PngQuant([...args, '--force', filename])
   }
 
-  // @ts-ignore
-  return async (buildContext) => {
+  return async (context) => {
     const files = await glob(src ?? '**/*.png', {
       ignore,
-      cwd: buildContext.src,
+      cwd: context.src,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(buildContext.src, file)
+        const filePath = path.join(context.src, file)
 
         try {
           compress(filePath)

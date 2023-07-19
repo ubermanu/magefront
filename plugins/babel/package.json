@@ -30,6 +30,9 @@
     "fast-glob": "^3.3.0",
     "@types/babel__core": "7.x"
   },
+  "peerDependencies": {
+    "magefront": "workspace:^"
+  },
   "exports": {
     ".": {
       "import": "./dist/plugin.mjs",

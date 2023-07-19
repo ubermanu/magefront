@@ -1,22 +1,17 @@
 import { parse } from 'csv-parse'
-import fs from 'fs'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs'
 import path from 'node:path'
 
-/**
- * Generate a `js-translation.json` file for the current locale.
- *
- * @returns {(function( any ): Promise<void>)| any}
- */
-export default () => {
-  // @ts-ignore
-  return async (themeConfig) => {
+/** Generates a `js-translation.json` file for the current locale. */
+export default (): Plugin => {
+  return async (context) => {
     const files = []
 
-    const { locale, moduleList, languageList } = themeConfig
+    const { locale, moduleList, languageList } = context
     const translationFilename = locale + '.csv'
 
     // Get the translation files from the language packs
-    // @ts-ignore
     languageList.forEach((lang) => {
       if (lang.code !== locale) {
         return
@@ -30,7 +25,6 @@ export default () => {
 
     // Get the translation files from the modules
     // TODO: Sort the modules by dependencies tree
-    // @ts-ignore
     moduleList.forEach((mod) => {
       if (!mod.enabled || !mod.src) {
         return
@@ -44,7 +38,7 @@ export default () => {
 
     // Get the translation file from the theme
     // FIXME: Get the translations from the parent themes
-    const themeTranslationFile = path.join(themeConfig.src, 'i18n', translationFilename)
+    const themeTranslationFile = path.join(context.src, 'i18n', translationFilename)
     if (fs.existsSync(themeTranslationFile)) {
       files.push(themeTranslationFile)
     }
@@ -71,7 +65,7 @@ export default () => {
     })
 
     parser.on('end', () => {
-      const file = path.join(themeConfig.src, 'js-translation.json')
+      const file = path.join(context.src, 'js-translation.json')
       fs.writeFileSync(file, JSON.stringify(records, null, 2))
     })
 

@@ -28,6 +28,9 @@
   "dependencies": {
     "csv-parse": "^5.3.0"
   },
+  "peerDependencies": {
+    "magefront": "workspace:^"
+  },
   "exports": {
     ".": {
       "import": "./dist/plugin.mjs",

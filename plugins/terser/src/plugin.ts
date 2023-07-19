@@ -1,5 +1,6 @@
 import glob, { type Pattern } from 'fast-glob'
-import fs from 'fs'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import { minify } from 'terser'
 
@@ -9,26 +10,20 @@ export interface Options {
   terserOptions?: any
 }
 
-/**
- * Find all the `js` files in the preprocessed directory and minify them.
- *
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited<void>[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, terserOptions } = options
+/** Find all the `js` files in the preprocessed directory and minify them. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, terserOptions } = { ...options }
 
-  // @ts-ignore
-  return async (themeConfig) => {
-    const files = await glob(src ?? '**/*.js', { ignore, cwd: themeConfig.src })
+  return async (context) => {
+    const files = await glob(src ?? '**/*.js', { ignore, cwd: context.src })
 
-    return Promise.all(
+    await Promise.all(
       files.map(async (file: string) => {
-        const filePath = path.join(themeConfig.src, file)
-        const fileContent = await fs.promises.readFile(filePath)
+        const filePath = path.join(context.src, file)
+        const fileContent = await fs.readFile(filePath)
         const { code } = await minify(fileContent.toString(), terserOptions || {})
         if (code) {
-          return fs.promises.writeFile(filePath, code)
+          return fs.writeFile(filePath, code)
         }
       })
     )

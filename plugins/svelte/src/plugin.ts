@@ -1,8 +1,9 @@
 import glob, { type Pattern } from 'fast-glob'
-import fs from 'fs'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs'
 import path from 'node:path'
 import { compile } from 'svelte/compiler'
-import { type CompileOptions } from 'svelte/types/compiler'
+import { type CompileOptions } from 'svelte/types/compiler/interfaces'
 
 export interface Options {
   src?: string | string[]
@@ -10,25 +11,19 @@ export interface Options {
   compilerOptions?: CompileOptions
 }
 
-/**
- * Transform `*.svelte` files to `*.js` files.
- *
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited< any >[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, compilerOptions } = options
+/** Transform `*.svelte` files to `*.js` files. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, compilerOptions } = { ...options }
 
-  // @ts-ignore
-  return async (themeConfig) => {
+  return async (context) => {
     const files = await glob(src ?? '**/*.svelte', {
       ignore: ignore ?? [],
-      cwd: themeConfig.src,
+      cwd: context.src,
     })
 
-    return Promise.all(
+    await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(themeConfig.src, file)
+        const filePath = path.join(context.src, file)
         const fileContent = await fs.promises.readFile(filePath)
         const output = compile(fileContent.toString(), compilerOptions ?? {})
 

@@ -1,5 +1,6 @@
 import babel, { type TransformOptions } from '@babel/core'
 import glob, { type Pattern } from 'fast-glob'
+import type { Plugin } from 'magefront'
 import path from 'node:path'
 
 export interface Options {
@@ -8,29 +9,23 @@ export interface Options {
   compilerOptions?: TransformOptions
 }
 
-/**
- * Transform your JS code with babel.
- *
- * @param {Options} options
- * @returns {function( any ): Promise<Awaited< any >[]>}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, compilerOptions } = options
+/** Transform your JS code with babel. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, compilerOptions } = { ...options }
 
   if (!src) {
     throw new Error('The `src` option is required')
   }
 
-  // @ts-ignore
-  return async (themeConfig) => {
+  return async (context) => {
     const files = await glob(src, {
       ignore: ignore ?? [],
-      cwd: themeConfig.src,
+      cwd: context.src,
     })
 
-    return Promise.all(
+    await Promise.all(
       files.map((file) => {
-        const filePath = path.join(themeConfig.src, file)
+        const filePath = path.join(context.src, file)
         return babel.transformAsync(filePath, compilerOptions)
       })
     )

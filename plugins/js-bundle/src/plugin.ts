@@ -1,16 +1,13 @@
+import type { Plugin } from 'magefront'
+
 export interface Options {
-  dest: string
+  dest?: string
 }
 
-/**
- * Merge files into one.
- *
- * @param {Options} options
- * @returns {(function( any ): Promise<void>)| any}
- */
-export default (options: Options) => {
-  // @ts-ignore
-  return async (buildContext) => {
+/** Merge JS files into multiple chunks. */
+export default (options?: Options): Plugin => {
+  // TODO: Implement this plugin using rollup?
+  return async (context) => {
     throw new Error('Not implemented yet')
   }
 }

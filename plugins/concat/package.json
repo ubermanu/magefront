@@ -28,6 +28,9 @@
   "dependencies": {
     "fast-glob": "^3.2.12"
   },
+  "peerDependencies": {
+    "magefront": "workspace:^"
+  },
   "exports": {
     ".": {
       "import": "./dist/plugin.mjs",

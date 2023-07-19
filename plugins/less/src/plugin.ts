@@ -1,6 +1,7 @@
-import glob, { Pattern } from 'fast-glob'
-import fs from 'fs'
+import glob, { type Pattern } from 'fast-glob'
 import less27 from 'less'
+import type { Plugin } from 'magefront'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import magentoImportPreprocessor from './magento-import-preprocessor'
 
@@ -14,35 +15,29 @@ export interface Options {
   compilerOptions?: any
 }
 
-/**
- * For all the `less` files in the `css` directory, compile them to CSS.
- *
- * @param {Options} options
- * @returns {import('magefront').Plugin}
- */
-export default (options: Options = {}) => {
-  const { src, ignore, compiler, sourcemaps, compilerOptions } = options
+/** For all the `less` files in the `css` directory, compile them to CSS. */
+export default (options?: Options): Plugin => {
+  const { src, ignore, compiler, sourcemaps, compilerOptions } = { ...options }
   const less = compiler ?? less27
-  const plugins = options.plugins ?? []
-  const magentoImport = options.magentoImport ?? true
+  const plugins = options?.plugins ?? []
+  const magentoImport = options?.magentoImport ?? true
 
-  // @ts-ignore
-  return async (themeConfig) => {
+  return async (context) => {
     // Add the default magento import plugin
     // Necessary to resolve the "//@magento_import" statements in the core styles
     if (magentoImport) {
-      plugins.unshift(magentoImportPreprocessor(themeConfig.modules))
+      plugins.unshift(magentoImportPreprocessor(context.modules))
     }
 
     const files = await glob(src ?? '**/!(_)*.less', {
       ignore,
-      cwd: themeConfig.src,
+      cwd: context.src,
     })
 
-    return Promise.all(
+    await Promise.all(
       files.map(async (file: string) => {
-        const filePath = path.join(themeConfig.src, file)
-        const fileContent = await fs.promises.readFile(filePath, 'utf8')
+        const filePath = path.join(context.src, file)
+        const fileContent = await fs.readFile(filePath, 'utf8')
 
         const output = await less
           .render(
@@ -64,12 +59,12 @@ export default (options: Options = {}) => {
         const cssFilePath = filePath.replace(/\.less$/, '.css')
 
         if (output.css) {
-          await fs.promises.writeFile(cssFilePath, output.css, 'utf8')
+          await fs.writeFile(cssFilePath, output.css, 'utf8')
         }
 
         // TODO: Render the map alongside the CSS file
         if (output.map) {
-          await fs.promises.writeFile(`${cssFilePath}.map`, output.map, 'utf8')
+          await fs.writeFile(`${cssFilePath}.map`, output.map, 'utf8')
         }
       })
     )
