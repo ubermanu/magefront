@@ -3,6 +3,11 @@ name: npm-publish
 on:
   push:
     tags: [ '*' ]
+  workflow_dispatch:
+
+concurrency:
+  group: 'npm-publish'
+  cancel-in-progress: true
 
 jobs:
   build:
