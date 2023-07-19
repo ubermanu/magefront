@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/magefront) ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/ubermanu/magefront/build.yml?branch=main) ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/ubermanu/magefront/ci.yml?branch=main)
+![npm](https://img.shields.io/npm/v/magefront) ![build](https://img.shields.io/github/actions/workflow/status/ubermanu/magefront/build.yml?branch=main) ![tests](https://img.shields.io/github/actions/workflow/status/ubermanu/magefront/ci.yml?branch=main&label=tests)
 
 <br>
 <p align="center">
