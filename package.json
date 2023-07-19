@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.23.0",
+  "version": "0.23.1",
   "type": "module",
   "description": "A modern Magento 2 theme builder",
   "keywords": [
