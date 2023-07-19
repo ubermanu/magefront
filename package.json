@@ -88,7 +88,8 @@
   "exports": {
     ".": {
       "import": "./dist/magefront.mjs",
-      "require": "./dist/magefront.cjs"
+      "require": "./dist/magefront.cjs",
+      "types": "./dist/magefront.d.ts"
     }
   }
 }
