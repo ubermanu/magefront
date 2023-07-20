@@ -6,7 +6,6 @@ import { getLanguages } from '../magento/language'
 import type { MagentoModule } from '../magento/module'
 import { getModules } from '../magento/module'
 import { getThemeDependencyTree, getThemes } from '../magento/theme'
-import type { PluginContext } from '../plugin'
 
 /**
  * Build the theme. If a configuration file is found, it will be used.
@@ -30,7 +29,8 @@ export const build = async (themeName: string, locale = 'en_US') => {
   for (const plugin of themeConfig.plugins) {
     try {
       await plugin({
-        ...themeConfig,
+        theme: themeConfig.theme,
+        src: themeConfig.src,
         dest,
         locale,
         modules,
@@ -39,7 +39,7 @@ export const build = async (themeName: string, locale = 'en_US') => {
         themeList,
         themeDependencyTree: getThemeDependencyTree(themeName),
         cwd: rootPath,
-      } as PluginContext)
+      })
     } catch (e) {
       logger.error(e)
     }

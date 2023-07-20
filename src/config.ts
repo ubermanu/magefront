@@ -8,43 +8,41 @@ import { getThemes } from './magento/theme'
 import type { Plugin } from './plugin'
 import type { Preset } from './preset'
 
-/**
- * The configuration filename.
- *
- * @type {string}
- */
-export let configFilename = 'magefront.config.{js,mjs,cjs}'
+/** The configuration filename. */
+export let configFilename: string = 'magefront.config.{js,mjs,cjs}'
 
-export const setConfigFilename = (newFilename: string) => {
+export const setConfigFilename = (newFilename: string): void => {
   configFilename = newFilename
 }
 
 /** If set to true, the configuration file will be loaded. */
-export let useConfigFile = false
+export let useConfigFile: boolean = false
 
-export const setUseConfigFile = (value: boolean) => {
+export const setUseConfigFile = (value: boolean): void => {
   useConfigFile = value
 }
 
-/** The user configuration object, before it's parsed. Preset and plugins are transformed to functions. */
-export interface UserConfig {
+export type UserConfig = {
   theme?: string
   presets?: Array<Preset | string | [string, any]>
   plugins?: Array<Plugin | string | [string, any]>
 }
 
+/** The user configuration object, before it's parsed. Preset and plugins are transformed to functions. */
+export type UserConfigFile = UserConfig | UserConfig[]
+
 /** The configuration object that is passed as build context. The preset plugins are resolved and merged into the plugins array. */
-export interface ThemeConfig {
+export type ThemeConfig = {
   theme: string
-  dest: string
   src: string
+  dest: string
   plugins: Plugin[]
 }
 
 /** Get the `UserConfig` list from the configuration file. */
-export const getConfigFromFile = async () => {
+export const getConfigFromFile = async (): Promise<UserConfig[]> => {
   const files = await glob(configFilename, { cwd: rootPath })
-  let fileConfig: UserConfig[] = []
+  let fileConfig: UserConfigFile = []
 
   if (!files.length) {
     throw new Error(`No configuration file found. Searched for: ${configFilename}`)
@@ -52,7 +50,8 @@ export const getConfigFromFile = async () => {
 
   if (files.length > 0) {
     let { default: config } = await import(path.join(rootPath, files[0]))
-    fileConfig = config
+    fileConfig = config as UserConfigFile
+    // TODO: Validate the config object
   }
 
   // Add support for array into the config file
@@ -64,7 +63,7 @@ export const getConfigFromFile = async () => {
 }
 
 /** Get the configuration for the given theme name. The theme config is passed to the plugins. Prepend `presets` plugins to the root plugins. */
-export const getThemeConfig = memo(async (themeName: string) => {
+export const getThemeConfig = memo(async (themeName: string): Promise<ThemeConfig> => {
   const theme: MagentoTheme | undefined = getThemes().find((t: MagentoTheme) => t.name === themeName)
 
   if (!theme) {

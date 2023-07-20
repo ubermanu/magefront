@@ -1,10 +1,12 @@
-import type { ThemeConfig } from './config'
 import type { MagentoLanguage } from './magento/language'
 import type { MagentoModule } from './magento/module'
 import type { MagentoTheme } from './magento/theme'
 
 /** Extends the themeConfig with additional values to be passed to the plugin when it's running. */
-export interface PluginContext extends ThemeConfig {
+export type PluginContext = {
+  theme: string
+  src: string
+  dest: string
   locale: string
   modules: string[]
   moduleList: MagentoModule[]
