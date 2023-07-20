@@ -32,6 +32,7 @@ These plugins are specific to **Magento 2**.
 
 ## Image
 
+- [magefront-plugin-pngquant](plugins/pngquant.md)
 - [magefront-plugin-svgo](plugins/svgo.md)
 
 ## Misc

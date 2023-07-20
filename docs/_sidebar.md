@@ -17,6 +17,7 @@
   * [React](plugins/react.md)
   * [Terser](plugins/terser.md)
   * [Typescript](plugins/typescript.md)
+  * [PNGQuant](plugins/pngquant.md)
   * [SVGO](plugins/svgo.md)
   * [Concat](plugins/concat.md)
 
