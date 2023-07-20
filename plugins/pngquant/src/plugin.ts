@@ -1,7 +1,6 @@
 import glob, { type Pattern } from 'fast-glob'
 import type { Plugin } from 'magefront'
 import path from 'node:path'
-// @ts-ignore
 import PngQuant from 'pngquant'
 
 export interface Options {

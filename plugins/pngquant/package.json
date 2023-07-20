@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
-    "pngquant": "^4.1.0"
+    "pngquant": "^4.2.0"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
