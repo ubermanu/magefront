@@ -1,3 +1,4 @@
+import type { Logger } from 'winston'
 import type { MagentoLanguage } from './magento/language'
 import type { MagentoModule } from './magento/module'
 import type { MagentoTheme } from './magento/theme'
@@ -14,6 +15,7 @@ export type PluginContext = {
   themeList: MagentoTheme[]
   themeDependencyTree: string[]
   cwd: string
+  logger: Logger
 }
 
 /** The plugin interface. */

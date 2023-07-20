@@ -39,9 +39,10 @@ export const build = async (themeName: string, locale = 'en_US') => {
         themeList,
         themeDependencyTree: getThemeDependencyTree(themeName),
         cwd: rootPath,
+        logger,
       })
     } catch (e) {
-      logger.error(e)
+      logger.crit(e)
     }
   }
 }
