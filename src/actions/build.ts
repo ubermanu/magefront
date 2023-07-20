@@ -42,7 +42,8 @@ export const build = async (themeName: string, locale = 'en_US') => {
         logger,
       })
     } catch (e) {
-      logger.crit(e)
+      // TODO: Should be critical error
+      logger.error(e)
     }
   }
 }
