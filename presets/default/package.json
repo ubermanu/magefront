@@ -1,6 +1,6 @@
 {
   "name": "magefront-preset-default",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "module",
   "keywords": [
     "magefront",
@@ -26,10 +26,10 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
+    "magefront-plugin-cssnano": "workspace:~",
     "magefront-plugin-js-translation": "workspace:~",
     "magefront-plugin-less": "workspace:~",
     "magefront-plugin-requirejs-config": "workspace:~",
-    "magefront-plugin-cssnano": "workspace:~",
     "magefront-plugin-terser": "workspace:~"
   },
   "peerDependencies": {

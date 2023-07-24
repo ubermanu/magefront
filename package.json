@@ -1,6 +1,6 @@
 {
   "name": "magefront",
-  "version": "0.23.2",
+  "version": "0.24.0",
   "type": "module",
   "description": "A modern Magento 2 theme builder",
   "keywords": [
@@ -54,6 +54,7 @@
     "@ubermanu/prettier-config": "^1.7.1",
     "dotenv": "^16.3.1",
     "jest": "^29.6.1",
+    "lerna": "^7.1.4",
     "prettier": "^2.8.8",
     "rimraf": "^3.0.2",
     "ts-jest": "^29.1.1",
