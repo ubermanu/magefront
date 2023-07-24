@@ -8,6 +8,16 @@ Generates CSS with [TailwindCSS](https://tailwindcss.com/) from your template fi
 
 ## Usage
 
+Create your `tailwind.css` file in your `web/css` directory:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Then add the plugin to your `magefront.config.js`:
+
 ```js
 import tailwindcss from 'magefront-plugin-tailwindcss'
 
