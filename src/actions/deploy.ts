@@ -28,6 +28,8 @@ export const deploy = async (themeName: string, locale: string = 'en_US') => {
     '**/*.jsx',
     '**/*.svelte',
     '**/*.vue',
+    '**/*.postcss',
+    '**/*.pcss',
   ]
 
   // Copy all the files from the src (tmp) dir to the `pub/static` dir
