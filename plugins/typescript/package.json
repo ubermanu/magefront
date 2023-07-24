@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
-    "typescript": "^4.8.2"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
