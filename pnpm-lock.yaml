@@ -58,8 +58,8 @@ importers:
         specifier: ^0.4.8
         version: 0.4.8
       '@types/node':
-        specifier: ^18.16.19
-        version: 18.16.19
+        specifier: ^20.4.4
+        version: 20.4.4
       '@ubermanu/prettier-config':
         specifier: ^1.7.1
         version: 1.7.1(prettier@2.8.8)
@@ -68,7 +68,7 @@ importers:
         version: 16.3.1
       jest:
         specifier: ^29.6.1
-        version: 29.6.1(@types/node@18.16.19)
+        version: 29.6.1(@types/node@20.4.4)
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
@@ -1663,9 +1663,9 @@ packages:
   /@types/node@18.16.19:
     resolution: {integrity: sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==}
 
-  /@types/node@20.4.2:
-    resolution: {integrity: sha512-Dd0BYtWgnWJKwO1jkmTrzofjK2QXXcai0dmtzvIBhcA+RsG5h8R3xlyta0kGOZRNfL9GuRtb1knmPEhQrePCEw==}
-    dev: false
+  /@types/node@20.4.4:
+    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
+    dev: true
 
   /@types/parse-glob@3.0.29:
     resolution: {integrity: sha512-OFwMPH5eJOhtwR92GMjTNWukaKTdWQC12cBgRvrTQl5CwhruSq6734wi1CTSh5Qjm/pMJWaKOOPKZOp6FpIkXQ==}
@@ -1701,13 +1701,13 @@ packages:
   /@types/stylus@0.48.38:
     resolution: {integrity: sha512-B5otJekvD6XM8iTrnO6e2twoTY2tKL9VkL/57/2Lo4tv3EatbCaufdi68VVtn/h4yjO+HVvYEyrNQd0Lzj6riw==}
     dependencies:
-      '@types/node': 20.4.2
+      '@types/node': 18.16.19
     dev: false
 
   /@types/svgo@2.6.4:
     resolution: {integrity: sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==}
     dependencies:
-      '@types/node': 20.4.2
+      '@types/node': 18.16.19
     dev: false
 
   /@types/triple-beam@1.3.2:
@@ -4305,7 +4305,7 @@ packages:
       - supports-color
     dev: true
 
-  /jest-cli@29.6.1(@types/node@18.16.19):
+  /jest-cli@29.6.1(@types/node@20.4.4):
     resolution: {integrity: sha512-607dSgTA4ODIN6go9w6xY3EYkyPFGicx51a69H7yfvt7lN53xNswEVLovq+E77VsTRi5fWprLH0yl4DJgE8Ing==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -4322,7 +4322,7 @@ packages:
       exit: 0.1.2
       graceful-fs: 4.2.11
       import-local: 3.1.0
-      jest-config: 29.6.1(@types/node@18.16.19)
+      jest-config: 29.6.1(@types/node@20.4.4)
       jest-util: 29.6.1
       jest-validate: 29.6.1
       prompts: 2.4.2
@@ -4349,6 +4349,45 @@ packages:
       '@jest/test-sequencer': 29.6.1
       '@jest/types': 29.6.1
       '@types/node': 18.16.19
+      babel-jest: 29.6.1(@babel/core@7.22.9)
+      chalk: 4.1.2
+      ci-info: 3.8.0
+      deepmerge: 4.3.1
+      glob: 7.2.3
+      graceful-fs: 4.2.11
+      jest-circus: 29.6.1
+      jest-environment-node: 29.6.1
+      jest-get-type: 29.4.3
+      jest-regex-util: 29.4.3
+      jest-resolve: 29.6.1
+      jest-runner: 29.6.1
+      jest-util: 29.6.1
+      jest-validate: 29.6.1
+      micromatch: 4.0.5
+      parse-json: 5.2.0
+      pretty-format: 29.6.1
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /jest-config@29.6.1(@types/node@20.4.4):
+    resolution: {integrity: sha512-XdjYV2fy2xYixUiV2Wc54t3Z4oxYPAELUzWnV6+mcbq0rh742X2p52pii5A3oeRzYjLnQxCsZmp0qpI6klE2cQ==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    peerDependencies:
+      '@types/node': '*'
+      ts-node: '>=9.0.0'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      ts-node:
+        optional: true
+    dependencies:
+      '@babel/core': 7.22.9
+      '@jest/test-sequencer': 29.6.1
+      '@jest/types': 29.6.1
+      '@types/node': 20.4.4
       babel-jest: 29.6.1(@babel/core@7.22.9)
       chalk: 4.1.2
       ci-info: 3.8.0
@@ -4656,7 +4695,7 @@ packages:
       supports-color: 8.1.1
     dev: true
 
-  /jest@29.6.1(@types/node@18.16.19):
+  /jest@29.6.1(@types/node@20.4.4):
     resolution: {integrity: sha512-Nirw5B4nn69rVUZtemCQhwxOBhm0nsp3hmtF4rzCeWD7BkjAXRIji7xWQfnTNbz9g0aVsBX6aZK3n+23LM6uDw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -4669,7 +4708,7 @@ packages:
       '@jest/core': 29.6.1
       '@jest/types': 29.6.1
       import-local: 3.1.0
-      jest-cli: 29.6.1(@types/node@18.16.19)
+      jest-cli: 29.6.1(@types/node@20.4.4)
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -7159,7 +7198,7 @@ packages:
       '@babel/core': 7.22.9
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.6.1(@types/node@18.16.19)
+      jest: 29.6.1(@types/node@20.4.4)
       jest-util: 29.6.1
       json5: 2.2.3
       lodash.memoize: 4.1.2
