@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-babel",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "type": "module",
   "keywords": [
     "magefront",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@babel/core": "7.x",
-    "fast-glob": "^3.3.0",
-    "@types/babel__core": "7.x"
+    "@types/babel__core": "7.x",
+    "fast-glob": "^3.3.0"
   },
   "peerDependencies": {
     "magefront": "workspace:^"

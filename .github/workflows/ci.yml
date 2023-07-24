@@ -48,7 +48,7 @@ jobs:
           MAGEFRONT_TEST_MAGENTO_ROOT: ${{ github.workspace }}/magento
 
       - name: Cache Composer packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
