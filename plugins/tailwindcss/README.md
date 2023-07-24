@@ -13,7 +13,9 @@ import tailwindcss from 'magefront-plugin-tailwindcss'
 
 export default {
     plugins: [
-        tailwindcss()
+        tailwindcss({
+            src: 'web/css/tailwind.css'
+        })
     ]
 }
 ```

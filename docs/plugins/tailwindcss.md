@@ -13,16 +13,18 @@ import tailwindcss from 'magefront-plugin-tailwindcss'
 
 export default {
     plugins: [
-        tailwindcss()
+        tailwindcss({
+            src: 'web/css/tailwind.css'
+        })
     ]
 }
 ```
 
 ## Options
 
-### `src`
+### `src` ⭐
 
-The templates to process. Default is `**/*.{html,phtml}`.
+The CSS source file to process.
 
 ### `ignore`
 
@@ -30,4 +32,7 @@ A list of paths to ignore.
 
 ### `config`
 
-The [TailwindCSS configuration](https://tailwindcss.com/docs/configuration) to use. Default is `tailwind.config.js`.
+The [TailwindCSS configuration](https://tailwindcss.com/docs/configuration) to use.
+
+<br>
+<small>⭐ - Required option</small>
