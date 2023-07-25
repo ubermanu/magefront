@@ -16,7 +16,6 @@ import { watch } from './actions/watch'
 import { setConfigFilename, setUseConfigFile } from './config'
 import { logger } from './env'
 
-// TODO: Implement an option to list all available themes
 const program = sade('magefront', true)
 
 program
