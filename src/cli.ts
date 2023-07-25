@@ -11,6 +11,7 @@ import { build } from './actions/build'
 import { clean } from './actions/clean'
 import { deploy } from './actions/deploy'
 import { inheritance } from './actions/inheritance'
+import { list } from './actions/list'
 import { watch } from './actions/watch'
 import { setConfigFilename, setUseConfigFile } from './config'
 import { logger } from './env'
@@ -24,12 +25,18 @@ program
   .option('-c, --config <config>', 'Path to the configuration file')
   .option('-w, --watch', 'Watch the source files of a theme, and rebuild on change', false)
   .option('-d, --dev <url>', 'Run a browser-sync proxy instance')
+  .option('--list', 'List all available themes')
 
 program.example('-t Magento/blank')
 program.example('-t Magento/blank -c -w')
 program.example('-t Magento/blank -c --dev https://magento.ddev.site')
 
 program.action(async (opts) => {
+  if (opts.list) {
+    list()
+    return
+  }
+
   const { theme, _: locales, watch: watchMode, dev: devMode, config } = opts
 
   if (!theme) {
