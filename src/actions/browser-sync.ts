@@ -1,5 +1,4 @@
-import type { BrowserSyncInstance, Options } from 'browser-sync'
-import bs from 'browser-sync'
+import bs, { type BrowserSyncInstance, type Options } from 'browser-sync'
 
 // Current instance of BrowserSync
 export let instance: BrowserSyncInstance

@@ -9,7 +9,7 @@ import { getThemeConfig } from '../config'
  *
  * @param {string} themeName
  * @param {string} locale
- * @returns {Promise<Awaited<unknown>[]>}
+ * @returns {Promise<void>}
  */
 export const deploy = async (themeName: string, locale: string = 'en_US') => {
   const themeConfig = await getThemeConfig(themeName)
