@@ -257,8 +257,8 @@ importers:
   plugins/svgo:
     dependencies:
       '@types/svgo':
-        specifier: ^2.6.4
-        version: 2.6.4
+        specifier: ^3.0.0
+        version: 3.0.0
       fast-glob:
         specifier: ^3.2.11
         version: 3.2.11
@@ -266,8 +266,8 @@ importers:
         specifier: workspace:^
         version: link:../..
       svgo:
-        specifier: ^2.8.0
-        version: 2.8.0
+        specifier: ^3.0.2
+        version: 3.0.2
 
   plugins/tailwindcss:
     dependencies:
@@ -2158,10 +2158,11 @@ packages:
       '@types/node': 20.4.2
     dev: false
 
-  /@types/svgo@2.6.4:
-    resolution: {integrity: sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==}
+  /@types/svgo@3.0.0:
+    resolution: {integrity: sha512-G5qLWNq/rMvSM1EyY4E2iEd+s9km/PxLkzPkA2lghrgWJ2jrVMuB1ZsGOzL4YAWCy5sAoUw7SEQseHE2qypF2w==}
+    deprecated: This is a stub types definition. svgo provides its own type definitions, so you do not need this installed.
     dependencies:
-      '@types/node': 20.4.2
+      svgo: 3.0.2
     dev: false
 
   /@types/triple-beam@1.3.2:
