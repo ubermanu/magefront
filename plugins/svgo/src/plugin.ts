@@ -2,12 +2,12 @@ import glob, { type Pattern } from 'fast-glob'
 import type { Plugin } from 'magefront'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import svgo, { type OptimizeOptions } from 'svgo'
+import svgo, { type Config } from 'svgo'
 
 export interface Options {
   src?: string | string[]
   ignore?: Pattern[]
-  optimizeOptions?: OptimizeOptions
+  optimizeOptions?: Config
 }
 
 /** Optimize SVG files. */
@@ -24,7 +24,7 @@ export default (options?: Options): Plugin => {
       files.map(async (file) => {
         const filePath = path.join(context.src, file)
         const fileContent = await fs.readFile(filePath)
-        const result = await svgo.optimize(fileContent.toString(), optimizeOptions)
+        const result = svgo.optimize(fileContent.toString(), optimizeOptions)
 
         if ('data' in result) {
           await fs.writeFile(filePath, result.data)

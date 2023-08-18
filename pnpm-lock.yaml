@@ -256,9 +256,6 @@ importers:
 
   plugins/svgo:
     dependencies:
-      '@types/svgo':
-        specifier: ^3.0.0
-        version: 3.0.0
       fast-glob:
         specifier: ^3.2.11
         version: 3.2.11
@@ -2156,13 +2153,6 @@ packages:
     resolution: {integrity: sha512-B5otJekvD6XM8iTrnO6e2twoTY2tKL9VkL/57/2Lo4tv3EatbCaufdi68VVtn/h4yjO+HVvYEyrNQd0Lzj6riw==}
     dependencies:
       '@types/node': 20.4.2
-    dev: false
-
-  /@types/svgo@3.0.0:
-    resolution: {integrity: sha512-G5qLWNq/rMvSM1EyY4E2iEd+s9km/PxLkzPkA2lghrgWJ2jrVMuB1ZsGOzL4YAWCy5sAoUw7SEQseHE2qypF2w==}
-    deprecated: This is a stub types definition. svgo provides its own type definitions, so you do not need this installed.
-    dependencies:
-      svgo: 3.0.2
     dev: false
 
   /@types/triple-beam@1.3.2:

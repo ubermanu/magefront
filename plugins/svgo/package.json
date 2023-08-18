@@ -26,7 +26,6 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@types/svgo": "^3.0.0",
     "fast-glob": "^3.2.11",
     "svgo": "^3.0.2"
   },
