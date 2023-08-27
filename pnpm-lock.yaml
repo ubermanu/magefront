@@ -64,8 +64,8 @@ importers:
         specifier: ^20.4.4
         version: 20.4.4
       '@ubermanu/prettier-config':
-        specifier: ^3.0.0
-        version: 3.0.0(prettier@3.0.2)
+        specifier: ^3.1.0
+        version: 3.1.0(prettier@3.0.2)
       dotenv:
         specifier: ^16.3.1
         version: 16.3.1
@@ -194,7 +194,7 @@ importers:
         specifier: ^7.22.5
         version: 7.22.5(@babel/core@7.22.9)
       magefront:
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../..
       magefront-plugin-babel:
         specifier: workspace:~
@@ -1979,15 +1979,15 @@ packages:
       '@types/yargs-parser': 21.0.0
     dev: true
 
-  /@ubermanu/prettier-config@3.0.0(prettier@3.0.2):
-    resolution: {integrity: sha512-bQ3taQ92AaPTzNQk1H22Ws7z0rQt0kKNNNPDSersNHgQOWIifVGOvewfi5/jtSYSLEdiT33t6estM7cgIqKKhw==}
+  /@ubermanu/prettier-config@3.1.0(prettier@3.0.2):
+    resolution: {integrity: sha512-JsWgj+buFSjggdGX7wwtBioNQxLYZP6yrIp7L9MUltSKn7u5Jx78lj02zfyhyJ3GAf3h5Z+3H7OxDSrd9P7IVA==}
     peerDependencies:
       prettier: 3.x
     dependencies:
       postcss: 8.4.28
       prettier: 3.0.2
       prettier-plugin-css-order: 2.0.0(postcss@8.4.28)(prettier@3.0.2)
-      prettier-plugin-jsdoc: 0.4.2(prettier@3.0.2)
+      prettier-plugin-jsdoc: 1.0.1(prettier@3.0.2)
       prettier-plugin-organize-imports: 3.2.3(prettier@3.0.2)(typescript@5.1.6)
       prettier-plugin-packagejson: 2.4.5(prettier@3.0.2)
       try-require: 1.2.1
@@ -7624,11 +7624,11 @@ packages:
       - postcss
     dev: true
 
-  /prettier-plugin-jsdoc@0.4.2(prettier@3.0.2):
-    resolution: {integrity: sha512-w2jnAQm3z0GAG0bhzVJeehzDtrhGMSxJjit5ApCc2oxWfc7+jmLAkbtdOXaSpfwZz3IWkk+PiQPeRrLNpbM+Mw==}
-    engines: {node: '>=12.0.0'}
+  /prettier-plugin-jsdoc@1.0.1(prettier@3.0.2):
+    resolution: {integrity: sha512-07q74MfX9m+xHK2+Lr4c+igiEzAKVDWhqkvlm65WoYJUlRiaV6STXcEtcZMhrPPYgNeQRgb9FJmgE/n+OI4MpQ==}
+    engines: {node: '>=14.13.1 || >=16.0.0'}
     peerDependencies:
-      prettier: '>=2.1.2'
+      prettier: ^3.0.0
     dependencies:
       binary-searching: 2.0.5
       comment-parser: 1.3.1
