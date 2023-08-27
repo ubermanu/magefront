@@ -83,7 +83,7 @@ importers:
         version: 29.1.1(@babel/core@7.22.9)(jest@29.6.1)(typescript@5.1.6)
       tslib:
         specifier: ^2.6.0
-        version: 2.6.0
+        version: 2.6.2
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
@@ -1648,7 +1648,7 @@ packages:
       is-glob: 4.0.3
       open: 9.1.0
       picocolors: 1.0.0
-      tslib: 2.6.0
+      tslib: 2.6.2
     dev: true
 
   /@rollup/plugin-alias@5.0.0(rollup@3.26.3):
@@ -8875,7 +8875,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     dependencies:
       '@pkgr/utils': 2.4.2
-      tslib: 2.6.0
+      tslib: 2.6.2
     dev: true
 
   /tailwindcss@3.3.3:
@@ -9110,8 +9110,8 @@ packages:
       yargs-parser: 21.1.1
     dev: true
 
-  /tslib@2.6.0:
-    resolution: {integrity: sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==}
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
 
   /tty-table@4.2.1:
