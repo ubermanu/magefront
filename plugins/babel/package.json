@@ -31,7 +31,7 @@
     "fast-glob": "^3.3.0"
   },
   "peerDependencies": {
-    "magefront": "workspace:^"
+    "magefront": "workspace:*"
   },
   "exports": {
     ".": {

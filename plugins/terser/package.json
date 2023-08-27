@@ -30,7 +30,7 @@
     "terser": "^5.19.1"
   },
   "peerDependencies": {
-    "magefront": "workspace:^"
+    "magefront": "workspace:*"
   },
   "exports": {
     ".": {

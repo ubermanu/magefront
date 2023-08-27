@@ -32,7 +32,7 @@
     "tailwindcss": "^3.3.3"
   },
   "peerDependencies": {
-    "magefront": "workspace:^"
+    "magefront": "workspace:*"
   },
   "exports": {
     ".": {
