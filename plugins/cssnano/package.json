@@ -26,7 +26,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "cssnano": "^5.1.13",
+    "cssnano": "^6.0.1",
     "cssnano-preset-default": "^6.0.1",
     "magefront-plugin-postcss": "workspace:~"
   },
