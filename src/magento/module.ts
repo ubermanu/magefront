@@ -4,14 +4,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import { logger, rootPath } from '../env'
-import type { ComposerPackage } from './composer'
+import type { ComposerPackage, MagentoModule } from '../types'
 import { getPackages, getRegistrations } from './composer'
-
-export interface MagentoModule {
-  name: string
-  src: string
-  enabled: boolean
-}
 
 /**
  * Read the `config.php` file and return the modules list. Resolve the modules paths from `app/code` then from the `vendor` directory.

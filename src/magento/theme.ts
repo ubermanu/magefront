@@ -4,15 +4,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import { rootPath } from '../env'
-import type { ComposerPackage } from './composer'
+import type { ComposerPackage, MagentoTheme } from '../types'
 import { getPackages, getRegistrations } from './composer'
-import type { MagentoModule } from './module'
-
-export interface MagentoTheme extends MagentoModule {
-  area: string
-  parent: string | false
-  dest: string
-}
 
 /**
  * Crawl the Magento project source code and return a list of all the themes.

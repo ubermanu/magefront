@@ -3,9 +3,9 @@ import path from 'node:path'
 import { getThemeConfig } from '../config'
 import { logger, rootPath } from '../env'
 import { getLanguages } from '../magento/language'
-import type { MagentoModule } from '../magento/module'
 import { getModules } from '../magento/module'
 import { getThemeDependencyTree, getThemes } from '../magento/theme'
+import type { MagentoModule } from '../types'
 
 /**
  * Build the theme. If a configuration file is found, it will be used.

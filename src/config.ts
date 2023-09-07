@@ -3,10 +3,8 @@ import memo from 'memoizee'
 import path from 'node:path'
 
 import { rootPath, tempPath } from './env'
-import type { MagentoTheme } from './magento/theme'
 import { getThemes } from './magento/theme'
-import type { Plugin } from './plugin'
-import type { Preset } from './preset'
+import type { MagentoTheme, Plugin, Preset } from './types'
 
 /** The configuration filename. */
 export let configFilename: string = 'magefront.config.{js,mjs,cjs}'

@@ -3,14 +3,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import { rootPath } from '../env'
-
-export interface ComposerPackage {
-  name: string
-  type: string
-  autoload?: {
-    files?: string[]
-  }
-}
+import type { ComposerPackage } from '../types'
 
 /**
  * Get the list of packages installed.
@@ -24,19 +17,13 @@ export const getPackages = memo(() => {
     throw new Error(`composer.lock not found in ${rootPath}`)
   }
 
-  /** @type {{ packages: [] }} */
-  const lock = JSON.parse(fs.readFileSync(composerLock, 'utf8'))
+  const lock: { packages: [] } | undefined = JSON.parse(fs.readFileSync(composerLock, 'utf8'))
 
-  return lock.packages ?? []
+  return lock?.packages ?? []
 })
 
-/**
- * Return a list of registration files for the given composer package config. FIXME: At one point this could be any file, not just
- * `registration.php`.
- *
- * @param {ComposerPackage} pkg
- * @returns {[]}
- */
-export const getRegistrations = (pkg: ComposerPackage) => {
+/** Return a list of registration files for the given composer package config. */
+// FIXME: At one point this could be any file, not just `registration.php`.
+export const getRegistrations = (pkg: ComposerPackage): string[] => {
   return (pkg?.autoload?.files ?? []).filter((file: string) => file.endsWith('registration.php'))
 }

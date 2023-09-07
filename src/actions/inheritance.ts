@@ -3,9 +3,9 @@ import fs from 'fs-extra'
 import path from 'node:path'
 
 import { rootPath, tempPath } from '../env'
-import type { MagentoModule } from '../magento/module'
 import { getModules } from '../magento/module'
 import { findTheme, getThemeDependencyTree } from '../magento/theme'
+import type { MagentoModule } from '../types'
 
 /**
  * Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards.

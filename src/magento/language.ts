@@ -3,13 +3,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 import { rootPath } from '../env'
-import type { ComposerPackage } from './composer'
+import type { ComposerPackage, MagentoLanguage } from '../types'
 import { getPackages, getRegistrations } from './composer'
-import type { MagentoModule } from './module'
-
-export interface MagentoLanguage extends MagentoModule {
-  code: string | false
-}
 
 /**
  * Get all the languages loaded from the `composer.lock` file.
