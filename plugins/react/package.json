@@ -26,7 +26,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-react": "^7.22.15",
     "magefront-plugin-babel": "workspace:~"
   },
   "peerDependencies": {

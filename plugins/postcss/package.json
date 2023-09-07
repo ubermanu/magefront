@@ -26,8 +26,8 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "fast-glob": "^3.2.11",
-    "postcss": "^8.4.16"
+    "fast-glob": "^3.3.1",
+    "postcss": "^8.4.29"
   },
   "peerDependencies": {
     "magefront": "workspace:*"

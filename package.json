@@ -26,6 +26,7 @@
   "module": "dist/magefront.mjs",
   "types": "dist/magefront.d.ts",
   "scripts": {
+    "changeset": "changeset",
     "ts-check": "tsc --noEmit",
     "build": "unbuild",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
@@ -47,20 +48,20 @@
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
     "@types/browser-sync": "^2.27.0",
-    "@types/cli-table": "^0.3.1",
+    "@types/cli-table": "^0.3.2",
     "@types/fs-extra": "^11.0.1",
-    "@types/jest": "^29.5.3",
+    "@types/jest": "^29.5.4",
     "@types/memoizee": "^0.4.8",
-    "@types/node": "^20.4.4",
-    "@ubermanu/prettier-config": "^3.1.0",
+    "@types/node": "^20.5.9",
+    "@ubermanu/prettier-config": "^3.2.0",
     "dotenv": "^16.3.1",
-    "jest": "^29.6.1",
-    "prettier": "^3.0.2",
+    "jest": "^29.6.4",
+    "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
     "ts-jest": "^29.1.1",
-    "tslib": "^2.6.0",
-    "typescript": "^5.1.6",
-    "unbuild": "^1.2.1"
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0"
   },
   "jest": {
     "preset": "ts-jest",

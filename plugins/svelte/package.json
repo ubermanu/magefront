@@ -26,8 +26,8 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "fast-glob": "^3.2.11",
-    "svelte": "4.x"
+    "fast-glob": "^3.3.1",
+    "svelte": "~4.2.0"
   },
   "peerDependencies": {
     "magefront": "workspace:*"

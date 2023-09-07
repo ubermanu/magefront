@@ -26,9 +26,9 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@babel/core": "7.x",
-    "@types/babel__core": "7.x",
-    "fast-glob": "^3.3.0"
+    "@babel/core": "~7.22.15",
+    "@types/babel__core": "~7.20.1",
+    "fast-glob": "^3.3.1"
   },
   "peerDependencies": {
     "magefront": "workspace:*"

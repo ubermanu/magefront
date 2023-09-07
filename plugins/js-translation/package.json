@@ -26,7 +26,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "csv-parse": "^5.3.0"
+    "csv-parse": "^5.5.0"
   },
   "peerDependencies": {
     "magefront": "workspace:*"
