@@ -1,18 +1,13 @@
 import glob, { Pattern } from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
+import { getThemeDependencyTree } from '../magento/theme'
+import type { Action, MagentoModule } from '../types'
 
-import { rootPath, tempPath } from '../env'
-import { getModules } from '../magento/module'
-import { findTheme, getThemeDependencyTree } from '../magento/theme'
-import type { MagentoModule } from '../types'
+/** Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards. */
+export const inheritance: Action = async (context) => {
+  const { rootPath, tempPath, themes } = context.magento
 
-/**
- * Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards.
- *
- * @param {string} themeName
- */
-export const inheritance = async (themeName: string) => {
   /**
    * Copy the files from the src to the destination directory.
    *
@@ -35,11 +30,7 @@ export const inheritance = async (themeName: string) => {
     )
   }
 
-  const currentTheme = findTheme(themeName)
-
-  if (!currentTheme) {
-    throw new Error(`Theme "${themeName}" not found.`)
-  }
+  const currentTheme = context.theme
 
   const themeDest = path.join(rootPath, tempPath, currentTheme.dest)
 
@@ -51,7 +42,7 @@ export const inheritance = async (themeName: string) => {
   await generateCopies(path.join('lib', 'web'), themeDest, ['css/docs', '**/*.txt', 'i18n'])
 
   // For each enabled modules, copy the web resources into the theme temp dir
-  const modules: MagentoModule[] = getModules().filter((m) => m.enabled && m.src)
+  const modules = context.magento.modules.filter((m) => m.enabled && m.src)
   const area = currentTheme.area
   const ignore = ['**/node_modules/**']
 
@@ -65,8 +56,8 @@ export const inheritance = async (themeName: string) => {
 
   // Copy the files from the themes
   // TODO: Get the theme dependency tree beforehand
-  for (const themeDependency of getThemeDependencyTree(themeName)) {
-    const theme = findTheme(themeDependency)
+  for (const themeDependency of getThemeDependencyTree(context.theme)) {
+    const theme = themes.find((t) => t.name === themeDependency)
     if (!theme) {
       return
     }

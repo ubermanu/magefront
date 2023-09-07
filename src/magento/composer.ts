@@ -1,8 +1,6 @@
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-
-import { rootPath } from '../env'
 import type { ComposerPackage } from '../types'
 
 /**
@@ -10,7 +8,7 @@ import type { ComposerPackage } from '../types'
  *
  * @returns {ComposerPackage[]}
  */
-export const getPackages = memo(() => {
+export const getPackages = memo((rootPath: string) => {
   const composerLock = path.join(rootPath, 'composer.lock')
 
   if (!fs.existsSync(composerLock)) {

@@ -2,18 +2,19 @@ import glob from 'fast-glob'
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-
-import { rootPath } from '../env'
-import type { ComposerPackage, MagentoTheme } from '../types'
-import { getPackages, getRegistrations } from './composer'
+import type { ComposerPackage, MagentoContext, MagentoTheme } from '../types'
+import { getRegistrations } from './composer'
 
 /**
  * Crawl the Magento project source code and return a list of all the themes.
  *
  * @returns MagentoTheme[]
  */
-export const getThemes = memo(() => {
-  const list: { [name: string]: MagentoTheme } = {}
+export const getThemes = memo((context: MagentoContext) => {
+  const { rootPath } = context
+
+  type MagentoThemeTmp = Omit<MagentoTheme, 'parent'> & { parent: string | MagentoTheme | null }
+  const list: { [name: string]: MagentoThemeTmp } = {}
 
   // 1. Get the list of themes from the `app/design/` directory.
   const appDesign = glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml', {
@@ -36,7 +37,7 @@ export const getThemes = memo(() => {
 
   // 2. Get the themes from the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages: ComposerPackage[] = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-theme')
+  const packages = context.packages.filter((pkg: ComposerPackage) => pkg.type === 'magento2-theme')
 
   packages.forEach((pkg: ComposerPackage) => {
     getRegistrations(pkg).forEach((registration) => {
@@ -54,19 +55,30 @@ export const getThemes = memo(() => {
     })
   })
 
-  return Object.values(list)
+  // 3. Attach the parent theme to each theme
+  return Object.values(list).map((theme) => {
+    if (theme.parent === null) {
+      return theme as MagentoTheme
+    }
+
+    if (typeof theme.parent === 'string') {
+      return { ...theme, parent: list[theme.parent] } as MagentoTheme
+    }
+
+    return theme as MagentoTheme
+  })
 })
 
 /**
  * Get the parent of a theme from its `theme.xml` file.
  *
  * @param {string} file
- * @returns {string | false}
+ * @returns {string | null}
  */
 function getParentFromThemeXml(file: string) {
   const themeXml = fs.readFileSync(file, 'utf8')
   const match = themeXml.match(/<parent>(.*)<\/parent>/)
-  return match ? match[1].trim() : false
+  return match ? match[1].trim() : null
 }
 
 /**
@@ -82,33 +94,15 @@ function getThemeNameAndAreaFromRegistrationPhp(file: string) {
   return { name, area }
 }
 
-/**
- * Get a theme by its name.
- *
- * @memoized
- */
-export const findTheme = memo((themeName: string) => {
-  return getThemes().find((theme) => theme.name === themeName)
-})
+/** Get the theme dependency tree for the given theme. */
+export const getThemeDependencyTree = (theme: MagentoTheme): string[] => {
+  const tree: string[] = []
+  let cur = theme
 
-/** @param themeName */
-export const getThemeDependencyTree = memo((themeName: string): string[] => {
-  return __resolveThemeDependencyTree(themeName)
-})
-
-/**
- * @param themeName
- * @param dependencyTree
- * @internal
- */
-function __resolveThemeDependencyTree(themeName: string, dependencyTree: string[] = []): string[] {
-  dependencyTree = dependencyTree ? dependencyTree : []
-  dependencyTree.push(themeName)
-  const theme = findTheme(themeName)
-
-  if (theme && theme.parent) {
-    return __resolveThemeDependencyTree(theme.parent, dependencyTree)
-  } else {
-    return dependencyTree.reverse()
+  while (cur.parent) {
+    tree.push(cur.parent.name)
+    cur = cur.parent
   }
+
+  return tree
 }

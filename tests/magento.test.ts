@@ -1,8 +1,11 @@
-import { getModules } from '../src/magento/module'
-import { getThemes } from '../src/magento/theme'
+import { createActionContext } from '../src/actions/context'
 
-test('Get all the modules from Magento source code', () => {
-  const modules = getModules()
+test('Get all the modules from Magento source code', async () => {
+  const { magento } = await createActionContext({
+    theme: 'Magento/backend',
+    magento: { rootPath: process.env.MAGEFRONT_TEST_MAGENTO_ROOT },
+  })
+  const { modules } = magento
 
   const catalog = modules.find((m) => m.name === 'Magento_Catalog')
   expect(catalog).not.toBe(undefined)
@@ -23,8 +26,12 @@ test('Get all the modules from Magento source code', () => {
   }
 })
 
-test('Get all the themes from Magento source code', () => {
-  const themes = getThemes()
+test('Get all the themes from Magento source code', async () => {
+  const { magento } = await createActionContext({
+    theme: 'Magento/backend',
+    magento: { rootPath: process.env.MAGEFRONT_TEST_MAGENTO_ROOT },
+  })
+  const { themes } = magento
 
   const blank = themes.find((t) => t.name === 'Magento/blank')
   expect(blank).not.toBe(undefined)
@@ -33,7 +40,7 @@ test('Get all the themes from Magento source code', () => {
     expect(blank.src).toEqual('vendor/magento/theme-frontend-blank')
     expect(blank.dest).toEqual('pub/static/frontend/Magento/blank')
     expect(blank.area).toEqual('frontend')
-    expect(blank.parent).toEqual(false)
+    expect(blank.parent).toBeNull()
   }
 
   const luma = themes.find((t) => t.name === 'Magento/luma')
@@ -43,7 +50,7 @@ test('Get all the themes from Magento source code', () => {
     expect(luma.src).toEqual('vendor/magento/theme-frontend-luma')
     expect(luma.dest).toEqual('pub/static/frontend/Magento/luma')
     expect(luma.area).toEqual('frontend')
-    expect(luma.parent).toEqual('Magento/blank')
+    expect(luma.parent?.name).toEqual('Magento/blank')
   }
 
   const backend = themes.find((t) => t.name === 'Magento/backend')
@@ -53,6 +60,6 @@ test('Get all the themes from Magento source code', () => {
     expect(backend.src).toEqual('vendor/magento/theme-adminhtml-backend')
     expect(backend.dest).toEqual('pub/static/adminhtml/Magento/backend')
     expect(backend.area).toEqual('adminhtml')
-    expect(backend.parent).toEqual(false)
+    expect(backend.parent).toBeNull()
   }
 })

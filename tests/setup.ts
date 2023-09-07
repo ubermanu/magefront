@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import fs from 'node:fs'
-import { setRootPath } from '../src/env'
+import process from 'node:process'
 
 // Load test env file
 dotenv.config({ path: '.env.test' })
@@ -14,6 +14,3 @@ if (!magentoPath) {
 if (!fs.existsSync(magentoPath)) {
   throw new Error(`MAGEFRONT_TEST_MAGENTO_ROOT env variable points to a non-existing directory: ${magentoPath}`)
 }
-
-// Set the root path to the magento test instance.
-setRootPath(magentoPath)

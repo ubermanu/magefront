@@ -1,23 +1,16 @@
 import fs from 'node:fs'
+import { Action } from '../types'
 
-import { getThemeConfig } from '../config'
-
-/**
- * Clean up all the generated files.
- *
- * @param {string} themeName
- * @returns {Promise<void>}
- */
-export const clean = async (themeName: string) => {
-  const themeConfig = await getThemeConfig(themeName)
+export const clean: Action = async (context) => {
+  const { buildConfig } = context
 
   // Cleanup the `temp` folder
-  if (fs.existsSync(themeConfig.src)) {
-    await fs.promises.rm(themeConfig.src, { recursive: true })
+  if (fs.existsSync(buildConfig.src)) {
+    await fs.promises.rm(buildConfig.src, { recursive: true })
   }
 
   // Clean up the `pub/static` folder
-  if (fs.existsSync(themeConfig.dest)) {
-    await fs.promises.rm(themeConfig.dest, { recursive: true })
+  if (fs.existsSync(buildConfig.dest)) {
+    await fs.promises.rm(buildConfig.dest, { recursive: true })
   }
 }

@@ -1,46 +1,34 @@
 import path from 'node:path'
+import { getThemeDependencyTree } from '../magento/theme'
+import type { Action, PluginContext } from '../types'
 
-import { getThemeConfig } from '../config'
-import { logger, rootPath } from '../env'
-import { getLanguages } from '../magento/language'
-import { getModules } from '../magento/module'
-import { getThemeDependencyTree, getThemes } from '../magento/theme'
-import type { MagentoModule } from '../types'
+/** Build the theme. If a configuration file is found, it will be used. */
+export const build: Action = async (context) => {
+  const { buildConfig, magento, locale, logger } = context
 
-/**
- * Build the theme. If a configuration file is found, it will be used.
- *
- * @param {string} themeName
- * @param {string} locale
- * @returns {Promise<void>}
- */
-export const build = async (themeName: string, locale = 'en_US') => {
-  const themeConfig = await getThemeConfig(themeName)
+  // Filter the modules that are enabled and have a source directory.
+  const modules = magento.modules.filter((m) => m.enabled && m.src)
 
-  const moduleList = getModules().filter((m) => m.enabled && m.src)
-  const modules: string[] = moduleList.map((m: MagentoModule) => m.name)
+  // Append the locale to the destination directory.
+  const dest = path.join(buildConfig.dest, locale)
 
-  const languageList = getLanguages()
-  const themeList = getThemes()
+  const pluginContext: PluginContext = {
+    theme: context.theme.name,
+    locale,
+    logger,
+    src: buildConfig.src,
+    dest,
+    modules: modules.map((m) => m.name),
+    moduleList: magento.modules,
+    languageList: magento.languages,
+    themeList: magento.themes,
+    themeDependencyTree: getThemeDependencyTree(context.theme),
+    cwd: magento.rootPath,
+  }
 
-  // Execute all the tasks for each locale
-  // The destination dir gets the locale appended to it
-  const dest = path.join(themeConfig.dest, locale)
-  for (const plugin of themeConfig.plugins) {
+  for (const plugin of buildConfig.plugins) {
     try {
-      await plugin({
-        theme: themeConfig.theme,
-        src: themeConfig.src,
-        dest,
-        locale,
-        modules,
-        moduleList,
-        languageList,
-        themeList,
-        themeDependencyTree: getThemeDependencyTree(themeName),
-        cwd: rootPath,
-        logger,
-      })
+      await plugin(pluginContext)
     } catch (e) {
       // TODO: Should be critical error
       logger.error(e)
