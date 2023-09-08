@@ -14,7 +14,7 @@ You can see a list of the available plugins [here](https://ubermanu.github.io/ma
 
 ## Install
 
-Install the package at the root level of your website:
+Install the package at the root level of your project:
 
     npm install magefront
 
