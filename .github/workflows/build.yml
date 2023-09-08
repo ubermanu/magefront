@@ -25,4 +25,3 @@ jobs:
           version: 8.2.0
       - run: pnpm i
       - run: pnpm build
-      - run: pnpm -r build

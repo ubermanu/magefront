@@ -3,11 +3,6 @@
 
 import { MagefrontOptions } from './types'
 
-export * from './config'
-export * from './magento/composer'
-export * from './magento/language'
-export * from './magento/module'
-export * from './magento/theme'
 export * from './types'
 
 export { magefront as default } from './magefront'
