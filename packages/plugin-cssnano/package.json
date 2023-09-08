@@ -22,8 +22,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "prepublishOnly": "pnpm run build"
+    "build": "unbuild"
   },
   "dependencies": {
     "cssnano": "^6.0.1",

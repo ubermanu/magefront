@@ -10,6 +10,7 @@
   },
   "scripts": {
     "changeset": "changeset",
+    "changeset:publish": "pnpm run build && changeset publish",
     "ts-check": "tsc --noEmit",
     "build": "npm run build --prefix=packages/magefront && pnpm -r build",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"

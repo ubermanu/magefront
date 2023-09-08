@@ -22,8 +22,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "prepublishOnly": "pnpm run build"
+    "build": "unbuild"
   },
   "dependencies": {
     "@types/stylus": "^0.48.39",

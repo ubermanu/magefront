@@ -23,8 +23,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "prepublishOnly": "pnpm run build"
+    "build": "unbuild"
   },
   "peerDependencies": {
     "magefront": "workspace:~"

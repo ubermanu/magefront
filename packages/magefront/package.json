@@ -27,8 +27,7 @@
   "module": "dist/magefront.mjs",
   "types": "dist/magefront.d.ts",
   "scripts": {
-    "build": "unbuild",
-    "prepublishOnly": "pnpm run build"
+    "build": "unbuild"
   },
   "dependencies": {
     "browser-sync": "^2.29.3",

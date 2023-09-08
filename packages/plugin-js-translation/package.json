@@ -22,8 +22,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "prepublishOnly": "pnpm run build"
+    "build": "unbuild"
   },
   "dependencies": {
     "csv-parse": "^5.5.0"

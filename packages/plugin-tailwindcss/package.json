@@ -24,8 +24,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "prepublishOnly": "pnpm run build"
+    "build": "unbuild"
   },
   "dependencies": {
     "magefront-plugin-postcss": "workspace:~",
