@@ -76,6 +76,9 @@ export type MagefrontOptions = {
   }
 }
 
+// The configuration object that is read from the `magefront.config.js` file.
+export type MagefrontConfig = Partial<MagefrontOptions>
+
 type MaybePromise<T> = T | Promise<T>
 
 export type Action = (context: ActionContext) => MaybePromise<void>
