@@ -20,13 +20,17 @@ export const getBuildConfig = memo(async (opts: MagefrontOptions, context: Magen
   // The path to the destination directory where the theme will be deployed (pub/static)
   const dest = path.join(rootPath, theme.dest)
 
-  // The list of presets to use. If none is provided, use the default preset.
+  const all_presets: MagefrontOptions['presets'] = []
+  const all_plugins: MagefrontOptions['plugins'] = []
+
+  // Add the default preset if no preset or plugin is provided
   // The default preset contains the following plugins:
   // - magefront-plugin-less
   // - magefront-plugin-requirejs-config
   // - magefront-plugin-js-translation
-  const all_presets: MagefrontOptions['presets'] = opts.presets ?? ['magefront-preset-default']
-  const all_plugins: MagefrontOptions['plugins'] = []
+  if (!opts.presets && !opts.plugins) {
+    all_presets.push('magefront-preset-default')
+  }
 
   // Add the preset plugins to the plugin list
   if (Array.isArray(all_presets) && all_presets.length > 0) {
