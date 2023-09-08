@@ -1,11 +1,7 @@
-import { createActionContext } from '../src/actions/context'
+import { createActionContextTest } from './helpers'
 
 test('Get all the modules from Magento source code', async () => {
-  const { magento } = await createActionContext({
-    theme: 'Magento/backend',
-    magento: { rootPath: process.env.MAGEFRONT_TEST_MAGENTO_ROOT },
-  })
-  const { modules } = magento
+  const { modules } = await createActionContextTest('Magento/backend')
 
   const catalog = modules.find((m) => m.name === 'Magento_Catalog')
   expect(catalog).not.toBe(undefined)
@@ -27,11 +23,7 @@ test('Get all the modules from Magento source code', async () => {
 })
 
 test('Get all the themes from Magento source code', async () => {
-  const { magento } = await createActionContext({
-    theme: 'Magento/backend',
-    magento: { rootPath: process.env.MAGEFRONT_TEST_MAGENTO_ROOT },
-  })
-  const { themes } = magento
+  const { themes } = await createActionContextTest('Magento/backend')
 
   const blank = themes.find((t) => t.name === 'Magento/blank')
   expect(blank).not.toBe(undefined)
