@@ -6,22 +6,21 @@ on:
   pull_request:
     branches: [ main ]
 
-concurrency:
-  group: 'build'
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '19.x'
-          registry-url: 'https://registry.npmjs.org'
+
       - uses: pnpm/action-setup@v2
         with:
-          version: 8.2.0
+          version: 8
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
       - run: pnpm i
       - run: pnpm build
