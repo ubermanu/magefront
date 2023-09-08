@@ -1,7 +1,8 @@
-import { createActionContextTest } from './helpers'
+import { testActionContext } from './helpers'
 
 test('Get all the modules from Magento source code', async () => {
-  const { modules } = await createActionContextTest('Magento/backend')
+  const context = await testActionContext()
+  const { modules } = context.magento
 
   const catalog = modules.find((m) => m.name === 'Magento_Catalog')
   expect(catalog).not.toBe(undefined)
@@ -23,7 +24,8 @@ test('Get all the modules from Magento source code', async () => {
 })
 
 test('Get all the themes from Magento source code', async () => {
-  const { themes } = await createActionContextTest('Magento/backend')
+  const context = await testActionContext()
+  const { themes } = context.magento
 
   const blank = themes.find((t) => t.name === 'Magento/blank')
   expect(blank).not.toBe(undefined)
@@ -57,7 +59,8 @@ test('Get all the themes from Magento source code', async () => {
 })
 
 test('Get all the languages from Magento source code', async () => {
-  const { languages } = await createActionContextTest('Magento/backend')
+  const context = await testActionContext()
+  const { languages } = context.magento
 
   const enUs = languages.find((l) => l.code === 'en_US')
   expect(enUs).not.toBe(undefined)

@@ -4,18 +4,27 @@ import { build } from '../src/actions/build'
 import { clean } from '../src/actions/clean'
 import { deploy } from '../src/actions/deploy'
 import { inheritance } from '../src/actions/inheritance'
-import { createActionContextTest } from './helpers'
+import { ActionContext } from '../src/types'
+import { testActionContext } from './helpers'
 
 describe('Build and deploy the Magento/backend theme', () => {
+  let context: ActionContext
+  let rootPath: string
+  let tempPath: string
+
+  beforeAll(async () => {
+    context = await testActionContext({ theme: 'Magento/backend' })
+    rootPath = context.magento.rootPath
+    tempPath = context.magento.tempPath
+  })
+
   it('Clean up the generated files', async () => {
-    const { context, rootPath, tempPath } = await createActionContextTest('Magento/backend')
     await clean(context)
     expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/adminhtml/Magento/backend'))).toBe(false)
     expect(fs.existsSync(path.join(rootPath, 'pub/static/adminhtml/Magento/backend'))).toBe(false)
   })
 
   it('Synchronize all the files', async () => {
-    const { context, rootPath, tempPath } = await createActionContextTest('Magento/backend')
     await inheritance(context)
     expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/adminhtml/Magento/backend/css/styles.less'))).toBe(true)
     expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/adminhtml/Magento/backend/css/source/lib/_lib.less'))).toBe(true)
@@ -23,7 +32,6 @@ describe('Build and deploy the Magento/backend theme', () => {
   }, 10000)
 
   it('Build the source files', async () => {
-    const { context, rootPath, tempPath } = await createActionContextTest('Magento/backend')
     await build(context)
     expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/adminhtml/Magento/backend/css/styles.css'))).toBe(true)
     expect(fs.existsSync(path.join(rootPath, tempPath, 'pub/static/adminhtml/Magento/backend/requirejs-config.js'))).toBe(true)
@@ -31,7 +39,6 @@ describe('Build and deploy the Magento/backend theme', () => {
   }, 10000)
 
   it('Deploy the generated files', async () => {
-    const { context, rootPath } = await createActionContextTest('Magento/backend')
     await deploy(context)
     expect(fs.existsSync(path.join(rootPath, 'pub/static/adminhtml/Magento/backend/en_US/css/styles.css'))).toBe(true)
     expect(fs.existsSync(path.join(rootPath, 'pub/static/adminhtml/Magento/backend/en_US/requirejs-config.js'))).toBe(true)
