@@ -6,6 +6,7 @@ dist
 types
 _*.md
 .turbo
+.secrets
 
 # tests
 auth.json
