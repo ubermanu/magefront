@@ -55,3 +55,26 @@ test('Get all the themes from Magento source code', async () => {
     expect(backend.parent).toBeNull()
   }
 })
+
+test('Get all the languages from Magento source code', async () => {
+  const { languages } = await createActionContextTest('Magento/backend')
+
+  const enUs = languages.find((l) => l.code === 'en_US')
+  expect(enUs).not.toBe(undefined)
+
+  if (enUs) {
+    expect(enUs.code).toEqual('en_US')
+    expect(enUs.src).toEqual('vendor/magento/language-en_us')
+    expect(enUs.enabled).toBe(true)
+  }
+
+  const codes = languages.map((l) => l.code)
+
+  expect(codes.includes('en_US')).toBe(true)
+  expect(codes.includes('fr_FR')).toBe(true)
+  expect(codes.includes('es_ES')).toBe(true)
+  expect(codes.includes('de_DE')).toBe(true)
+  expect(codes.includes('nl_NL')).toBe(true)
+  expect(codes.includes('pt_BR')).toBe(true)
+  expect(codes.includes('zh_Hans_CN')).toBe(true)
+})
