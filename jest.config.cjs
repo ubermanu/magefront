@@ -9,5 +9,5 @@ module.exports = {
     '^magefront-preset-default$': '<rootDir>/presets/default/src/preset.ts',
   },
   testMatch: ['**/tests/*.test.ts'],
-  setupFiles: ['<rootDir>/tests/setup.ts'],
+  setupFiles: ['<rootDir>/jest.setup.ts'],
 }
