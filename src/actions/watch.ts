@@ -53,7 +53,7 @@ export const watch: Action = async (context) => {
     .on('unlinkDir', rebuild)
     .on('change', async (filePath) => {
       await rebuild()
-      if (['.less', '.scss', '.styl', '.css'].includes(path.extname(filePath))) {
+      if (['.less', '.scss', '.styl', '.css', '.postcss', '.pcss'].includes(path.extname(filePath))) {
         if (instance) {
           instance.reload('*.css')
         }
