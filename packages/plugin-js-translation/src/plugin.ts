@@ -8,7 +8,7 @@ export default (): Plugin => {
   return async (context) => {
     const files = []
 
-    const { locale, moduleList, languageList } = context
+    const { locale, moduleList, languageList, cwd } = context
     const translationFilename = locale + '.csv'
 
     // Get the translation files from the language packs
@@ -17,7 +17,7 @@ export default (): Plugin => {
         return
       }
 
-      const translationFile = path.join(lang.src, translationFilename)
+      const translationFile = path.join(cwd, lang.src, translationFilename)
       if (fs.existsSync(translationFile)) {
         files.push(translationFile)
       }
@@ -30,7 +30,7 @@ export default (): Plugin => {
         return
       }
 
-      const translationFile = path.join(mod.src, 'i18n', translationFilename)
+      const translationFile = path.join(cwd, mod.src, 'i18n', translationFilename)
       if (fs.existsSync(translationFile)) {
         files.push(translationFile)
       }
