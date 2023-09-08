@@ -24,7 +24,7 @@ export default (options?: Options): Plugin => {
       files.map(async (file) => {
         const filePath = path.join(context.src, file)
         const fileContent = await fs.readFile(filePath)
-        const compiler = await postcss(plugins ?? [])
+        const compiler = postcss(plugins ?? [])
 
         const result = await compiler.process(fileContent, {
           from: filePath,
