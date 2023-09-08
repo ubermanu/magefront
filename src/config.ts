@@ -14,14 +14,23 @@ export const getBuildConfig = memo(async (opts: MagefrontOptions, context: Magen
     throw new Error(`Theme '${opts.theme}' not found.`)
   }
 
-  const src = path.join(rootPath, tempPath, theme.dest)
+  // The path to the temporary directory where the theme will be built
+  const tmp = path.join(rootPath, tempPath, theme.dest)
+
+  // The path to the destination directory where the theme will be deployed (pub/static)
   const dest = path.join(rootPath, theme.dest)
 
+  // The list of presets to use. If none is provided, use the default preset.
+  // The default preset contains the following plugins:
+  // - magefront-plugin-less
+  // - magefront-plugin-requirejs-config
+  // - magefront-plugin-js-translation
+  const all_presets: MagefrontOptions['presets'] = opts.presets ?? ['magefront-preset-default']
   const all_plugins: MagefrontOptions['plugins'] = []
 
   // Add the preset plugins to the plugin list
-  if (Array.isArray(opts.presets) && opts.presets.length > 0) {
-    const presets = await Promise.all(opts.presets.map(transformPresetDefinition))
+  if (Array.isArray(all_presets) && all_presets.length > 0) {
+    const presets = await Promise.all(all_presets.map(transformPresetDefinition))
     presets.forEach((preset) => {
       if (Array.isArray(preset.plugins)) {
         preset.plugins.forEach((plugin) => all_plugins.push(plugin))
@@ -38,7 +47,7 @@ export const getBuildConfig = memo(async (opts: MagefrontOptions, context: Magen
   // It can be 'string', 'object' or 'function'
   const plugins = await Promise.all(all_plugins.map(transformPluginDefinition))
 
-  return { src, dest, plugins }
+  return { tmp, dest, plugins }
 })
 
 /** Transform the plugin to a function if it is not already. If passed a string, import the plugin and return the default export. */

@@ -2,19 +2,14 @@ import glob, { Pattern } from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
 import { getThemeDependencyTree } from '../magento/theme'
-import type { Action, MagentoModule } from '../types'
+import type { Action } from '../types'
 
 /** Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards. */
 export const inheritance: Action = async (context) => {
-  const { rootPath, tempPath, themes } = context.magento
+  const { rootPath } = context.magento
+  const { tmp } = context.buildConfig
 
-  /**
-   * Copy the files from the src to the destination directory.
-   *
-   * @param src
-   * @param dest
-   * @param ignore
-   */
+  // Copy the files from the src to the destination directory.
   async function generateCopies(src: string, dest: string, ignore: Pattern[] = []) {
     const files = await glob(src + '/**', {
       cwd: rootPath,
@@ -30,46 +25,35 @@ export const inheritance: Action = async (context) => {
     )
   }
 
-  const currentTheme = context.theme
-
-  const themeDest = path.join(rootPath, tempPath, currentTheme.dest)
-
   // Clean destination dir
-  fs.removeSync(themeDest)
+  fs.removeSync(tmp)
 
   // Add the Magento core lib resources as a dependency for everyone
   // Ignore the css docs and txt files
-  await generateCopies(path.join('lib', 'web'), themeDest, ['css/docs', '**/*.txt', 'i18n'])
+  await generateCopies(path.join('lib', 'web'), tmp, ['css/docs', '**/*.txt', 'i18n'])
 
   // For each enabled modules, copy the web resources into the theme temp dir
   const modules = context.magento.modules.filter((m) => m.enabled && m.src)
-  const area = currentTheme.area
   const ignore = ['**/node_modules/**']
 
   await Promise.all(
-    modules.map(async (m: MagentoModule) => {
+    modules.map(async (m) => {
       // Resolve the "base" area as well (common to frontend and adminhtml)
-      await generateCopies(path.join(m.src, 'view', 'base', 'web'), path.join(themeDest, m.name), ignore)
-      await generateCopies(path.join(m.src, 'view', area, 'web'), path.join(themeDest, m.name), ignore)
+      await generateCopies(path.join(m.src, 'view', 'base', 'web'), path.join(tmp, m.name), ignore)
+      await generateCopies(path.join(m.src, 'view', context.theme.area, 'web'), path.join(tmp, m.name), ignore)
     })
   )
 
   // Copy the files from the themes
-  // TODO: Get the theme dependency tree beforehand
-  for (const themeDependency of getThemeDependencyTree(context.theme)) {
-    const theme = themes.find((t) => t.name === themeDependency)
-    if (!theme) {
-      return
-    }
-
+  for (const theme of getThemeDependencyTree(context.theme)) {
     // TODO: Implement custom ignore property in the theme config
     // TODO: Add support for a `.magefrontignore` file?
-    await generateCopies(path.join(theme.src, 'web'), themeDest, ignore)
+    await generateCopies(path.join(theme.src, 'web'), tmp, ignore)
 
-    // Add the submodule source files
+    // Add the submodule source files (ex: `Magento_Catalog/web`)
     await Promise.all(
-      modules.map((m: MagentoModule) => {
-        return generateCopies(path.join(theme.src, m.name, 'web'), path.join(themeDest, m.name), ignore)
+      modules.map((m) => {
+        return generateCopies(path.join(theme.src, m.name, 'web'), path.join(tmp, m.name), ignore)
       })
     )
   }

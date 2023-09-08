@@ -94,15 +94,25 @@ function getThemeNameAndAreaFromRegistrationPhp(file: string) {
   return { name, area }
 }
 
-/** Get the theme dependency tree for the given theme. */
-export const getThemeDependencyTree = (theme: MagentoTheme): string[] => {
-  const tree: string[] = []
+/**
+ * Get the theme dependency tree with the upmost parent first. Also contains the theme itself!
+ *
+ * Example:
+ *
+ * If your theme extends `Magento/luma` which extends `Magento/blank`, the tree will be:
+ *
+ * - Magento/blank
+ * - Magento/luma
+ * - Vendor/theme-child
+ */
+export const getThemeDependencyTree = (theme: MagentoTheme): MagentoTheme[] => {
+  const tree: MagentoTheme[] = [theme]
   let cur = theme
 
   while (cur.parent) {
-    tree.push(cur.parent.name)
+    tree.push(cur.parent)
     cur = cur.parent
   }
 
-  return tree
+  return tree.reverse()
 }

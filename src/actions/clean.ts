@@ -4,9 +4,9 @@ import { Action } from '../types'
 export const clean: Action = async (context) => {
   const { buildConfig } = context
 
-  // Cleanup the `temp` folder
-  if (fs.existsSync(buildConfig.src)) {
-    await fs.promises.rm(buildConfig.src, { recursive: true })
+  // Cleanup the `var/view_preprocessed` folder
+  if (fs.existsSync(buildConfig.tmp)) {
+    await fs.promises.rm(buildConfig.tmp, { recursive: true })
   }
 
   // Clean up the `pub/static` folder

@@ -14,8 +14,6 @@ export const createActionContext = async (opts: MagefrontOptions): Promise<Actio
     transports: [new winston.transports.Console({ silent: true })],
   })
 
-  // TODO: Get theme config for the given theme
-
   const magentoContext = createMagentoContext(opts)
   const themes = getThemes(magentoContext)
   const modules = getModules(magentoContext)
@@ -28,13 +26,14 @@ export const createActionContext = async (opts: MagefrontOptions): Promise<Actio
     throw new Error(`Theme "${opts.theme}" not found.`)
   }
 
-  const themeConfig = await getBuildConfig(opts, magentoContext)
+  // Normalize the build config (merge the presets and plugins)
+  const buildConfig = await getBuildConfig(opts, magentoContext)
 
   return {
     theme,
     locale: opts?.locale || 'en_US',
     logger,
-    buildConfig: themeConfig,
+    buildConfig,
     magento: {
       rootPath: magentoContext.rootPath,
       tempPath: magentoContext.tempPath,

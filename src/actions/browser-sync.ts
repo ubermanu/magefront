@@ -1,6 +1,8 @@
 import bs, { type BrowserSyncInstance, type Options } from 'browser-sync'
+import console from 'node:console'
 
 // Current instance of BrowserSync
+// TODO: Move this into the ActionContext
 export let instance: BrowserSyncInstance
 
 export const browserSync = async (url: string) => {
@@ -22,6 +24,7 @@ export const browserSync = async (url: string) => {
     instance = bs.create()
     instance.init(config)
   } catch (e) {
+    // TODO: Use logger
     console.error(e)
   }
 }

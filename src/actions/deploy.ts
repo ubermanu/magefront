@@ -26,11 +26,11 @@ export const deploy: Action = async (context) => {
   ]
 
   // Copy all the files from the src (tmp) dir to the `pub/static` dir
-  const files = await glob('**/*', { cwd: buildConfig.src, ignore: excludes })
+  const files = await glob('**/*', { cwd: buildConfig.tmp, ignore: excludes })
 
   await Promise.all(
     files.map(async (file) => {
-      const filePath = await fs.promises.realpath(path.join(buildConfig.src, file))
+      const filePath = await fs.promises.realpath(path.join(buildConfig.tmp, file))
       const destPath = path.join(dest, file)
       return fs.copy(filePath, destPath)
     })

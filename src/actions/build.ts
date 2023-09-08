@@ -16,13 +16,13 @@ export const build: Action = async (context) => {
     theme: context.theme.name,
     locale,
     logger,
-    src: buildConfig.src,
+    src: buildConfig.tmp,
     dest,
     modules: modules.map((m) => m.name),
     moduleList: magento.modules,
     languageList: magento.languages,
     themeList: magento.themes,
-    themeDependencyTree: getThemeDependencyTree(context.theme),
+    themeDependencyTree: getThemeDependencyTree(context.theme).map((t) => t.name),
     cwd: magento.rootPath,
   }
 

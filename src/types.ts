@@ -48,11 +48,10 @@ export type Preset = {
   plugins?: Plugin[]
 }
 
-// The configuration object that is passed as build context. The preset plugins are resolved and merged into the plugins array.
+// The configuration object that is passed as build context.
+// The preset plugins are resolved and merged into the plugins array.
 export type BuildConfig = {
-  // TODO: Remove this (already in context?)
-  src: string
-  // TODO: Remove this (already in context?)
+  tmp: string
   dest: string
   plugins: Plugin[]
 }
