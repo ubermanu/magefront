@@ -60,7 +60,7 @@ jobs:
         run: |
           if [ ! -d "$GITHUB_WORKSPACE/magento/vendor" ]; then
             composer create-project --ignore-platform-reqs --repository-url=https://repo.magento.com/ magento/project-community-edition "$GITHUB_WORKSPACE/magento"
-            cp tests/_fixtures/config.php.dist "$GITHUB_WORKSPACE/magento/app/etc/config.php"
+            cp .github/_fixtures/config.php.dist "$GITHUB_WORKSPACE/magento/app/etc/config.php"
           fi
 
       - run: pnpm i
