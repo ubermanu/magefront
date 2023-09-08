@@ -2,24 +2,18 @@ import chokidar from 'chokidar'
 import path from 'node:path'
 import { performance } from 'node:perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
-
-import { logger, rootPath } from '../env'
-import { getModules } from '../magento/module'
-import { getThemes } from '../magento/theme'
+import { Action } from '../types'
 import { instance } from './browser-sync'
 import { build } from './build'
 import { deploy } from './deploy'
 import { inheritance } from './inheritance'
 
-export const watch = async (themeName: string, locale: string) => {
-  const watcherConfig = { ignoreInitial: true }
-  const theme = getThemes().find((theme) => theme.name === themeName)
-  const modules = getModules().filter((module) => module.src && module.enabled)
+export const watch: Action = async (context) => {
+  const { logger, magento, theme } = context
+  const { rootPath } = magento
 
-  if (!theme) {
-    logger.error(`Theme ${themeName} not found.`)
-    return
-  }
+  const watcherConfig = { ignoreInitial: true }
+  const modules = magento.modules.filter((m) => m.src && m.enabled)
 
   const themeSrc = [path.join(rootPath, theme.src)]
 
@@ -44,9 +38,9 @@ export const watch = async (themeName: string, locale: string) => {
     isBuilding = true
     logger.info('Rebuilding theme...')
     const now = performance.now()
-    await inheritance(themeName)
-    await build(themeName, locale)
-    await deploy(themeName, locale)
+    await inheritance(context)
+    await build(context)
+    await deploy(context)
     logger.info(`Done in ${prettyMilliseconds(performance.now() - now)}`)
     isBuilding = false
   }
@@ -59,7 +53,7 @@ export const watch = async (themeName: string, locale: string) => {
     .on('unlinkDir', rebuild)
     .on('change', async (filePath) => {
       await rebuild()
-      if (['.less', '.scss', '*.styl', '.css'].includes(path.extname(filePath))) {
+      if (['.less', '.scss', '.styl', '.css', '.postcss', '.pcss'].includes(path.extname(filePath))) {
         if (instance) {
           instance.reload('*.css')
         }

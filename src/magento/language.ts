@@ -1,24 +1,23 @@
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-
-import { rootPath } from '../env'
-import type { ComposerPackage, MagentoLanguage } from '../types'
-import { getPackages, getRegistrations } from './composer'
+import type { MagentoContext, MagentoLanguage } from '../types'
+import { getRegistrations } from './composer'
 
 /**
  * Get all the languages loaded from the `composer.lock` file.
  *
  * @returns MagentoLanguage[]
  */
-export const getLanguages = memo(() => {
+export const getLanguages = memo((context: MagentoContext) => {
+  const { rootPath } = context
   const list: { [name: string]: MagentoLanguage } = {}
 
   // Get the list of languages in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages: ComposerPackage[] = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-language')
+  const packages = context.packages.filter((pkg) => pkg.type === 'magento2-language')
 
-  packages.forEach((pkg: ComposerPackage) => {
+  packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
       const name = pkg.name

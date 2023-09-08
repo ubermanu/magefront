@@ -1,21 +1,12 @@
-import k from 'kleur'
-import path from 'node:path'
-import { performance } from 'node:perf_hooks'
-import prettyMilliseconds from 'pretty-ms'
 import sade from 'sade'
 import winston from 'winston'
-
 import { version } from '../package.json' assert { type: 'json' }
 import { browserSync } from './actions/browser-sync'
-import { build } from './actions/build'
-import { clean } from './actions/clean'
-import { deploy } from './actions/deploy'
-import { inheritance } from './actions/inheritance'
+import { createActionContext } from './actions/context'
 import { list } from './actions/list'
 import { watch } from './actions/watch'
-import { setConfigFilename, setUseConfigFile } from './config'
-import { logger } from './env'
-
+import { magefront } from './magefront'
+import { MagefrontOptions } from './types'
 const program = sade('magefront', true)
 
 program
@@ -30,45 +21,52 @@ program.example('-t Magento/blank')
 program.example('-t Magento/blank -c -w')
 program.example('-t Magento/blank -c --dev https://magento.ddev.site')
 
+// const CONFIG_FILENAME: string = 'magefront.config.{js,mjs,cjs}'
+
+function transformCommandOptions(opts: any): MagefrontOptions {
+  const { theme, _: locales } = opts
+
+  // Use the default `en_US` locale if none is provided
+  // TODO: Add support for multiple locales (when building)
+  const locale = locales[0] || 'en_US'
+
+  return {
+    theme,
+    locale,
+  }
+}
+
 program.action(async (opts) => {
+  const magefrontOptions = transformCommandOptions(opts)
+  const context = await createActionContext(magefrontOptions)
+  const { logger } = context
+
+  // Set up the logger instance to go through console
+  logger.add(new winston.transports.Console({ silent: false }))
+
   if (opts.list) {
-    list()
+    list(context)
     return
   }
 
-  const { theme, _: locales, watch: watchMode, dev: devMode, config } = opts
+  const { theme, watch: watchMode, dev: devMode, config } = opts
 
   if (!theme) {
     logger.error('You must provide a theme name.')
     return
   }
 
-  if (devMode && !devMode.length) {
+  if (devMode && devMode.length === 0) {
     logger.error('The dev mode requires a URL to proxy.')
     return
   }
 
   if (config) {
-    setUseConfigFile(true)
-    if (typeof config === 'string' && config.length > 0) {
-      logger.info(`Using configuration file: ${config}`)
-      setConfigFilename(path.resolve(process.cwd(), config))
-    }
+    // TODO: Load the config file
   }
 
-  // Use the default `en_US` locale if none is provided
-  // TODO: Add support for multiple locales (when building)
-  const locale = locales[0] || 'en_US'
-
   try {
-    const now = performance.now()
-    logger.info(`Gathering files for ${k.bold(theme)}...`)
-    await clean(theme)
-    await inheritance(theme)
-    logger.info(`Building ${k.bold(theme)} for locale ${k.bold(locale)}...`)
-    await build(theme, locale)
-    await deploy(theme, locale)
-    logger.info(`Done in ${prettyMilliseconds(performance.now() - now)}`)
+    await magefront(magefrontOptions)
   } catch (error) {
     logger.error(error)
     process.exit(1)
@@ -80,11 +78,8 @@ program.action(async (opts) => {
   }
 
   if (devMode || watchMode) {
-    await watch(theme, locale)
+    await watch(context)
   }
 })
-
-// Set up the logger instance to go through console
-logger.add(new winston.transports.Console({ silent: false }))
 
 program.parse(process.argv)

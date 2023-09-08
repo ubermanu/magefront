@@ -2,22 +2,22 @@ import glob from 'fast-glob'
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-
-import { logger, rootPath } from '../env'
-import type { ComposerPackage, MagentoModule } from '../types'
-import { getPackages, getRegistrations } from './composer'
+import type { MagentoContext, MagentoModule } from '../types'
+import { getRegistrations } from './composer'
 
 /**
  * Read the `config.php` file and return the modules list. Resolve the modules paths from `app/code` then from the `vendor` directory.
  *
  * @returns MagentoModule[]
  */
-export const getModules = memo(() => {
+export const getModules = memo((context: MagentoContext) => {
+  const { rootPath } = context
+
   const list: { [name: string]: MagentoModule } = {}
   const config = fs.readFileSync(path.join(rootPath, '/app/etc/config.php')).toString()
 
   if (!config) {
-    logger.error('No config.php file found.')
+    // FIXME: logger.error('No config.php file found.')
     return []
   }
 
@@ -41,13 +41,13 @@ export const getModules = memo(() => {
     const moduleXmlFile = path.join(rootPath, codeSrc, 'etc/module.xml')
 
     if (!fs.existsSync(moduleXmlFile)) {
-      logger.warn(`Module XML file not found in ${codeSrc}`)
+      // FIXME: logger.warn(`Module XML file not found in ${codeSrc}`)
       return
     }
 
     const name = fetchNameFromModuleXml(moduleXmlFile)
     if (!list[name]) {
-      logger.warn(`Module "${name}" not found in config.php`)
+      // FIXME: logger.warn(`Module "${name}" not found in config.php`)
       return
     }
 
@@ -56,15 +56,15 @@ export const getModules = memo(() => {
 
   // 3. Get the list of modules in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages: ComposerPackage[] = getPackages().filter((pkg: ComposerPackage) => pkg.type === 'magento2-module')
+  const packages = context.packages.filter((pkg) => pkg.type === 'magento2-module')
 
-  packages.forEach((pkg: ComposerPackage) => {
+  packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
       const name = fetchNameFromModuleXml(path.join(rootPath, src, 'etc/module.xml'))
 
       if (!list[name]) {
-        logger.warn(`Module "${name}" not found in config.php`)
+        // FIXME: logger.warn(`Module "${name}" not found in config.php`)
         return
       }
 
