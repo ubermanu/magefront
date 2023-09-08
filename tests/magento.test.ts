@@ -17,7 +17,7 @@ test('Get all the modules from Magento source code', async () => {
   }
 
   const twoFactorAuth = modules.find((m) => m.name === 'Magento_TwoFactorAuth')
-  expect(catalog).not.toBe(undefined)
+  expect(twoFactorAuth).not.toBe(undefined)
 
   if (twoFactorAuth) {
     expect(twoFactorAuth.name).toEqual('Magento_TwoFactorAuth')
