@@ -1,7 +1,10 @@
 module.exports = {
   preset: 'ts-jest',
+  extensionsToTreatAsEsm: ['.ts'],
   testEnvironment: 'node',
-  transform: {},
+  transform: {
+    '^.+\\.ts$': ['ts-jest', { useESM: true }],
+  },
   moduleNameMapper: {
     '^magefront-plugin-less$': '<rootDir>/plugins/less/src/plugin.ts',
     '^magefront-plugin-requirejs-config$': '<rootDir>/plugins/requirejs-config/src/plugin.ts',

@@ -6,7 +6,7 @@ import { clean } from './actions/clean'
 import { createActionContext } from './actions/context'
 import { deploy } from './actions/deploy'
 import { inheritance } from './actions/inheritance'
-import { MagefrontOptions } from './types'
+import type { MagefrontOptions } from './types'
 
 /** Builds a Magento 2 theme. */
 export const magefront = async (opts: MagefrontOptions): Promise<void> => {
