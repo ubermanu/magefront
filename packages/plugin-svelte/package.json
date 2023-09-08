@@ -30,7 +30,7 @@
     "svelte": "~4.2.0"
   },
   "peerDependencies": {
-    "magefront": "workspace:*"
+    "magefront": "workspace:~"
   },
   "exports": {
     ".": {

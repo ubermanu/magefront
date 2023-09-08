@@ -30,7 +30,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "magefront": "workspace:*"
+    "magefront": "workspace:~"
   },
   "exports": {
     ".": {

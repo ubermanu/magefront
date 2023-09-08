@@ -31,7 +31,7 @@
     "sass": "^1.66.1"
   },
   "peerDependencies": {
-    "magefront": "workspace:*"
+    "magefront": "workspace:~"
   },
   "exports": {
     ".": {

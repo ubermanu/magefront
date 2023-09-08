@@ -30,7 +30,7 @@
     "magefront-plugin-babel": "workspace:~"
   },
   "peerDependencies": {
-    "magefront": "workspace:*",
+    "magefront": "workspace:~",
     "react": ">=18"
   },
   "exports": {

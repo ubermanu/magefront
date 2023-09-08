@@ -33,7 +33,7 @@
     "magefront-plugin-terser": "workspace:~"
   },
   "peerDependencies": {
-    "magefront": "workspace:*"
+    "magefront": "workspace:~"
   },
   "exports": {
     ".": {

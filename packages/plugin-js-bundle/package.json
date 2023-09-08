@@ -27,7 +27,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
-    "magefront": "workspace:*"
+    "magefront": "workspace:~"
   },
   "exports": {
     ".": {
