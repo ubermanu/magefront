@@ -14,7 +14,10 @@
     "sourceMap": false,
     "inlineSourceMap": false,
     "moduleResolution": "node",
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": [
+      "bun-types" // add Bun global
+    ]
   },
   "exclude": ["tests", "node_modules", "dist"]
 }
