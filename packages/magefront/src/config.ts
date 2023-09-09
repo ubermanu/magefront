@@ -20,7 +20,7 @@ export const getBuildConfig = memo(async (opts: MagefrontOptions, context: Magen
   // The path to the destination directory where the theme will be deployed (pub/static)
   const dest = path.join(rootPath, theme.dest)
 
-  const all_presets: MagefrontOptions['presets'] = []
+  const all_presets: MagefrontOptions['presets'] = opts.presets || []
   const all_plugins: MagefrontOptions['plugins'] = []
 
   // Add the default preset if no preset or plugin is provided

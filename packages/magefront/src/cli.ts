@@ -90,14 +90,14 @@ program.action(async (opts) => {
           process.exit(1)
         }
 
-        cli_options = u.assign(cli_options, item)
+        cli_options = Object.assign(cli_options, item)
       } else if (u.isObject(mod.default)) {
         if (theme !== mod.default.theme) {
           logger.error(`Theme '${theme}' not found in the configuration file: ${config_path}`)
           process.exit(1)
         }
 
-        cli_options = u.assign(cli_options, mod.default)
+        cli_options = Object.assign(cli_options, mod.default)
       } else {
         // TODO: Add configuration validation
         logger.error(`Invalid configuration file: ${config_path}`)
