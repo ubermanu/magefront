@@ -8,7 +8,7 @@ import { getRegistrations } from './composer'
 /**
  * Crawl the Magento project source code and return a list of all the themes.
  *
- * @returns MagentoTheme[]
+ * @returns {MagentoTheme[]}
  */
 export const getThemes = memo((context: MagentoContext) => {
   const { rootPath } = context

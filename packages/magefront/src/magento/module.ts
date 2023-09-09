@@ -8,7 +8,7 @@ import { getRegistrations } from './composer'
 /**
  * Read the `config.php` file and return the modules list. Resolve the modules paths from `app/code` then from the `vendor` directory.
  *
- * @returns MagentoModule[]
+ * @returns {MagentoModule[]}
  */
 export const getModules = memo((context: MagentoContext) => {
   const { rootPath } = context

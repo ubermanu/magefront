@@ -7,7 +7,7 @@ import { getRegistrations } from './composer'
 /**
  * Get all the languages loaded from the `composer.lock` file.
  *
- * @returns MagentoLanguage[]
+ * @returns {MagentoLanguage[]}
  */
 export const getLanguages = memo((context: MagentoContext) => {
   const { rootPath } = context
