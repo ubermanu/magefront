@@ -1,5 +1,5 @@
 import glob from 'fast-glob'
-import fs from 'fs-extra'
+import fs from 'node:fs'
 import path from 'node:path'
 import { Action } from '../types'
 
@@ -32,7 +32,7 @@ export const deploy: Action = async (context) => {
     files.map(async (file) => {
       const filePath = await fs.promises.realpath(path.join(buildConfig.tmp, file))
       const destPath = path.join(dest, file)
-      return fs.copy(filePath, destPath)
+      return fs.promises.cp(filePath, destPath, { recursive: true })
     })
   )
 }
