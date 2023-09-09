@@ -1,5 +1,16 @@
 # magefront
 
+## 1.1.0
+
+### Minor Changes
+
+- 9d2b2b5: Restore config file support for CLI.
+
+### Patch Changes
+
+- Updated dependencies [4cc6bd1]
+  - magefront-preset-default@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

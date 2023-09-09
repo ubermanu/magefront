@@ -1,5 +1,23 @@
 # magefront-preset-default
 
+## 1.1.0
+
+### Minor Changes
+
+- 4cc6bd1: Changeset is struggling with peer dependencies.
+  Set the magefront peer dependency to `any`.
+
+### Patch Changes
+
+- Updated dependencies [4cc6bd1]
+- Updated dependencies [9d2b2b5]
+  - magefront-plugin-requirejs-config@1.1.0
+  - magefront-plugin-js-translation@1.1.0
+  - magefront-plugin-cssnano@1.1.0
+  - magefront-plugin-terser@1.1.0
+  - magefront-plugin-less@1.1.0
+  - magefront@1.1.0
+
 ## 1.0.0
 
 ### Major Changes

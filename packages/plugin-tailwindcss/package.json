@@ -1,6 +1,6 @@
 {
   "name": "magefront-plugin-tailwindcss",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -31,7 +31,7 @@
     "tailwindcss": "^3.3.3"
   },
   "peerDependencies": {
-    "magefront": "workspace:~"
+    "magefront": "*"
   },
   "exports": {
     ".": {
