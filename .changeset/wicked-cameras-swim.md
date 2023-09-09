@@ -1,5 +1,5 @@
 ---
-'magefront': patch
+'magefront': minor
 ---
 
 Restore config file support for CLI.
