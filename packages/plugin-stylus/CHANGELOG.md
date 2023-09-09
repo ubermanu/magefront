@@ -1,5 +1,17 @@
 # magefront-plugin-stylus
 
+## 1.1.0
+
+### Minor Changes
+
+- 4cc6bd1: Changeset is struggling with peer dependencies.
+  Set the magefront peer dependency to `any`.
+
+### Patch Changes
+
+- Updated dependencies [9d2b2b5]
+  - magefront@1.1.0
+
 ## 1.0.0
 
 ### Major Changes
