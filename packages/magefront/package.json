@@ -44,11 +44,7 @@
   "devDependencies": {
     "@types/browser-sync": "^2.27.0",
     "@types/cli-table": "^0.3.2",
-    "@types/memoizee": "^0.4.8",
-    "@types/node": "^20.5.9"
-  },
-  "engines": {
-    "node": ">=18"
+    "@types/memoizee": "^0.4.8"
   },
   "bin": {
     "magefront": "dist/cli.mjs"
