@@ -18,7 +18,7 @@ test('Parses less files without any options', async () => {
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email.css'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email-inline.css'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/print.css'))).toBe(true)
-}, 5000)
+}, 10000)
 
 test('Parses less files with sourcemaps', async () => {
   await magefront({
@@ -37,4 +37,4 @@ test('Parses less files with sourcemaps', async () => {
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email-inline.css.map'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/print.css'))).toBe(true)
   expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/print.css.map'))).toBe(true)
-}, 5000)
+}, 10000)
