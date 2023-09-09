@@ -76,8 +76,8 @@ export type MagefrontOptions = {
   }
 }
 
-// The configuration object that is read from the `magefront.config.js` file.
-// export type MagefrontConfig = Partial<MagefrontOptions>
+// The configuration object or array that is read from the `magefront.config.js` file.
+export type Config = Partial<MagefrontOptions> | MagefrontOptions[]
 
 type MaybePromise<T> = T | Promise<T>
 

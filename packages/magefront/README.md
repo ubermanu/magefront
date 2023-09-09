@@ -23,7 +23,7 @@ Example:
 Use the `magefront` function programmatically:
 
 ```js
-import magefront from 'magefront'
+import { magefront } from 'magefront'
 
 await magefront({
   theme: 'Magento/blank',
