@@ -1,5 +1,12 @@
 # magefront
 
+## 1.1.1
+
+### Patch Changes
+
+- 3a6498e: Update exports and exported types
+- 5fbff09: Fix preset loading in config file
+
 ## 1.1.0
 
 ### Minor Changes
