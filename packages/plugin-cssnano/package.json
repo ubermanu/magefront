@@ -33,7 +33,7 @@
     "postcss": "^8.4.29"
   },
   "peerDependencies": {
-    "magefront": "workspace:~"
+    "magefront": "*"
   },
   "exports": {
     ".": {

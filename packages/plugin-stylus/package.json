@@ -30,7 +30,7 @@
     "stylus": "^0.60.0"
   },
   "peerDependencies": {
-    "magefront": "workspace:~"
+    "magefront": "*"
   },
   "exports": {
     ".": {
