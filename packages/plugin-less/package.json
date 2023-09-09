@@ -30,7 +30,7 @@
     "less": "2.7"
   },
   "peerDependencies": {
-    "magefront": "*"
+    "magefront": "workspace:^"
   },
   "exports": {
     ".": {
