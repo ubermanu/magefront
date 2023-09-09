@@ -16,15 +16,15 @@ You can see a list of the available plugins [here](https://ubermanu.github.io/ma
 
 Install the package at the root level of your project:
 
-    npm install magefront
+    bun install magefront
 
 ## Usage
 
-    npx magefront [options] [locale]
+    bunx magefront [options] [locale]
 
 Example:
 
-    npx magefront -t Magento/blank en_US
+    bunx magefront -t Magento/blank en_US
 
 ## Configuration
 
