@@ -50,5 +50,5 @@ You can test `magefront` on a Magento 2 instance by doing the following:
 
 1. Clone this repository
 2. Copy the `.env.test.dist` file to `.env.test` and fill in your Magento path
-3. Install the dependencies: `pnpm install`
-4. Run the tests: `pnpm test`
+3. Install the dependencies: `bun install`
+4. Run the tests: `bun test`
