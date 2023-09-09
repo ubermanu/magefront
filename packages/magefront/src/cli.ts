@@ -12,7 +12,8 @@ import { watch } from './actions/watch'
 import { createLogger } from './logger'
 import { magefront } from './magefront'
 import { createMagentoContext } from './magento/context'
-import type { MagefrontConfig, MagefrontOptions } from './types'
+import type { MagefrontOptions } from './types'
+import * as u from './utils'
 
 const program = sade('magefront', true)
 
@@ -42,8 +43,8 @@ function transformCommandOptions(opts: any): MagefrontOptions {
 }
 
 program.action(async (opts) => {
-  let magefrontOptions = transformCommandOptions(opts)
-  const magento = createMagentoContext(magefrontOptions)
+  let cli_options = transformCommandOptions(opts)
+  const magento = createMagentoContext(cli_options)
 
   // Set up the logger instance to go through console
   const logger = createLogger()
@@ -54,9 +55,14 @@ program.action(async (opts) => {
     return
   }
 
-  const { theme, watch: watchMode, dev: devMode, config } = opts
+  const { theme, watch: watch_mode, dev: dev_mode, config } = opts
 
-  if (devMode && devMode.length === 0) {
+  if (!theme) {
+    logger.error('You must provide a theme name.')
+    return
+  }
+
+  if (dev_mode && dev_mode.length === 0) {
     logger.error('The dev mode requires a URL to proxy.')
     return
   }
@@ -70,60 +76,54 @@ program.action(async (opts) => {
       process.exit(1)
     }
 
-    const configPath = path.join(magento.rootPath, files[0])
+    const config_path = path.join(magento.rootPath, files[0])
     logger.info(`Loading configuration file: ${k.bold(files[0])}...`)
 
     try {
-      const mod: { default: MagefrontConfig | MagefrontConfig[] } = await import(configPath)
+      const mod: { default: MagefrontOptions | MagefrontOptions[] } = await import(config_path)
 
-      if (Array.isArray(mod.default)) {
+      if (u.isArray(mod.default)) {
         const item = mod.default.find((opts) => opts.theme === theme)
 
-        // TODO: Handle the case where the theme is not specified in the configuration file (as array)
         if (!item) {
-          logger.error(`Theme '${theme}' not found in the configuration file: ${configPath}`)
+          logger.error(`Theme '${theme}' not found in the configuration file: ${config_path}`)
           process.exit(1)
         }
 
-        magefrontOptions = Object.assign(magefrontOptions, item)
-      } else if (typeof mod.default === 'object') {
-        magefrontOptions = Object.assign(magefrontOptions, mod.default)
+        cli_options = u.assign(cli_options, item)
+      } else if (u.isObject(mod.default)) {
+        if (theme !== mod.default.theme) {
+          logger.error(`Theme '${theme}' not found in the configuration file: ${config_path}`)
+          process.exit(1)
+        }
+
+        cli_options = u.assign(cli_options, mod.default)
       } else {
         // TODO: Add configuration validation
-        logger.error(`Invalid configuration file: ${configPath}`)
+        logger.error(`Invalid configuration file: ${config_path}`)
         process.exit(1)
       }
     } catch (e) {
-      logger.error(`Failed to load configuration file: ${configPath}`)
+      logger.error(`Failed to load configuration file: ${config_path}`)
       logger.error(e)
       process.exit(1)
     }
   }
 
-  // Use the theme name from the arguments if provided
-  if (theme) {
-    magefrontOptions.theme = theme
-  }
-
-  if (!magefrontOptions.theme) {
-    logger.error('You must provide a theme name either as an argument or in the configuration file.')
-    return
-  }
-
   try {
-    await magefront(magefrontOptions, logger)
+    await magefront(cli_options, logger)
   } catch (error) {
     logger.error(error)
     process.exit(1)
   }
 
-  if (devMode) {
+  if (dev_mode) {
     logger.info('Starting browser-sync proxy...')
-    await browserSync(devMode)
+    await browserSync(dev_mode)
   }
 
-  if (devMode || watchMode) {
-    const context = await createActionContext(magefrontOptions, logger)
+  if (dev_mode || watch_mode) {
+    const context = await createActionContext(cli_options, logger)
     await watch(context)
   }
 })
