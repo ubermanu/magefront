@@ -1,5 +1,5 @@
 import glob, { type Pattern } from 'fast-glob'
-import fs from 'node:fs'
+import fs from 'fs-extra'
 import path from 'node:path'
 import type { Action } from '../../types/magefront'
 import { getThemeDependencyTree } from '../magento/theme'
@@ -19,14 +19,14 @@ export const inheritance: Action = async (context) => {
     await Promise.all(
       files.map(async (srcPath) => {
         const destPath = path.join(dest, srcPath.replace(src + '/', '/'))
-        await fs.promises.rm(destPath, { recursive: true })
-        return fs.promises.cp(path.join(rootPath, srcPath), destPath, { recursive: true })
+        await fs.remove(destPath)
+        return fs.copy(path.join(rootPath, srcPath), destPath)
       })
     )
   }
 
   // Clean destination dir
-  await fs.promises.rm(tmp, { recursive: true })
+  await fs.remove(tmp)
 
   // Add the Magento core lib resources as a dependency for everyone
   // Ignore the css docs and txt files

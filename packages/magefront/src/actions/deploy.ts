@@ -1,5 +1,5 @@
 import glob from 'fast-glob'
-import fs from 'node:fs'
+import fs from 'fs-extra'
 import path from 'node:path'
 import type { Action } from '../../types/magefront'
 
@@ -32,7 +32,7 @@ export const deploy: Action = async (context) => {
     files.map(async (file) => {
       const filePath = await fs.promises.realpath(path.join(buildConfig.tmp, file))
       const destPath = path.join(dest, file)
-      return fs.promises.cp(filePath, destPath, { recursive: true })
+      return fs.copy(filePath, destPath)
     })
   )
 }

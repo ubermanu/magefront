@@ -4,8 +4,7 @@
 
 ### Minor Changes
 
-- f8da0cb: - Replace fs-extra with the node:fs functions
-  - Write types statically to reduce build time and overhead
+- f8da0cb: Write types statically to reduce build time and overhead
 - f8da0cb: Set a proper (peer) dependency version in packages
 
 ### Patch Changes
