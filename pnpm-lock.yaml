@@ -106,7 +106,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
 
   packages/plugin-concat:
@@ -115,7 +115,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
 
   packages/plugin-cssnano:
@@ -127,7 +127,7 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1(postcss@8.4.29)
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       magefront-plugin-postcss:
         specifier: workspace:~
@@ -140,7 +140,7 @@ importers:
   packages/plugin-js-bundle:
     dependencies:
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
 
   packages/plugin-js-translation:
@@ -149,7 +149,7 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
 
   packages/plugin-less:
@@ -164,7 +164,7 @@ importers:
         specifier: '2.7'
         version: 2.7.3
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
 
   packages/plugin-pngquant:
@@ -173,7 +173,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       pngquant:
         specifier: ^4.2.0
@@ -185,7 +185,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       postcss:
         specifier: ^8.4.29
@@ -197,7 +197,7 @@ importers:
         specifier: ^7.22.15
         version: 7.22.15(@babel/core@7.22.15)
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       magefront-plugin-babel:
         specifier: workspace:~
@@ -212,7 +212,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
 
   packages/plugin-sass:
@@ -221,7 +221,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       sass:
         specifier: ^1.66.1
@@ -236,7 +236,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       stylus:
         specifier: ^0.60.0
@@ -248,7 +248,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       svelte:
         specifier: ~4.2.0
@@ -260,7 +260,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       svgo:
         specifier: ^3.0.2
@@ -269,7 +269,7 @@ importers:
   packages/plugin-tailwindcss:
     dependencies:
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       magefront-plugin-postcss:
         specifier: workspace:~
@@ -284,7 +284,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       terser:
         specifier: ^5.19.4
@@ -296,7 +296,7 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       typescript:
         specifier: ^5.2.2
@@ -305,7 +305,7 @@ importers:
   packages/preset-default:
     dependencies:
       magefront:
-        specifier: '*'
+        specifier: workspace:^
         version: link:../magefront
       magefront-plugin-cssnano:
         specifier: workspace:~
