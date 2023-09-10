@@ -1,3 +1,4 @@
+import { expect, test } from 'bun:test'
 import { testActionContext } from './helpers'
 
 test('Get all the modules from Magento source code', async () => {

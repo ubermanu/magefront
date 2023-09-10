@@ -1,3 +1,4 @@
+import { expect, test } from 'bun:test'
 import { preProcessor } from '../src/magento-import-preprocessor'
 
 test('Replace the `@magento_import` statement with the correct one', () => {

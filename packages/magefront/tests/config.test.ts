@@ -1,3 +1,4 @@
+import { expect, test } from 'bun:test'
 import { testActionContext } from './helpers'
 
 test('Empty configuration returns the default plugins', async () => {

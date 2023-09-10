@@ -1,3 +1,4 @@
+import { expect, test } from 'bun:test'
 import { magefront } from 'magefront'
 import fs from 'node:fs'
 import path from 'node:path'
