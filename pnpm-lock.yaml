@@ -60,7 +60,7 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       magefront-preset-default:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../preset-default
       memoizee:
         specifier: ^0.4.15
@@ -124,7 +124,7 @@ importers:
         specifier: workspace:^
         version: link:../magefront
       magefront-plugin-postcss:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-postcss
     devDependencies:
       postcss:
@@ -194,7 +194,7 @@ importers:
         specifier: workspace:^
         version: link:../magefront
       magefront-plugin-babel:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-babel
       react:
         specifier: '>=18'
@@ -266,7 +266,7 @@ importers:
         specifier: workspace:^
         version: link:../magefront
       magefront-plugin-postcss:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-postcss
       tailwindcss:
         specifier: ^3.3.3
@@ -302,19 +302,19 @@ importers:
         specifier: workspace:^
         version: link:../magefront
       magefront-plugin-cssnano:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-cssnano
       magefront-plugin-js-translation:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-js-translation
       magefront-plugin-less:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-less
       magefront-plugin-requirejs-config:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-requirejs-config
       magefront-plugin-terser:
-        specifier: workspace:~
+        specifier: workspace:^
         version: link:../plugin-terser
 
 packages:

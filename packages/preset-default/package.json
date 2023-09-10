@@ -25,11 +25,11 @@
     "build": "unbuild"
   },
   "dependencies": {
-    "magefront-plugin-cssnano": "workspace:~",
-    "magefront-plugin-js-translation": "workspace:~",
-    "magefront-plugin-less": "workspace:~",
-    "magefront-plugin-requirejs-config": "workspace:~",
-    "magefront-plugin-terser": "workspace:~"
+    "magefront-plugin-cssnano": "workspace:^",
+    "magefront-plugin-js-translation": "workspace:^",
+    "magefront-plugin-less": "workspace:^",
+    "magefront-plugin-requirejs-config": "workspace:^",
+    "magefront-plugin-terser": "workspace:^"
   },
   "peerDependencies": {
     "magefront": "workspace:^"

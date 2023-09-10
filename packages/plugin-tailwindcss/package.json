@@ -27,7 +27,7 @@
     "build": "unbuild"
   },
   "dependencies": {
-    "magefront-plugin-postcss": "workspace:~",
+    "magefront-plugin-postcss": "workspace:^",
     "tailwindcss": "^3.3.3"
   },
   "peerDependencies": {

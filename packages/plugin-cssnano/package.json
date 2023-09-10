@@ -27,7 +27,7 @@
   "dependencies": {
     "cssnano": "^6.0.1",
     "cssnano-preset-default": "^6.0.1",
-    "magefront-plugin-postcss": "workspace:~"
+    "magefront-plugin-postcss": "workspace:^"
   },
   "devDependencies": {
     "postcss": "^8.4.29"
