@@ -1,5 +1,18 @@
 # magefront
 
+## 1.2.0
+
+### Minor Changes
+
+- f8da0cb: - Replace fs-extra with the node:fs functions
+  - Write types statically to reduce build time and overhead
+- f8da0cb: Set a proper (peer) dependency version in packages
+
+### Patch Changes
+
+- Updated dependencies [f8da0cb]
+  - magefront-preset-default@1.2.0
+
 ## 1.1.1
 
 ### Patch Changes

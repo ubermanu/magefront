@@ -1,5 +1,17 @@
 # magefront-plugin-postcss
 
+## 1.2.0
+
+### Minor Changes
+
+- f8da0cb: Set a proper (peer) dependency version in packages
+
+### Patch Changes
+
+- Updated dependencies [f8da0cb]
+- Updated dependencies [f8da0cb]
+  - magefront@1.2.0
+
 ## 1.1.0
 
 ### Minor Changes
