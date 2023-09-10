@@ -1,4 +1,4 @@
-import fs from 'fs-extra'
+import fs from 'node:fs'
 import path from 'node:path'
 import { build } from '../src/actions/build'
 import { clean } from '../src/actions/clean'
