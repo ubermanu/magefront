@@ -1,7 +1,7 @@
 import memo from 'memoizee'
 import path from 'node:path'
+import type { BuildConfig, MagefrontOptions, MagentoContext, MagentoTheme, Plugin, Preset } from '../types/magefront'
 import { getThemes } from './magento/theme'
-import type { BuildConfig, MagefrontOptions, MagentoContext, MagentoTheme, Plugin, Preset } from './types'
 
 /** Get the build configuration for the given options. */
 export const getBuildConfig = memo(async (opts: MagefrontOptions, context: MagentoContext): Promise<BuildConfig> => {

@@ -1,7 +1,7 @@
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-import type { ComposerPackage } from '../types'
+import type { ComposerPackage } from '../../types/magefront'
 
 /**
  * Get the list of packages installed.

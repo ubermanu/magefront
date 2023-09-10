@@ -1,6 +1,6 @@
 {
   "name": "magefront-preset-default",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "keywords": [
     "magefront",
@@ -25,14 +25,14 @@
     "build": "unbuild"
   },
   "dependencies": {
-    "magefront-plugin-cssnano": "workspace:~",
-    "magefront-plugin-js-translation": "workspace:~",
-    "magefront-plugin-less": "workspace:~",
-    "magefront-plugin-requirejs-config": "workspace:~",
-    "magefront-plugin-terser": "workspace:~"
+    "magefront-plugin-cssnano": "workspace:^",
+    "magefront-plugin-js-translation": "workspace:^",
+    "magefront-plugin-less": "workspace:^",
+    "magefront-plugin-requirejs-config": "workspace:^",
+    "magefront-plugin-terser": "workspace:^"
   },
   "peerDependencies": {
-    "magefront": "*"
+    "magefront": "workspace:^"
   },
   "exports": {
     ".": {

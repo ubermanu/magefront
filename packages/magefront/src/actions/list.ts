@@ -1,7 +1,7 @@
 import Table from 'cli-table'
 import console from 'node:console'
+import type { MagentoContext } from '../../types/magefront'
 import { getThemes } from '../magento/theme'
-import type { MagentoContext } from '../types'
 
 /** List all the themes. */
 export const list = (magento: MagentoContext) => {

@@ -1,7 +1,7 @@
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-import type { MagentoContext, MagentoLanguage } from '../types'
+import type { MagentoContext, MagentoLanguage } from '../../types/magefront'
 import { getRegistrations } from './composer'
 
 /**

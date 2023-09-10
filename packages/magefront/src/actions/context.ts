@@ -1,11 +1,11 @@
 import type { Logger } from 'winston'
+import type { ActionContext, MagefrontOptions } from '../../types/magefront'
 import { getBuildConfig } from '../config'
 import { createLogger } from '../logger'
 import { createMagentoContext } from '../magento/context'
 import { getLanguages } from '../magento/language'
 import { getModules } from '../magento/module'
 import { getThemes } from '../magento/theme'
-import { ActionContext, MagefrontOptions } from '../types'
 
 // Creates an ActionContext object to be passed to the build process.
 export const createActionContext = async (opts: MagefrontOptions, logger?: Logger): Promise<ActionContext> => {

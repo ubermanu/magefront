@@ -1,10 +1,10 @@
-import fs from 'fs-extra'
+import fs from 'node:fs'
 import path from 'node:path'
 import { build } from '../src/actions/build'
 import { clean } from '../src/actions/clean'
 import { deploy } from '../src/actions/deploy'
 import { inheritance } from '../src/actions/inheritance'
-import { ActionContext } from '../src/types'
+import type { ActionContext } from '../types/magefront'
 import { testActionContext } from './helpers'
 
 describe('Build and deploy the Magento/blank theme', () => {

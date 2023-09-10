@@ -5,6 +5,7 @@ import process from 'node:process'
 import sade from 'sade'
 import winston from 'winston'
 import { version } from '../package.json' assert { type: 'json' }
+import type { MagefrontOptions } from '../types/magefront'
 import { browserSync } from './actions/browser-sync'
 import { createActionContext } from './actions/context'
 import { list } from './actions/list'
@@ -12,7 +13,6 @@ import { watch } from './actions/watch'
 import { createLogger } from './logger'
 import { magefront } from './magefront'
 import { createMagentoContext } from './magento/context'
-import type { MagefrontOptions } from './types'
 import * as u from './utils'
 
 const program = sade('magefront', true)
