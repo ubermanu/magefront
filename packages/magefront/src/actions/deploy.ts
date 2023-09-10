@@ -1,7 +1,7 @@
 import glob from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
-import { Action } from '../types'
+import type { Action } from '../../types/magefront'
 
 /** Deploy the built theme files from the temp directory to the `pub/static` dir. This is the third step in the build process. */
 export const deploy: Action = async (context) => {

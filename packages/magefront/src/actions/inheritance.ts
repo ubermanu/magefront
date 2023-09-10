@@ -1,8 +1,8 @@
-import glob, { Pattern } from 'fast-glob'
+import glob, { type Pattern } from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
+import type { Action } from '../../types/magefront'
 import { getThemeDependencyTree } from '../magento/theme'
-import type { Action } from '../types'
 
 /** Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards. */
 export const inheritance: Action = async (context) => {

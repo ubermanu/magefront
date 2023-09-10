@@ -16,7 +16,8 @@
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
   },
   "main": "dist/magefront.cjs",
   "module": "dist/magefront.mjs",
-  "types": "dist/magefront.d.ts",
+  "types": "types/magefront.d.ts",
   "scripts": {
     "build": "unbuild"
   },
@@ -59,7 +60,7 @@
     ".": {
       "import": "./dist/magefront.mjs",
       "require": "./dist/magefront.cjs",
-      "types": "./dist/magefront.d.ts"
+      "types": "./types/magefront.d.ts"
     }
   }
 }

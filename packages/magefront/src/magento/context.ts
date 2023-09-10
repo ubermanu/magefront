@@ -1,4 +1,4 @@
-import { MagefrontOptions, MagentoContext } from '../types'
+import type { MagefrontOptions, MagentoContext } from '../../types/magefront'
 import { getPackages } from './composer'
 
 export const createMagentoContext = (opts: MagefrontOptions): MagentoContext => {

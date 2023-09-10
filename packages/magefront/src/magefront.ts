@@ -1,13 +1,13 @@
 import k from 'kleur'
 import { performance } from 'node:perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
-import { Logger } from 'winston'
+import type { Logger } from 'winston'
+import type { MagefrontOptions } from '../types/magefront'
 import { build } from './actions/build'
 import { clean } from './actions/clean'
 import { createActionContext } from './actions/context'
 import { deploy } from './actions/deploy'
 import { inheritance } from './actions/inheritance'
-import type { MagefrontOptions } from './types'
 
 /** Builds a Magento 2 theme. */
 // TODO: Remove the logger argument and implement it in the options

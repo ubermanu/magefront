@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import { Action } from '../types'
+import type { Action } from '../../types/magefront'
 
 export const clean: Action = async (context) => {
   const { buildConfig } = context

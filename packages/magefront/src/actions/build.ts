@@ -1,6 +1,6 @@
 import path from 'node:path'
+import type { Action, PluginContext } from '../../types/magefront'
 import { getThemeDependencyTree } from '../magento/theme'
-import type { Action, PluginContext } from '../types'
 
 /** Build the theme. If a configuration file is found, it will be used. */
 export const build: Action = async (context) => {

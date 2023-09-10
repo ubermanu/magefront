@@ -2,7 +2,7 @@ import glob from 'fast-glob'
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-import type { MagentoContext, MagentoModule } from '../types'
+import type { MagentoContext, MagentoModule } from '../../types/magefront'
 import { getRegistrations } from './composer'
 
 /**
