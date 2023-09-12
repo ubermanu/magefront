@@ -5,9 +5,9 @@ export interface Options {
 }
 
 /** Merge JS files into multiple chunks. */
-export default (options?: Options): Plugin => {
-  // TODO: Implement this plugin using rollup?
-  return async (context) => {
+export default (options?: Options): Plugin => ({
+  name: 'js-bundle',
+  async build(context) {
     throw new Error('Not implemented yet')
-  }
-}
+  },
+})

@@ -14,26 +14,29 @@ export default (options?: Options): Plugin => {
     throw new Error('Missing required option: src')
   }
 
-  return async (context) => {
-    // TODO: Target the phtml files (from the module sources, might target overridden files)
-    // TODO: Target the layout files (from the module sources, might target overridden files)
-    const modulePaths = context.modules.map((mod) => path.join(context.src, mod, '/**/*.html'))
+  return {
+    name: 'tailwindcss',
+    async build(context) {
+      // TODO: Target the phtml files (from the module sources, might target overridden files)
+      // TODO: Target the layout files (from the module sources, might target overridden files)
+      const modulePaths = context.modules.map((mod) => path.join(context.src, mod, '/**/*.html'))
 
-    // TODO: Let the user target its content files
-    const content = [
-      // prettier-ignore
-      ...modulePaths,
-    ]
+      // TODO: Let the user target its content files
+      const content = [
+        // prettier-ignore
+        ...modulePaths,
+      ]
 
-    const plugin = postcss({
-      src,
-      ignore,
-      plugins: [
-        // @ts-ignore
-        tailwind({ ...config, content }),
-      ],
-    })
+      const plugin = postcss({
+        src,
+        ignore,
+        plugins: [
+          // @ts-ignore
+          tailwind({ ...config, content }),
+        ],
+      })
 
-    await plugin(context)
+      await plugin.build(context)
+    },
   }
 }

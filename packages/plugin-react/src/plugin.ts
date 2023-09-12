@@ -18,9 +18,12 @@ export default (options?: Options): Plugin => {
     ],
   }
 
-  return babel({
-    src,
-    ignore,
-    compilerOptions: compilerOptions ?? babelReactPreset,
-  })
+  return {
+    ...babel({
+      src,
+      ignore,
+      compilerOptions: compilerOptions ?? babelReactPreset,
+    }),
+    name: 'react',
+  }
 }

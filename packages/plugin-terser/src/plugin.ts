@@ -14,18 +14,21 @@ export interface Options {
 export default (options?: Options): Plugin => {
   const { src, ignore, terserOptions } = { ...options }
 
-  return async (context) => {
-    const files = await glob(src ?? '**/*.js', { ignore, cwd: context.src })
+  return {
+    name: 'terser',
+    async build(context) {
+      const files = await glob(src ?? '**/*.js', { ignore, cwd: context.src })
 
-    await Promise.all(
-      files.map(async (file: string) => {
-        const filePath = path.join(context.src, file)
-        const fileContent = await fs.readFile(filePath)
-        const { code } = await minify(fileContent.toString(), terserOptions || {})
-        if (code) {
-          return fs.writeFile(filePath, code)
-        }
-      })
-    )
+      await Promise.all(
+        files.map(async (file: string) => {
+          const filePath = path.join(context.src, file)
+          const fileContent = await fs.readFile(filePath)
+          const { code } = await minify(fileContent.toString(), terserOptions || {})
+          if (code) {
+            return fs.writeFile(filePath, code)
+          }
+        })
+      )
+    },
   }
 }

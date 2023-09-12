@@ -4,8 +4,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 /** Merge all the requirejs-config files into one. */
-export default (): Plugin => {
-  return async (context) => {
+export default (): Plugin => ({
+  name: 'requirejs-config',
+  async build(context) {
     const files: string[] = []
     const { themeList, themeDependencyTree } = context
     const moduleList = context.moduleList.filter((mod) => mod.enabled && mod.src)
@@ -49,5 +50,5 @@ export default (): Plugin => {
     // Output the final requirejs-config.js file, so it can be deployed
     const file = path.join(context.src, 'requirejs-config.js')
     await fs.promises.writeFile(file, `(function(require){\n${packed.join('')}})(require);`)
-  }
-}
+  },
+})

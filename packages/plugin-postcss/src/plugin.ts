@@ -14,30 +14,33 @@ export interface Options {
 export default (options?: Options): Plugin => {
   const { src, ignore, plugins } = { ...options }
 
-  return async (context) => {
-    const files = await glob(src ?? '**/!(_)*.css', {
-      ignore: ignore ?? [],
-      cwd: context.src,
-    })
-
-    await Promise.all(
-      files.map(async (file) => {
-        const filePath = path.join(context.src, file)
-        const fileContent = await fs.readFile(filePath)
-        const compiler = postcss(plugins ?? [])
-
-        const result = await compiler.process(fileContent, {
-          from: filePath,
-          to: filePath,
-        })
-
-        // TODO: Forward to logger
-        result.warnings().forEach((warn) => {
-          console.warn(warn.toString())
-        })
-
-        return fs.writeFile(filePath, result.css)
+  return {
+    name: 'postcss',
+    async build(context) {
+      const files = await glob(src ?? '**/!(_)*.css', {
+        ignore: ignore ?? [],
+        cwd: context.src,
       })
-    )
+
+      await Promise.all(
+        files.map(async (file) => {
+          const filePath = path.join(context.src, file)
+          const fileContent = await fs.readFile(filePath)
+          const compiler = postcss(plugins ?? [])
+
+          const result = await compiler.process(fileContent, {
+            from: filePath,
+            to: filePath,
+          })
+
+          // TODO: Forward to logger
+          result.warnings().forEach((warn) => {
+            context.logger.warn(warn.toString())
+          })
+
+          return fs.writeFile(filePath, result.css)
+        })
+      )
+    },
   }
 }

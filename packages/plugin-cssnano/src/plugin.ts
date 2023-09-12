@@ -11,14 +11,17 @@ export interface Options extends PostcssOptions {
 export default (options?: Options): Plugin => {
   const { src, ignore, preset, plugins } = { ...options }
 
-  return postcss({
-    src,
-    ignore,
-    plugins: [
-      cssnano({
-        preset: preset ?? 'default',
-        plugins,
-      }),
-    ],
-  })
+  return {
+    ...postcss({
+      src,
+      ignore,
+      plugins: [
+        cssnano({
+          preset: preset ?? 'default',
+          plugins,
+        }),
+      ],
+    }),
+    name: 'cssnano',
+  }
 }

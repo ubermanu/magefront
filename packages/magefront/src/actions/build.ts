@@ -28,7 +28,7 @@ export const build: Action = async (context) => {
 
   for (const plugin of buildConfig.plugins) {
     try {
-      await plugin(pluginContext)
+      await plugin.build(pluginContext)
     } catch (e) {
       // TODO: Should be critical error
       logger.error(e)

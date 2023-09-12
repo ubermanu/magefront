@@ -17,22 +17,25 @@ export default (options?: Options): Plugin => {
     new PngQuant([...args, '--force', filename])
   }
 
-  return async (context) => {
-    const files = await glob(src ?? '**/*.png', {
-      ignore,
-      cwd: context.src,
-    })
-
-    await Promise.all(
-      files.map(async (file) => {
-        const filePath = path.join(context.src, file)
-
-        try {
-          compress(filePath)
-        } catch (e) {
-          console.error('PNGQUANT error', e)
-        }
+  return {
+    name: 'pngquant',
+    async build(context) {
+      const files = await glob(src ?? '**/*.png', {
+        ignore,
+        cwd: context.src,
       })
-    )
+
+      await Promise.all(
+        files.map(async (file) => {
+          const filePath = path.join(context.src, file)
+
+          try {
+            compress(filePath)
+          } catch (e) {
+            context.logger.error('PNGQUANT error', e)
+          }
+        })
+      )
+    },
   }
 }

@@ -14,20 +14,23 @@ export interface Options {
 export default (options?: Options): Plugin => {
   const { src, ignore, compilerOptions } = { ...options }
 
-  return async (context) => {
-    const files = await glob(src ?? '**/*.ts', {
-      ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
-      cwd: context.src,
-    })
-
-    await Promise.all(
-      files.map(async (file) => {
-        const filePath = path.join(context.src, file)
-        const fileContent = await fs.readFile(filePath)
-        const output = typescript.transpile(fileContent.toString(), compilerOptions ?? {})
-
-        return fs.writeFile(filePath.replace(/\.ts$/, '.js'), output)
+  return {
+    name: 'typescript',
+    async build(context) {
+      const files = await glob(src ?? '**/*.ts', {
+        ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
+        cwd: context.src,
       })
-    )
+
+      await Promise.all(
+        files.map(async (file) => {
+          const filePath = path.join(context.src, file)
+          const fileContent = await fs.readFile(filePath)
+          const output = typescript.transpile(fileContent.toString(), compilerOptions ?? {})
+
+          return fs.writeFile(filePath.replace(/\.ts$/, '.js'), output)
+        })
+      )
+    },
   }
 }

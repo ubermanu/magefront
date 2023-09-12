@@ -4,8 +4,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 /** Generates a `js-translation.json` file for the current locale. */
-export default (): Plugin => {
-  return async (context) => {
+export default (): Plugin => ({
+  name: 'js-translation',
+  async build(context) {
     const files = []
 
     const { locale, moduleList, languageList, cwd } = context
@@ -80,5 +81,5 @@ export default (): Plugin => {
       parser.on('error', reject)
       parser.on('finish', resolve)
     })
-  }
-}
+  },
+})
