@@ -43,8 +43,18 @@ declare namespace magefront {
   }
 
   export interface Plugin {
+    /** The name of the plugin. */
     name: string
+
+    /** The build function that is called when the plugin is executed. */
     build: (context: PluginContext) => MaybePromise<void>
+
+    watcherConfig?: {
+      /** The files to reload if the right counterpart matches a changed file. If the key is '*', the whole page is reloaded. */
+      reload?: {
+        [file: string]: string | RegExp | Array<string | RegExp>
+      }
+    }
   }
 
   // The preset configuration object. Contains already defined plugins (because we cannot resolve them at the module level).

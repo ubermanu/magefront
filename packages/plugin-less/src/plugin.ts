@@ -69,6 +69,11 @@ export default (options?: Options): Plugin => {
         })
       )
     },
+    watcherConfig: {
+      reload: {
+        '*.css': /\.less$/,
+      },
+    },
   }
 }
 
