@@ -6,6 +6,7 @@ module.exports = {
     '^.+\\.ts$': ['ts-jest', { useESM: true }],
   },
   moduleNameMapper: {
+    '^magefront$': '<rootDir>/packages/magefront/src/main.ts',
     '^magefront-plugin-less$': '<rootDir>/packages/plugin-less/src/plugin.ts',
     '^magefront-plugin-requirejs-config$': '<rootDir>/packages/plugin-requirejs-config/src/plugin.ts',
     '^magefront-plugin-js-translation$': '<rootDir>/packages/plugin-js-translation/src/plugin.ts',
