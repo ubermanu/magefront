@@ -4,7 +4,7 @@ import path from 'node:path'
 import process from 'node:process'
 import sade from 'sade'
 import winston from 'winston'
-import { version } from '../package.json' assert { type: 'json' }
+import pkg from '../package.json'
 import type { MagefrontOptions } from '../types/magefront'
 import { browserSync } from './actions/browser-sync'
 import { createActionContext } from './actions/context'
@@ -18,7 +18,7 @@ import * as u from './utils'
 const program = sade('magefront', true)
 
 program
-  .version(version)
+  .version(pkg.version)
   .option('-t, --theme <theme>', 'Theme identifier')
   .option('-c, --config <config>', 'Path to the configuration file')
   .option('-w, --watch', 'Watch the source files of a theme, and rebuild on change', false)
