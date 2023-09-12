@@ -6,7 +6,7 @@ import requireJsConfig from '../src/plugin'
 
 const rootPath = process.env.MAGEFRONT_TEST_MAGENTO_ROOT!
 
-test('Generate js-translation.json', async () => {
+test('Generate a merged requirejs-config.js', async () => {
   await magefront({
     theme: 'Magento/blank',
     plugins: [requireJsConfig()],
