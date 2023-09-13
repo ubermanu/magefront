@@ -1,5 +1,12 @@
 # magefront-plugin-cssnano
 
+## 1.2.1
+
+### Patch Changes
+
+- magefront@1.2.1
+- magefront-plugin-postcss@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # magefront
 
+## 1.2.1
+
+### Patch Changes
+
+- magefront-preset-default@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes

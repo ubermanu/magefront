@@ -1,5 +1,12 @@
 # magefront-plugin-less
 
+## 1.2.1
+
+### Patch Changes
+
+- 5013afa: Fix an issue where the `@magento_import` calls would append the import parameters to the file path
+  - magefront@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes

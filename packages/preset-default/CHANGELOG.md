@@ -1,5 +1,17 @@
 # magefront-preset-default
 
+## 1.2.1
+
+### Patch Changes
+
+- Updated dependencies [5013afa]
+  - magefront-plugin-less@1.2.1
+  - magefront@1.2.1
+  - magefront-plugin-cssnano@1.2.1
+  - magefront-plugin-js-translation@1.2.1
+  - magefront-plugin-requirejs-config@1.2.1
+  - magefront-plugin-terser@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes
