@@ -25,9 +25,11 @@
     "build": "unbuild"
   },
   "dependencies": {
-    "magefront-plugin-cssnano": "workspace:^",
+    "cssnano": "^6.0.1",
+    "cssnano-preset-default": "^6.0.1",
     "magefront-plugin-js-translation": "workspace:^",
     "magefront-plugin-less": "workspace:^",
+    "magefront-plugin-postcss": "workspace:^",
     "magefront-plugin-requirejs-config": "workspace:^",
     "magefront-plugin-terser": "workspace:^"
   },
