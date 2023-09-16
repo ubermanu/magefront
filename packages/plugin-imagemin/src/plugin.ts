@@ -2,7 +2,7 @@ import glob, { type Pattern } from 'fast-glob'
 import type { Plugin as ImageMinPlugin } from 'imagemin'
 import imagemin from 'imagemin'
 import type { Plugin } from 'magefront'
-import * as path from 'path'
+import path from 'node:path'
 
 export interface Options {
   src?: string | string[]
