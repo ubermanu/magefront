@@ -2,11 +2,10 @@
 
 The following example uses [Tailwind CSS](https://tailwindcss.com/) to generate a CSS file.
 
-Install these packages, and initialize Tailwind CSS configuration:
+Install these packages:
 
 ```sh
 npm i magefront-plugin-postcss tailwindcss autoprefixer --save-dev
-npx tailwindcss init -p
 ```
 
 Add the following to your `magefront.config.js` file:
@@ -15,13 +14,18 @@ Add the following to your `magefront.config.js` file:
 // magefront.config.js
 import postcss from 'magefront-plugin-postcss'
 import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
 
 export default {
     plugins: [
         postcss({
-            src: 'web/css/tailwind.pcss',
-            dest: 'css/tailwind.css',
-            plugins: [tailwindcss()]
+            src: 'css/tailwind.pcss',
+            plugins: [
+                tailwindcss({
+                    content: ['app/design/frontend/**/*.{html,phtml}']
+                }),
+                autoprefixer()
+            ]
         })
     ]
 }
@@ -33,13 +37,4 @@ Create a file named `tailwind.pcss` in the `web/css` directory of your theme:
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-```
-
-Add the paths to all your templates in your `tailwind.config.js` file:
-
-```js
-/** @type {import('tailwindcss').Config} */
-export default {
-    content: ['./**/*.{html,phtml}']
-};
 ```
