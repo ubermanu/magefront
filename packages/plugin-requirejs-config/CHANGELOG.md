@@ -1,5 +1,11 @@
 # magefront-plugin-requirejs-config
 
+## 1.2.2
+
+### Patch Changes
+
+- magefront@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes

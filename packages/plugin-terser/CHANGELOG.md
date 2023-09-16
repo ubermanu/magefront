@@ -1,5 +1,11 @@
 # magefront-plugin-terser
 
+## 1.2.2
+
+### Patch Changes
+
+- magefront@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes

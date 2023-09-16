@@ -1,5 +1,21 @@
 # magefront-preset-default
 
+## 1.3.0
+
+### Minor Changes
+
+- 4f09f9d: Remove pre-configured plugins
+
+### Patch Changes
+
+- Updated dependencies [4f09f9d]
+  - magefront-plugin-less@1.3.0
+  - magefront@1.2.2
+  - magefront-plugin-js-translation@1.2.2
+  - magefront-plugin-postcss@1.2.2
+  - magefront-plugin-requirejs-config@1.2.2
+  - magefront-plugin-terser@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes

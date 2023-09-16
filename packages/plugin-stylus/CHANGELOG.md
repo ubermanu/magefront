@@ -1,5 +1,15 @@
 # magefront-plugin-stylus
 
+## 1.3.0
+
+### Minor Changes
+
+- 4f09f9d: Move 3rd party types into dev deps
+
+### Patch Changes
+
+- magefront@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes
