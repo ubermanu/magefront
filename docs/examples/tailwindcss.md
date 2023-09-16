@@ -19,15 +19,15 @@ import tailwindcss from 'tailwindcss'
 export default {
     plugins: [
         postcss({
-            src: 'tailwind.postcss',
-            dest: 'tailwind.css',
+            src: 'web/css/tailwind.pcss',
+            dest: 'css/tailwind.css',
             plugins: [tailwindcss()]
         })
     ]
 }
 ```
 
-Add the following to your `tailwind.postcss` file:
+Create a file named `tailwind.pcss` in the `web/css` directory of your theme:
 
 ```css
 @tailwind base;
