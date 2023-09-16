@@ -2,14 +2,14 @@
 
 Regroup a collection of plugins to build a Magento 2 theme.
 
-* less
-* requirejs-config
-* js-translation
+- less
+- requirejs-config
+- js-translation
 
 And these plugins are included, if configured:
 
-* cssnano
-* terser
+- cssnano
+- terser
 
 ## Install
 
@@ -21,9 +21,7 @@ And these plugins are included, if configured:
 import defaultPreset from 'magefront-preset-default'
 
 export default {
-    presets: [
-        defaultPreset()
-    ]
+  presets: [defaultPreset()],
 }
 ```
 

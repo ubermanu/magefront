@@ -1,19 +1,26 @@
 {
   "name": "magefront-plugin-typescript",
   "version": "1.2.1",
-  "type": "module",
   "keywords": [
     "magefront",
     "magento",
     "theme",
     "plugin"
   ],
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "packages/plugin-typescript"
+  },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.mjs",
+      "require": "./dist/plugin.cjs",
+      "types": "./dist/plugin.d.ts"
+    }
   },
   "main": "dist/plugin.cjs",
   "module": "dist/plugin.mjs",
@@ -30,12 +37,5 @@
   },
   "peerDependencies": {
     "magefront": "workspace:^"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.cjs",
-      "types": "./dist/plugin.d.ts"
-    }
   }
 }

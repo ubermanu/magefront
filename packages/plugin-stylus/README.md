@@ -12,9 +12,7 @@ Transforms STYL files into CSS files.
 import stylus from 'magefront-plugin-stylus'
 
 export default {
-    plugins: [
-        stylus()
-    ]
+  plugins: [stylus()],
 }
 ```
 

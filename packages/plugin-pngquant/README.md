@@ -12,9 +12,7 @@ Optimize PNG files with [pngquant](https://pngquant.org/).
 import pngquant from 'magefront-plugin-pngquant'
 
 export default {
-    plugins: [
-        pngquant()
-    ]
+  plugins: [pngquant()],
 }
 ```
 

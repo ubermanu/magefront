@@ -1,6 +1,6 @@
 # magefront-plugin-svelte
 
-Transforms *.svelte files into JS files.
+Transforms \*.svelte files into JS files.
 
 ## Install
 
@@ -12,9 +12,7 @@ Transforms *.svelte files into JS files.
 import svelte from 'magefront-plugin-svelte'
 
 export default {
-    plugins: [
-        svelte()
-    ]
+  plugins: [svelte()],
 }
 ```
 

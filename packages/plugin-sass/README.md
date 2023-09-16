@@ -12,9 +12,7 @@ Transforms SCSS files into CSS files.
 import sass from 'magefront-plugin-sass'
 
 export default {
-    plugins: [
-        sass()
-    ]
+  plugins: [sass()],
 }
 ```
 

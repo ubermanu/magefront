@@ -12,9 +12,7 @@ Optimize SVG files with [SVGO](https://github.com/svg/svgo).
 import svgo from 'magefront-plugin-svgo'
 
 export default {
-    plugins: [
-        svgo()
-    ]
+  plugins: [svgo()],
 }
 ```
 

@@ -12,9 +12,7 @@ Merge all the translations into the `js-translation.json` file.
 import jsTranslation from 'magefront-plugin-js-translation'
 
 export default {
-    plugins: [
-        jsTranslation()
-    ]
+  plugins: [jsTranslation()],
 }
 ```
 

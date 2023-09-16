@@ -1,7 +1,6 @@
 {
   "name": "magefront",
   "version": "1.2.1",
-  "type": "module",
   "description": "A modern Magento 2 theme builder",
   "keywords": [
     "magefront",
@@ -13,20 +12,31 @@
     "sass",
     "stylus"
   ],
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
-  "license": "MIT",
-  "files": [
-    "dist",
-    "types"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "packages/magefront"
   },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/magefront.mjs",
+      "require": "./dist/magefront.cjs",
+      "types": "./types/magefront.d.ts"
+    }
+  },
   "main": "dist/magefront.cjs",
   "module": "dist/magefront.mjs",
   "types": "types/magefront.d.ts",
+  "bin": {
+    "magefront": "dist/cli.mjs"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
     "build": "unbuild"
   },
@@ -52,15 +62,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "bin": {
-    "magefront": "dist/cli.mjs"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/magefront.mjs",
-      "require": "./dist/magefront.cjs",
-      "types": "./types/magefront.d.ts"
-    }
   }
 }

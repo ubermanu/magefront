@@ -1,6 +1,6 @@
 # magefront-plugin-typescript
 
-Transforms *.ts files into JS files.
+Transforms \*.ts files into JS files.
 
 ## Install
 
@@ -12,9 +12,7 @@ Transforms *.ts files into JS files.
 import typescript from 'magefront-plugin-typescript'
 
 export default {
-    plugins: [
-        typescript()
-    ]
+  plugins: [typescript()],
 }
 ```
 

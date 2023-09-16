@@ -12,9 +12,7 @@ Transpile JS files with [Babel](https://babeljs.io/).
 import babel from 'magefront-plugin-babel'
 
 export default {
-    plugins: [
-        babel({ src: 'js/source/**/*.js' })
-    ]
+  plugins: [babel({ src: 'js/source/**/*.js' })],
 }
 ```
 

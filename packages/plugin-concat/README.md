@@ -12,9 +12,7 @@ Merge files into one.
 import concat from 'magefront-plugin-concat'
 
 export default {
-    plugins: [
-        concat({ src: '**/*.css', dest: 'css/all-styles.css' }),
-    ]
+  plugins: [concat({ src: '**/*.css', dest: 'css/all-styles.css' })],
 }
 ```
 

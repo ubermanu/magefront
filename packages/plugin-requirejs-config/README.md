@@ -12,9 +12,7 @@ Merge all the `requirejs-config.js` files into one.
 import requireJsConfig from 'magefront-plugin-requirejs-config'
 
 export default {
-    plugins: [
-        requireJsConfig()
-    ]
+  plugins: [requireJsConfig()],
 }
 ```
 

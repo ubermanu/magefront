@@ -33,9 +33,7 @@ The `magefront.config.js` file should be located in the root directory of your p
 ```js
 // magefront.config.js
 export default {
-    presets: [
-        'magefront-preset-default'
-    ]
+  presets: ['magefront-preset-default'],
 }
 ```
 
