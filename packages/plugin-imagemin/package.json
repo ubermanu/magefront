@@ -1,16 +1,18 @@
 {
-  "name": "magefront-plugin-pngquant",
-  "version": "1.2.2",
+  "name": "magefront-plugin-imagemin",
+  "version": "1.0.0",
   "keywords": [
     "magefront",
     "magento",
     "theme",
-    "plugin"
+    "plugin",
+    "imagemin",
+    "image"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
-    "directory": "packages/plugin-pngquant"
+    "directory": "packages/plugin-imagemin"
   },
   "license": "MIT",
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
@@ -33,7 +35,10 @@
   },
   "dependencies": {
     "fast-glob": "^3.3.1",
-    "pngquant": "^4.2.0"
+    "imagemin": "^8.0.1"
+  },
+  "devDependencies": {
+    "@types/imagemin": "^8.0.1"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
