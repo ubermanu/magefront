@@ -232,18 +232,6 @@ importers:
         specifier: ~4.2.0
         version: 4.2.0
 
-  packages/plugin-svgo:
-    dependencies:
-      fast-glob:
-        specifier: ^3.3.1
-        version: 3.3.1
-      magefront:
-        specifier: workspace:^
-        version: link:../magefront
-      svgo:
-        specifier: ^3.0.2
-        version: 3.0.2
-
   packages/plugin-terser:
     dependencies:
       fast-glob:
