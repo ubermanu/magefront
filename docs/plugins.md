@@ -10,7 +10,6 @@ Here is a list of available plugins:
 - [magefront-plugin-sass](plugins/sass.md)
 - [magefront-plugin-stylus](plugins/stylus.md)
 - [magefront-plugin-postcss](plugins/postcss.md)
-- [magefront-plugin-cssnano](plugins/cssnano.md)
 
 ## JS
 
@@ -21,7 +20,6 @@ Here is a list of available plugins:
 ## Framework
 
 - [magefront-plugin-svelte](plugins/svelte.md)
-- [magefront-plugin-react](plugins/react.md)
 
 ## Magento
 
@@ -32,8 +30,7 @@ These plugins are specific to **Magento 2**.
 
 ## Image
 
-- [magefront-plugin-pngquant](plugins/pngquant.md)
-- [magefront-plugin-svgo](plugins/svgo.md)
+- [magefront-plugin-imagemin](plugins/imagemin.md)
 
 ## Misc
 

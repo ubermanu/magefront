@@ -1,6 +1,6 @@
-# LESS
+# Less
 
-Transforms LESS files into CSS files.
+Transforms Less files into CSS files.
 
 ## Install
 
