@@ -12,9 +12,7 @@ Transforms LESS files into CSS files.
 import less from 'magefront-plugin-less'
 
 export default {
-    plugins: [
-        less()
-    ]
+  plugins: [less()],
 }
 ```
 

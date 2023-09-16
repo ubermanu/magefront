@@ -12,9 +12,7 @@ Bundle JS files into multiple files according to the `view.xml` config.
 import jsBundle from 'magefront-plugin-js-bundle'
 
 export default {
-    plugins: [
-        jsBundle(),
-    ]
+  plugins: [jsBundle()],
 }
 ```
 

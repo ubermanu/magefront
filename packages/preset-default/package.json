@@ -1,19 +1,26 @@
 {
   "name": "magefront-preset-default",
   "version": "1.2.1",
-  "type": "module",
   "keywords": [
     "magefront",
     "magento",
     "theme",
     "preset"
   ],
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "packages/preset-default"
+  },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/preset.mjs",
+      "require": "./dist/preset.cjs",
+      "types": "./dist/preset.d.ts"
+    }
   },
   "main": "dist/preset.cjs",
   "module": "dist/preset.mjs",
@@ -25,20 +32,15 @@
     "build": "unbuild"
   },
   "dependencies": {
-    "magefront-plugin-cssnano": "workspace:^",
+    "cssnano": "^6.0.1",
+    "cssnano-preset-default": "^6.0.1",
     "magefront-plugin-js-translation": "workspace:^",
     "magefront-plugin-less": "workspace:^",
+    "magefront-plugin-postcss": "workspace:^",
     "magefront-plugin-requirejs-config": "workspace:^",
     "magefront-plugin-terser": "workspace:^"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/preset.mjs",
-      "require": "./dist/preset.cjs",
-      "types": "./dist/preset.d.ts"
-    }
   }
 }

@@ -12,9 +12,7 @@ PostCSS plugin for **magefront**.
 import postcss from 'magefront-plugin-postcss'
 
 export default {
-    plugins: [
-        postcss()
-    ]
+  plugins: [postcss()],
 }
 ```
 

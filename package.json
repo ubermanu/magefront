@@ -1,19 +1,20 @@
 {
   "name": "magefront-monorepo",
   "private": true,
-  "type": "module",
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git"
   },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "type": "module",
   "scripts": {
+    "build": "pnpm -r build",
     "changeset": "changeset",
     "changeset:publish": "pnpm run build && changeset publish",
-    "ts-check": "tsc --noEmit",
-    "build": "pnpm -r build",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
+    "format": "prettier --write .",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
+    "ts-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",

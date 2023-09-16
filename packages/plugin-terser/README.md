@@ -12,9 +12,7 @@ Minify JS files with [terser](https://terser.org/).
 import terser from 'magefront-plugin-terser'
 
 export default {
-    plugins: [
-        terser()
-    ]
+  plugins: [terser()],
 }
 ```
 

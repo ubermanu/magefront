@@ -1,19 +1,26 @@
 {
   "name": "magefront-plugin-stylus",
   "version": "1.2.1",
-  "type": "module",
   "keywords": [
     "magefront",
     "magento",
     "theme",
     "plugin"
   ],
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "packages/plugin-stylus"
+  },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/plugin.mjs",
+      "require": "./dist/plugin.cjs",
+      "types": "./dist/plugin.d.ts"
+    }
   },
   "main": "dist/plugin.cjs",
   "module": "dist/plugin.mjs",
@@ -25,18 +32,13 @@
     "build": "unbuild"
   },
   "dependencies": {
-    "@types/stylus": "^0.48.39",
     "fast-glob": "^3.3.1",
     "stylus": "^0.60.0"
   },
+  "devDependencies": {
+    "@types/stylus": "^0.48.39"
+  },
   "peerDependencies": {
     "magefront": "workspace:^"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.cjs",
-      "types": "./dist/plugin.d.ts"
-    }
   }
 }

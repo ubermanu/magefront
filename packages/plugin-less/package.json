@@ -1,19 +1,26 @@
 {
   "name": "magefront-plugin-less",
   "version": "1.2.1",
-  "type": "module",
   "keywords": [
     "magefront",
     "magento",
     "theme",
     "plugin"
   ],
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/magefront.git",
     "directory": "packages/plugin-less"
+  },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/plugin.d.ts",
+      "require": "./dist/plugin.cjs",
+      "import": "./dist/plugin.mjs"
+    }
   },
   "main": "dist/plugin.cjs",
   "module": "dist/plugin.mjs",
@@ -25,18 +32,13 @@
     "build": "unbuild"
   },
   "dependencies": {
-    "@types/less": "^3.0.4",
     "fast-glob": "^3.3.1",
     "less": "2.7"
   },
+  "devDependencies": {
+    "@types/less": "^3.0.4"
+  },
   "peerDependencies": {
     "magefront": "workspace:^"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/plugin.d.ts",
-      "require": "./dist/plugin.cjs",
-      "import": "./dist/plugin.mjs"
-    }
   }
 }
