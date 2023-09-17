@@ -1,8 +1,10 @@
 import { render_markdown } from '$lib/server/docs.js'
 
 /** @type {import('./$types').LayoutServerLoad} */
-export const load = async ({ locals, params }) => {
+export const load = async ({ locals, params, depends }) => {
   const { docs } = locals
+
+  depends('pagination')
 
   // Find the document that matches the slug.
   const docId = docs.findIndex((doc) => doc.slug === params.slug)
@@ -14,10 +16,10 @@ export const load = async ({ locals, params }) => {
     return { metadata, slug: doc.slug }
   }
 
+  const previous = await extract_metadata_and_slug(docId - 1)
+  const next = await extract_metadata_and_slug(docId + 1)
+
   return {
-    pagination: {
-      previous: await extract_metadata_and_slug(docId - 1),
-      next: await extract_metadata_and_slug(docId + 1),
-    },
+    pagination: { previous, next },
   }
 }

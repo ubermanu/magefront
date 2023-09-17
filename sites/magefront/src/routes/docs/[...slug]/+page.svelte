@@ -7,4 +7,3 @@
 </svelte:head>
 
 {@html data.content}
-
