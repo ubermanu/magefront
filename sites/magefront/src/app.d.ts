@@ -4,11 +4,7 @@ declare global {
   namespace App {
     // interface Error {}
     interface Locals {
-      docs: Array<{
-        slug: string
-        content: string
-        metadata?: Record<string, string>
-      }>
+      docs: Array<{ slug: string; content: string }>
     }
     // interface PageData {}
     // interface Platform {}
