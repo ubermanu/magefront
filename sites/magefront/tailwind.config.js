@@ -1,3 +1,5 @@
+import typography from '@tailwindcss/typography'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -6,7 +8,12 @@ export default {
       fontFamily: {
         serif: ['Roboto Slab Variable', 'sans-serif'],
       },
+      colors: {
+        accent: {
+          DEFAULT: '#ff2a2a',
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [typography()],
 }
