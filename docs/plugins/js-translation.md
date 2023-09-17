@@ -8,7 +8,9 @@ Merge all the translations into the `js-translation.json` file.
 
 ## Install
 
-    npm i magefront-plugin-js-translation --save-dev
+```shell
+npm i magefront-plugin-js-translation --save-dev
+```
 
 ## Usage
 

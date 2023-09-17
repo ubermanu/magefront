@@ -8,7 +8,9 @@ Minify JS files with [terser](https://terser.org/).
 
 ## Install
 
-    npm i magefront-plugin-terser --save-dev
+```shell
+npm i magefront-plugin-terser --save-dev
+```
 
 ## Usage
 

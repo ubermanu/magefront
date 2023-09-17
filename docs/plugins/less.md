@@ -8,7 +8,9 @@ Transforms Less files into CSS files.
 
 ## Install
 
-    npm i magefront-plugin-less --save-dev
+```shell
+npm i magefront-plugin-less --save-dev
+```
 
 ## Usage
 

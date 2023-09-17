@@ -8,7 +8,9 @@ Transforms SCSS files into CSS files.
 
 ## Install
 
-    npm i magefront-plugin-sass --save-dev
+```shell
+npm i magefront-plugin-sass --save-dev
+```
 
 ## Usage
 

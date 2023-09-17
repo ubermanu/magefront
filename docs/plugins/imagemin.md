@@ -8,7 +8,9 @@ A plugin to optimize your images.
 
 ## Install
 
-    npm i magefront-plugin-imagemin --save-dev
+```shell
+npm i magefront-plugin-imagemin --save-dev
+```
 
 ## Usage
 

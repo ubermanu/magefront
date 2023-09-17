@@ -8,7 +8,9 @@ PostCSS plugin for **magefront**.
 
 ## Install
 
-    npm i magefront-plugin-postcss --save-dev
+```shell
+npm i magefront-plugin-postcss --save-dev
+```
 
 ## Usage
 

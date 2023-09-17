@@ -1,3 +1,7 @@
+---
+title: Tailwind CSS example
+---
+
 # Tailwind CSS
 
 The following example uses [Tailwind CSS](https://tailwindcss.com/) to generate a CSS file.

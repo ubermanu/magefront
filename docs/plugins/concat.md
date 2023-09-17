@@ -8,7 +8,9 @@ Merge files into one.
 
 ## Install
 
-    npm i magefront-plugin-concat --save-dev
+```shell
+npm i magefront-plugin-concat --save-dev
+```
 
 ## Usage
 
