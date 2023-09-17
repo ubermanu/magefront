@@ -1,13 +1,9 @@
 <script>
   import { page } from '$app/stores'
   import { ChevronLeft, ChevronRight } from 'lucide-svelte'
-  import { beforeNavigate, invalidate } from '$app/navigation'
 
-  const { previous, next } = $page.data.pagination
-
-  beforeNavigate(() => {
-    invalidate('pagination')
-  })
+  $: previous = $page.data.pagination?.previous
+  $: next = $page.data.pagination?.next
 </script>
 
 <div class="container mx-auto flex items-center justify-between text-neutral-300">

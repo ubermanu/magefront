@@ -1,10 +1,8 @@
 import { render_markdown } from '$lib/server/docs.js'
 
 /** @type {import('./$types').LayoutServerLoad} */
-export const load = async ({ locals, params, depends }) => {
+export const load = async ({ locals, params }) => {
   const { docs } = locals
-
-  depends('pagination')
 
   // Find the document that matches the slug.
   const docId = docs.findIndex((doc) => doc.slug === params.slug)
