@@ -2,7 +2,7 @@
 
 <br>
 <p align="center">
-    <img src="docs/images/magefront-logo.svg" alt width="200">
+    <img src="identity/magefront-logo.svg" alt width="200">
 </p>
 <br>
 
