@@ -10,7 +10,7 @@ main {
 }
 
 .btn {
-  @apply bg-red-600 text-white py-2 px-4 rounded transition duration-300 ease-in-out transform hover:shadow-md shadow active:scale-95 inline-flex items-center;
+  @apply inline-flex transform items-center rounded bg-red-600 px-4 py-2 text-white shadow transition duration-300 ease-in-out hover:shadow-md active:scale-95;
 }
 
 .btn-lg {
@@ -18,7 +18,11 @@ main {
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {

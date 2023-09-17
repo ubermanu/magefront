@@ -1,5 +1,5 @@
 <script>
-  import { Github } from "lucide-svelte";
+  import { Github } from 'lucide-svelte'
 </script>
 
 <header class="p-4">
