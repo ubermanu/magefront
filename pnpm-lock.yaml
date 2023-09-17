@@ -325,6 +325,9 @@ importers:
 
   sites/magefront:
     devDependencies:
+      '@fontsource-variable/roboto-slab':
+        specifier: ^5.0.12
+        version: 5.0.12
       '@sveltejs/adapter-auto':
         specifier: ^2.0.0
         version: 2.1.0(@sveltejs/kit@1.25.0)
@@ -334,6 +337,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.15
         version: 10.4.15(postcss@8.4.29)
+      lucide-svelte:
+        specifier: ^0.279.0
+        version: 0.279.0(svelte@4.2.0)
       postcss:
         specifier: ^8.4.29
         version: 8.4.29
@@ -342,7 +348,7 @@ importers:
         version: 4.2.0
       svelte-check:
         specifier: ^3.4.3
-        version: 3.5.1(@babel/core@7.22.17)(postcss@8.4.29)(svelte@4.2.0)
+        version: 3.5.1(postcss@8.4.29)(svelte@4.2.0)
       tailwindcss:
         specifier: ^3.3.3
         version: 3.3.3
@@ -351,7 +357,7 @@ importers:
         version: 5.2.2
       vite:
         specifier: ^4.4.2
-        version: 4.4.9(@types/node@20.6.0)
+        version: 4.4.9
 
 packages:
 
@@ -1295,6 +1301,10 @@ packages:
     dev: true
     optional: true
 
+  /@fontsource-variable/roboto-slab@5.0.12:
+    resolution: {integrity: sha512-8OwqZUEnzZDofeYdsNGhUT+w/X+swJkEwYrxFrCwIPYUddHl2JkeSRTYKZRzbhhoMi3rvaK39Jf9ILVoFoS/vw==}
+    dev: true
+
   /@istanbuljs/load-nyc-config@1.1.0:
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}
     engines: {node: '>=8'}
@@ -1759,7 +1769,7 @@ packages:
       svelte: 4.2.0
       tiny-glob: 0.2.9
       undici: 5.23.0
-      vite: 4.4.9(@types/node@20.6.0)
+      vite: 4.4.9
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1775,7 +1785,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@4.2.0)(vite@4.4.9)
       debug: 4.3.4
       svelte: 4.2.0
-      vite: 4.4.9(@types/node@20.6.0)
+      vite: 4.4.9
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1794,7 +1804,7 @@ packages:
       magic-string: 0.30.3
       svelte: 4.2.0
       svelte-hmr: 0.15.3(svelte@4.2.0)
-      vite: 4.4.9(@types/node@20.6.0)
+      vite: 4.4.9
       vitefu: 0.2.4(vite@4.4.9)
     transitivePeerDependencies:
       - supports-color
@@ -6147,6 +6157,14 @@ packages:
       es5-ext: 0.10.62
     dev: false
 
+  /lucide-svelte@0.279.0(svelte@4.2.0):
+    resolution: {integrity: sha512-u9j8tMPxWsv5iXJvrUU/jpyML/k49flr7440UE8QM9V3u0OZt5+qaY5TMiPDTVRMdEELBg4d4ueW1+3Mo3VT4A==}
+    peerDependencies:
+      svelte: '>=3 <5'
+    dependencies:
+      svelte: 4.2.0
+    dev: true
+
   /magic-string@0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
     engines: {node: '>=12'}
@@ -8716,7 +8734,7 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  /svelte-check@3.5.1(@babel/core@7.22.17)(postcss@8.4.29)(svelte@4.2.0):
+  /svelte-check@3.5.1(postcss@8.4.29)(svelte@4.2.0):
     resolution: {integrity: sha512-+Zb4iHxAhdUtcUg/WJPRjlS1RJalIsWAe9Mz6G1zyznSs7dDkT7VUBdXc3q7Iwg49O/VrZgyJRvOJkjuBfKjFA==}
     hasBin: true
     peerDependencies:
@@ -8729,7 +8747,7 @@ packages:
       picocolors: 1.0.0
       sade: 1.8.1
       svelte: 4.2.0
-      svelte-preprocess: 5.0.4(@babel/core@7.22.17)(postcss@8.4.29)(svelte@4.2.0)(typescript@5.2.2)
+      svelte-preprocess: 5.0.4(postcss@8.4.29)(svelte@4.2.0)(typescript@5.2.2)
       typescript: 5.2.2
     transitivePeerDependencies:
       - '@babel/core'
@@ -8752,7 +8770,7 @@ packages:
       svelte: 4.2.0
     dev: true
 
-  /svelte-preprocess@5.0.4(@babel/core@7.22.17)(postcss@8.4.29)(svelte@4.2.0)(typescript@5.2.2):
+  /svelte-preprocess@5.0.4(postcss@8.4.29)(svelte@4.2.0)(typescript@5.2.2):
     resolution: {integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==}
     engines: {node: '>= 14.10.0'}
     requiresBuild: true
@@ -8790,7 +8808,6 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@babel/core': 7.22.17
       '@types/pug': 2.0.6
       detect-indent: 6.1.0
       magic-string: 0.27.0
@@ -9404,7 +9421,7 @@ packages:
     dev: false
     optional: true
 
-  /vite@4.4.9(@types/node@20.6.0):
+  /vite@4.4.9:
     resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -9432,7 +9449,6 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.6.0
       esbuild: 0.18.20
       postcss: 8.4.29
       rollup: 3.29.0
@@ -9448,7 +9464,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.9(@types/node@20.6.0)
+      vite: 4.4.9
     dev: true
 
   /walker@1.0.8:

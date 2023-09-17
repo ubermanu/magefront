@@ -2,7 +2,11 @@
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        serif: ['Roboto Slab Variable', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
