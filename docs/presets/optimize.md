@@ -32,4 +32,4 @@ export default {
 
 ## Plugins
 
-- [magefront-plugin-imagemin](plugins/imagemin.md)
+- [magefront-plugin-imagemin](../plugins/imagemin.md)

@@ -1,7 +1,5 @@
 import { render_markdown } from '$lib/server/docs.js'
 
-export const prerender = true
-
 /** @type {import('./$types').LayoutServerLoad} */
 export const load = async ({ locals, params }) => {
   const { docs } = locals
