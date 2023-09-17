@@ -12,7 +12,7 @@
           <img src="/magefront-logo.svg" alt="" class=" mr-2 h-9 w-9" />
           <p class="font-serif text-2xl font-light">Magefront</p>
         </a>
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-6">
           <a href="/docs">Docs</a>
           <a href="/docs/plugins">Plugins</a>
           <a href="https://github.com/ubermanu/magefront" target="_blank" rel="noopener noreferrer">
@@ -27,7 +27,7 @@
 
   <footer class="py-8">
     <div class="container mx-auto text-center">
-      <p class="text-sm text-neutral-400">&copy; {new Date().getFullYear()} Magefront. Licensed under MIT.</p>
+      <p class="text-sm text-neutral-400">&copy; {new Date().getFullYear()} Magefront and its contributors. Licensed under MIT.</p>
     </div>
   </footer>
 </main>
