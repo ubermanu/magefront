@@ -6,7 +6,6 @@ import shiki from 'shiki'
 
 export async function get_docs_data() {
   const files = import.meta.glob('../../../../../docs/**/!(_)*.md', { as: 'raw' })
-  console.log(files)
 
   return await Promise.all(
     Object.entries(files).map(async ([path, resolver]) => {
@@ -31,5 +30,10 @@ const config = defineMDSveXConfig({
 })
 
 export async function render_markdown(markdown) {
-  return await compile(markdown, config)
+  const { code, data } = await compile(markdown, config)
+
+  return {
+    content: code.replace(/^<script context="module">.*?<\/script>/s, ''),
+    metadata: data?.fm || {},
+  }
 }

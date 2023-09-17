@@ -39,9 +39,3 @@
     <a href="/docs" class="btn btn-lg mt-4">Get Started</a>
   </div>
 </section>
-
-<footer class="py-8">
-  <div class="container mx-auto text-center">
-    <p class="text-neutral-400 text-sm">&copy; {new Date().getFullYear()} Magefront. Licensed under MIT.</p>
-  </div>
-</footer>

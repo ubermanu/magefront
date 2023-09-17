@@ -13,10 +13,10 @@ export const load = async ({ params, locals }) => {
     throw error(404, `Document not found`)
   }
 
-  const { code, data } = await render_markdown(doc.content)
+  const { content, metadata } = await render_markdown(doc.content)
 
   return {
-    content: code,
-    metadata: data,
+    content,
+    metadata,
   }
 }
