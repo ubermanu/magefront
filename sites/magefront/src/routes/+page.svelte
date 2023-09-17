@@ -2,6 +2,14 @@
   import { Github } from 'lucide-svelte'
 </script>
 
+<svelte:head>
+  <title>Magefront - Develop themes using a stack you already know.</title>
+  <meta
+    name="description"
+    content="A CLI tool for building Magento 2 themes with any modern frontend stack, including SASS, Tailwind, Svelte, TypeScript, and more."
+  />
+</svelte:head>
+
 <header class="p-4">
   <div class="container mx-auto">
     <nav class="flex justify-between items-center">
