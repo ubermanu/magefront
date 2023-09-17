@@ -1,4 +1,8 @@
-# imagemin
+---
+title: Imagemin plugin
+---
+
+# Imagemin
 
 A plugin to optimize your images.
 

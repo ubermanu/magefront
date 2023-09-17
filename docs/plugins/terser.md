@@ -1,3 +1,7 @@
+---
+title: Terser plugin
+---
+
 # Terser
 
 Minify JS files with [terser](https://terser.org/).

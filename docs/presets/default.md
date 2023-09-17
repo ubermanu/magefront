@@ -1,3 +1,7 @@
+---
+title: Default preset
+---
+
 # Default preset
 
 Includes a set of plugins that are mandatory for Magento 2 themes.

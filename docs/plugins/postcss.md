@@ -1,3 +1,7 @@
+---
+title: PostCSS plugin
+---
+
 # PostCSS
 
 PostCSS plugin for **magefront**.

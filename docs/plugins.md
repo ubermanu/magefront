@@ -1,3 +1,7 @@
+---
+title: Plugins
+---
+
 # Plugins
 
 Here is a list of available plugins:

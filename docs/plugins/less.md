@@ -1,3 +1,7 @@
+---
+title: Less plugin
+---
+
 # Less
 
 Transforms Less files into CSS files.

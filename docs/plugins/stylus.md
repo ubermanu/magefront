@@ -1,3 +1,7 @@
+---
+title: Stylus plugin
+---
+
 # Stylus
 
 Transforms STYL files into CSS files.

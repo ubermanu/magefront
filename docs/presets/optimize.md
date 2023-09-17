@@ -1,3 +1,7 @@
+---
+title: Optimize preset
+---
+
 # Optimize preset
 
 An additional preset to optimize your assets.

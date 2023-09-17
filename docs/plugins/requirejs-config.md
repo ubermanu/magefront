@@ -1,3 +1,7 @@
+---
+title: RequireJS config plugin
+---
+
 # RequireJS
 
 Merge all the `requirejs-config.js` files into one.

@@ -1,3 +1,7 @@
+---
+title: Typescript plugin
+---
+
 # Typescript
 
 Transforms *.ts files into JS files.

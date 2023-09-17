@@ -1,3 +1,7 @@
+---
+title: SASS plugin
+---
+
 # SASS
 
 Transforms SCSS files into CSS files.

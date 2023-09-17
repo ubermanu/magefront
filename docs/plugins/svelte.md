@@ -1,3 +1,7 @@
+---
+title: Svelte plugin
+---
+
 # Svelte
 
 Compile *.svelte files into JS files.

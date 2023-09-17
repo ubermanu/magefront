@@ -1,3 +1,7 @@
+---
+title: Concat plugin
+---
+
 # Concat
 
 Merge files into one.

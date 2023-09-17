@@ -1,3 +1,7 @@
+---
+title: Babel plugin
+---
+
 # Babel
 
 Transpile JS files with [Babel](https://babeljs.io/).

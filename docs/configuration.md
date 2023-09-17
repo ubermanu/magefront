@@ -1,3 +1,7 @@
+---
+title: Configuration
+---
+
 # Configuration
 
 The configuration is handled by a `magefront.config.js` file in the root of your project.
