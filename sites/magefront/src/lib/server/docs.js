@@ -16,7 +16,12 @@ export async function get_docs_data() {
     })
   )
 
-  return docs.sort((a, b) => a.slug.localeCompare(b.slug))
+  // If the slug is "getting-started", make sure it's the first document.
+  return docs.sort((a, b) => {
+    if (a.slug === 'getting-started') return -1
+    if (b.slug === 'getting-started') return 1
+    return a.slug.localeCompare(b.slug)
+  })
 }
 
 const config = defineMDSveXConfig({
