@@ -1,7 +1,3 @@
-<script>
-  import { Github } from 'lucide-svelte'
-</script>
-
 <svelte:head>
   <title>Magefront - Develop themes using a stack you already know.</title>
   <meta

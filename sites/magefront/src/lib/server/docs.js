@@ -7,7 +7,7 @@ import shiki from 'shiki'
 export async function get_docs_data() {
   const files = import.meta.glob('../../../../../docs/**/!(_)*.md', { as: 'raw' })
 
-  return await Promise.all(
+  const docs = await Promise.all(
     Object.entries(files).map(async ([path, resolver]) => {
       return {
         slug: path.replace('../../../../../docs/', '').replace('.md', ''),
@@ -15,6 +15,8 @@ export async function get_docs_data() {
       }
     })
   )
+
+  return docs.sort((a, b) => a.slug.localeCompare(b.slug))
 }
 
 const config = defineMDSveXConfig({
