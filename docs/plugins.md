@@ -6,8 +6,6 @@ title: Plugins
 
 Here is a list of available plugins:
 
-<small>💡 = Included in the [default preset](presets/default.md)</small>
-
 ## CSS
 
 - [magefront-plugin-less](plugins/less.md) 💡
@@ -39,3 +37,7 @@ These plugins are specific to **Magento 2**.
 ## Misc
 
 - [magefront-plugin-concat](plugins/concat.md)
+
+<br>
+
+💡 = Included in the [default preset](presets/default.md)
