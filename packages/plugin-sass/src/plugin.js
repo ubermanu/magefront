@@ -2,6 +2,7 @@ import glob from 'fast-glob'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { compileAsync } from 'sass'
+
 /**
  * Compile SCSS files to CSS.
  *
