@@ -47,7 +47,7 @@
     "winston": "^3.10.0"
   },
   "devDependencies": {
-    "@types/browser-sync": "^2.27.0",
+    "@types/browser-sync": "^2.27.1",
     "@types/cli-table": "^0.3.2",
     "@types/fs-extra": "^11.0.1",
     "@types/memoizee": "^0.4.8",

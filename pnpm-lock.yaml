@@ -90,8 +90,8 @@ importers:
         version: 3.10.0
     devDependencies:
       '@types/browser-sync':
-        specifier: ^2.27.0
-        version: 2.27.0
+        specifier: ^2.27.1
+        version: 2.27.1
       '@types/cli-table':
         specifier: ^0.3.2
         version: 0.3.2
@@ -1652,8 +1652,8 @@ packages:
       '@babel/types': 7.22.17
     dev: true
 
-  /@types/browser-sync@2.27.0:
-    resolution: {integrity: sha512-CQc8mggMZpKsUAdjm7jyR8uWcFnxuly8xw76ZY4jSLugsZWHLcv7mLVVY591XPaZ2BqbFZT1fxov3hrQFistNg==}
+  /@types/browser-sync@2.27.1:
+    resolution: {integrity: sha512-p/qAU+3dqq/CqobNiiZkIsernNfQe/35QEtor8Oae/WWgMLLhceFogCaAMe7pO4T8Z5WL/Co522YBo2sk/I7AQ==}
     dependencies:
       '@types/micromatch': 2.3.31
       '@types/node': 20.6.0
