@@ -1,3 +1,7 @@
+---
+title: Optimize preset
+---
+
 # Optimize preset
 
 An additional preset to optimize your assets.
@@ -28,4 +32,4 @@ export default {
 
 ## Plugins
 
-- [magefront-plugin-imagemin](plugins/imagemin.md)
+- [magefront-plugin-imagemin](../plugins/imagemin.md)

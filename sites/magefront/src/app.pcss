@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+  background-image: linear-gradient(transparent 1px, #111 1px), linear-gradient(90deg, transparent 1px, #111 1px);
+  background-position: center;
+  background-size: 30px 30px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.btn {
+  @apply inline-flex transform cursor-pointer items-center rounded bg-red-600 px-4 py-2 text-white shadow transition duration-300 ease-in-out hover:shadow-md active:scale-95;
+}
+
+.btn-lg {
+  @apply px-6 py-3 text-lg font-medium;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.logo:hover img {
+  animation: bounce 1s;
+}

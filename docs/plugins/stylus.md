@@ -1,10 +1,16 @@
+---
+title: Stylus plugin
+---
+
 # Stylus
 
 Transforms STYL files into CSS files.
 
 ## Install
 
-    npm i magefront-plugin-stylus --save-dev
+```shell
+npm i magefront-plugin-stylus --save-dev
+```
 
 ## Usage
 

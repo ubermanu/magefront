@@ -1,10 +1,16 @@
+---
+title: Typescript plugin
+---
+
 # Typescript
 
 Transforms *.ts files into JS files.
 
 ## Install
 
-    npm i magefront-plugin-typescript --save-dev
+```shell
+npm i magefront-plugin-typescript --save-dev
+```
 
 ## Usage
 

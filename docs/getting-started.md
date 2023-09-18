@@ -1,3 +1,7 @@
+---
+title: Getting Started
+---
+
 # Getting Started
 
 The main goal of **magefront** is to provide a way of developing Magento 2 themes in a Node.js environment.
@@ -8,15 +12,19 @@ All the assets deployment is handled by **magefront**, no need to run `bin/magen
 
 ## Install
 
-Install the package at the root level of your **Magento 2** project:
+Install the package at the root level of your Magento 2 project:
 
-    npm install magefront
+```shell
+npm install magefront --save-dev
+```
 
 ## Usage
 
-    npx magefront -t Magento/blank en_US
+Run the following command to build the `blank` theme, for the `en_US` locale:
 
-> This will build the `Magento/blank` theme, with the locale `en_US` into the `pub/static` folder.
+```shell
+npx magefront -t Magento/blank en_US
+```
 
 
 ## Compatibility

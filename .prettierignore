@@ -2,3 +2,5 @@ node_modules
 docs
 pnpm-lock.yaml
 .github
+.svelte-kit
+build

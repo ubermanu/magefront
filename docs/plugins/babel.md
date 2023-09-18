@@ -1,10 +1,16 @@
+---
+title: Babel plugin
+---
+
 # Babel
 
 Transpile JS files with [Babel](https://babeljs.io/).
 
 ## Install
 
-    npm i magefront-plugin-babel --save-dev
+```shell
+npm i magefront-plugin-babel --save-dev
+```
 
 ## Usage
 
