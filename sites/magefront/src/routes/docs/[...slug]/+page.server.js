@@ -1,3 +1,4 @@
+import { base } from '$app/paths'
 import { get_docs_data, render_markdown } from '$lib/server/docs.js'
 import { error, redirect } from '@sveltejs/kit'
 
@@ -8,7 +9,7 @@ export const load = async ({ params, locals }) => {
   // Redirect if the slug ends with ".md"
   // So the docs are still usable on git
   if (slug.endsWith('.md')) {
-    throw redirect(301, `/docs/${slug.slice(0, -3)}`)
+    throw redirect(301, `${base}/docs/${slug.slice(0, -3)}`)
   }
 
   // Find the document that matches the slug.

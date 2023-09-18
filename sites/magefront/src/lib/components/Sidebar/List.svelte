@@ -1,4 +1,6 @@
 <script>
+  import { base } from '$app/paths'
+
   /** @type {SidebarItem[]} */
   export let items = []
 
@@ -10,7 +12,7 @@
     {#each items as item}
       <li>
         {#if item?.slug}
-          <a href="/docs/{item.slug}" class="inline-block px-0.5 py-1">{item.title}</a>
+          <a href="{base}/docs/{item.slug}" class="inline-block px-0.5 py-1">{item.title}</a>
         {:else}
           <span class="inline-block px-0.5 py-1">{item.title}</span>
         {/if}
@@ -24,6 +26,6 @@
 
 <style lang="postcss">
   a {
-    @apply hover:text-accent hover:underline underline-offset-4 transition-colors;
+    @apply hover:text-accent underline-offset-4 transition-colors hover:underline;
   }
 </style>
