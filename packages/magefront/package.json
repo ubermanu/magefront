@@ -25,7 +25,8 @@
       "import": "./dist/magefront.mjs",
       "require": "./dist/magefront.cjs",
       "types": "./types/magefront.d.ts"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "dist/magefront.cjs",
   "module": "dist/magefront.mjs",
