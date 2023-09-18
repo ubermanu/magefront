@@ -12,9 +12,6 @@
   <button slot="before-logo" on:click={() => ($menu = !$menu)} class="lg:hidden">
     <Menu class="h-6 w-6" />
   </button>
-  <svelte:fragment slot="links">
-    <a href="/docs/plugins">Plugins</a>
-  </svelte:fragment>
 </Header>
 
 <div class="flex flex-grow">
