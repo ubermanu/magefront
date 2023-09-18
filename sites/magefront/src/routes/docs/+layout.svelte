@@ -1,29 +1,27 @@
 <script>
   import Pagination from '$lib/components/Pagination.svelte'
-  import { Github, Menu, X } from 'lucide-svelte'
+  import { Menu, X } from 'lucide-svelte'
   import Logo from '$lib/components/Logo.svelte'
   import Sidebar from '$lib/components/Sidebar.svelte'
   import { menu } from '$lib/stores.js'
+  import Footer from '$lib/components/Footer.svelte'
+  import Header from '$lib/components/Header.svelte'
 </script>
 
-<header class="p-4">
-  <nav class="flex items-center justify-between gap-4">
-    <button on:click={() => ($menu = !$menu)} class="lg:hidden">
-      <Menu class="h-6 w-6" />
-    </button>
-    <Logo />
-    <div class="flex items-center space-x-6">
-      <a href="/docs/plugins">Plugins</a>
-      <a href="https://github.com/ubermanu/magefront" target="_blank" rel="noopener noreferrer">
-        <Github class="h-6 w-6" />
-      </a>
-    </div>
-  </nav>
-</header>
+<Header container={false}>
+  <button slot="before-logo" on:click={() => ($menu = !$menu)} class="lg:hidden">
+    <Menu class="h-6 w-6" />
+  </button>
+  <svelte:fragment slot="links">
+    <a href="/docs/plugins">Plugins</a>
+  </svelte:fragment>
+</Header>
 
 <div class="flex flex-grow">
-  <aside class="sidebar mr-8 h-auto w-1/4 rounded bg-neutral-600 bg-opacity-10 p-4 max-lg:hidden">
-    <Sidebar />
+  <aside class="mr-8 w-1/4 max-lg:hidden">
+    <div class="sticky top-8 rounded bg-neutral-600 bg-opacity-10 p-4">
+      <Sidebar />
+    </div>
   </aside>
 
   <div
@@ -46,5 +44,6 @@
     </div>
     <hr class="my-5 border-neutral-600 opacity-10" />
     <Pagination />
+    <Footer />
   </div>
 </div>
