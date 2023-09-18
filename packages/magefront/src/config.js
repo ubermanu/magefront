@@ -69,7 +69,6 @@ export const getBuildConfig = memo(async (opts, context) => {
 async function transformPluginDefinition(definition) {
   // TODO: Validate the plugin definition
   if (typeof definition === 'object' && definition !== null) {
-    // @ts-ignore
     return definition
   }
 
