@@ -1,4 +1,9 @@
 {
   "extends": "../../shared/tsconfig.base.json",
-  "include": ["src/**/*.ts"]
+  "compilerOptions": {
+    "paths": {
+      "types": ["./src/preset.d.ts"]
+    }
+  },
+  "include": ["src/**/*"]
 }

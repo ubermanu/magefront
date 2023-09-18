@@ -1,0 +1,29 @@
+import glob from 'fast-glob'
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { minify } from 'terser'
+
+/**
+ * Find all the `js` files in the preprocessed directory and minify them.
+ *
+ * @param {import('types').Options} [options]
+ * @returns {import('magefront').Plugin}
+ */
+export default (options) => {
+  const { src, ignore, terserOptions } = { ...options }
+
+  return async (context) => {
+    const files = await glob(src ?? '**/*.js', { ignore, cwd: context.src })
+
+    await Promise.all(
+      files.map(async (file) => {
+        const filePath = path.join(context.src, file)
+        const fileContent = await fs.readFile(filePath)
+        const { code } = await minify(fileContent.toString(), terserOptions || {})
+        if (code) {
+          return fs.writeFile(filePath, code)
+        }
+      })
+    )
+  }
+}

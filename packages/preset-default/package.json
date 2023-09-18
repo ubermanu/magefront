@@ -17,20 +17,15 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/preset.mjs",
-      "require": "./dist/preset.cjs",
-      "types": "./dist/preset.d.ts"
+      "import": "./src/preset.js",
+      "types": "./src/preset.d.ts"
     }
   },
-  "main": "dist/preset.cjs",
-  "module": "dist/preset.mjs",
-  "types": "dist/preset.d.ts",
+  "module": "src/preset.js",
+  "types": "src/preset.d.ts",
   "files": [
-    "dist"
+    "src"
   ],
-  "scripts": {
-    "build": "unbuild"
-  },
   "dependencies": {
     "cssnano": "^6.0.1",
     "cssnano-preset-default": "^6.0.1",

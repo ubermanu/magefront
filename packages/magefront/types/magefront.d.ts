@@ -1,6 +1,4 @@
 declare namespace magefront {
-  import type { Logger } from 'winston'
-
   // A package from a `composer.lock` file.
   export interface ComposerPackage {
     name: string
@@ -17,7 +15,7 @@ declare namespace magefront {
   }
 
   export interface MagentoLanguage extends MagentoModule {
-    code: string | false
+    code: string
   }
 
   export interface MagentoTheme extends MagentoModule {
@@ -39,7 +37,7 @@ declare namespace magefront {
     themeList: MagentoTheme[]
     themeDependencyTree: string[]
     cwd: string
-    logger: Logger
+    logger: import('winston').Logger
   }
 
   export type Plugin = (context: PluginContext) => Promise<void>
@@ -66,10 +64,10 @@ declare namespace magefront {
     locale?: string
 
     /** The list of presets to use. */
-    presets?: Array<Preset | string | [string, any]>
+    presets?: Array<Preset | string | [string, unknown]>
 
     /** The list of plugins to use. */
-    plugins?: Array<Plugin | string | [string, any]>
+    plugins?: Array<Plugin | string | [string, unknown]>
 
     magento?: {
       /** The path to the magento root directory. */
@@ -88,7 +86,7 @@ declare namespace magefront {
   export type ActionContext = {
     theme: MagentoTheme
     locale: string
-    logger: Logger
+    logger: import('winston').Logger
     buildConfig: BuildConfig
     magento: {
       rootPath: string

@@ -7,10 +7,7 @@
     "magento",
     "theme",
     "builder",
-    "frontend",
-    "less",
-    "sass",
-    "stylus"
+    "frontend"
   ],
   "repository": {
     "type": "git",
@@ -22,25 +19,20 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/magefront.mjs",
-      "require": "./dist/magefront.cjs",
+      "import": "./src/main.js",
       "types": "./types/magefront.d.ts"
     },
     "./package.json": "./package.json"
   },
-  "main": "dist/magefront.cjs",
-  "module": "dist/magefront.mjs",
+  "module": "src/main.js",
   "types": "types/magefront.d.ts",
   "bin": {
-    "magefront": "dist/cli.mjs"
+    "magefront": "src/cli.js"
   },
   "files": [
-    "dist",
+    "src",
     "types"
   ],
-  "scripts": {
-    "build": "unbuild"
-  },
   "dependencies": {
     "browser-sync": "^2.29.3",
     "chokidar": "^3.5.3",

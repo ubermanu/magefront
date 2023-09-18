@@ -19,20 +19,15 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/plugin.mjs",
-      "require": "./dist/plugin.cjs",
-      "types": "./dist/plugin.d.ts"
+      "import": "./src/plugin.js",
+      "types": "./src/plugin.d.ts"
     }
   },
-  "main": "dist/plugin.cjs",
-  "module": "dist/plugin.mjs",
-  "types": "dist/plugin.d.ts",
+  "module": "src/plugin.js",
+  "types": "src/plugin.d.ts",
   "files": [
-    "dist"
+    "src"
   ],
-  "scripts": {
-    "build": "unbuild"
-  },
   "dependencies": {
     "fast-glob": "^3.3.1",
     "imagemin": "^8.0.1"

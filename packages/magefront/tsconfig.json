@@ -1,7 +1,9 @@
 {
   "extends": "../../shared/tsconfig.base.json",
   "compilerOptions": {
-    "resolveJsonModule": true
+    "paths": {
+      "types": ["./types/magefront.d.ts"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "types/magefront.d.ts", "tests/**/*"]
 }
