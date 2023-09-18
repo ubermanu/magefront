@@ -13,6 +13,9 @@ const config = {
   paths: {
     base: process.env.SVELTEKIT_BASE_URL || '',
   },
+  prerender: {
+    concurrency: 20,
+  },
 }
 
 export default config

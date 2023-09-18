@@ -10,7 +10,7 @@
 
 <Header>
   <svelte:fragment slot="links">
-    <a href="{base}/docs">Docs</a>
+    <a href="{base}/docs/getting-started">Docs</a>
     <a href="{base}/docs/plugins">Plugins</a>
   </svelte:fragment>
 </Header>
@@ -23,7 +23,7 @@
       <span class="text-red-600">Tailwind</span>, <span class="text-red-600">Svelte</span>, <span class="text-red-600">TypeScript</span>,
       and more.
     </p>
-    <a href="{base}/docs" class="btn btn-lg mt-4">Get Started</a>
+    <a href="{base}/docs/getting-started" class="btn btn-lg mt-4">Get Started</a>
   </div>
 </section>
 
