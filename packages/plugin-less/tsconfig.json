@@ -1,5 +1,10 @@
 {
   "extends": "../../shared/tsconfig.base.json",
-  "types": ["less"],
-  "include": ["src/**/*.ts"]
+  "compilerOptions": {
+    "paths": {
+      "types": ["./src/plugin.d.ts"]
+    },
+    "types": ["less"]
+  },
+  "include": ["src/**/*"]
 }

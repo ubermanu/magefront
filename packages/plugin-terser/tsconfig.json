@@ -1,4 +1,9 @@
 {
   "extends": "../../shared/tsconfig.base.json",
-  "include": ["src/**/*.ts"]
+  "compilerOptions": {
+    "paths": {
+      "types": ["./src/plugin.d.ts"]
+    }
+  },
+  "include": ["src/**/*"]
 }
