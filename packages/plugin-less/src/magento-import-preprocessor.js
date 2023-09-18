@@ -16,6 +16,7 @@ export class preProcessor {
    * @param {string} src
    * @param {Less.PreProcessorExtraInfo} [_extra]
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   process(src, _extra) {
     return src.replace(/^\/\/@magento_import\s(\([\w\s,]*\))?(.*)\s?;.*$/gm, (_match, options, path) => {
       /** @type {string[]} */

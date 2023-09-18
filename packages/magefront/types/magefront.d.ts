@@ -64,10 +64,10 @@ declare namespace magefront {
     locale?: string
 
     /** The list of presets to use. */
-    presets?: Array<Preset | string | [string, any]>
+    presets?: Array<Preset | string | [string, unknown]>
 
     /** The list of plugins to use. */
-    plugins?: Array<Plugin | string | [string, any]>
+    plugins?: Array<Plugin | string | [string, unknown]>
 
     magento?: {
       /** The path to the magento root directory. */
