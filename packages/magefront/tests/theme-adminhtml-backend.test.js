@@ -7,7 +7,7 @@ import { inheritance } from '../src/actions/inheritance'
 import { testActionContext } from './helpers'
 
 describe('Build and deploy the Magento/backend theme', () => {
-  /** @type {ActionContext} */
+  /** @type {import('types').ActionContext} */
   let context
   /** @type {string} */
   let rootPath

@@ -1,7 +1,7 @@
 import process from 'node:process'
 import { createActionContext } from '../src/actions/context'
 
-export const rootPath = process.env.MAGEFRONT_TEST_MAGENTO_ROOT
+export const rootPath = process.env.MAGEFRONT_TEST_MAGENTO_ROOT ?? ''
 
 /**
  * Create a context for testing purposes.

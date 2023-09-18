@@ -15,7 +15,7 @@ declare namespace magefront {
   }
 
   export interface MagentoLanguage extends MagentoModule {
-    code: string | false
+    code: string
   }
 
   export interface MagentoTheme extends MagentoModule {

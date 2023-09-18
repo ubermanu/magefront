@@ -4,7 +4,7 @@ test('Get all the modules from Magento source code', async () => {
   const context = await testActionContext()
   const { modules } = context.magento
 
-  /** @type {MagentoModule} */
+  /** @type {import('types').MagentoModule | undefined} */
   const catalog = modules.find((m) => m.name === 'Magento_Catalog')
   expect(catalog).not.toBe(undefined)
 
@@ -14,7 +14,7 @@ test('Get all the modules from Magento source code', async () => {
     expect(catalog.enabled).toEqual(true)
   }
 
-  /** @type {MagentoModule} */
+  /** @type {import('types').MagentoModule | undefined} */
   const twoFactorAuth = modules.find((m) => m.name === 'Magento_TwoFactorAuth')
   expect(twoFactorAuth).not.toBe(undefined)
 
@@ -29,7 +29,7 @@ test('Get all the themes from Magento source code', async () => {
   const context = await testActionContext()
   const { themes } = context.magento
 
-  /** @type {MagentoTheme} */
+  /** @type {import('types').MagentoTheme | undefined} */
   const blank = themes.find((t) => t.name === 'Magento/blank')
   expect(blank).not.toBe(undefined)
 
@@ -40,7 +40,7 @@ test('Get all the themes from Magento source code', async () => {
     expect(blank.parent).toBeNull()
   }
 
-  /** @type {MagentoTheme} */
+  /** @type {import('types').MagentoTheme | undefined} */
   const luma = themes.find((t) => t.name === 'Magento/luma')
   expect(luma).not.toBe(undefined)
 
@@ -51,7 +51,7 @@ test('Get all the themes from Magento source code', async () => {
     expect(luma.parent?.name).toEqual('Magento/blank')
   }
 
-  /** @type {MagentoTheme} */
+  /** @type {import('types').MagentoTheme | undefined} */
   const backend = themes.find((t) => t.name === 'Magento/backend')
   expect(backend).not.toBe(undefined)
 
@@ -67,7 +67,7 @@ test('Get all the languages from Magento source code', async () => {
   const context = await testActionContext()
   const { languages } = context.magento
 
-  /** @type {MagentoLanguage} */
+  /** @type {import('types').MagentoLanguage | undefined} */
   const enUs = languages.find((l) => l.code === 'en_US')
   expect(enUs).not.toBe(undefined)
 
