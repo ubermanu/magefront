@@ -28,6 +28,6 @@ export const load = async ({ params, locals }) => {
 }
 
 export const entries = async () => {
-  const docs = await get_docs_data()
+  const docs = await get_docs_data(false)
   return docs.map((doc) => ({ slug: doc.slug }))
 }

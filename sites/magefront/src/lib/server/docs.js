@@ -4,14 +4,14 @@ import rehypeSlug from 'rehype-slug'
 import remarkToc from 'remark-toc'
 import shiki from 'shiki'
 
-export async function get_docs_data() {
+export async function get_docs_data(withContent = true) {
   const files = import.meta.glob('../../../../../docs/**/!(_)*.md', { as: 'raw' })
 
   const docs = await Promise.all(
     Object.entries(files).map(async ([path, resolver]) => {
       return {
         slug: path.replace('../../../../../docs/', '').replace('.md', ''),
-        content: await resolver?.(),
+        content: withContent ? await resolver?.() : '',
       }
     })
   )
