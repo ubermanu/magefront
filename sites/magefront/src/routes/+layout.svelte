@@ -4,6 +4,13 @@
   import { Github } from 'lucide-svelte'
 </script>
 
+<svelte:head>
+  <meta
+    name="description"
+    content="A CLI tool for building Magento 2 themes with any modern frontend stack, including SASS, Tailwind, Svelte, TypeScript, and more."
+  />
+</svelte:head>
+
 <main class="flex min-h-screen flex-col px-4 font-sans text-white md:px-8">
   <header class="p-4">
     <div class="container mx-auto">
