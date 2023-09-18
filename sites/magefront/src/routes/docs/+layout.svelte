@@ -38,7 +38,7 @@
     <Sidebar />
   </div>
 
-  <div class="max-w-3xl flex-grow">
+  <div class="max-w-3xl flex-grow max-lg:max-w-full">
     <div class="prose prose-neutral prose-invert py-10">
       <div>
         <slot />
