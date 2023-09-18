@@ -6,7 +6,7 @@
   $: next = $page.data.pagination?.next
 </script>
 
-<div class="container mx-auto flex max-w-3xl items-center justify-between text-neutral-300">
+<div class="flex items-center justify-between text-neutral-300">
   {#if previous}
     <a class="mr-auto flex flex-col items-start p-2 pl-0" href="/docs/{previous.slug}" rel="prev">
       <div class="flex items-center text-xs uppercase leading-loose text-neutral-600">

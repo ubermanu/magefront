@@ -1,6 +1,26 @@
+<script>
+  import { Github } from 'lucide-svelte'
+  import Logo from '$lib/components/Logo.svelte'
+</script>
+
 <svelte:head>
   <title>Magefront - Develop themes using a stack you already know.</title>
 </svelte:head>
+
+<header class="p-4">
+  <div class="container mx-auto">
+    <nav class="flex items-center justify-between">
+      <Logo />
+      <div class="flex items-center space-x-6">
+        <a href="/docs">Docs</a>
+        <a href="/docs/plugins">Plugins</a>
+        <a href="https://github.com/ubermanu/magefront" target="_blank" rel="noopener noreferrer">
+          <Github class="h-6 w-6" />
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
 
 <section class="flex flex-grow items-center py-20">
   <div class="container mx-auto max-w-4xl text-center">

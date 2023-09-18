@@ -6,8 +6,17 @@ declare global {
     interface Locals {
       docs: Array<{ slug: string; content: string }>
     }
-    // interface PageData {}
+    interface PageData {
+      sidebar?: SidebarItem[]
+    }
     // interface Platform {}
+  }
+
+  interface SidebarItem {
+    name: string
+    title: string
+    slug?: string
+    children?: SidebarItem[]
   }
 }
 
