@@ -10,13 +10,14 @@ import magentoImportPreprocessor from './magento-import-preprocessor'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, compiler, sourcemaps, compilerOptions } = { ...options }
+export default (options) => ({
+  name: 'less',
 
-  const plugins = options?.plugins ?? []
-  const magentoImport = options?.magentoImport ?? true
+  async build(context) {
+    const { src, ignore, compiler, sourcemaps, compilerOptions } = { ...options }
+    const plugins = options?.plugins ?? []
+    const magentoImport = options?.magentoImport ?? true
 
-  return async (context) => {
     // Add the default magento import plugin
     // Necessary to resolve the "//@magento_import" statements in the core styles
     if (magentoImport) {
@@ -33,7 +34,11 @@ export default (options) => {
         const filePath = path.join(context.src, file)
         const fileContent = await fs.readFile(filePath, 'utf8')
 
-        /** @type {{ render: (input: string, options: Less.Options, callback: boolean | Function) => Promise<Less.RenderOutput> }} */
+        /**
+         * @type {{
+         *   render: (input: string, options: Less.Options, callback: boolean | Function) => Promise<Less.RenderOutput>
+         * }}
+         */
         const less = compiler ?? less27
 
         const output = await less.render(
@@ -61,7 +66,7 @@ export default (options) => {
         }
       })
     )
-  }
-}
+  },
+})
 
 export { magentoImportPreprocessor }

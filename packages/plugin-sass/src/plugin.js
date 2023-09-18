@@ -10,10 +10,12 @@ import { compileAsync } from 'sass'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, sourcemaps, compilerOptions } = { ...options }
+export default (options) => ({
+  name: 'sass',
 
-  return async (context) => {
+  async build(context) {
+    const { src, ignore, sourcemaps, compilerOptions } = { ...options }
+
     const files = await glob(src ?? '**/!(_)*.scss', {
       ignore: ignore ?? [],
       cwd: context.src,
@@ -33,5 +35,5 @@ export default (options) => {
         }
       })
     )
-  }
-}
+  },
+})

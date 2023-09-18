@@ -3,9 +3,10 @@
  *
  * @returns {import('magefront').Plugin}
  */
-export default () => {
-  // TODO: Implement this plugin using rollup?
-  return async () => {
+export default () => ({
+  name: 'js-bundle',
+
+  async build() {
     throw new Error('Not implemented yet')
-  }
-}
+  },
+})

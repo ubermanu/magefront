@@ -9,10 +9,12 @@ import { compile } from 'svelte/compiler'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, compilerOptions } = { ...options }
+export default (options) => ({
+  name: 'svelte',
 
-  return async (context) => {
+  async build(context) {
+    const { src, ignore, compilerOptions } = { ...options }
+
     const files = await glob(src ?? '**/*.svelte', {
       ignore: ignore ?? [],
       cwd: context.src,
@@ -27,5 +29,5 @@ export default (options) => {
         return fs.promises.writeFile(filePath.replace(/\.svelte$/, '.js'), output.js.code)
       })
     )
-  }
-}
+  },
+})

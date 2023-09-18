@@ -15,17 +15,21 @@ export default (options) => {
     throw new Error('The `src` option is required')
   }
 
-  return async (context) => {
-    const files = await glob(src, {
-      ignore: ignore ?? [],
-      cwd: context.src,
-    })
+  return {
+    name: 'babel',
 
-    await Promise.all(
-      files.map((file) => {
-        const filePath = path.join(context.src, file)
-        return babel.transformAsync(filePath, compilerOptions)
+    async build(context) {
+      const files = await glob(src, {
+        ignore: ignore ?? [],
+        cwd: context.src,
       })
-    )
+
+      await Promise.all(
+        files.map((file) => {
+          const filePath = path.join(context.src, file)
+          return babel.transformAsync(filePath, compilerOptions)
+        })
+      )
+    },
   }
 }

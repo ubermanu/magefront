@@ -7,8 +7,10 @@ import path from 'node:path'
  *
  * @returns {import('magefront').Plugin}
  */
-export default () => {
-  return async (context) => {
+export default () => ({
+  name: 'js-translation',
+
+  async build(context) {
     const files = []
 
     const { locale, moduleList, languageList, cwd } = context
@@ -84,5 +86,5 @@ export default () => {
       parser.on('error', reject)
       parser.on('finish', resolve)
     })
-  }
-}
+  },
+})

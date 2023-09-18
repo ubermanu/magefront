@@ -9,10 +9,12 @@ import path from 'node:path'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, dest, plugins } = { ...options }
+export default (options) => ({
+  name: 'imagemin',
 
-  return async (context) => {
+  async build(context) {
+    const { src, ignore, dest, plugins } = { ...options }
+
     const files = await glob(src ?? '**/*.{jpg,jpeg,png,gif,svg}', {
       cwd: context.src,
       ignore,
@@ -38,5 +40,5 @@ export default (options) => {
         await fs.writeFile(filePath, file.data, 'utf8')
       })
     )
-  }
-}
+  },
+})

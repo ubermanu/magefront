@@ -9,10 +9,11 @@ import stylus from 'stylus'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, sourcemaps, compilerOptions } = { ...options }
+export default (options) => ({
+  name: 'stylus',
 
-  return async (context) => {
+  async build(context) {
+    const { src, ignore, sourcemaps, compilerOptions } = { ...options }
     const files = await glob(src || '**/!(_)*.styl', {
       ignore: ignore ?? [],
       cwd: context.src,
@@ -25,7 +26,7 @@ export default (options) => {
 
         const style = stylus(fileContent.toString(), {
           // TODO: the option is not recognized
-          sourcemap: sourcemaps,
+          // sourcemap: sourcemaps,
           ...compilerOptions,
           filename: path.resolve(filePath),
         })
@@ -44,5 +45,5 @@ export default (options) => {
         })
       })
     )
-  }
-}
+  },
+})

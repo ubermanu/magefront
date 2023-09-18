@@ -9,10 +9,12 @@ import typescript from 'typescript'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, compilerOptions } = { ...options }
+export default (options) => ({
+  name: 'typescript',
 
-  return async (context) => {
+  async build(context) {
+    const { src, ignore, compilerOptions } = { ...options }
+
     const files = await glob(src ?? '**/*.ts', {
       ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
       cwd: context.src,
@@ -27,5 +29,5 @@ export default (options) => {
         return fs.writeFile(filePath.replace(/\.ts$/, '.js'), output)
       })
     )
-  }
-}
+  },
+})

@@ -7,8 +7,10 @@ import path from 'node:path'
  *
  * @returns {import('magefront').Plugin}
  */
-export default () => {
-  return async (context) => {
+export default () => ({
+  name: 'requirejs-config',
+
+  async build(context) {
     /** @type {string[]} */
     const files = []
     const { themeList, themeDependencyTree } = context
@@ -53,5 +55,5 @@ export default () => {
     // Output the final requirejs-config.js file, so it can be deployed
     const file = path.join(context.src, 'requirejs-config.js')
     await fs.promises.writeFile(file, `(function(require){\n${packed.join('')}})(require);`)
-  }
-}
+  },
+})

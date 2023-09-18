@@ -9,10 +9,12 @@ import postcss from 'postcss'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, plugins } = { ...options }
+export default (options) => ({
+  name: 'postcss',
 
-  return async (context) => {
+  async build(context) {
+    const { src, ignore, plugins } = { ...options }
+
     const files = await glob(src ?? '**/!(_)*.css', {
       ignore: ignore ?? [],
       cwd: context.src,
@@ -37,5 +39,5 @@ export default (options) => {
         return fs.writeFile(filePath, result.css)
       })
     )
-  }
-}
+  },
+})

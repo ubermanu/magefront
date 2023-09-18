@@ -40,7 +40,10 @@ declare namespace magefront {
     logger: import('winston').Logger
   }
 
-  export type Plugin = (context: PluginContext) => Promise<void>
+  export interface Plugin {
+    name: string
+    build(context: PluginContext): Promise<void>
+  }
 
   // The preset configuration object. Contains already defined plugins (because we cannot resolve them at the module level).
   export type Preset = {

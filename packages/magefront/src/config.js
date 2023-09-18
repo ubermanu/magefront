@@ -40,7 +40,7 @@ export const getBuildConfig = memo(async (opts, context) => {
 
   // Add the preset plugins to the plugin list
   if (Array.isArray(all_presets) && all_presets.length > 0) {
-    const presets = await Promise.all(all_presets.map(transformPresetDefinition))
+    const presets = await Promise.all(/** @type {import('types').Preset[]} */ all_presets.map(transformPresetDefinition))
     presets.forEach((preset) => {
       if (Array.isArray(preset.plugins)) {
         preset.plugins.forEach((plugin) => all_plugins.push(plugin))
@@ -55,7 +55,7 @@ export const getBuildConfig = memo(async (opts, context) => {
 
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
-  const plugins = await Promise.all(all_plugins.map(transformPluginDefinition))
+  const plugins = await Promise.all(/** @type {import('types').Plugin[]} */ all_plugins.map(transformPluginDefinition))
 
   return { tmp, dest, plugins }
 })
@@ -63,11 +63,13 @@ export const getBuildConfig = memo(async (opts, context) => {
 /**
  * Transform the plugin to a function if it is not already. If passed a string, import the plugin and return the default export.
  *
- * @param {any} definition
+ * @param {unknown} definition
  * @returns {Promise<import('types').Plugin>}
  */
 async function transformPluginDefinition(definition) {
-  if (typeof definition === 'function') {
+  // TODO: Validate the plugin definition
+  if (typeof definition === 'object' && definition !== null) {
+    // @ts-ignore
     return definition
   }
 
@@ -101,7 +103,7 @@ function resolveModuleNameFromPluginStr(str) {
 /**
  * Transform the preset to a function if it is not already. If passed a string, import the preset and return the default export.
  *
- * @param {any} definition
+ * @param {unknown} definition
  * @returns {Promise<import('types').Preset>}
  */
 async function transformPresetDefinition(definition) {
@@ -116,7 +118,7 @@ async function transformPresetDefinition(definition) {
     return presetModule(options)
   }
 
-  if (typeof definition === 'object') {
+  if (typeof definition === 'object' && definition !== null) {
     return definition
   }
 

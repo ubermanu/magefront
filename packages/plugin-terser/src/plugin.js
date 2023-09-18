@@ -9,10 +9,12 @@ import { minify } from 'terser'
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
  */
-export default (options) => {
-  const { src, ignore, terserOptions } = { ...options }
+export default (options) => ({
+  name: 'terser',
 
-  return async (context) => {
+  async build(context) {
+    const { src, ignore, terserOptions } = { ...options }
+
     const files = await glob(src ?? '**/*.js', { ignore, cwd: context.src })
 
     await Promise.all(
@@ -25,5 +27,5 @@ export default (options) => {
         }
       })
     )
-  }
-}
+  },
+})
