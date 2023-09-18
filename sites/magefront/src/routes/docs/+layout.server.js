@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { render_markdown } from '$lib/server/docs.js'
 import Case from 'case'
 

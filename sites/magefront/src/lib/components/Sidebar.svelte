@@ -2,10 +2,9 @@
   import { page } from '$app/stores'
   import List from './Sidebar/List.svelte'
 
-  /** @type {SidebarItem[]} */
-  $: sidebar = $page.data.sidebar ?? []
+  $: sidebar = $page.data.sidebar
 </script>
 
 <div class="px-2 text-neutral-300">
-  <List items={sidebar.children} />
+  <List items={sidebar?.children ?? []} />
 </div>

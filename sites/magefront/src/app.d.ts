@@ -7,7 +7,7 @@ declare global {
       docs: Array<{ slug: string; content: string }>
     }
     interface PageData {
-      sidebar?: SidebarItem[]
+      sidebar?: { children: SidebarItem[] }
     }
     // interface Platform {}
   }

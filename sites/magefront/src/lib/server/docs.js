@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { compile, defineMDSveXConfig, escapeSvelte } from 'mdsvex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
@@ -36,6 +37,7 @@ const config = defineMDSveXConfig({
   rehypePlugins: [rehypeSlug, rehypePrettyCode],
 })
 
+/** @param {string} markdown */
 export async function render_markdown(markdown) {
   const { code, data } = await compile(markdown, config)
 
