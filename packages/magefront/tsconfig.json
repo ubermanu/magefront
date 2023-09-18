@@ -5,5 +5,5 @@
       "types": ["./types/magefront.d.ts"]
     }
   },
-  "include": ["src/**/*", "types/magefront.d.ts", "tests/**/*"],
+  "include": ["src/**/*", "types/magefront.d.ts", "tests/**/*"]
 }
