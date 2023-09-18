@@ -15,7 +15,7 @@
           <span class="inline-block px-0.5 py-1">{item.title}</span>
         {/if}
         {#if item?.children}
-          <svelte:self items={item.children} class="ml-5 list-inside list-disc space-y-0" />
+          <svelte:self items={item.children} class="ml-5 list-inside list-disc space-y-0 marker:text-neutral-600" />
         {/if}
       </li>
     {/each}
