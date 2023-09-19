@@ -1,6 +1,3 @@
-import glob from 'fast-glob'
-import k from 'kleur'
-import path from 'node:path'
 import process from 'node:process'
 import sade from 'sade'
 import winston from 'winston'
@@ -9,115 +6,113 @@ import { browserSync } from './actions/browser-sync.js'
 import { createActionContext } from './actions/context.js'
 import { list } from './actions/list.js'
 import { watch } from './actions/watch.js'
-import { loadConfigFile } from './config/file.js'
+import { generateEntries } from './cli/entries.js'
 import { createLogger } from './logger.js'
 import { magefront } from './magefront.js'
 import { createMagentoContext } from './magento/context.js'
 
-const program = sade('magefront', true)
+// Set up the logger instance to go through console
+const logger = createLogger()
+logger.add(new winston.transports.Console({ silent: false }))
+
+// The root path of the project
+const rootPath = process.cwd()
+
+// The CLI program
+const program = sade('magefront')
 
 program
   .version(pkg.version)
-  .option('-t, --theme <theme>', 'Theme identifier')
+  .option('-t, --theme <theme>', 'Theme identifier (e.g. Magento/blank)')
   .option('-c, --config <config>', 'Path to the configuration file')
-  .option(
-    '-w, --watch',
-    'Watch the source files of a theme, and rebuild on change',
-    false
-  )
-  .option('-d, --dev <url>', 'Run a browser-sync proxy instance')
-  .option('--list', 'List all available themes')
-
-program.example('-t Magento/blank')
-program.example('-t Magento/blank -c -w')
-program.example('-t Magento/blank -c --dev https://magento.ddev.site')
 
 /**
- * @param {Record<string, any>} opts
- * @returns {import('types').MagefrontOptions}
+ * The build command, gather all the theme files and build the theme into the
+ * `pub/static` directory.
+ *
+ * @example
+ *   magefront build -t Magento/blank
+ *   magefront build -t Magento/blank -c
+ *   magefront build -t Magento/blank -c -w
  */
-function transformCommandOptions(opts) {
-  const { theme, _: locales } = opts
+program
+  .command('build', 'Build a theme', { default: true })
+  .option('-w, --watch', 'Watch the source files, and rebuild on change')
+  .example('build -t Magento/blank')
+  .example('build -t Magento/blank -c -w')
+  .action(async (opts) => {
+    const { theme, watch: watch_mode } = opts
 
-  // Use the default `en_US` locale if none is provided
-  // TODO: Add support for multiple locales (when building)
-  const locale = locales[0] || 'en_US'
-
-  return {
-    theme,
-    locale,
-  }
-}
-
-program.action(async (opts) => {
-  let cli_options = transformCommandOptions(opts)
-  const magento = createMagentoContext(cli_options)
-
-  // Set up the logger instance to go through console
-  const logger = createLogger()
-  logger.add(new winston.transports.Console({ silent: false }))
-
-  if (opts.list) {
-    list(magento)
-    return
-  }
-
-  const { theme, watch: watch_mode, dev: dev_mode, config } = opts
-
-  if (!theme) {
-    logger.error('You must provide a theme name.')
-    return
-  }
-
-  if (dev_mode && dev_mode.length === 0) {
-    logger.error('The dev mode requires a URL to proxy.')
-    return
-  }
-
-  if (config) {
-    const filename =
-      typeof config === 'string' && config.length > 0
-        ? config
-        : 'magefront.config.{js,mjs,cjs}'
-
-    const files = await glob(filename, {
-      onlyFiles: true,
-      cwd: magento.rootPath,
-    })
-
-    if (files.length === 0) {
-      logger.error(`Configuration file not found: ${filename}`)
+    if ((Array.isArray(theme) || !theme) && watch_mode) {
+      logger.error('You must provide only one theme name in watch mode.')
       process.exit(1)
     }
 
-    const config_path = path.join(magento.rootPath, files[0])
-    logger.info(`Loading configuration file: ${k.bold(files[0])}...`)
+    const entries = await generateEntries(opts, rootPath, logger)
 
-    try {
-      const theme_config = await loadConfigFile(config_path, theme)
-      cli_options = Object.assign(cli_options, theme_config)
-    } catch (error) {
-      logger.error(error)
+    // Build the themes
+    for (const entry of entries) {
+      await magefront(entry, logger)
+    }
+
+    if (watch_mode) {
+      const actionContext = await createActionContext(entries[0], logger)
+      await watch(actionContext)
+    }
+  })
+
+/**
+ * The list command, renders a table of available themes.
+ *
+ * @example
+ *   magefront list
+ *   magefront ls
+ */
+program
+  .command('list', 'List all available themes', { alias: 'ls' })
+  .action(async (opts) => {
+    list(createMagentoContext(opts))
+  })
+
+/**
+ * The dev command, starts a browser-sync proxy instance + watcher.
+ *
+ * @example
+ *   magefront dev -t Magento/blank --url https://magento.ddev.site
+ */
+program
+  .command('dev', 'Run a browser-sync proxy instance')
+  .option('-u, --url <url>', 'URL to proxy')
+  .example('dev -t Magento/blank --url https://magento.ddev.site')
+  .action(async (opts) => {
+    const { url, theme, _: locales } = opts
+
+    if (!theme) {
+      logger.error('You must provide a theme name.')
       process.exit(1)
     }
-  }
 
-  try {
-    await magefront(cli_options, logger)
-  } catch (error) {
-    logger.error(error)
-    process.exit(1)
-  }
+    if (Array.isArray(theme)) {
+      logger.error('You must provide only one theme name.')
+      process.exit(1)
+    }
 
-  if (dev_mode) {
+    if (Array.isArray(locales)) {
+      logger.error('You must provide only one locale.')
+      process.exit(1)
+    }
+
+    if (!url) {
+      logger.error('You must provide a URL to proxy.')
+      process.exit(1)
+    }
+
     logger.info('Starting browser-sync proxy...')
-    await browserSync(dev_mode)
-  }
+    await browserSync(url)
 
-  if (dev_mode || watch_mode) {
-    const context = await createActionContext(cli_options, logger)
+    const entries = await generateEntries(opts, rootPath, logger)
+    const context = await createActionContext(entries[0], logger)
     await watch(context)
-  }
-})
+  })
 
 program.parse(process.argv)

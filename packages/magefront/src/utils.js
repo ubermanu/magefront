@@ -12,4 +12,5 @@ export const isArray = (value) => Array.isArray(value)
  * @param {any} value
  * @returns {value is Record<string, any>}
  */
-export const isObject = (value) => typeof value === 'object' && value !== null
+export const isObject = (value) =>
+  typeof value === 'object' && value !== null && !isArray(value)
