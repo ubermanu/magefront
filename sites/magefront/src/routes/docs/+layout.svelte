@@ -9,7 +9,11 @@
 </script>
 
 <Header container={false}>
-  <button slot="before-logo" on:click={() => ($menu = !$menu)} class="lg:hidden">
+  <button
+    slot="before-logo"
+    on:click={() => ($menu = !$menu)}
+    class="lg:hidden"
+  >
     <Menu class="h-6 w-6" />
   </button>
 </Header>
@@ -26,7 +30,10 @@
     class:translate-x-0={$menu}
     inert={!$menu}
   >
-    <button class="absolute right-4 top-4 p-4 text-white" on:click={() => ($menu = false)}>
+    <button
+      class="absolute right-4 top-4 p-4 text-white max-sm:right-3 max-sm:top-3"
+      on:click={() => ($menu = false)}
+    >
       <X class="h-6 w-6" />
     </button>
     <Logo class="mb-4 ml-4 mt-0" />
