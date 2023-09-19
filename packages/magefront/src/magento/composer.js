@@ -28,5 +28,7 @@ export const getPackages = memo((rootPath) => {
  */
 // FIXME: At one point this could be any file, not just `registration.php`.
 export function getRegistrations(pkg) {
-  return (pkg?.autoload?.files ?? []).filter((file) => file.endsWith('registration.php'))
+  return (pkg?.autoload?.files ?? []).filter((file) =>
+    file.endsWith('registration.php')
+  )
 }

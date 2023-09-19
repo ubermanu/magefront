@@ -24,7 +24,10 @@ export default (options) => ({
       files.map(async (file) => {
         const filePath = path.join(context.src, file)
         const fileContent = await fs.readFile(filePath)
-        const output = typescript.transpile(fileContent.toString(), compilerOptions ?? {})
+        const output = typescript.transpile(
+          fileContent.toString(),
+          compilerOptions ?? {}
+        )
 
         return fs.writeFile(filePath.replace(/\.ts$/, '.js'), output)
       })

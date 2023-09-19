@@ -31,12 +31,18 @@ export default (options) => ({
 
     /**
      * @type {{
-     *   render: (input: string, options: Less.Options, callback: boolean | Function) => Promise<Less.RenderOutput>
+     *   render: (
+     *     input: string,
+     *     options: Less.Options,
+     *     callback: boolean | Function
+     *   ) => Promise<Less.RenderOutput>
      * }}
      */
     const _less = less
 
-    context.logger.debug(`Using Less v${less.version.toString().replace(/,/g, '.')}`)
+    context.logger.debug(
+      `Using Less v${less.version.toString().replace(/,/g, '.')}`
+    )
 
     await Promise.all(
       files.map(async (file) => {

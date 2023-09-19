@@ -13,11 +13,46 @@ test('Parses less files without any options', async () => {
     magento: { rootPath },
   })
 
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/styles-m.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/styles-l.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email-inline.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/print.css'))).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/styles-m.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/styles-l.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/email.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/email-inline.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/print.css'
+      )
+    )
+  ).toBe(true)
 }, 10000)
 
 test('Parses less files with sourcemaps', async () => {
@@ -27,14 +62,84 @@ test('Parses less files with sourcemaps', async () => {
     magento: { rootPath },
   })
 
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/styles-m.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/styles-m.css.map'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/styles-l.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/styles-l.css.map'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email.css.map'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email-inline.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/email-inline.css.map'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/print.css'))).toBe(true)
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/css/print.css.map'))).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/styles-m.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/styles-m.css.map'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/styles-l.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/styles-l.css.map'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/email.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/email.css.map'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/email-inline.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/email-inline.css.map'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/print.css'
+      )
+    )
+  ).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/css/print.css.map'
+      )
+    )
+  ).toBe(true)
 }, 10000)

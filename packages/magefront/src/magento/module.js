@@ -5,16 +5,21 @@ import path from 'node:path'
 import { getRegistrations } from './composer.js'
 
 /**
- * Read the `config.php` file and return the modules list. Resolve the modules paths from `app/code` then from the `vendor` directory.
+ * Read the `config.php` file and return the modules list. Resolve the modules
+ * paths from `app/code` then from the `vendor` directory.
  *
- * @type {(context: import('types').MagentoContext) => import('types').MagentoModule[]}
+ * @type {(
+ *   context: import('types').MagentoContext
+ * ) => import('types').MagentoModule[]}
  */
 export const getModules = memo((context) => {
   const { rootPath } = context
 
   /** @type {{ [name: string]: import('types').MagentoModule }} */
   const list = {}
-  const config = fs.readFileSync(path.join(rootPath, '/app/etc/config.php')).toString()
+  const config = fs
+    .readFileSync(path.join(rootPath, '/app/etc/config.php'))
+    .toString()
 
   if (!config) {
     // FIXME: logger.error('No config.php file found.')
@@ -56,12 +61,16 @@ export const getModules = memo((context) => {
 
   // 3. Get the list of modules in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = context.packages.filter((pkg) => pkg.type === 'magento2-module')
+  const packages = context.packages.filter(
+    (pkg) => pkg.type === 'magento2-module'
+  )
 
   packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
-      const name = fetchNameFromModuleXml(path.join(rootPath, src, 'etc/module.xml'))
+      const name = fetchNameFromModuleXml(
+        path.join(rootPath, src, 'etc/module.xml')
+      )
 
       if (!list[name]) {
         // FIXME: logger.warn(`Module "${name}" not found in config.php`)

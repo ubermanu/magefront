@@ -12,5 +12,7 @@ if (!magentoPath) {
 }
 
 if (!fs.existsSync(magentoPath)) {
-  throw new Error(`MAGEFRONT_TEST_MAGENTO_ROOT env variable points to a non-existing directory: ${magentoPath}`)
+  throw new Error(
+    `MAGEFRONT_TEST_MAGENTO_ROOT env variable points to a non-existing directory: ${magentoPath}`
+  )
 }

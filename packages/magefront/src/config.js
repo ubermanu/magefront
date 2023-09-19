@@ -1,11 +1,16 @@
+import Joi from 'joi'
 import memo from 'memoizee'
 import path from 'node:path'
 import { getThemes } from './magento/theme.js'
+import * as u from './utils.js'
 
 /**
  * Get the build configuration for the given options.
  *
- * @type {(opts: import('types').MagefrontOptions, context: import('types').MagentoContext) => Promise<import('types').BuildConfig>}
+ * @type {(
+ *   opts: import('types').MagefrontOptions,
+ *   context: import('types').MagentoContext
+ * ) => Promise<import('types').BuildConfig>}
  */
 export const getBuildConfig = memo(async (opts, context) => {
   const { rootPath, tempPath } = context
@@ -40,7 +45,11 @@ export const getBuildConfig = memo(async (opts, context) => {
 
   // Add the preset plugins to the plugin list
   if (Array.isArray(all_presets) && all_presets.length > 0) {
-    const presets = await Promise.all(/** @type {import('types').Preset[]} */ all_presets.map(transformPresetDefinition))
+    const presets = await Promise.all(
+      /** @type {import('types').Preset[]} */ all_presets.map(
+        transformPresetDefinition
+      )
+    )
     presets.forEach((preset) => {
       if (Array.isArray(preset.plugins)) {
         preset.plugins.forEach((plugin) => all_plugins.push(plugin))
@@ -55,84 +64,97 @@ export const getBuildConfig = memo(async (opts, context) => {
 
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
-  const plugins = await Promise.all(/** @type {import('types').Plugin[]} */ all_plugins.map(transformPluginDefinition))
+  const plugins = await Promise.all(
+    /** @type {import('types').Plugin[]} */ all_plugins.map(
+      transformPluginDefinition
+    )
+  )
 
   return { tmp, dest, plugins }
 })
 
+const pluginSchema = Joi.alternatives().try(
+  Joi.string(),
+  Joi.object({
+    name: Joi.string().required(),
+    build: Joi.func().required(),
+  }),
+  Joi.array().items(Joi.string(), Joi.any())
+)
+
 /**
- * Transform the plugin to a function if it is not already. If passed a string, import the plugin and return the default export.
+ * Transform the plugin to a function if it is not already. If passed a string,
+ * import the plugin and return the default export.
  *
- * @param {unknown} definition
+ * @param {any} definition
  * @returns {Promise<import('types').Plugin>}
  */
 async function transformPluginDefinition(definition) {
-  // TODO: Validate the plugin definition
-  if (typeof definition === 'object' && definition !== null) {
-    return definition
+  const { error } = pluginSchema.validate(definition)
+
+  if (error) {
+    throw error
   }
 
   if (typeof definition === 'string') {
-    const { default: pluginModule } = await import(resolveModuleNameFromPluginStr(definition))
-    return pluginModule()
+    const mod = await import(definition)
+    return mod.default?.()
   }
 
-  if (Array.isArray(definition)) {
+  if (u.isArray(definition)) {
     const [pluginName, options] = definition
-    const { default: pluginModule } = await import(resolveModuleNameFromPluginStr(pluginName))
-    return pluginModule(options)
+    const mod = await import(pluginName)
+    return mod.default?.(options)
+  }
+
+  if (u.isObject(definition)) {
+    return {
+      name: definition.name,
+      build: definition.build,
+    }
   }
 
   throw new Error(`Invalid plugin type: ${typeof definition}`)
 }
 
-/**
- * Return the full module name from the given plugin string.
- *
- * @param {string} str
- * @returns {string}
- */
-function resolveModuleNameFromPluginStr(str) {
-  if (str.startsWith('magefront-plugin-')) {
-    return str
-  }
-  return `magefront-plugin-${str}`
-}
+const presetSchema = Joi.alternatives().try(
+  Joi.string(),
+  Joi.object({
+    plugins: Joi.array().items(pluginSchema).required(),
+  }),
+  Joi.array().items(Joi.string(), Joi.any())
+)
 
 /**
- * Transform the preset to a function if it is not already. If passed a string, import the preset and return the default export.
+ * Transform the preset to a function if it is not already. If passed a string,
+ * import the preset and return the default export.
  *
  * @param {unknown} definition
  * @returns {Promise<import('types').Preset>}
  */
 async function transformPresetDefinition(definition) {
+  const { error } = presetSchema.validate(definition)
+
+  if (error) {
+    throw error
+  }
+
   if (typeof definition === 'string') {
-    const { default: presetModule } = await import(resolveModuleNameFromPresetStr(definition))
-    return presetModule()
+    const mod = await import(definition)
+    return mod.default?.()
   }
 
-  if (Array.isArray(definition)) {
+  if (u.isArray(definition)) {
     const [presetName, options] = definition
-    const { default: presetModule } = await import(resolveModuleNameFromPresetStr(presetName))
-    return presetModule(options)
+    const mod = await import(presetName)
+    return mod.default?.(options)
   }
 
-  if (typeof definition === 'object' && definition !== null) {
-    return definition
+  if (u.isObject(definition)) {
+    return {
+      plugins: definition.plugins ?? [],
+    }
   }
 
-  throw new Error(`Invalid plugin type: ${typeof definition}`)
-}
-
-/**
- * Return the full module name from the given preset string.
- *
- * @param {string} str
- * @returns {string}
- */
-function resolveModuleNameFromPresetStr(str) {
-  if (str.startsWith('magefront-preset-')) {
-    return str
-  }
-  return `magefront-preset-${str}`
+  throw new Error(`Invalid preset type: ${typeof definition}`)
 }

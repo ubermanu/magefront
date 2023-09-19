@@ -7,12 +7,20 @@ import { getRegistrations } from './composer.js'
 /**
  * Crawl the Magento project source code and return a list of all the themes.
  *
- * @type {(context: import('types').MagentoContext) => import('types').MagentoTheme[]}
+ * @type {(
+ *   context: import('types').MagentoContext
+ * ) => import('types').MagentoTheme[]}
  */
 export const getThemes = memo((context) => {
   const { rootPath } = context
 
-  /** @type {{ [name: string]: Omit<import('types').MagentoTheme, 'parent'> & { parent: string | null } }} */
+  /**
+   * @type {{
+   *   [name: string]: Omit<import('types').MagentoTheme, 'parent'> & {
+   *     parent: string | null
+   *   }
+   * }}
+   */
   const list = {}
 
   // 1. Get the list of themes from the `app/design/` directory.
@@ -37,12 +45,16 @@ export const getThemes = memo((context) => {
   // 2. Get the themes from the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
   /** @type {import('types').ComposerPackage[]} */
-  const packages = context.packages.filter((pkg) => pkg.type === 'magento2-theme')
+  const packages = context.packages.filter(
+    (pkg) => pkg.type === 'magento2-theme'
+  )
 
   packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
-      const { name, area } = getThemeNameAndAreaFromRegistrationPhp(path.join(rootPath, src, 'registration.php'))
+      const { name, area } = getThemeNameAndAreaFromRegistrationPhp(
+        path.join(rootPath, src, 'registration.php')
+      )
 
       list[name] = {
         name,
@@ -85,16 +97,19 @@ function getParentFromThemeXml(file) {
  */
 function getThemeNameAndAreaFromRegistrationPhp(file) {
   const registration = fs.readFileSync(file).toString()
-  const [, area, name] = registration.match(/'(frontend|adminhtml)\/([\w/]+)'/) ?? []
+  const [, area, name] =
+    registration.match(/'(frontend|adminhtml)\/([\w/]+)'/) ?? []
   return { name, area }
 }
 
 /**
- * Get the theme dependency tree with the upmost parent first. Also contains the theme itself!
+ * Get the theme dependency tree with the upmost parent first. Also contains the
+ * theme itself!
  *
  * Example:
  *
- * If your theme extends `Magento/luma` which extends `Magento/blank`, the tree will be:
+ * If your theme extends `Magento/luma` which extends `Magento/blank`, the tree
+ * will be:
  *
  * - Magento/blank
  * - Magento/luma

@@ -26,7 +26,10 @@ export default (options) => ({
         const fileContent = await fs.promises.readFile(filePath)
         const output = compile(fileContent.toString(), compilerOptions ?? {})
 
-        return fs.promises.writeFile(filePath.replace(/\.svelte$/, '.js'), output.js.code)
+        return fs.promises.writeFile(
+          filePath.replace(/\.svelte$/, '.js'),
+          output.js.code
+        )
       })
     )
   },

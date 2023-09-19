@@ -6,7 +6,8 @@ import { compileAsync } from 'sass'
 /**
  * Compile SCSS files to CSS.
  *
- * Note: This plugin is not compatible with node-sass because it has been deprecated.
+ * Note: This plugin is not compatible with node-sass because it has been
+ * deprecated.
  *
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Plugin}
@@ -32,7 +33,11 @@ export default (options) => ({
 
         // TODO: The map is always null?
         if (sourcemaps && output.sourceMap) {
-          await fs.writeFile(`${cssFilePath}.map`, JSON.stringify(output.sourceMap), 'utf8')
+          await fs.writeFile(
+            `${cssFilePath}.map`,
+            JSON.stringify(output.sourceMap),
+            'utf8'
+          )
         }
       })
     )

@@ -1,3 +1,4 @@
+import { resolveConfig } from '../src/config/file.js'
 import { testActionContext } from './helpers.js'
 
 test('Empty configuration returns the default plugins', async () => {
@@ -19,4 +20,33 @@ test('If plugins is defined, the default ones are skipped', async () => {
     plugins: [],
   })
   expect(context.buildConfig.plugins).toHaveLength(0)
+})
+
+test('Load an empty configuration', async () => {
+  expect(await resolveConfig({}, 'Magento/blank')).toMatchObject({
+    theme: 'Magento/blank',
+  })
+})
+
+test('Load a theme configuration as object or array', async () => {
+  expect(
+    await resolveConfig({ theme: 'Magento/blank' }, 'Magento/blank')
+  ).toMatchObject({
+    theme: 'Magento/blank',
+  })
+
+  expect(
+    await resolveConfig([{ theme: 'Magento/blank' }], 'Magento/blank')
+  ).toMatchObject({
+    theme: 'Magento/blank',
+  })
+
+  expect(
+    await resolveConfig(
+      [{ theme: 'Magento/blank' }, { theme: 'Magento/luma' }],
+      'Magento/luma'
+    )
+  ).toMatchObject({
+    theme: 'Magento/luma',
+  })
 })

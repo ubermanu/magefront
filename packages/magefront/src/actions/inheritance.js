@@ -4,7 +4,8 @@ import path from 'node:path'
 import { getThemeDependencyTree } from '../magento/theme.js'
 
 /**
- * Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards.
+ * Gather all the theme files and copy them to the temporary directory. When
+ * this is done, the `build` task should be run afterwards.
  *
  * @type {import('types').Action}
  */
@@ -40,7 +41,11 @@ export const inheritance = async (context) => {
 
   // Add the Magento core lib resources as a dependency for everyone
   // Ignore the css docs and txt files
-  await generateCopies(path.join('lib', 'web'), tmp, ['css/docs', '**/*.txt', 'i18n'])
+  await generateCopies(path.join('lib', 'web'), tmp, [
+    'css/docs',
+    '**/*.txt',
+    'i18n',
+  ])
 
   // For each enabled modules, copy the web resources into the theme temp dir
   const modules = context.magento.modules.filter((m) => m.enabled && m.src)
@@ -49,8 +54,16 @@ export const inheritance = async (context) => {
   await Promise.all(
     modules.map(async (m) => {
       // Resolve the "base" area as well (common to frontend and adminhtml)
-      await generateCopies(path.join(m.src, 'view', 'base', 'web'), path.join(tmp, m.name), ignore)
-      await generateCopies(path.join(m.src, 'view', context.theme.area, 'web'), path.join(tmp, m.name), ignore)
+      await generateCopies(
+        path.join(m.src, 'view', 'base', 'web'),
+        path.join(tmp, m.name),
+        ignore
+      )
+      await generateCopies(
+        path.join(m.src, 'view', context.theme.area, 'web'),
+        path.join(tmp, m.name),
+        ignore
+      )
     })
   )
 
@@ -63,7 +76,11 @@ export const inheritance = async (context) => {
     // Add the submodule source files (ex: `Magento_Catalog/web`)
     await Promise.all(
       modules.map((m) => {
-        return generateCopies(path.join(theme.src, m.name, 'web'), path.join(tmp, m.name), ignore)
+        return generateCopies(
+          path.join(theme.src, m.name, 'web'),
+          path.join(tmp, m.name),
+          ignore
+        )
       })
     )
   }

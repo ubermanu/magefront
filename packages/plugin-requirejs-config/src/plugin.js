@@ -14,16 +14,30 @@ export default () => ({
     /** @type {string[]} */
     const files = []
     const { themeList, themeDependencyTree } = context
-    const moduleList = context.moduleList.filter((mod) => mod.enabled && mod.src)
+    const moduleList = context.moduleList.filter(
+      (mod) => mod.enabled && mod.src
+    )
 
     // Get the `requirejs-config.js` files from the modules
     // FIXME: Check for the module dependency tree (to get the correct order)
     moduleList.forEach((mod) => {
-      const baseFilePath = path.join(context.cwd, mod.src, 'view', 'base', 'requirejs-config.js')
+      const baseFilePath = path.join(
+        context.cwd,
+        mod.src,
+        'view',
+        'base',
+        'requirejs-config.js'
+      )
       if (fs.existsSync(baseFilePath)) {
         files.push(baseFilePath)
       }
-      const filePath = path.join(context.cwd, mod.src, 'view', 'frontend', 'requirejs-config.js')
+      const filePath = path.join(
+        context.cwd,
+        mod.src,
+        'view',
+        'frontend',
+        'requirejs-config.js'
+      )
       if (fs.existsSync(filePath)) {
         files.push(filePath)
       }
@@ -31,14 +45,19 @@ export default () => ({
 
     // Get the `requirejs-config.js` files from the theme (and its parents)
     for (const dependencyName of themeDependencyTree) {
-      const themeDependency = themeList.find((theme) => theme.name === dependencyName)
+      const themeDependency = themeList.find(
+        (theme) => theme.name === dependencyName
+      )
 
       if (!themeDependency) {
         throw new Error(`Theme "${dependencyName}" not found.`)
       }
 
       const cwd = path.join(context.cwd, themeDependency.src)
-      const themeFiles = await glob(['[A-Z]*_[A-Z]*/requirejs-config.js', 'requirejs-config.js'], { cwd })
+      const themeFiles = await glob(
+        ['[A-Z]*_[A-Z]*/requirejs-config.js', 'requirejs-config.js'],
+        { cwd }
+      )
 
       themeFiles.forEach((file) => {
         files.push(path.join(cwd, file))
@@ -54,6 +73,9 @@ export default () => ({
 
     // Output the final requirejs-config.js file, so it can be deployed
     const file = path.join(context.src, 'requirejs-config.js')
-    await fs.promises.writeFile(file, `(function(require){\n${packed.join('')}})(require);`)
+    await fs.promises.writeFile(
+      file,
+      `(function(require){\n${packed.join('')}})(require);`
+    )
   },
 })

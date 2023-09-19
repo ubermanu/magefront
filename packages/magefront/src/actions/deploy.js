@@ -3,7 +3,8 @@ import fs from 'fs-extra'
 import path from 'node:path'
 
 /**
- * Deploy the built theme files from the temp directory to the `pub/static` dir. This is the third step in the build process.
+ * Deploy the built theme files from the temp directory to the `pub/static` dir.
+ * This is the third step in the build process.
  *
  * @type {import('types').Action}
  */
@@ -33,7 +34,9 @@ export const deploy = async (context) => {
 
   await Promise.all(
     files.map(async (file) => {
-      const filePath = await fs.promises.realpath(path.join(buildConfig.tmp, file))
+      const filePath = await fs.promises.realpath(
+        path.join(buildConfig.tmp, file)
+      )
       const destPath = path.join(dest, file)
       return fs.copy(filePath, destPath)
     })
