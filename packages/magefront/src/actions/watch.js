@@ -2,10 +2,10 @@ import chokidar from 'chokidar'
 import path from 'node:path'
 import { performance } from 'node:perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
-import { instance } from './browser-sync'
-import { build } from './build'
-import { deploy } from './deploy'
-import { inheritance } from './inheritance'
+import { instance } from './browser-sync.js'
+import { build } from './build.js'
+import { deploy } from './deploy.js'
+import { inheritance } from './inheritance.js'
 
 /**
  * Watch the source files of a theme, and rebuild on change.

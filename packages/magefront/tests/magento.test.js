@@ -1,4 +1,4 @@
-import { testActionContext } from './helpers'
+import { testActionContext } from './helpers.js'
 
 test('Get all the modules from Magento source code', async () => {
   const context = await testActionContext()

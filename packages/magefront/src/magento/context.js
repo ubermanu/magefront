@@ -1,4 +1,4 @@
-import { getPackages } from './composer'
+import { getPackages } from './composer.js'
 
 /**
  * Create a Magento context.

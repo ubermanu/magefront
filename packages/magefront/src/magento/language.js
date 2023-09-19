@@ -1,7 +1,7 @@
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-import { getRegistrations } from './composer'
+import { getRegistrations } from './composer.js'
 
 /**
  * Get all the languages loaded from the `composer.lock` file.
@@ -23,6 +23,11 @@ export const getLanguages = memo((context) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
       const name = pkg.name
       const code = getCodeFromLanguageXml(path.join(rootPath, src, 'language.xml'))
+
+      if (!code) {
+        // TODO: logger.warn(`Language code not found in ${src}/language.xml`)
+        return
+      }
 
       list[name] = {
         name,

@@ -1,11 +1,11 @@
 import k from 'kleur'
 import { performance } from 'node:perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
-import { build } from './actions/build'
-import { clean } from './actions/clean'
-import { createActionContext } from './actions/context'
-import { deploy } from './actions/deploy'
-import { inheritance } from './actions/inheritance'
+import { build } from './actions/build.js'
+import { clean } from './actions/clean.js'
+import { createActionContext } from './actions/context.js'
+import { deploy } from './actions/deploy.js'
+import { inheritance } from './actions/inheritance.js'
 
 /**
  * Builds a Magento 2 theme.

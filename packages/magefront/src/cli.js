@@ -5,14 +5,14 @@ import process from 'node:process'
 import sade from 'sade'
 import winston from 'winston'
 import pkg from '../package.json'
-import { browserSync } from './actions/browser-sync'
-import { createActionContext } from './actions/context'
-import { list } from './actions/list'
-import { watch } from './actions/watch'
-import { createLogger } from './logger'
-import { magefront } from './magefront'
-import { createMagentoContext } from './magento/context'
-import * as u from './utils'
+import { browserSync } from './actions/browser-sync.js'
+import { createActionContext } from './actions/context.js'
+import { list } from './actions/list.js'
+import { watch } from './actions/watch.js'
+import { createLogger } from './logger.js'
+import { magefront } from './magefront.js'
+import { createMagentoContext } from './magento/context.js'
+import * as u from './utils.js'
 
 const program = sade('magefront', true)
 
@@ -71,7 +71,7 @@ program.action(async (opts) => {
   }
 
   if (config) {
-    const filename = config.length > 0 ? config : 'config.{js,mjs,cjs}'
+    const filename = config.length > 0 ? config : 'magefront.config.{js,mjs,cjs}'
     const files = await glob(filename, { onlyFiles: true, cwd: magento.rootPath })
 
     if (files.length === 0) {

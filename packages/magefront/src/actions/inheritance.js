@@ -1,7 +1,7 @@
 import glob from 'fast-glob'
 import fs from 'fs-extra'
 import path from 'node:path'
-import { getThemeDependencyTree } from '../magento/theme'
+import { getThemeDependencyTree } from '../magento/theme.js'
 
 /**
  * Gather all the theme files and copy them to the temporary directory. When this is done, the `build` task should be run afterwards.

@@ -1,6 +1,6 @@
 import memo from 'memoizee'
 import path from 'node:path'
-import { getThemes } from './magento/theme'
+import { getThemes } from './magento/theme.js'
 
 /**
  * Get the build configuration for the given options.
