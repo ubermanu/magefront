@@ -108,7 +108,10 @@ async function transformPluginDefinition(definition) {
   }
 
   if (u.isObject(definition)) {
-    return definition
+    return {
+      name: definition.name,
+      build: definition.build,
+    }
   }
 
   throw new Error(`Invalid plugin type: ${typeof definition}`)
@@ -148,7 +151,9 @@ async function transformPresetDefinition(definition) {
   }
 
   if (u.isObject(definition)) {
-    return definition
+    return {
+      plugins: definition.plugins ?? [],
+    }
   }
 
   throw new Error(`Invalid preset type: ${typeof definition}`)
