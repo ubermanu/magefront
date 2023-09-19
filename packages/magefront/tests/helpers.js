@@ -20,7 +20,7 @@ export async function testActionContext(opts) {
  * @returns {Promise<boolean>}
  */
 async function exists(path) {
-  return !!(await fs.stat(path).catch((_) => false))
+  return !!(await fs.stat(path).catch(() => false))
 }
 
 /**
