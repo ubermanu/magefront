@@ -11,7 +11,7 @@ Transforms Less files into CSS files.
 Install the plugin and its dependencies:
 
 ```shell
-npm i less@2 magefront-plugin-less --save-dev
+npm i less@3 magefront-plugin-less --save-dev
 ```
 
 > See the [compatibility](#compatibility) section for more info.
@@ -58,7 +58,7 @@ Options to pass to the **Less** compiler. See [less docs](http://lesscss.org/usa
 
 ## Compatibility
 
-The preferred **Less** version is `2.7.3`, so it can be compatible with the actual **Magento 2** themes, without any configuration.
+The preferred **Less** version is `3.x`, so it can be compatible with the actual **Magento 2** themes, without any configuration.
 
 If you need the latest **Less** features, you can install the latest version of the compiler and pass it to the plugin:
 

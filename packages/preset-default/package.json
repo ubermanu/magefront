@@ -30,7 +30,7 @@
   "dependencies": {
     "cssnano": "^6.0.1",
     "cssnano-preset-default": "^6.0.1",
-    "less": "2.7.3",
+    "less": "3.13.1",
     "magefront-plugin-js-translation": "workspace:^",
     "magefront-plugin-less": "workspace:^",
     "magefront-plugin-postcss": "workspace:^",

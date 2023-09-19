@@ -2,7 +2,7 @@
 
 Regroup a collection of plugins to build a Magento 2 theme.
 
-- less (v2.7.3)
+- less (v3.13.1)
 - requirejs-config
 - js-translation
 
