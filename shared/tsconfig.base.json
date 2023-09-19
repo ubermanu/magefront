@@ -2,15 +2,14 @@
   "compilerOptions": {
     "noEmit": true,
     "strict": true,
-    "target": "es2020",
-    "module": "nodenext",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "allowJs": true,
     "checkJs": true,
-    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
   "exclude": ["node_modules", "dist", "build", ".svelte-kit"]
