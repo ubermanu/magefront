@@ -2,11 +2,11 @@
   import '@fontsource-variable/roboto-slab'
   import '../app.pcss'
   import { menu } from '$lib/stores'
-  import { afterNavigate } from '$app/navigation'
+  import { page } from '$app/stores'
 
-  afterNavigate(() => {
-    menu.set(false)
-  })
+  $: if ($page.url) {
+    $menu = false
+  }
 </script>
 
 <svelte:head>
