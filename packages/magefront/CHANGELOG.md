@@ -1,5 +1,25 @@
 # magefront
 
+## 2.0.0
+
+### Major Changes
+
+- d81251b: Move codebase to JS (with JSDoc)
+- d8c4fe8: Update the CLI, so it can build multiple themes
+  Also configuration is now properly merged, even if you don't provide a theme
+  Updated the colors of the CLI
+
+### Minor Changes
+
+- ecfdec5: Implement a more extensible plugin format
+- 987b28b: Validate user configuration file
+
+### Patch Changes
+
+- Updated dependencies [d81251b]
+- Updated dependencies [c664d24]
+  - magefront-preset-default@2.0.0
+
 ## 1.2.2
 
 ### Patch Changes
