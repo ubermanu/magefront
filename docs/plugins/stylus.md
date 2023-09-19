@@ -8,8 +8,10 @@ Transforms STYL files into CSS files.
 
 ## Install
 
+Install the plugin and its dependencies:
+
 ```shell
-npm i magefront-plugin-stylus --save-dev
+npm i stylus magefront-plugin-stylus --save-dev
 ```
 
 ## Usage

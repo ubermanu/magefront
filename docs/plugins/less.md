@@ -8,9 +8,13 @@ Transforms Less files into CSS files.
 
 ## Install
 
+Install the plugin and its dependencies:
+
 ```shell
-npm i magefront-plugin-less --save-dev
+npm i less@2 magefront-plugin-less --save-dev
 ```
+
+> See the [compatibility](#compatibility) section for more info.
 
 ## Usage
 
@@ -36,18 +40,13 @@ The source files to minify. Default is `**/!(_)*.less`.
 
 A list of paths to ignore.
 
-### `compiler`
-
-The less compiler to use.<br>
-The default is set on **less:2.7** for [compatibility](#compatibility) with the legacy **Magento 2** themes.
-
 ### `sourcemaps`
 
 Enable sourcemaps. Default is `false`.
 
 ### `plugins`
 
-A list of plugins to use. See [less docs](http://lesscss.org/usage/#plugins) for more info.<br>
+A list of plugins to use. See [less docs](http://lesscss.org/usage/#plugins) for more info.
 
 ### `magentoImport`
 
@@ -55,23 +54,16 @@ Enable the [magento import](#magento-imports) feature. Default is `true`.
 
 ### `compilerOptions`
 
-Options to pass to the less compiler. See [less docs](http://lesscss.org/usage/#programmatic-usage) for more info.
+Options to pass to the **Less** compiler. See [less docs](http://lesscss.org/usage/#programmatic-usage) for more info.
 
 ## Compatibility
 
-The default LESS version is `2.7.3`, so it can be compatible with the actual **Magento 2** themes, without any configuration.
+The preferred **Less** version is `2.7.3`, so it can be compatible with the actual **Magento 2** themes, without any configuration.
 
-A `compiler` option is available if you need the latest LESS features:
+If you need the latest **Less** features, you can install the latest version of the compiler and pass it to the plugin:
 
-```js
-import less from 'magefront-plugin-less'
-import v4 from 'less'
-
-export default {
-    plugins: [
-        less({ compiler: v4 })
-    ]
-}
+```shell
+npm i less@latest --save-dev
 ```
 
 ## Magento imports
@@ -86,7 +78,7 @@ You can find this kind of imports into the `styles-m.less` file, for example:
 
 This will be transformed into:
 
-```css
+```less
 /* ... */
 @import '../Magento_AdvancedSearch/css/source/_module.less';
 @import '../Magento_Bundle/css/source/_module.less';

@@ -8,8 +8,10 @@ Transforms *.ts files into JS files.
 
 ## Install
 
+Install the plugin and its dependencies:
+
 ```shell
-npm i magefront-plugin-typescript --save-dev
+npm i typescript magefront-plugin-typescript --save-dev
 ```
 
 ## Usage
