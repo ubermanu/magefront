@@ -1,6 +1,7 @@
 import memo from 'memoizee'
 import path from 'node:path'
 import { getThemes } from './magento/theme.js'
+import * as u from './utils.js'
 
 /**
  * Get the build configuration for the given options.
@@ -79,11 +80,6 @@ export const getBuildConfig = memo(async (opts, context) => {
  * @returns {Promise<import('types').Plugin>}
  */
 async function transformPluginDefinition(definition) {
-  // TODO: Validate the plugin definition
-  if (typeof definition === 'object' && definition !== null) {
-    return definition
-  }
-
   if (typeof definition === 'string') {
     const { default: pluginModule } = await import(
       resolveModuleNameFromPluginStr(definition)
@@ -91,12 +87,17 @@ async function transformPluginDefinition(definition) {
     return pluginModule()
   }
 
-  if (Array.isArray(definition)) {
+  if (u.isArray(definition)) {
     const [pluginName, options] = definition
     const { default: pluginModule } = await import(
       resolveModuleNameFromPluginStr(pluginName)
     )
     return pluginModule(options)
+  }
+
+  // TODO: Validate the plugin definition
+  if (u.isObject(definition)) {
+    return definition
   }
 
   throw new Error(`Invalid plugin type: ${typeof definition}`)
@@ -130,7 +131,7 @@ async function transformPresetDefinition(definition) {
     return presetModule()
   }
 
-  if (Array.isArray(definition)) {
+  if (u.isArray(definition)) {
     const [presetName, options] = definition
     const { default: presetModule } = await import(
       resolveModuleNameFromPresetStr(presetName)
@@ -138,11 +139,12 @@ async function transformPresetDefinition(definition) {
     return presetModule(options)
   }
 
-  if (typeof definition === 'object' && definition !== null) {
+  // TODO: Validate the preset definition
+  if (u.isObject(definition)) {
     return definition
   }
 
-  throw new Error(`Invalid plugin type: ${typeof definition}`)
+  throw new Error(`Invalid preset type: ${typeof definition}`)
 }
 
 /**

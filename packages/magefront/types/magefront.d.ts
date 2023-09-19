@@ -78,7 +78,12 @@ declare namespace magefront {
     }
   }
 
-  // The configuration object or array that is read from the `magefront.config.js` file.
+  /**
+   * The configuration object or array that is read from the
+   * `magefront.config.js` file.
+   *
+   * The `theme` option is required when the config is an array.
+   */
   export type Config = Partial<MagefrontOptions> | MagefrontOptions[]
 
   type MaybePromise<T> = T | Promise<T>

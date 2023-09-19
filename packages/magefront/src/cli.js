@@ -9,10 +9,10 @@ import { browserSync } from './actions/browser-sync.js'
 import { createActionContext } from './actions/context.js'
 import { list } from './actions/list.js'
 import { watch } from './actions/watch.js'
+import { loadConfigFile } from './config/file.js'
 import { createLogger } from './logger.js'
 import { magefront } from './magefront.js'
 import { createMagentoContext } from './magento/context.js'
-import * as u from './utils.js'
 
 const program = sade('magefront', true)
 
@@ -76,7 +76,10 @@ program.action(async (opts) => {
 
   if (config) {
     const filename =
-      config.length > 0 ? config : 'magefront.config.{js,mjs,cjs}'
+      typeof config === 'string' && config.length > 0
+        ? config
+        : 'magefront.config.{js,mjs,cjs}'
+
     const files = await glob(filename, {
       onlyFiles: true,
       cwd: magento.rootPath,
@@ -91,44 +94,10 @@ program.action(async (opts) => {
     logger.info(`Loading configuration file: ${k.bold(files[0])}...`)
 
     try {
-      /**
-       * @type {{
-       *   default:
-       *     | import('types').MagefrontOptions
-       *     | import('types').MagefrontOptions[]
-       * }}
-       */
-      const mod = await import(config_path)
-
-      if (u.isArray(mod.default)) {
-        /** @type {import('types').MagefrontOptions | undefined} */
-        const item = mod.default.find((opts) => opts.theme === theme)
-
-        if (!item) {
-          logger.error(
-            `Theme '${theme}' not found in the configuration file: ${config_path}`
-          )
-          process.exit(1)
-        }
-
-        cli_options = Object.assign(cli_options, item)
-      } else if (u.isObject(mod.default)) {
-        if (theme !== mod.default.theme) {
-          logger.error(
-            `Theme '${theme}' not found in the configuration file: ${config_path}`
-          )
-          process.exit(1)
-        }
-
-        cli_options = Object.assign(cli_options, mod.default)
-      } else {
-        // TODO: Add configuration validation
-        logger.error(`Invalid configuration file: ${config_path}`)
-        process.exit(1)
-      }
-    } catch (e) {
-      logger.error(`Failed to load configuration file: ${config_path}`)
-      logger.error(e)
+      const theme_config = await loadConfigFile(config_path, theme)
+      cli_options = Object.assign(cli_options, theme_config)
+    } catch (error) {
+      logger.error(error)
       process.exit(1)
     }
   }
