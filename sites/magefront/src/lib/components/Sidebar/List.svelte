@@ -6,7 +6,7 @@
   export let items = []
 
   function is_current(slug) {
-    return $page.url.pathname === '/docs/' + slug
+    return $page.url.pathname === base + '/docs/' + slug
   }
 
   const { class: additionalClass } = $$restProps
