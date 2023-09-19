@@ -51,7 +51,7 @@ export async function loadConfigFile(filename, entries) {
     entries = entries.map((entry) => {
       const additionalEntry = config.find(
         (/** @type {import('types').MagefrontOptions} */ o) =>
-          o.theme === o.theme
+          o.theme === entry.theme
       )
       return additionalEntry ? { ...additionalEntry, ...entry } : entry
     })
