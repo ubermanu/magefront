@@ -16,6 +16,7 @@
     "lint": "eslint --ext .js,.ts packages/*",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
   },
+  "prettier": "@ubermanu/prettier-config",
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
     "@types/jest": "^29.5.5",

@@ -57,12 +57,12 @@ export const watch = async (context) => {
     .on('unlinkDir', rebuild)
     .on('change', async (filePath) => {
       await rebuild()
-      if (['.less', '.scss', '.styl', '.css', '.postcss', '.pcss'].includes(path.extname(filePath))) {
+      if (styleExtensions.includes(path.extname(filePath))) {
         if (instance) {
           instance.reload('*.css')
         }
       }
-      if (['.html', '.phtml', '.xml', '.csv', '.js'].some((ext) => path.extname(filePath) === ext)) {
+      if (staticExtensions.some((ext) => path.extname(filePath) === ext)) {
         if (instance) {
           instance.reload()
         }
@@ -73,3 +73,7 @@ export const watch = async (context) => {
     logger.info(`Watching source files...`)
   })
 }
+
+const styleExtensions = ['.less', '.scss', '.styl', '.css', '.postcss', '.pcss']
+
+const staticExtensions = ['.html', '.phtml', '.xml', '.csv', '.js']

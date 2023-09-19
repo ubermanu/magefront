@@ -42,7 +42,11 @@ export default (options) => {
       }
 
       // Write the merged file (after deleting the original files)
-      await fs.writeFile(path.join(context.src, dest), packed.join('\n'), 'utf8')
+      await fs.writeFile(
+        path.join(context.src, dest),
+        packed.join('\n'),
+        'utf8'
+      )
     },
   }
 }

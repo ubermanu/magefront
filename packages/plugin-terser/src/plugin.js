@@ -21,7 +21,10 @@ export default (options) => ({
       files.map(async (file) => {
         const filePath = path.join(context.src, file)
         const fileContent = await fs.readFile(filePath)
-        const { code } = await minify(fileContent.toString(), terserOptions || {})
+        const { code } = await minify(
+          fileContent.toString(),
+          terserOptions || {}
+        )
         if (code) {
           return fs.writeFile(filePath, code)
         }

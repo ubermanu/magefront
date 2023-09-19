@@ -15,7 +15,12 @@ export default () => {
   // Add image optimization plugins
   plugins.push(
     imagemin({
-      plugins: [imageminPngquant(), imageminJpegtran(), imageminGifsicle(), imageminSvgo()],
+      plugins: [
+        imageminPngquant(),
+        imageminJpegtran(),
+        imageminGifsicle(),
+        imageminSvgo(),
+      ],
     })
   )
 

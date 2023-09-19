@@ -26,7 +26,9 @@ export const build = async (context) => {
     moduleList: magento.modules,
     languageList: magento.languages,
     themeList: magento.themes,
-    themeDependencyTree: getThemeDependencyTree(context.theme).map((t) => t.name),
+    themeDependencyTree: getThemeDependencyTree(context.theme).map(
+      (t) => t.name
+    ),
     cwd: magento.rootPath,
   }
 

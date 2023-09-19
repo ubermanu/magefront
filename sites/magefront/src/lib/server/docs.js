@@ -6,7 +6,9 @@ import remarkToc from 'remark-toc'
 import shiki from 'shiki'
 
 export async function get_docs_data(withContent = true) {
-  const files = import.meta.glob('../../../../../docs/**/!(_)*.md', { as: 'raw' })
+  const files = import.meta.glob('../../../../../docs/**/!(_)*.md', {
+    as: 'raw',
+  })
 
   const docs = await Promise.all(
     Object.entries(files).map(async ([path, resolver]) => {
@@ -29,7 +31,9 @@ const config = defineMDSveXConfig({
   extensions: ['.md'],
   highlight: {
     highlighter: async (code, lang = 'text') => {
-      const highlighter = await shiki.getHighlighter({ theme: 'material-theme-darker' })
+      const highlighter = await shiki.getHighlighter({
+        theme: 'material-theme-darker',
+      })
       return escapeSvelte(highlighter.codeToHtml(code, { lang }))
     },
   },

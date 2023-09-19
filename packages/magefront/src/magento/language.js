@@ -6,7 +6,9 @@ import { getRegistrations } from './composer.js'
 /**
  * Get all the languages loaded from the `composer.lock` file.
  *
- * @type {(context: import('types').MagentoContext) => import('types').MagentoLanguage[]}
+ * @type {(
+ *   context: import('types').MagentoContext
+ * ) => import('types').MagentoLanguage[]}
  */
 export const getLanguages = memo((context) => {
   const { rootPath } = context
@@ -16,13 +18,17 @@ export const getLanguages = memo((context) => {
 
   // Get the list of languages in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
-  const packages = context.packages.filter((pkg) => pkg.type === 'magento2-language')
+  const packages = context.packages.filter(
+    (pkg) => pkg.type === 'magento2-language'
+  )
 
   packages.forEach((pkg) => {
     getRegistrations(pkg).forEach((registration) => {
       const src = path.join('vendor', pkg.name, path.dirname(registration))
       const name = pkg.name
-      const code = getCodeFromLanguageXml(path.join(rootPath, src, 'language.xml'))
+      const code = getCodeFromLanguageXml(
+        path.join(rootPath, src, 'language.xml')
+      )
 
       if (!code) {
         // TODO: logger.warn(`Language code not found in ${src}/language.xml`)

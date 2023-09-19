@@ -7,7 +7,8 @@ import requireJsConfig from 'magefront-plugin-requirejs-config'
 import terser from 'magefront-plugin-terser'
 
 /**
- * Return the default preset. It is meant to be compatible with the default Magento themes.
+ * Return the default preset. It is meant to be compatible with the default
+ * Magento themes.
  *
  * @param {import('types').Options} [options]
  * @returns {import('magefront').Preset}

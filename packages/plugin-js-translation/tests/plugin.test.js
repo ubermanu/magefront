@@ -14,5 +14,12 @@ test('Generate js-translation.json', async () => {
     magento: { rootPath },
   })
 
-  expect(fs.existsSync(path.join(rootPath, 'pub/static/frontend/Magento/blank/en_US/js-translation.json'))).toBe(true)
+  expect(
+    fs.existsSync(
+      path.join(
+        rootPath,
+        'pub/static/frontend/Magento/blank/en_US/js-translation.json'
+      )
+    )
+  ).toBe(true)
 }, 5000)

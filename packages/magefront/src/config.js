@@ -5,7 +5,10 @@ import { getThemes } from './magento/theme.js'
 /**
  * Get the build configuration for the given options.
  *
- * @type {(opts: import('types').MagefrontOptions, context: import('types').MagentoContext) => Promise<import('types').BuildConfig>}
+ * @type {(
+ *   opts: import('types').MagefrontOptions,
+ *   context: import('types').MagentoContext
+ * ) => Promise<import('types').BuildConfig>}
  */
 export const getBuildConfig = memo(async (opts, context) => {
   const { rootPath, tempPath } = context
@@ -40,7 +43,11 @@ export const getBuildConfig = memo(async (opts, context) => {
 
   // Add the preset plugins to the plugin list
   if (Array.isArray(all_presets) && all_presets.length > 0) {
-    const presets = await Promise.all(/** @type {import('types').Preset[]} */ all_presets.map(transformPresetDefinition))
+    const presets = await Promise.all(
+      /** @type {import('types').Preset[]} */ all_presets.map(
+        transformPresetDefinition
+      )
+    )
     presets.forEach((preset) => {
       if (Array.isArray(preset.plugins)) {
         preset.plugins.forEach((plugin) => all_plugins.push(plugin))
@@ -55,13 +62,18 @@ export const getBuildConfig = memo(async (opts, context) => {
 
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
-  const plugins = await Promise.all(/** @type {import('types').Plugin[]} */ all_plugins.map(transformPluginDefinition))
+  const plugins = await Promise.all(
+    /** @type {import('types').Plugin[]} */ all_plugins.map(
+      transformPluginDefinition
+    )
+  )
 
   return { tmp, dest, plugins }
 })
 
 /**
- * Transform the plugin to a function if it is not already. If passed a string, import the plugin and return the default export.
+ * Transform the plugin to a function if it is not already. If passed a string,
+ * import the plugin and return the default export.
  *
  * @param {unknown} definition
  * @returns {Promise<import('types').Plugin>}
@@ -73,13 +85,17 @@ async function transformPluginDefinition(definition) {
   }
 
   if (typeof definition === 'string') {
-    const { default: pluginModule } = await import(resolveModuleNameFromPluginStr(definition))
+    const { default: pluginModule } = await import(
+      resolveModuleNameFromPluginStr(definition)
+    )
     return pluginModule()
   }
 
   if (Array.isArray(definition)) {
     const [pluginName, options] = definition
-    const { default: pluginModule } = await import(resolveModuleNameFromPluginStr(pluginName))
+    const { default: pluginModule } = await import(
+      resolveModuleNameFromPluginStr(pluginName)
+    )
     return pluginModule(options)
   }
 
@@ -100,20 +116,25 @@ function resolveModuleNameFromPluginStr(str) {
 }
 
 /**
- * Transform the preset to a function if it is not already. If passed a string, import the preset and return the default export.
+ * Transform the preset to a function if it is not already. If passed a string,
+ * import the preset and return the default export.
  *
  * @param {unknown} definition
  * @returns {Promise<import('types').Preset>}
  */
 async function transformPresetDefinition(definition) {
   if (typeof definition === 'string') {
-    const { default: presetModule } = await import(resolveModuleNameFromPresetStr(definition))
+    const { default: presetModule } = await import(
+      resolveModuleNameFromPresetStr(definition)
+    )
     return presetModule()
   }
 
   if (Array.isArray(definition)) {
     const [presetName, options] = definition
-    const { default: presetModule } = await import(resolveModuleNameFromPresetStr(presetName))
+    const { default: presetModule } = await import(
+      resolveModuleNameFromPresetStr(presetName)
+    )
     return presetModule(options)
   }
 

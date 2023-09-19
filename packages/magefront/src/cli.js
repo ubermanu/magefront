@@ -20,7 +20,11 @@ program
   .version(pkg.version)
   .option('-t, --theme <theme>', 'Theme identifier')
   .option('-c, --config <config>', 'Path to the configuration file')
-  .option('-w, --watch', 'Watch the source files of a theme, and rebuild on change', false)
+  .option(
+    '-w, --watch',
+    'Watch the source files of a theme, and rebuild on change',
+    false
+  )
   .option('-d, --dev <url>', 'Run a browser-sync proxy instance')
   .option('--list', 'List all available themes')
 
@@ -71,8 +75,12 @@ program.action(async (opts) => {
   }
 
   if (config) {
-    const filename = config.length > 0 ? config : 'magefront.config.{js,mjs,cjs}'
-    const files = await glob(filename, { onlyFiles: true, cwd: magento.rootPath })
+    const filename =
+      config.length > 0 ? config : 'magefront.config.{js,mjs,cjs}'
+    const files = await glob(filename, {
+      onlyFiles: true,
+      cwd: magento.rootPath,
+    })
 
     if (files.length === 0) {
       logger.error(`Configuration file not found: ${filename}`)
@@ -83,7 +91,13 @@ program.action(async (opts) => {
     logger.info(`Loading configuration file: ${k.bold(files[0])}...`)
 
     try {
-      /** @type {{ default: import('types').MagefrontOptions | import('types').MagefrontOptions[] }} */
+      /**
+       * @type {{
+       *   default:
+       *     | import('types').MagefrontOptions
+       *     | import('types').MagefrontOptions[]
+       * }}
+       */
       const mod = await import(config_path)
 
       if (u.isArray(mod.default)) {
@@ -91,14 +105,18 @@ program.action(async (opts) => {
         const item = mod.default.find((opts) => opts.theme === theme)
 
         if (!item) {
-          logger.error(`Theme '${theme}' not found in the configuration file: ${config_path}`)
+          logger.error(
+            `Theme '${theme}' not found in the configuration file: ${config_path}`
+          )
           process.exit(1)
         }
 
         cli_options = Object.assign(cli_options, item)
       } else if (u.isObject(mod.default)) {
         if (theme !== mod.default.theme) {
-          logger.error(`Theme '${theme}' not found in the configuration file: ${config_path}`)
+          logger.error(
+            `Theme '${theme}' not found in the configuration file: ${config_path}`
+          )
           process.exit(1)
         }
 

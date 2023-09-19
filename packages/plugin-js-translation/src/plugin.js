@@ -35,7 +35,12 @@ export default () => ({
         return
       }
 
-      const translationFile = path.join(cwd, mod.src, 'i18n', translationFilename)
+      const translationFile = path.join(
+        cwd,
+        mod.src,
+        'i18n',
+        translationFilename
+      )
       if (fs.existsSync(translationFile)) {
         files.push(translationFile)
       }
@@ -43,7 +48,11 @@ export default () => ({
 
     // Get the translation file from the theme
     // FIXME: Get the translations from the parent themes
-    const themeTranslationFile = path.join(context.src, 'i18n', translationFilename)
+    const themeTranslationFile = path.join(
+      context.src,
+      'i18n',
+      translationFilename
+    )
     if (fs.existsSync(themeTranslationFile)) {
       files.push(themeTranslationFile)
     }
