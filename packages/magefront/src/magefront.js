@@ -6,6 +6,7 @@ import { clean } from './actions/clean.js'
 import { createActionContext } from './actions/context.js'
 import { deploy } from './actions/deploy.js'
 import { inheritance } from './actions/inheritance.js'
+import { getThemeDependencyTree } from './magento/theme.js'
 
 /**
  * Builds a Magento 2 theme.
@@ -26,8 +27,24 @@ export async function magefront(opts, logger) {
   await inheritance(context)
 
   context.logger.info(
-    `Building ${k.bold(theme.name)} for locale ${k.bold(locale)}...`
+    `Building ${k.bold(theme.name)} for locale ${k.bold(locale)}`
   )
+
+  const parents = getThemeDependencyTree(context.theme).reverse().slice(1)
+  if (parents.length > 0) {
+    context.logger.info(
+      k.dim(`\tparent: ${parents.map((p) => k.bold(p.name)).join(' ← ')}`)
+    )
+  }
+
+  context.logger.info(
+    k.dim(
+      `\tplugins: ${context.buildConfig.plugins
+        .map((p) => k.bold(p.name))
+        .join(', ')}`
+    )
+  )
+
   await build(context)
   await deploy(context)
 
