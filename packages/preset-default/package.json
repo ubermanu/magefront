@@ -5,7 +5,8 @@
     "magefront",
     "magento",
     "theme",
-    "preset"
+    "preset",
+    "default"
   ],
   "repository": {
     "type": "git",

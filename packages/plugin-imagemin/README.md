@@ -4,7 +4,7 @@ Optimize images with [imagemin](https://github.com/imagemin/imagemin).
 
 ## Install
 
-    npm i magefront-plugin-imagemin
+    npm i imagemin magefront-plugin-imagemin
 
 ## Usage
 

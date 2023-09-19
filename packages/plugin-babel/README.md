@@ -4,7 +4,7 @@ Transpile JS files with [Babel](https://babeljs.io/).
 
 ## Install
 
-    npm i magefront-plugin-babel
+    npm i magefront-plugin-babel @babel/core @babel/preset-env
 
 ## Usage
 
@@ -12,7 +12,12 @@ Transpile JS files with [Babel](https://babeljs.io/).
 import babel from 'magefront-plugin-babel'
 
 export default {
-  plugins: [babel({ src: 'js/source/**/*.js' })],
+  plugins: [
+    babel({
+      src: 'js/source/**/*.js',
+      compilerOptions: { presets: ['@babel/preset-env'] },
+    }),
+  ],
 }
 ```
 

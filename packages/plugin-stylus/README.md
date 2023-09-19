@@ -4,7 +4,7 @@ Transforms STYL files into CSS files.
 
 ## Install
 
-    npm i magefront-plugin-stylus
+    npm i stylus magefront-plugin-stylus
 
 ## Usage
 

@@ -4,7 +4,7 @@ Transforms \*.ts files into JS files.
 
 ## Install
 
-    npm i magefront-plugin-typescript
+    npm i typescript magefront-plugin-typescript
 
 ## Usage
 
