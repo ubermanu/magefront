@@ -1,7 +1,7 @@
 import process from 'node:process'
 import sade from 'sade'
 import winston from 'winston'
-import pkg from '../package.json'
+import pkg from '../package.json' assert { type: 'json' }
 import { browserSync } from './actions/browser-sync.js'
 import { createActionContext } from './actions/context.js'
 import { list } from './actions/list.js'
