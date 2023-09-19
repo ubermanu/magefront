@@ -13,7 +13,37 @@ Process all the source files from different locations to output the result into 
 This aims to be as close as possible from the original behavior.
 
 ```shell
-magefront -t Magento/blank
+magefront build -t Magento/blank
+```
+
+The argument provided is the `locale` to build:
+
+```shell
+magefront build en_US
+```
+
+You can load the configuration from the `magefront.config.js` file:
+
+```shell
+magefront build -c
+```
+
+Or from a custom file:
+
+```shell
+magefront build -c my-config.js
+```
+
+If no `theme` is provided, all the themes will be generated:
+
+```shell
+magefront build
+```
+
+Also, build is the default command, so you can just run:
+
+```shell
+magefront
 ```
 
 
@@ -23,10 +53,10 @@ Enables a watcher on the source directories of the given theme.
 When a change is detected, build the theme.
 
 ```shell
-magefront -t Magento/blank --watch
+magefront build -t Magento/blank --watch
 ```
 
-> Only one theme can be watched.
+> Only one theme can be used in watch mode.
 
 
 ## dev
@@ -38,7 +68,7 @@ On change, refreshes the `*.css` files or the whole page.
 magefront dev -t Magento/blank --url https://magento.ddev.site
 ```
 
-> Only one theme can be watched.
+> Only one theme can be used in dev mode.
 
 ## list
 
