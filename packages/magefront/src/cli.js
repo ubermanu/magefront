@@ -97,7 +97,7 @@ program
       process.exit(1)
     }
 
-    if (Array.isArray(locales)) {
+    if (Array.isArray(locales) && locales.length > 1) {
       logger.error('You must provide only one locale.')
       process.exit(1)
     }
@@ -107,10 +107,12 @@ program
       process.exit(1)
     }
 
+    const entries = await generateEntries(opts, rootPath, logger)
+    await magefront(entries[0], logger)
+
     logger.info('Starting browser-sync proxy...')
     await browserSync(url)
 
-    const entries = await generateEntries(opts, rootPath, logger)
     const context = await createActionContext(entries[0], logger)
     await watch(context)
   })
