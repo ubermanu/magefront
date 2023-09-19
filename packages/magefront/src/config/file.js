@@ -7,7 +7,7 @@ import { validateConfig } from './schema.js'
  * @param {string} filename
  * @param {string} theme
  * @returns {Promise<import('types').MagefrontOptions>}
- * @throws {Error}
+ * @throws {string | import('joi').ValidationError}
  */
 export async function loadConfigFile(filename, theme) {
   const mod = await import(filename)
@@ -21,6 +21,7 @@ export async function loadConfigFile(filename, theme) {
  * @param {any} config
  * @param {string} theme
  * @returns {Promise<import('types').MagefrontOptions>}
+ * @throws {string | import('joi').ValidationError}
  */
 export async function resolveConfig(config, theme) {
   validateConfig(config)

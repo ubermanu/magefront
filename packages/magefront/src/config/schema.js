@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-const MagefrontOptionsSchema = Joi.object({
+const optionsSchema = Joi.object({
   theme: Joi.string(),
   locale: Joi.string(),
   presets: Joi.array().items(
@@ -22,9 +22,9 @@ const MagefrontOptionsSchema = Joi.object({
   }),
 })
 
-const ConfigSchema = Joi.alternatives().try(
-  MagefrontOptionsSchema,
-  Joi.array().items(MagefrontOptionsSchema)
+const configSchema = Joi.alternatives().try(
+  optionsSchema,
+  Joi.array().items(optionsSchema)
 )
 
 /**
@@ -35,7 +35,7 @@ const ConfigSchema = Joi.alternatives().try(
  * @throws {Joi.ValidationError}
  */
 export function validateConfig(config) {
-  const { error } = ConfigSchema.validate(config)
+  const { error } = configSchema.validate(config)
   if (error) {
     throw error
   }
