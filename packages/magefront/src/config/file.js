@@ -1,52 +1,79 @@
+import glob from 'fast-glob'
+import path from 'node:path'
 import * as u from '../utils.js'
 import { validateConfig } from './schema.js'
 
 /**
- * Load the configuration file and return the options for the given theme.
+ * Resolve the configuration filename and return the path to the file. Takes the
+ * config option from the CLI and the root path of the project.
  *
- * @param {string} filename
- * @param {string} theme
- * @returns {Promise<import('types').MagefrontOptions>}
- * @throws {string | import('joi').ValidationError}
+ * Throws an error if the file is not found.
+ *
+ * @param {string | boolean} str
+ * @param {string} [rootPath]
+ * @returns {Promise<string>}
+ * @throws {string}
  */
-export async function loadConfigFile(filename, theme) {
-  const mod = await import(filename)
-  return resolveConfig(mod.default, theme)
+export async function resolveConfigFilename(str, rootPath) {
+  const filename =
+    typeof str === 'string' && str.length > 0
+      ? str
+      : 'magefront.config.{js,mjs,cjs}'
+
+  const files = await glob(filename, {
+    onlyFiles: true,
+    cwd: rootPath,
+  })
+
+  if (files.length === 0) {
+    throw `Configuration file not found: ${filename}`
+  }
+
+  return path.join(rootPath ?? '', files[0])
 }
 
 /**
- * Get the MagefrontOptions for the given theme, in the given configuration.
- * Validate the configuration and throw an error if it's invalid.
+ * Load the configuration file and update the CLI entries with the new user
+ * configuration.
  *
- * @param {any} config
- * @param {string} theme
- * @returns {Promise<import('types').MagefrontOptions>}
+ * @param {string} filename
+ * @param {import('types').MagefrontOptions[]} entries
+ * @returns {Promise<import('types').MagefrontOptions[]>}
  * @throws {string | import('joi').ValidationError}
  */
-export async function resolveConfig(config, theme) {
+export async function loadConfigFile(filename, entries) {
+  const mod = await import(filename)
+  const config = mod.default
+
   validateConfig(config)
 
-  if (u.isArray(config)) {
-    /** @type {import('types').MagefrontOptions | undefined} */
-    const item = config.find((opts) => opts.theme === theme)
-
-    if (!item) {
-      throw `Theme '${theme}' not found in the configuration`
-    }
-
-    return item
+  if (Array.isArray(config)) {
+    entries = entries.map((entry) => {
+      const additionalEntry = config.find(
+        (/** @type {import('types').MagefrontOptions} */ o) =>
+          o.theme === o.theme
+      )
+      return additionalEntry ? { ...additionalEntry, ...entry } : entry
+    })
   }
 
   if (u.isObject(config)) {
-    if (!config.theme || config.theme === theme) {
-      return /** @type {import('types').MagefrontOptions} */ {
-        ...config,
-        theme,
-      }
-    }
+    const additionalEntry = config
 
-    throw `The configuration is for the theme '${config.theme}' and not '${theme}'`
+    // If the theme is specified in the config file, apply the config to the matching theme
+    if (additionalEntry.theme) {
+      entries = entries.map((entry) => {
+        return entry.theme === additionalEntry.theme
+          ? { ...config, ...entry }
+          : entry
+      })
+    } else {
+      // Otherwise, apply the config to all the themes
+      entries = entries.map((entry) => {
+        return { ...config, ...entry }
+      })
+    }
   }
 
-  throw `The configuration is invalid`
+  return entries
 }

@@ -3,7 +3,7 @@ import { getPackages } from './composer.js'
 /**
  * Create a Magento context.
  *
- * @param {import('types').MagefrontOptions} opts
+ * @param {Partial<import('types').MagefrontOptions>} [opts]
  * @returns {import('types').MagentoContext}
  */
 export function createMagentoContext(opts) {
