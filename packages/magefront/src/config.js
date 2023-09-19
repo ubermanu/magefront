@@ -1,6 +1,6 @@
-import Joi from 'joi'
 import memo from 'memoizee'
 import path from 'node:path'
+import { pluginSchema, presetSchema } from './config/schema.js'
 import { getThemes } from './magento/theme.js'
 import * as u from './utils.js'
 
@@ -73,15 +73,6 @@ export const getBuildConfig = memo(async (opts, context) => {
   return { tmp, dest, plugins }
 })
 
-const pluginSchema = Joi.alternatives().try(
-  Joi.string(),
-  Joi.object({
-    name: Joi.string().required(),
-    build: Joi.func().required(),
-  }),
-  Joi.array().items(Joi.string(), Joi.any())
-)
-
 /**
  * Transform the plugin to a function if it is not already. If passed a string,
  * import the plugin and return the default export.
@@ -116,14 +107,6 @@ async function transformPluginDefinition(definition) {
 
   throw new Error(`Invalid plugin type: ${typeof definition}`)
 }
-
-const presetSchema = Joi.alternatives().try(
-  Joi.string(),
-  Joi.object({
-    plugins: Joi.array().items(pluginSchema).required(),
-  }),
-  Joi.array().items(Joi.string(), Joi.any())
-)
 
 /**
  * Transform the preset to a function if it is not already. If passed a string,
