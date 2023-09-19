@@ -27,13 +27,11 @@
     "src"
   ],
   "dependencies": {
-    "fast-glob": "^3.3.1",
-    "stylus": "^0.60.0"
-  },
-  "devDependencies": {
-    "@types/stylus": "^0.48.39"
+    "@types/stylus": "^0.48.39",
+    "fast-glob": "^3.3.1"
   },
   "peerDependencies": {
-    "magefront": "workspace:^"
+    "magefront": "workspace:^",
+    "stylus": "^0.60.0"
   }
 }

@@ -29,11 +29,14 @@
   "dependencies": {
     "cssnano": "^6.0.1",
     "cssnano-preset-default": "^6.0.1",
+    "less": "2.7.3",
     "magefront-plugin-js-translation": "workspace:^",
     "magefront-plugin-less": "workspace:^",
     "magefront-plugin-postcss": "workspace:^",
     "magefront-plugin-requirejs-config": "workspace:^",
-    "magefront-plugin-terser": "workspace:^"
+    "magefront-plugin-terser": "workspace:^",
+    "postcss": "^8.4.30",
+    "terser": "^5.19.4"
   },
   "peerDependencies": {
     "magefront": "workspace:^"

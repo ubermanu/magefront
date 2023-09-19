@@ -27,10 +27,10 @@
     "src"
   ],
   "dependencies": {
-    "fast-glob": "^3.3.1",
-    "postcss": "^8.4.29"
+    "fast-glob": "^3.3.1"
   },
   "peerDependencies": {
-    "magefront": "workspace:^"
+    "magefront": "workspace:^",
+    "postcss": "^8.4.29"
   }
 }

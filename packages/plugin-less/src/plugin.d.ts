@@ -8,7 +8,6 @@ interface Options {
   src?: string | string[]
   ignore?: Pattern[]
   sourcemaps?: boolean
-  compiler?: LessStatic
   magentoImport?: boolean
   plugins?: Less.Plugin[]
   compilerOptions?: Less.Options
