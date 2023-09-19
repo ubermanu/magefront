@@ -1,9 +1,9 @@
-import { getBuildConfig } from '../config'
-import { createLogger } from '../logger'
-import { createMagentoContext } from '../magento/context'
-import { getLanguages } from '../magento/language'
-import { getModules } from '../magento/module'
-import { getThemes } from '../magento/theme'
+import { getBuildConfig } from '../config.js'
+import { createLogger } from '../logger.js'
+import { createMagentoContext } from '../magento/context.js'
+import { getLanguages } from '../magento/language.js'
+import { getModules } from '../magento/module.js'
+import { getThemes } from '../magento/theme.js'
 
 /**
  * Creates an ActionContext object to be passed to the build process.

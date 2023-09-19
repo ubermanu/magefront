@@ -4,7 +4,7 @@ Transforms \*.svelte files into JS files.
 
 ## Install
 
-    npm i magefront-plugin-svelte
+    npm i svelte magefront-plugin-svelte
 
 ## Usage
 

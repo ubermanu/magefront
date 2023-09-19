@@ -1,4 +1,4 @@
-import { testActionContext } from './helpers'
+import { testActionContext } from './helpers.js'
 
 test('Empty configuration returns the default plugins', async () => {
   const context = await testActionContext()

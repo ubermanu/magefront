@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { getThemeDependencyTree } from '../magento/theme'
+import { getThemeDependencyTree } from '../magento/theme.js'
 
 /**
  * Build the theme. If a configuration file is found, it will be used.

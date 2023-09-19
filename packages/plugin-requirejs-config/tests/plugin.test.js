@@ -2,7 +2,7 @@ import { magefront } from 'magefront'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
-import requireJsConfig from '../src/plugin'
+import requireJsConfig from '../src/plugin.js'
 
 const rootPath = process.env.MAGEFRONT_TEST_MAGENTO_ROOT
 

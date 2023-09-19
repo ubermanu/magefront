@@ -1,6 +1,6 @@
 import Table from 'cli-table'
 import console from 'node:console'
-import { getThemes } from '../magento/theme'
+import { getThemes } from '../magento/theme.js'
 
 /**
  * List all the themes.

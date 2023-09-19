@@ -1,10 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { build } from '../src/actions/build'
-import { clean } from '../src/actions/clean'
-import { deploy } from '../src/actions/deploy'
-import { inheritance } from '../src/actions/inheritance'
-import { testActionContext } from './helpers'
+import { build } from '../src/actions/build.js'
+import { clean } from '../src/actions/clean.js'
+import { deploy } from '../src/actions/deploy.js'
+import { inheritance } from '../src/actions/inheritance.js'
+import { testActionContext } from './helpers.js'
 
 describe('Build and deploy the Magento/backend theme', () => {
   /** @type {import('types').ActionContext} */

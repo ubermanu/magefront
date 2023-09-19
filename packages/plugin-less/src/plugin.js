@@ -1,8 +1,8 @@
 import glob from 'fast-glob'
-import less27 from 'less'
+import less from 'less'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import magentoImportPreprocessor from './magento-import-preprocessor'
+import magentoImportPreprocessor from './magento-import-preprocessor.js'
 
 /**
  * For all the `less` files in the `css` directory, compile them to CSS.
@@ -14,7 +14,7 @@ export default (options) => ({
   name: 'less',
 
   async build(context) {
-    const { src, ignore, compiler, sourcemaps, compilerOptions } = { ...options }
+    const { src, ignore, sourcemaps, compilerOptions } = { ...options }
     const plugins = options?.plugins ?? []
     const magentoImport = options?.magentoImport ?? true
 
@@ -29,19 +29,21 @@ export default (options) => ({
       cwd: context.src,
     })
 
+    /**
+     * @type {{
+     *   render: (input: string, options: Less.Options, callback: boolean | Function) => Promise<Less.RenderOutput>
+     * }}
+     */
+    const _less = less
+
+    context.logger.debug(`Using Less v${less.version.toString().replace(/,/g, '.')}`)
+
     await Promise.all(
       files.map(async (file) => {
         const filePath = path.join(context.src, file)
         const fileContent = await fs.readFile(filePath, 'utf8')
 
-        /**
-         * @type {{
-         *   render: (input: string, options: Less.Options, callback: boolean | Function) => Promise<Less.RenderOutput>
-         * }}
-         */
-        const less = compiler ?? less27
-
-        const output = await less.render(
+        const output = await _less.render(
           fileContent.toString(),
           {
             sourceMap: {

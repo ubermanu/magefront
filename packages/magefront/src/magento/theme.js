@@ -2,7 +2,7 @@ import glob from 'fast-glob'
 import memo from 'memoizee'
 import fs from 'node:fs'
 import path from 'node:path'
-import { getRegistrations } from './composer'
+import { getRegistrations } from './composer.js'
 
 /**
  * Crawl the Magento project source code and return a list of all the themes.

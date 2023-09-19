@@ -26,6 +26,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint'],
-  rules: {},
+  plugins: ['import', '@typescript-eslint'],
+  rules: {
+    'import/extensions': ['error', 'always', { ignorePackages: true }],
+  },
 }

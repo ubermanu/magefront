@@ -8,8 +8,10 @@ Transforms SCSS files into CSS files.
 
 ## Install
 
+Install the plugin and its dependencies:
+
 ```shell
-npm i magefront-plugin-sass --save-dev
+npm i sass magefront-plugin-sass --save-dev
 ```
 
 ## Usage

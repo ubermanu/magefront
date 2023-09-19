@@ -1,4 +1,4 @@
-export { magefront } from './magefront'
+export { magefront } from './magefront.js'
 
 /**
  * Auxiliary function for defining the configuration object.

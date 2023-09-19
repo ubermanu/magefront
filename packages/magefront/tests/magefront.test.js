@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { magefront } from '../src/magefront'
-import { rootPath } from './helpers'
+import { magefront } from '../src/magefront.js'
+import { rootPath } from './helpers.js'
 
 test('Can be called programmatically', async () => {
   await magefront({ theme: 'Magento/blank', magento: { rootPath } })

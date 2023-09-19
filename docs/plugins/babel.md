@@ -8,8 +8,10 @@ Transpile JS files with [Babel](https://babeljs.io/).
 
 ## Install
 
+Install the plugin and its dependencies:
+
 ```shell
-npm i magefront-plugin-babel --save-dev
+npm i magefront-plugin-babel @babel/core --save-dev
 ```
 
 ## Usage
