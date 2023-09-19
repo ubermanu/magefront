@@ -2,6 +2,10 @@
   import { base } from '$app/paths'
   import Footer from '$lib/components/Footer.svelte'
   import Header from '$lib/components/Header.svelte'
+
+  // This is a hack to get around the fact that SvelteKit doesn't
+  // insert the base path into the href attribute of the main button ???
+  const weird = base
 </script>
 
 <svelte:head>
@@ -23,7 +27,7 @@
       <span class="text-red-600">Tailwind</span>, <span class="text-red-600">Svelte</span>, <span class="text-red-600">TypeScript</span>,
       and more.
     </p>
-    <a href="{base}/docs/getting-started" class="btn btn-lg mt-4">Get Started</a>
+    <a href="{weird}/docs/getting-started" class="btn btn-lg mt-4">Get Started</a>
   </div>
 </section>
 
