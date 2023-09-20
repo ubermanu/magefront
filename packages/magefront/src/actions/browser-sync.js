@@ -3,8 +3,8 @@ import console from 'node:console'
 
 // Current instance of BrowserSync
 // TODO: Move this into the ActionContext
-/** @type {import('browser-sync').BrowserSyncInstance} */
-export let instance
+/** @type {import('browser-sync').BrowserSyncInstance | null} */
+export let instance = null
 
 /**
  * Run a BrowserSync proxy instance.
@@ -30,7 +30,7 @@ export const browserSync = async (url) => {
       ],
     }
 
-    instance = bs.create()
+    instance = bs.create('magefront')
     instance.init(config)
   } catch (e) {
     // TODO: Use logger

@@ -1,4 +1,5 @@
 import chokidar from 'chokidar'
+import k from 'kleur'
 import path from 'node:path'
 import { performance } from 'node:perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
@@ -16,21 +17,33 @@ export const watch = async (context) => {
   const { logger, magento, theme } = context
   const { rootPath } = magento
 
-  const watcherConfig = { ignoreInitial: true }
+  /** @type {import('types').MagentoModule[]} */
   const modules = magento.modules.filter((m) => m.src && m.enabled)
-
-  const themeSrc = [path.join(rootPath, theme.src)]
+  const sources = [theme.src]
 
   // Add modules source directories to theme source paths array
   // Ignore the sources of modules that are in the vendor directory
   modules
     .filter((m) => !m.src.startsWith('vendor'))
     .forEach((m) => {
-      themeSrc.push(path.join(rootPath, m.src))
+      sources.push(m.src)
     })
 
   // Initialize watcher
-  const srcWatcher = chokidar.watch(themeSrc, watcherConfig)
+  const srcWatcher = chokidar.watch(sources, {
+    ignoreInitial: true,
+    cwd: rootPath,
+    awaitWriteFinish: {
+      stabilityThreshold: 100,
+    },
+    ignored: [
+      '**/.git/**',
+      '**/.idea/**',
+      '**/.vscode/**',
+      '**/node_modules/**',
+      '**/vendor/**',
+    ],
+  })
 
   let isBuilding = false
 
@@ -40,12 +53,16 @@ export const watch = async (context) => {
       return
     }
     isBuilding = true
-    logger.info('Rebuilding theme...')
+    logger.info(`[${k.gray(theme.name)}] Rebuilding theme...`)
     const now = performance.now()
     await inheritance(context)
     await build(context)
     await deploy(context)
-    logger.info(`Done in ${prettyMilliseconds(performance.now() - now)}`)
+    logger.info(
+      `[${k.gray(theme.name)}] Done in ${prettyMilliseconds(
+        performance.now() - now
+      )}`
+    )
     isBuilding = false
   }
 
@@ -58,19 +75,14 @@ export const watch = async (context) => {
     .on('change', async (filePath) => {
       await rebuild()
       if (styleExtensions.includes(path.extname(filePath))) {
-        if (instance) {
-          instance.reload('*.css')
-        }
-      }
-      if (staticExtensions.some((ext) => path.extname(filePath) === ext)) {
-        if (instance) {
-          instance.reload()
-        }
+        instance?.reload('*.css')
+      } else if (staticExtensions.includes(path.extname(filePath))) {
+        instance?.reload()
       }
     })
 
   srcWatcher.on('ready', () => {
-    logger.info(`Watching source files...`)
+    logger.info(`[${k.gray(theme.name)}] Watching source files...`)
   })
 }
 
