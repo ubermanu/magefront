@@ -5,6 +5,7 @@
   /** @type {SidebarItem[]} */
   export let items = []
 
+  /** @param {string} slug */
   function is_current(slug) {
     return $page.url.pathname === base + '/docs/' + slug
   }
