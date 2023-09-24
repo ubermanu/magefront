@@ -9,7 +9,7 @@ import { compileAsync } from 'sass'
  * Note: This plugin is not compatible with node-sass because it has been
  * deprecated.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({

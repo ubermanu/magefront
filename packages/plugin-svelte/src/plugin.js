@@ -6,7 +6,7 @@ import { compile } from 'svelte/compiler'
 /**
  * Transform `*.svelte` files to `*.js` files.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({

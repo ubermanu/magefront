@@ -6,7 +6,7 @@ import postcss from 'postcss'
 /**
  * Transforms CSS files using PostCSS.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({

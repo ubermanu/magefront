@@ -26,6 +26,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "csv-parse": "^5.5.0"
   },

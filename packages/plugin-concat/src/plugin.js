@@ -5,7 +5,7 @@ import path from 'node:path'
 /**
  * Merges multiple files into one.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => {

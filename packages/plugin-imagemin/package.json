@@ -28,6 +28,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "@types/imagemin": "^8.0.1",
     "fast-glob": "^3.3.1"

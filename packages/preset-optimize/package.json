@@ -28,6 +28,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "imagemin": "^8.0.1",
     "imagemin-gifsicle": "^7.0.0",

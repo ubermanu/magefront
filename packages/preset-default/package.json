@@ -27,6 +27,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "cssnano": "^6.0.1",
     "cssnano-preset-default": "^6.0.1",

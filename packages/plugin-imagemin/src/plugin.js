@@ -6,7 +6,7 @@ import path from 'node:path'
 /**
  * Optimizes images using imagemin.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({

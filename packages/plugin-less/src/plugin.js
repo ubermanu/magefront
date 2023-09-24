@@ -7,7 +7,7 @@ import magentoImportPreprocessor from './magento-import-preprocessor.js'
 /**
  * For all the `less` files in the `css` directory, compile them to CSS.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({

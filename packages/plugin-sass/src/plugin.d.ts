@@ -2,14 +2,11 @@ import { Pattern } from 'fast-glob'
 import { Plugin } from 'magefront'
 import { Options as SassOptions } from 'sass'
 
-interface Options {
+export interface Options {
   src?: string | string[]
   ignore?: Pattern[]
   sourcemaps?: boolean
   compilerOptions?: SassOptions<'async'>
 }
 
-/** Compile SCSS files to CSS. */
-declare const _default: (options?: Options) => Plugin
-
-export { _default as default, type Options }
+export default function (options?: Options): Plugin

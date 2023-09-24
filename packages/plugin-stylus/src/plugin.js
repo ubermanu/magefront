@@ -6,7 +6,7 @@ import stylus from 'stylus'
 /**
  * Transform Stylus files to CSS.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({

@@ -26,6 +26,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "fast-glob": "^3.3.1",
     "terser": "^5.19.4"

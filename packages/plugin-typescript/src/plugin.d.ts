@@ -2,12 +2,10 @@ import { Pattern } from 'fast-glob'
 import { Plugin } from 'magefront'
 import { CompilerOptions } from 'typescript'
 
-interface Options {
+export interface Options {
   src?: string | string[]
   ignore?: Pattern[]
   compilerOptions?: CompilerOptions
 }
-/** Transform TypeScript files to JavaScript. */
-declare const _default: (options?: Options) => Plugin
 
-export { _default as default, type Options }
+export default function (options?: Options): Plugin

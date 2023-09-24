@@ -2,9 +2,9 @@
 import { Pattern } from 'fast-glob'
 import { Plugin } from 'magefront'
 
-declare const magentoImportPreprocessor: (modules: string[]) => Less.Plugin
+export function magentoImportPreprocessor(modules: string[]): Less.Plugin
 
-interface Options {
+export interface Options {
   src?: string | string[]
   ignore?: Pattern[]
   sourcemaps?: boolean
@@ -13,6 +13,4 @@ interface Options {
   compilerOptions?: Less.Options
 }
 
-declare const _default: (options?: Options) => Plugin
-
-export { _default as default, magentoImportPreprocessor, type Options }
+export default function (options?: Options): Plugin

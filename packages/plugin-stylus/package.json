@@ -26,6 +26,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "@types/stylus": "^0.48.39",
     "fast-glob": "^3.3.1"

@@ -5,7 +5,7 @@ import path from 'node:path'
 /**
  * Transform your JS code with babel.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => {

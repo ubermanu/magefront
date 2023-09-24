@@ -6,7 +6,7 @@ import { minify } from 'terser'
 /**
  * Find all the `js` files in the preprocessed directory and minify them.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({

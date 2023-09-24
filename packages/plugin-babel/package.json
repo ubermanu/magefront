@@ -26,6 +26,9 @@
   "files": [
     "src"
   ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "@types/babel__core": "~7.20.2",
     "fast-glob": "^3.3.1"

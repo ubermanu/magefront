@@ -10,7 +10,7 @@ import terser from 'magefront-plugin-terser'
  * Return the default preset. It is meant to be compatible with the default
  * Magento themes.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./preset').Options} [options]
  * @returns {import('magefront').Preset}
  */
 export default (options) => {

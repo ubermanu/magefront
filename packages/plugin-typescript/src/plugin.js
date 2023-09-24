@@ -6,7 +6,7 @@ import typescript from 'typescript'
 /**
  * Transform TypeScript files to JavaScript.
  *
- * @param {import('types').Options} [options]
+ * @param {import('./plugin').Options} [options]
  * @returns {import('magefront').Plugin}
  */
 export default (options) => ({
