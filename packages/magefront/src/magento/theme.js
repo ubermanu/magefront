@@ -70,8 +70,8 @@ export const getThemes = memo((context) => {
   /** @type {Map<string, import('types').MagentoTheme>} */
   const themes = new Map()
 
-  list.forEach(({ parent, ...rest }) => {
-    themes.set(rest.name, { ...rest, parent: null })
+  list.forEach((item) => {
+    themes.set(item.name, { ...item, parent: null })
   })
 
   // 3. Attach the parent theme to each theme
