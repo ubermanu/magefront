@@ -15,13 +15,13 @@ export const getThemes = memo((context) => {
   const { rootPath } = context
 
   /**
-   * @type {{
-   *   [name: string]: Omit<import('types').MagentoTheme, 'parent'> & {
-   *     parent: string | null
-   *   }
-   * }}
+   * @typedef {Omit<import('types').MagentoTheme, 'parent'> & {
+   *   parent: string | null
+   * }} MagentoThemeTmp
    */
-  const list = {}
+
+  /** @type {Map<string, MagentoThemeTmp>} */
+  const list = new Map()
 
   // 1. Get the list of themes from the `app/design/` directory.
   const appDesign = glob.sync('app/design/{frontend,adminhtml}/*/*/theme.xml', {
@@ -32,14 +32,14 @@ export const getThemes = memo((context) => {
     const name = designSrc.split('/').slice(3, -1).join('/')
     const area = designSrc.split('/')[2]
 
-    list[name] = {
+    list.set(name, {
       name,
       src: designSrc.split('/').slice(0, -1).join('/'),
       area,
       parent: getParentFromThemeXml(path.join(rootPath, designSrc)),
       dest: path.join('pub/static', area, name),
       enabled: true,
-    }
+    })
   })
 
   // 2. Get the themes from the vendor directory.
@@ -56,25 +56,36 @@ export const getThemes = memo((context) => {
         path.join(rootPath, src, 'registration.php')
       )
 
-      list[name] = {
+      list.set(name, {
         name,
         src,
         area,
         parent: getParentFromThemeXml(path.join(rootPath, src, 'theme.xml')),
         dest: path.join('pub/static', area, name),
         enabled: true,
-      }
+      })
     })
   })
 
+  /** @type {Map<string, import('types').MagentoTheme>} */
+  const themes = new Map()
+
+  list.forEach(({ parent, ...rest }) => {
+    themes.set(rest.name, { ...rest, parent: null })
+  })
+
   // 3. Attach the parent theme to each theme
-  return Object.values(list).map(
-    ({ parent, ...rest }) =>
-      /** @type {import('types').MagentoTheme} */ ({
-        ...rest,
-        parent: parent ? list[parent] : null,
-      })
-  )
+  list.forEach((item) => {
+    if (item.parent) {
+      const parent = themes.get(item.parent) ?? null
+      const theme = themes.get(item.name)
+      if (theme && parent) {
+        theme.parent = parent
+      }
+    }
+  })
+
+  return [...themes.values()]
 })
 
 /**
