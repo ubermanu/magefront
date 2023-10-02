@@ -329,8 +329,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1
       '@types/imagemin-jpegtran':
-        specifier: ^5.0.1
-        version: 5.0.1
+        specifier: ^5.0.2
+        version: 5.0.2
       '@types/imagemin-svgo':
         specifier: ^10.0.2
         version: 10.0.2
@@ -1757,8 +1757,8 @@ packages:
       '@types/imagemin': 8.0.1
     dev: true
 
-  /@types/imagemin-jpegtran@5.0.1:
-    resolution: {integrity: sha512-Ps8kbm+DUFte/Eln/tUdEvpMWHKFCsQKlV8n+RN50zqWqL/7QhfLxR0ymitP9wa90P6+rkbJlintBNPkVR+B/Q==}
+  /@types/imagemin-jpegtran@5.0.2:
+    resolution: {integrity: sha512-Ov/wC42m+1Hgui9h4aXflLRUE+Sloqb8W2xQ0IF2oLfOVulGTwB7cgjDsdwIPvSnmsYIVJ0t5IYCmmURwlnFHA==}
     dependencies:
       '@types/imagemin': 8.0.1
     dev: true
