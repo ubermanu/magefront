@@ -18,6 +18,14 @@ export default () => ({
       (mod) => mod.enabled && mod.src
     )
 
+    /** @type {import('magefront').MagentoTheme | undefined} */
+    const theme = themeList.find((theme) => theme.name === context.theme)
+
+    // TODO: Remove once the theme object is passed in context
+    if (!theme) {
+      throw new Error(`Theme "${context.theme}" not found.`)
+    }
+
     // Get the `requirejs-config.js` files from the modules
     // FIXME: Check for the module dependency tree (to get the correct order)
     moduleList.forEach((mod) => {
@@ -35,7 +43,7 @@ export default () => ({
         context.cwd,
         mod.src,
         'view',
-        'frontend',
+        theme.area,
         'requirejs-config.js'
       )
       if (fs.existsSync(filePath)) {
