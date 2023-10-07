@@ -41,11 +41,7 @@ export const inheritance = async (context) => {
 
   // Add the Magento core lib resources as a dependency for everyone
   // Ignore the css docs and txt files
-  await generateCopies(path.join('lib', 'web'), tmp, [
-    'css/docs',
-    '**/*.txt',
-    'i18n',
-  ])
+  await generateCopies(path.join('lib', 'web'), tmp, ['css/docs', '**/*.txt'])
 
   // For each enabled modules, copy the web resources into the theme temp dir
   const modules = context.magento.modules.filter((m) => m.enabled && m.src)
