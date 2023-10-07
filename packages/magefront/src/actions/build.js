@@ -1,3 +1,4 @@
+import k from 'kleur'
 import path from 'node:path'
 import { getThemeDependencyTree } from '../magento/theme.js'
 
@@ -37,7 +38,7 @@ export const build = async (context) => {
       await plugin.build(pluginContext)
     } catch (e) {
       // TODO: Should be critical error
-      logger.error(e)
+      logger.error(k.red(`${e}`))
     }
   }
 }
