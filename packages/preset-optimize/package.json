@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/imagemin-gifsicle": "^7.0.1",
-    "@types/imagemin-jpegtran": "^5.0.1",
+    "@types/imagemin-jpegtran": "^5.0.2",
     "@types/imagemin-svgo": "^10.0.2"
   },
   "peerDependencies": {
