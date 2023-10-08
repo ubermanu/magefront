@@ -31,12 +31,11 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "cssnano": "^6.0.1",
-    "cssnano-preset-default": "^6.0.1",
     "less": "3.13.1",
+    "lightningcss": "^1.22.0",
     "magefront-plugin-js-translation": "workspace:^",
     "magefront-plugin-less": "workspace:^",
-    "magefront-plugin-postcss": "workspace:^",
+    "magefront-plugin-lightningcss": "workspace:^",
     "magefront-plugin-requirejs-config": "workspace:^",
     "magefront-plugin-terser": "workspace:^",
     "postcss": "^8.4.31"

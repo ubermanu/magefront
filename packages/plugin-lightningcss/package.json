@@ -1,0 +1,40 @@
+{
+  "name": "magefront-plugin-lightningcss",
+  "version": "0.1.0",
+  "keywords": [
+    "magefront",
+    "magento",
+    "theme",
+    "plugin",
+    "lightningcss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubermanu/magefront.git",
+    "directory": "packages/plugin-lightningcss"
+  },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/plugin.js",
+      "types": "./src/plugin.d.ts"
+    }
+  },
+  "module": "src/plugin.js",
+  "types": "src/plugin.d.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fast-glob": "^3.3.1"
+  },
+  "peerDependencies": {
+    "lightningcss": "^1.22.0",
+    "magefront": "workspace:^"
+  }
+}

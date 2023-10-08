@@ -1,8 +1,6 @@
-import cssnano from 'cssnano'
-import cssnanoPresetDefault from 'cssnano-preset-default'
 import jsTranslation from 'magefront-plugin-js-translation'
 import less from 'magefront-plugin-less'
-import postcss from 'magefront-plugin-postcss'
+import lightningcss from 'magefront-plugin-lightningcss'
 import requireJsConfig from 'magefront-plugin-requirejs-config'
 import terser from 'magefront-plugin-terser'
 
@@ -33,12 +31,7 @@ export default (options) => {
   }
 
   if (minifyCss) {
-    plugins.push(
-      postcss({
-        src: '**/*.css',
-        plugins: [cssnano({ preset: cssnanoPresetDefault })],
-      })
-    )
+    plugins.push(lightningcss({ minify: true }))
   }
 
   if (mergeCss) {
