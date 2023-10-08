@@ -20,12 +20,12 @@ export default (options) => ({
 
     const files = await glob(src ?? '**/!(_)*.scss', {
       ignore: ignore ?? [],
-      cwd: context.src,
+      cwd: context.cwd,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.src, file)
+        const filePath = path.join(context.cwd, file)
         const output = await compileAsync(filePath, compilerOptions)
 
         const cssFilePath = filePath.replace(/\.scss$/, '.css')

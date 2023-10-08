@@ -22,11 +22,11 @@ export default (options) => {
         throw new Error('Missing "dest" option')
       }
 
-      const files = await glob(src, { ignore, cwd: context.src })
+      const files = await glob(src, { ignore, cwd: context.cwd })
 
       const packed = await Promise.all(
         files.map((file) => {
-          const filePath = path.join(context.src, file)
+          const filePath = path.join(context.cwd, file)
           return fs.readFile(filePath, 'utf8')
         })
       )
@@ -35,7 +35,7 @@ export default (options) => {
       if (remove ?? true) {
         await Promise.all(
           files.map((file) => {
-            const filePath = path.join(context.src, file)
+            const filePath = path.join(context.cwd, file)
             return fs.unlink(filePath)
           })
         )
@@ -43,7 +43,7 @@ export default (options) => {
 
       // Write the merged file (after deleting the original files)
       await fs.writeFile(
-        path.join(context.src, dest),
+        path.join(context.cwd, dest),
         packed.join('\n'),
         'utf8'
       )

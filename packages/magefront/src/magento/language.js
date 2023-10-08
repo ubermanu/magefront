@@ -31,7 +31,7 @@ export const getLanguages = memo((context) => {
       )
 
       if (!code) {
-        // TODO: logger.warn(`Language code not found in ${src}/language.xml`)
+        // TODO: logger.warn(`Language code not found in ${cwd}/language.xml`)
         return
       }
 

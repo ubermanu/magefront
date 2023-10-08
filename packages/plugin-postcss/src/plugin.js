@@ -17,12 +17,12 @@ export default (options) => ({
 
     const files = await glob(src ?? '**/!(_)*.css', {
       ignore: ignore ?? [],
-      cwd: context.src,
+      cwd: context.cwd,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.src, file)
+        const filePath = path.join(context.cwd, file)
         const fileContent = await fs.readFile(filePath)
         const compiler = postcss(plugins ?? [])
 

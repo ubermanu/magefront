@@ -25,18 +25,17 @@ declare namespace magefront {
   }
 
   // Extends the themeConfig with additional values to be passed to the plugin when it's running.
-  // TODO: Update this API (outdated)
   export type PluginContext = {
-    theme: string
-    src: string
-    dest: string
-    locale: string
-    modules: string[]
-    moduleList: MagentoModule[]
-    languageList: MagentoLanguage[]
-    themeList: MagentoTheme[]
-    themeDependencyTree: string[]
+    theme: MagentoTheme
+    themeDependencyTree: MagentoTheme[]
     cwd: string
+    locale: string
+    magento: {
+      modules: MagentoModule[]
+      languages: MagentoLanguage[]
+      themes: MagentoTheme[]
+      rootPath: string
+    }
     logger: import('winston').Logger
   }
 

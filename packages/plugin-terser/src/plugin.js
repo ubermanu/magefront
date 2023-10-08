@@ -15,11 +15,11 @@ export default (options) => ({
   async build(context) {
     const { src, ignore, terserOptions } = { ...options }
 
-    const files = await glob(src ?? '**/*.js', { ignore, cwd: context.src })
+    const files = await glob(src ?? '**/*.js', { ignore, cwd: context.cwd })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.src, file)
+        const filePath = path.join(context.cwd, file)
         const fileContent = await fs.readFile(filePath)
         const { code } = await minify(
           fileContent.toString(),

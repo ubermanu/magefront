@@ -21,12 +21,12 @@ export default (options) => {
     async build(context) {
       const files = await glob(src, {
         ignore: ignore ?? [],
-        cwd: context.src,
+        cwd: context.cwd,
       })
 
       await Promise.all(
         files.map((file) => {
-          const filePath = path.join(context.src, file)
+          const filePath = path.join(context.cwd, file)
           return babel.transformAsync(filePath, compilerOptions)
         })
       )

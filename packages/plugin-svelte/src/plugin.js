@@ -17,12 +17,12 @@ export default (options) => ({
 
     const files = await glob(src ?? '**/*.svelte', {
       ignore: ignore ?? [],
-      cwd: context.src,
+      cwd: context.cwd,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.src, file)
+        const filePath = path.join(context.cwd, file)
         const fileContent = await fs.promises.readFile(filePath)
         const output = compile(fileContent.toString(), compilerOptions ?? {})
 

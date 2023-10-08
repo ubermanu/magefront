@@ -16,12 +16,12 @@ export default (options) => ({
     const { src, ignore, sourcemaps, compilerOptions } = { ...options }
     const files = await glob(src || '**/!(_)*.styl', {
       ignore: ignore ?? [],
-      cwd: context.src,
+      cwd: context.cwd,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.src, file)
+        const filePath = path.join(context.cwd, file)
         const fileContent = await fs.promises.readFile(filePath, 'utf8')
 
         const style = stylus(fileContent.toString(), {

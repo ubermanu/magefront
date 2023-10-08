@@ -11,32 +11,32 @@ export default () => ({
   name: 'js-translation',
 
   async build(context) {
+    const { locale } = context
+    const { languages, modules, rootPath } = context.magento
+
+    const translationFilename = locale + '.csv'
     const files = []
 
-    const { locale, moduleList, languageList, cwd } = context
-    const translationFilename = locale + '.csv'
-
     // Get the translation files from the language packs
-    languageList.forEach((lang) => {
+    languages.forEach((lang) => {
       if (lang.code !== locale) {
         return
       }
 
-      const translationFile = path.join(cwd, lang.src, translationFilename)
+      const translationFile = path.join(rootPath, lang.src, translationFilename)
       if (fs.existsSync(translationFile)) {
         files.push(translationFile)
       }
     })
 
     // Get the translation files from the modules
-    // TODO: Sort the modules by dependencies tree
-    moduleList.forEach((mod) => {
+    modules.forEach((mod) => {
       if (!mod.enabled || !mod.src) {
         return
       }
 
       const translationFile = path.join(
-        cwd,
+        rootPath,
         mod.src,
         'i18n',
         translationFilename
@@ -49,7 +49,7 @@ export default () => ({
     // Get the translation file from the theme
     // FIXME: Get the translations from the parent themes
     const themeTranslationFile = path.join(
-      context.src,
+      context.cwd,
       'i18n',
       translationFilename
     )
@@ -80,7 +80,7 @@ export default () => ({
     })
 
     parser.on('end', () => {
-      const file = path.join(context.src, 'js-translation.json')
+      const file = path.join(context.cwd, 'js-translation.json')
       fs.writeFileSync(file, JSON.stringify(records, null, 2))
     })
 

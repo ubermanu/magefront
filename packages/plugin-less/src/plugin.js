@@ -18,15 +18,18 @@ export default (options) => ({
     const plugins = options?.plugins ?? []
     const magentoImport = options?.magentoImport ?? true
 
+    /** @type {string[]} */
+    const moduleNames = context.magento.modules.map((module) => module.name)
+
     // Add the default magento import plugin
     // Necessary to resolve the "//@magento_import" statements in the core styles
     if (magentoImport) {
-      plugins.unshift(magentoImportPreprocessor(context.modules))
+      plugins.unshift(magentoImportPreprocessor(moduleNames))
     }
 
     const files = await glob(src ?? '**/!(_)*.less', {
       ignore,
-      cwd: context.src,
+      cwd: context.cwd,
     })
 
     /**
@@ -46,7 +49,7 @@ export default (options) => ({
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.src, file)
+        const filePath = path.join(context.cwd, file)
         const fileContent = await fs.readFile(filePath, 'utf8')
 
         const output = await _less.render(

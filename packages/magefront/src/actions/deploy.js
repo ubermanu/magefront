@@ -29,7 +29,7 @@ export const deploy = async (context) => {
     '**/*.pcss',
   ]
 
-  // Copy all the files from the src (tmp) dir to the `pub/static` dir
+  // Copy all the files from the `var/view_preprocessed` dir to the `pub/static` dir
   const files = await glob('**/*', { cwd: buildConfig.tmp, ignore: excludes })
 
   await Promise.all(

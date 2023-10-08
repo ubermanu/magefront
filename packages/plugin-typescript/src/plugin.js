@@ -17,12 +17,12 @@ export default (options) => ({
 
     const files = await glob(src ?? '**/*.ts', {
       ignore: ignore ?? ['**/node_modules/**', '**/*.d.ts'],
-      cwd: context.src,
+      cwd: context.cwd,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.src, file)
+        const filePath = path.join(context.cwd, file)
         const fileContent = await fs.readFile(filePath)
         const output = typescript.transpile(
           fileContent.toString(),
