@@ -62,6 +62,7 @@ export default () => ({
         files.push(path.join(cwd, file))
       })
     }
+
     const packed = await Promise.all(
       files.map(async (filePath) => {
         const fileContent = await fs.promises.readFile(filePath)
