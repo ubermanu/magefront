@@ -73,6 +73,7 @@ export const watch = async (context) => {
     .on('unlink', rebuild)
     .on('unlinkDir', rebuild)
     .on('change', async (filePath) => {
+      logger.info(`[${k.gray(theme.name)}] File changed: ${k.cyan(filePath)}`)
       await rebuild()
       if (styleExtensions.includes(path.extname(filePath))) {
         instance?.reload('*.css')
