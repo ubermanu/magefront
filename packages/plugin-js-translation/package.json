@@ -30,7 +30,8 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "csv-parse": "^5.5.0"
+    "csv-parse": "^5.5.0",
+    "fast-glob": "^3.3.1"
   },
   "peerDependencies": {
     "magefront": "workspace:^"

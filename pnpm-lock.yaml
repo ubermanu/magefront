@@ -161,6 +161,9 @@ importers:
       csv-parse:
         specifier: ^5.5.0
         version: 5.5.0
+      fast-glob:
+        specifier: ^3.3.1
+        version: 3.3.1
       magefront:
         specifier: workspace:^
         version: link:../magefront
