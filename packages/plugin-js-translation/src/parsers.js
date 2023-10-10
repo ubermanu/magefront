@@ -19,4 +19,4 @@ export const REGEX_I18N_BINDING = /i18n:\s?'([^'\\]*(?:\\.[^'\\]*)*)'/g
  * @covers <span translate="'Examples'"></span>
  */
 export const REGEX_TRANSLATE_TAG_OR_ATTR =
-  /translate( args|)="\'([^"\\]*(?:\\.[^"\\]*)*)'"/g
+  /translate( args|)="'([^"\\]*(?:\\.[^"\\]*)*)'"/g
