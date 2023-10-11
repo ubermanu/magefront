@@ -13,8 +13,8 @@ import { getRegistrations } from './composer.js'
 export const getLanguages = memo((context) => {
   const { rootPath } = context
 
-  /** @type {{ [name: string]: import('types').MagentoLanguage }} */
-  const list = {}
+  /** @type {Map<string, import('types').MagentoLanguage>} */
+  const languages = new Map()
 
   // Get the list of languages in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
@@ -35,16 +35,16 @@ export const getLanguages = memo((context) => {
         return
       }
 
-      list[name] = {
+      languages.set(name, {
         name,
         code,
         src,
         enabled: true,
-      }
+      })
     })
   })
 
-  return Object.values(list)
+  return Array.from(languages.values())
 })
 
 /**

@@ -85,7 +85,7 @@ export const getThemes = memo((context) => {
     }
   })
 
-  return [...themes.values()]
+  return Array.from(themes.values())
 })
 
 /**

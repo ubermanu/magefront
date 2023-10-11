@@ -15,8 +15,9 @@ import { getRegistrations } from './composer.js'
 export const getModules = memo((context) => {
   const { rootPath } = context
 
-  /** @type {{ [name: string]: import('types').MagentoModule }} */
-  const list = {}
+  /** @type {Map<string, import('types').MagentoModule>} */
+  const modules = new Map()
+
   const config = fs
     .readFileSync(path.join(rootPath, '/app/etc/config.php'))
     .toString()
@@ -29,11 +30,11 @@ export const getModules = memo((context) => {
   // 1. Get the list of modules from the config file
   config.match(/'(\w+_\w+)'\s*=>\s*(\d)/g)?.forEach((match) => {
     const [, name, enabled] = match.match(/'(\w+_\w+)'\s*=>\s*(\d)/) ?? []
-    list[name] = {
+    modules.set(name, {
       name,
       enabled: enabled === '1',
       src: '',
-    }
+    })
   })
 
   // 2. Resolve the source path for the modules into `app/code/`
@@ -51,12 +52,15 @@ export const getModules = memo((context) => {
     }
 
     const name = fetchNameFromModuleXml(moduleXmlFile)
-    if (!list[name]) {
+    if (!modules.has(name)) {
       // FIXME: logger.warn(`Module "${name}" not found in config.php`)
       return
     }
 
-    list[name].src = codeSrc.split('/').slice(0, 4).join('/')
+    const module = modules.get(name)
+    if (module) {
+      module.src = codeSrc.split('/').slice(0, 4).join('/')
+    }
   })
 
   // 3. Get the list of modules in the vendor directory.
@@ -72,16 +76,19 @@ export const getModules = memo((context) => {
         path.join(rootPath, src, 'etc/module.xml')
       )
 
-      if (!list[name]) {
+      if (!modules.has(name)) {
         // FIXME: logger.warn(`Module "${name}" not found in config.php`)
         return
       }
 
-      list[name].src = src
+      const module = modules.get(name)
+      if (module) {
+        module.src = src
+      }
     })
   })
 
-  return Object.values(list)
+  return Array.from(modules.values())
 })
 
 /**
