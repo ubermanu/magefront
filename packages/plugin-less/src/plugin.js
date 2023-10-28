@@ -75,7 +75,6 @@ export default (options) => ({
           await fs.writeFile(cssFilePath, output.css, 'utf8')
         }
 
-        // TODO: Render the map alongside the CSS file
         if (output.map) {
           await fs.writeFile(`${cssFilePath}.map`, output.map, 'utf8')
         }
