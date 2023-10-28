@@ -69,6 +69,8 @@ export default (options) => ({
           .join(context.dest, file)
           .replace(/\.less$/, '.css')
 
+        await fs.mkdir(path.dirname(cssFilePath), { recursive: true })
+
         if (output.css) {
           await fs.writeFile(cssFilePath, output.css, 'utf8')
         }
