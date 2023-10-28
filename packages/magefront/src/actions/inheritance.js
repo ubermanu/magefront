@@ -27,13 +27,13 @@ export const inheritance = async (context) => {
   async function fetchFiles(src, dest, ignore = []) {
     const files = await glob(src + '/**', {
       cwd: rootPath,
-      ignore: ignore.map((pattern) => path.join(src, pattern)),
+      ignore,
       onlyFiles: true,
     })
 
     await Promise.all(
       files.map(async (srcPath) => {
-        const destPath = path.join(dest, srcPath.replace(src + '/', '/'))
+        const destPath = path.join(dest, srcPath.substring(src.length + 1))
         fileList.set(destPath, srcPath)
       })
     )
@@ -41,7 +41,7 @@ export const inheritance = async (context) => {
 
   // Add the Magento core lib resources as a dependency for everyone
   // Ignore the css docs and txt files
-  await fetchFiles(path.join('lib', 'web'), tmp, ['css/docs', '**/*.txt'])
+  await fetchFiles(path.join('lib', 'web'), '', ['css/docs', '**/*.txt'])
 
   // For each enabled modules, copy the web resources into the theme temp dir
   const modules = context.magento.modules.filter((m) => m.enabled && m.src)
@@ -50,14 +50,10 @@ export const inheritance = async (context) => {
   await Promise.all(
     modules.map(async (m) => {
       // Resolve the "base" area as well (common to frontend and adminhtml)
-      await fetchFiles(
-        path.join(m.src, 'view', 'base', 'web'),
-        path.join(tmp, m.name),
-        ignore
-      )
+      await fetchFiles(path.join(m.src, 'view', 'base', 'web'), m.name, ignore)
       await fetchFiles(
         path.join(m.src, 'view', context.theme.area, 'web'),
-        path.join(tmp, m.name),
+        m.name,
         ignore
       )
     })
@@ -67,16 +63,12 @@ export const inheritance = async (context) => {
   for (const theme of getThemeDependencyTree(context.theme)) {
     // TODO: Implement custom ignore property in the theme config
     // TODO: Add support for a `.magefrontignore` file?
-    await fetchFiles(path.join(theme.src, 'web'), tmp, ignore)
+    await fetchFiles(path.join(theme.src, 'web'), '', ignore)
 
     // Add the submodule source files (ex: `Magento_Catalog/web`)
     await Promise.all(
       modules.map((m) => {
-        return fetchFiles(
-          path.join(theme.src, m.name, 'web'),
-          path.join(tmp, m.name),
-          ignore
-        )
+        return fetchFiles(path.join(theme.src, m.name, 'web'), m.name, ignore)
       })
     )
   }
@@ -87,7 +79,7 @@ export const inheritance = async (context) => {
   // Generate the copies
   await Promise.all(
     Array.from(fileList.entries()).map(([destPath, srcPath]) => {
-      return fs.copy(path.join(rootPath, srcPath), destPath)
+      return fs.copy(path.join(rootPath, srcPath), path.join(tmp, destPath))
     })
   )
 }
