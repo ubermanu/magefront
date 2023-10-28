@@ -23,7 +23,7 @@ export const getBuildConfig = memo(async (opts, context) => {
   }
 
   // The path to the temporary directory where the theme will be built
-  const tmp = path.join(rootPath, tempPath, theme.dest)
+  const tmp = path.join(rootPath, tempPath, theme.name)
 
   // The path to the destination directory where the theme will be deployed (pub/static)
   const dest = path.join(rootPath, theme.dest)

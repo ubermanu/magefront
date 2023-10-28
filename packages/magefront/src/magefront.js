@@ -40,12 +40,11 @@ export async function magefront(opts, logger) {
   context.logger.info(`[${k.gray(theme.name)}] Gathering files...`)
   await clean(context)
   await inheritance(context)
+  await deploy(context)
 
   context.logger.info(
     `[${k.gray(theme.name)}] Building locale ${k.bold(locale)}`
   )
-
-  await deploy(context)
   await build(context)
 
   context.logger.info(
