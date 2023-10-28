@@ -1,8 +1,10 @@
 import k from 'kleur'
+import path from 'node:path'
 import { getThemeDependencyTree } from '../magento/theme.js'
 
 /**
- * Build the theme. If a configuration file is found, it will be used.
+ * Process the files in both the temporary and destination directories. This is
+ * the final step in the build process.
  *
  * @type {import('types').Action}
  */
@@ -17,6 +19,7 @@ export const build = async (context) => {
     theme: context.theme,
     themeDependencyTree: getThemeDependencyTree(context.theme),
     cwd: buildConfig.tmp,
+    dest: path.join(buildConfig.dest, locale),
     locale,
     magento: {
       modules,

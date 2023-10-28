@@ -16,12 +16,12 @@ export default (options) => ({
     const { src, ignore, dest, plugins } = { ...options }
 
     const files = await glob(src ?? '**/*.{jpg,jpeg,png,gif,svg}', {
-      cwd: context.cwd,
+      cwd: context.dest,
       ignore,
     })
 
     const result = await imagemin(
-      files.map((file) => path.join(context.cwd, file)),
+      files.map((file) => path.join(context.dest, file)),
       {
         plugins: Array.from(plugins ?? []),
       }
@@ -33,8 +33,8 @@ export default (options) => ({
     await Promise.all(
       result.map(async (file) => {
         // Remove the absolute context.cwd path from the file's source path.
-        const sourcePath = path.relative(context.cwd, file.sourcePath)
-        const filePath = path.join(context.cwd, dest ?? '', sourcePath)
+        const sourcePath = path.relative(context.dest, file.sourcePath)
+        const filePath = path.join(context.dest, dest ?? '', sourcePath)
 
         // Write the optimized image to the destination.
         await fs.writeFile(filePath, file.data, 'utf8')

@@ -5,6 +5,7 @@ import { performance } from 'node:perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
 import { instance } from './browser-sync.js'
 import { build } from './build.js'
+import { clean } from './clean.js'
 import { deploy } from './deploy.js'
 import { inheritance } from './inheritance.js'
 
@@ -47,16 +48,20 @@ export const watch = async (context) => {
 
   let isBuilding = false
 
-  // When files are created, updated or deleted, rebuild the theme
-  const rebuild = async () => {
+  /**
+   * Gather the files and deploy the theme files.
+   *
+   * @returns {Promise<void>}
+   */
+  const reindex = async () => {
     if (isBuilding) {
       return
     }
-    isBuilding = true
-    logger.info(`[${k.gray(theme.name)}] Rebuilding theme...`)
+    logger.info(`[${k.gray(theme.name)}] Deploying theme...`)
     const now = performance.now()
+    isBuilding = true
+    await clean(context)
     await inheritance(context)
-    await build(context)
     await deploy(context)
     logger.info(
       `[${k.gray(theme.name)}] Done in ${prettyMilliseconds(
@@ -66,20 +71,75 @@ export const watch = async (context) => {
     isBuilding = false
   }
 
-  // TODO: Only build the plugins that are affected by the change
+  /**
+   * Run the build plugins on the deployed files.
+   *
+   * @returns {Promise<void>}
+   */
+  const rebuild = async () => {
+    if (isBuilding) {
+      return
+    }
+    isBuilding = true
+    logger.info(`[${k.gray(theme.name)}] Rebuilding theme...`)
+    const now = performance.now()
+    // TODO: clean pub and deploy before rebuilding to avoid dangling files
+    await build(context)
+    logger.info(
+      `[${k.gray(theme.name)}] Done in ${prettyMilliseconds(
+        performance.now() - now
+      )}`
+    )
+    isBuilding = false
+  }
+
+  /**
+   * Returns TRUE if the file path comes from a web directory.
+   *
+   * @param {string} filePath
+   * @returns {boolean}
+   */
+  function isWebFile(filePath) {
+    return (
+      filePath.includes(`/view/${theme.area}/web/`) ||
+      filePath.includes('/view/base/web/')
+    )
+  }
+
+  /**
+   * Queue a rebuild of the theme for a specific file.
+   *
+   * TODO: Only rebuild the plugins that are affected by the change
+   *
+   * @param {string} filePath
+   * @returns {Promise<void>}
+   */
+  async function rebuildFile(filePath) {
+    await rebuild()
+    if (
+      isWebFile(filePath) &&
+      styleExtensions.includes(path.extname(filePath))
+    ) {
+      instance?.reload('*.css')
+    } else if (staticExtensions.includes(path.extname(filePath))) {
+      instance?.reload()
+    }
+  }
+
   srcWatcher
-    .on('add', rebuild)
-    .on('addDir', rebuild)
-    .on('unlink', rebuild)
-    .on('unlinkDir', rebuild)
+    .on('add', async (filePath) => {
+      logger.info(`[${k.gray(theme.name)}] File added: ${k.cyan(filePath)}`)
+      await reindex()
+      await rebuildFile(filePath)
+    })
+    .on('unlink', async (filePath) => {
+      logger.info(`[${k.gray(theme.name)}] File removed: ${k.cyan(filePath)}`)
+      await reindex()
+      await rebuildFile(filePath)
+    })
     .on('change', async (filePath) => {
       logger.info(`[${k.gray(theme.name)}] File changed: ${k.cyan(filePath)}`)
-      await rebuild()
-      if (styleExtensions.includes(path.extname(filePath))) {
-        instance?.reload('*.css')
-      } else if (staticExtensions.includes(path.extname(filePath))) {
-        instance?.reload()
-      }
+      await rebuildFile(filePath)
     })
 
   srcWatcher.on('ready', () => {
@@ -88,5 +148,4 @@ export const watch = async (context) => {
 }
 
 const styleExtensions = ['.less', '.scss', '.styl', '.css', '.postcss', '.pcss']
-
 const staticExtensions = ['.html', '.phtml', '.xml', '.csv', '.js']

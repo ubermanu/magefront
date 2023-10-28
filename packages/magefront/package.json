@@ -34,6 +34,7 @@
     "types"
   ],
   "dependencies": {
+    "async": "^3.2.4",
     "browser-sync": "^2.29.3",
     "chokidar": "^3.5.3",
     "cli-table": "^0.3.11",
@@ -48,6 +49,7 @@
     "winston": "^3.10.0"
   },
   "devDependencies": {
+    "@types/async": "^3.2.22",
     "@types/browser-sync": "^2.27.1",
     "@types/cli-table": "^0.3.2",
     "@types/fs-extra": "^11.0.2",

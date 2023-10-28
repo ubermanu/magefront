@@ -29,6 +29,7 @@ declare namespace magefront {
     theme: MagentoTheme
     themeDependencyTree: MagentoTheme[]
     cwd: string
+    dest: string
     locale: string
     magento: {
       modules: MagentoModule[]
@@ -42,6 +43,12 @@ declare namespace magefront {
   export interface Plugin {
     name: string
     build(context: PluginContext): Promise<void>
+    watcher?: {
+      onRebuild?: (
+        filePath: string,
+        browserSync: import('browser-sync').BrowserSyncInstance
+      ) => void
+    }
   }
 
   // The preset configuration object. Contains already defined plugins (because we cannot resolve them at the module level).

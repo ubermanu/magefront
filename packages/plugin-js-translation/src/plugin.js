@@ -146,7 +146,7 @@ export default () => ({
     })
 
     parser.on('end', () => {
-      const file = path.join(context.cwd, 'js-translation.json')
+      const file = path.join(context.dest, 'js-translation.json')
       // Sort the records by key
       records = Object.fromEntries(Object.entries(records).sort())
       fs.writeFileSync(file, JSON.stringify(records, null, 2))

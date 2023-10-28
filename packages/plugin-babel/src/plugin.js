@@ -26,7 +26,7 @@ export default (options) => {
 
       await Promise.all(
         files.map((file) => {
-          const filePath = path.join(context.cwd, file)
+          const filePath = path.join(context.dest, file)
           return babel.transformAsync(filePath, compilerOptions)
         })
       )

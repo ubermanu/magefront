@@ -4,7 +4,7 @@ import path from 'node:path'
 
 /**
  * Deploy the built theme files from the temp directory to the `pub/static` dir.
- * This is the third step in the build process.
+ * This is the second step in the build process.
  *
  * @type {import('types').Action}
  */
@@ -15,7 +15,7 @@ export const deploy = async (context) => {
   const dest = path.join(buildConfig.dest, locale)
 
   const excludes = [
-    '**/node_modules',
+    '**/node_modules/**',
     '**/*.less',
     '**/*.scss',
     '**/*.styl',

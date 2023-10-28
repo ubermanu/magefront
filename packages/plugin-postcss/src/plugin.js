@@ -22,13 +22,15 @@ export default (options) => ({
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.cwd, file)
-        const fileContent = await fs.readFile(filePath)
+        const srcPath = path.join(context.cwd, file)
+        const destPath = path.join(context.dest, file)
+
+        const fileContent = await fs.readFile(srcPath)
         const compiler = postcss(plugins ?? [])
 
         const result = await compiler.process(fileContent, {
-          from: filePath,
-          to: filePath,
+          from: srcPath,
+          to: destPath,
         })
 
         // TODO: Forward to logger
@@ -36,7 +38,7 @@ export default (options) => ({
           console.warn(warn.toString())
         })
 
-        return fs.writeFile(filePath, result.css)
+        return fs.writeFile(destPath, result.css)
       })
     )
   },

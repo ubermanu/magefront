@@ -15,12 +15,12 @@ export default (options) => ({
 
     const files = await glob(src ?? '**/!(_)*.css', {
       ignore: ignore ?? [],
-      cwd: context.cwd,
+      cwd: context.dest,
     })
 
     await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(context.cwd, file)
+        const filePath = path.join(context.dest, file)
         const fileContent = await fs.readFile(filePath)
 
         const { code, map, warnings } = lightningcss.transform({
@@ -28,7 +28,7 @@ export default (options) => ({
           code: fileContent,
           minify: minify,
           sourceMap: sourcemap,
-          projectRoot: context.cwd,
+          projectRoot: context.dest,
         })
 
         warnings.forEach((warn) => {

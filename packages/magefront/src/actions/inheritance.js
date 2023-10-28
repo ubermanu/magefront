@@ -5,7 +5,7 @@ import { getThemeDependencyTree } from '../magento/theme.js'
 
 /**
  * Gather all the theme files and copy them to the temporary directory. When
- * this is done, the `build` task should be run afterwards.
+ * this is done, the `preprocess` task should be run afterwards.
  *
  * @type {import('types').Action}
  */
@@ -78,8 +78,11 @@ export const inheritance = async (context) => {
 
   // Generate the copies
   await Promise.all(
-    Array.from(fileList.entries()).map(([destPath, srcPath]) => {
-      return fs.copy(path.join(rootPath, srcPath), path.join(tmp, destPath))
+    Array.from(fileList).map(async ([destPath, srcPath]) => {
+      return fs.ensureSymlink(
+        path.join(rootPath, srcPath),
+        path.join(tmp, destPath)
+      )
     })
   )
 }

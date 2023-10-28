@@ -45,8 +45,8 @@ export async function magefront(opts, logger) {
     `[${k.gray(theme.name)}] Building locale ${k.bold(locale)}`
   )
 
-  await build(context)
   await deploy(context)
+  await build(context)
 
   context.logger.info(
     `[${k.gray(theme.name)}] Done in ${prettyMilliseconds(

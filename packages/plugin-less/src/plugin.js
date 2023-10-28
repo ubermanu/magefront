@@ -65,7 +65,9 @@ export default (options) => ({
           false
         )
 
-        const cssFilePath = filePath.replace(/\.less$/, '.css')
+        const cssFilePath = path
+          .join(context.dest, file)
+          .replace(/\.less$/, '.css')
 
         if (output.css) {
           await fs.writeFile(cssFilePath, output.css, 'utf8')

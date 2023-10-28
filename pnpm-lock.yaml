@@ -58,6 +58,9 @@ importers:
 
   packages/magefront:
     dependencies:
+      async:
+        specifier: ^3.2.4
+        version: 3.2.4
       browser-sync:
         specifier: ^2.29.3
         version: 2.29.3
@@ -95,6 +98,9 @@ importers:
         specifier: ^3.10.0
         version: 3.10.0
     devDependencies:
+      '@types/async':
+        specifier: ^3.2.22
+        version: 3.2.22
       '@types/browser-sync':
         specifier: ^2.27.1
         version: 2.27.1
@@ -1668,6 +1674,10 @@ packages:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
     dev: false
+
+  /@types/async@3.2.22:
+    resolution: {integrity: sha512-aYsrMkRWXwJfchKtwubTIgvWcgRU8zFT+lL48l9jSu7RJKa3A+E3qwmAJVYap4Do9QzTCLm6p63JmOuII3j7dg==}
+    dev: true
 
   /@types/babel__core@7.20.2:
     resolution: {integrity: sha512-pNpr1T1xLUc2l3xJKuPtsEky3ybxN3m4fJkknfIpTCTfIZCDW57oAg+EfCgIIp2rvCe0Wn++/FfodDS4YXxBwA==}
