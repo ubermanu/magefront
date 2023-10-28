@@ -15,8 +15,8 @@ export default () => ({
     const { theme, themeDependencyTree } = context
     const { modules, rootPath } = context.magento
 
-    /** @type {string[]} */
-    const files = []
+    /** @type {Set<string>} */
+    const files = new Set()
 
     // Get the `requirejs-config.js` files from the modules
     modules.forEach((mod) => {
@@ -29,7 +29,8 @@ export default () => ({
       )
 
       if (fs.existsSync(baseFilePath)) {
-        files.push(baseFilePath)
+        files.add(baseFilePath)
+        return
       }
 
       const filePath = path.join(
@@ -41,7 +42,7 @@ export default () => ({
       )
 
       if (fs.existsSync(filePath)) {
-        files.push(filePath)
+        files.add(filePath)
       }
     })
 
@@ -59,12 +60,12 @@ export default () => ({
       })
 
       themeFiles.forEach((file) => {
-        files.push(path.join(cwd, file))
+        files.add(path.join(cwd, file))
       })
     }
 
     const packed = await Promise.all(
-      files.map(async (filePath) => {
+      Array.from(files).map(async (filePath) => {
         const fileContent = await fs.promises.readFile(filePath)
         return `(function(){\n${fileContent}\nrequire.config(config);\n})();\n`
       })
