@@ -112,15 +112,16 @@ export default () => ({
       }
     })
 
-    // Get the translation file from the theme
-    // FIXME: Get the translations from the parent themes
-    const themeTranslationFile = path.join(
-      context.cwd,
-      'i18n',
-      translationFilename
-    )
-    if (fs.existsSync(themeTranslationFile)) {
-      files.push(themeTranslationFile)
+    // Get the translation file from the theme (and its parents)
+    for (const theme of context.themeDependencyTree) {
+      const themeTranslationFile = path.join(
+        path.join(rootPath, theme.src),
+        'i18n',
+        translationFilename
+      )
+      if (fs.existsSync(themeTranslationFile)) {
+        files.push(themeTranslationFile)
+      }
     }
 
     /** @type {Record<string, string>} */
