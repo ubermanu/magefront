@@ -52,7 +52,7 @@ export default () => ({
     // Extract the phrases from the preprocessed JS files
     const jsFiles = await glob('**/*.js', {
       cwd: context.cwd,
-      ignore: ['**/node_modules/**', '**/vendor/**'],
+      ignore: ['**/node_modules/**'],
       onlyFiles: true,
     })
 
@@ -67,7 +67,7 @@ export default () => ({
     // Extract the phrases from the preprocessed HTML files
     const htmlFiles = await glob('**/*.html', {
       cwd: context.cwd,
-      ignore: ['**/node_modules/**', '**/vendor/**'],
+      ignore: ['**/node_modules/**'],
       onlyFiles: true,
     })
 
