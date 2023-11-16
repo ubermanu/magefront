@@ -47,11 +47,28 @@ export const watch = async (context) => {
 
   let isBuilding = false
 
-  // When files are created, updated or deleted, rebuild the theme
-  const rebuild = async () => {
+  /**
+   * When files are created, updated or deleted, rebuild the theme.
+   *
+   * @param {string} filePath
+   * @returns {Promise<void>}
+   */
+  const rebuild = async (filePath) => {
     if (isBuilding) {
       return
     }
+
+    // TODO: Only rerun the plugins that are affected by the change
+    //  Maybe add a watcher config that defines what files should trigger a rebuild
+    // This is actually wrong because the translations are generated using *.phtml files as well
+    if (
+      !isWebFile(filePath) &&
+      !isRequireJsConfigFile(filePath) &&
+      !isTranslationFile(filePath)
+    ) {
+      return
+    }
+
     isBuilding = true
     logger.info(`[${k.gray(theme.name)}] Rebuilding theme...`)
     const now = performance.now()
@@ -66,6 +83,50 @@ export const watch = async (context) => {
     isBuilding = false
   }
 
+  const APP_CODE_WEB_REGEX =
+    theme.area === 'adminhtml'
+      ? /^app\/code\/\w+\/\w+\/view\/(base|adminhtml)\/web\//
+      : /^app\/code\/\w+\/\w+\/view\/(base|frontend)\/web\//
+
+  const APP_DESIGN_WEB_REGEX = /^app\/design\/\w+\/\w+\/\w+\/(\w+\/?)web\//
+
+  /**
+   * Check if the file is in the `web` directory, and therefore should trigger a
+   * reload of the browser.
+   *
+   * TODO: Add unit tests for this function
+   *
+   * @param {string} filePath
+   * @returns {boolean}
+   */
+  function isWebFile(filePath) {
+    return [APP_CODE_WEB_REGEX, APP_DESIGN_WEB_REGEX].some((regex) =>
+      regex.test(filePath)
+    )
+  }
+
+  /**
+   * @param {string} filePath
+   * @returns {boolean}
+   */
+  function isRequireJsConfigFile(filePath) {
+    return path.basename(filePath) === 'requirejs-config.js'
+  }
+
+  const APP_I18N_REGEX = /^app\/i18n\/\w+\/\w+\/(\w+\/?)web\//
+  const APP_CODE_I18N_REGEX = /^app\/code\/\w+\/\w+\/i18n\//
+  const APP_DESIGN_I18N_REGEX = /^app\/design\/\w+\/\w+\/\w+\/i18n\//
+
+  /**
+   * @param {string} filePath
+   * @returns {boolean}
+   */
+  function isTranslationFile(filePath) {
+    return [APP_I18N_REGEX, APP_CODE_I18N_REGEX, APP_DESIGN_I18N_REGEX].some(
+      (regex) => regex.test(filePath)
+    )
+  }
+
   // TODO: Only build the plugins that are affected by the change
   srcWatcher
     .on('add', rebuild)
@@ -75,7 +136,7 @@ export const watch = async (context) => {
     .on('change', async (filePath) => {
       logger.info(`[${k.gray(theme.name)}] File changed: ${k.cyan(filePath)}`)
       if (rebuildExtensions.includes(path.extname(filePath))) {
-        await rebuild()
+        await rebuild(filePath)
       }
       if (styleExtensions.includes(path.extname(filePath))) {
         instance?.reload('*.css')
