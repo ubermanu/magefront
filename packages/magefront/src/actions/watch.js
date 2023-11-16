@@ -74,10 +74,12 @@ export const watch = async (context) => {
     .on('unlinkDir', rebuild)
     .on('change', async (filePath) => {
       logger.info(`[${k.gray(theme.name)}] File changed: ${k.cyan(filePath)}`)
-      await rebuild()
+      if (rebuildExtensions.includes(path.extname(filePath))) {
+        await rebuild()
+      }
       if (styleExtensions.includes(path.extname(filePath))) {
         instance?.reload('*.css')
-      } else if (staticExtensions.includes(path.extname(filePath))) {
+      } else if (reloadExtensions.includes(path.extname(filePath))) {
         instance?.reload()
       }
     })
@@ -88,5 +90,5 @@ export const watch = async (context) => {
 }
 
 const styleExtensions = ['.less', '.scss', '.styl', '.css', '.postcss', '.pcss']
-
-const staticExtensions = ['.html', '.phtml', '.xml', '.csv', '.js']
+const reloadExtensions = ['.phtml', '.xml', '.csv', '.html', '.js']
+const rebuildExtensions = ['.html', '.js', ...styleExtensions]
