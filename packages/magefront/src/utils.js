@@ -14,3 +14,13 @@ export const isArray = (value) => Array.isArray(value)
  */
 export const isObject = (value) =>
   typeof value === 'object' && value !== null && !isArray(value)
+
+/**
+ * Escapes a string to be used as a regular expression.
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+export function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
