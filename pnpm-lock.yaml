@@ -372,8 +372,8 @@ importers:
         specifier: ^1.6.3
         version: 1.6.3
       lucide-svelte:
-        specifier: ^0.279.0
-        version: 0.279.0(svelte@4.2.1)
+        specifier: ^0.292.0
+        version: 0.292.0(svelte@4.2.1)
       mdsvex:
         specifier: ^0.11.0
         version: 0.11.0(svelte@4.2.1)
@@ -6287,8 +6287,8 @@ packages:
       es5-ext: 0.10.62
     dev: false
 
-  /lucide-svelte@0.279.0(svelte@4.2.1):
-    resolution: {integrity: sha512-u9j8tMPxWsv5iXJvrUU/jpyML/k49flr7440UE8QM9V3u0OZt5+qaY5TMiPDTVRMdEELBg4d4ueW1+3Mo3VT4A==}
+  /lucide-svelte@0.292.0(svelte@4.2.1):
+    resolution: {integrity: sha512-bnTpg9pbm6pQDc+YiLK2yxtRFk2Cc+hbzwjAPaV85k56x10CJ9LsXjon6wRrlNTSdxJR7GOsRjz0A5ZNu3Z7dg==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
