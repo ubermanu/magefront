@@ -3,7 +3,7 @@ import { compile, defineMDSveXConfig, escapeSvelte } from 'mdsvex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkToc from 'remark-toc'
-import shiki from 'shiki'
+import * as shiki from 'shiki'
 
 export async function get_docs_data(withContent = true) {
   const files = import.meta.glob('../../../../../docs/**/!(_)*.md', {
@@ -32,9 +32,16 @@ const config = defineMDSveXConfig({
   highlight: {
     highlighter: async (code, lang = 'text') => {
       const highlighter = await shiki.getHighlighter({
-        theme: 'material-theme-darker',
+        themes: ['material-theme-darker'],
+        langs: ['shell', 'javascript', 'text', 'less', 'css'],
       })
-      return escapeSvelte(highlighter.codeToHtml(code, { lang }))
+
+      return escapeSvelte(
+        highlighter.codeToHtml(code, {
+          lang,
+          theme: 'material-theme-darker',
+        })
+      )
     },
   },
   remarkPlugins: [[remarkToc, { tight: true }]],
