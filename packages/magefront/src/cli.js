@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import process from 'node:process'
 import sade from 'sade'
 import winston from 'winston'
