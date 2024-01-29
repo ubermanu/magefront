@@ -109,7 +109,7 @@ function getParentFromThemeXml(file) {
 function getThemeNameAndAreaFromRegistrationPhp(file) {
   const registration = fs.readFileSync(file).toString()
   const [, area, name] =
-    registration.match(/'(frontend|adminhtml)\/([\w/]+)'/) ?? []
+    registration.match(/'(frontend|adminhtml)\/([\w/-]+)'/) ?? []
   return { name, area }
 }
 
