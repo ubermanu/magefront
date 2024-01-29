@@ -70,6 +70,8 @@ magefront dev -t Magento/blank --url https://magento.ddev.site
 
 > Only one theme can be used in dev mode.
 
+You might want to set the config `web/secure/use_in_frontend` to `0` in your `app/etc/env.php` file to avoid mixed content errors.
+
 ## list
 
 List all the available themes in your Magento 2 project files.
