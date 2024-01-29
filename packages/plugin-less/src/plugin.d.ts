@@ -2,7 +2,10 @@
 import { Pattern } from 'fast-glob'
 import { Plugin } from 'magefront'
 
-export function magentoImportPreprocessor(modules: string[]): Less.Plugin
+export function magentoImportPreprocessor(
+  modules: string[],
+  baseDir: string
+): Less.Plugin
 
 export interface Options {
   src?: string | string[]

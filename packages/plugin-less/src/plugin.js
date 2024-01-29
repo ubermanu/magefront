@@ -24,7 +24,7 @@ export default (options) => ({
     // Add the default magento import plugin
     // Necessary to resolve the "//@magento_import" statements in the core styles
     if (magentoImport) {
-      plugins.unshift(magentoImportPreprocessor(moduleNames))
+      plugins.unshift(magentoImportPreprocessor(moduleNames, context.cwd))
     }
 
     const files = await glob(src ?? '**/!(_)*.less', {

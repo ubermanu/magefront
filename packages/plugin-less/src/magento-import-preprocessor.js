@@ -1,3 +1,5 @@
+import path from 'node:path'
+
 /**
  * Replaces the commented `@magento_import` statements with the actual import
  * statements for each enabled modules.
@@ -8,9 +10,16 @@ export class preProcessor {
   /** @type {string[]} */
   modules
 
-  /** @param {string[]} modules */
-  constructor(modules) {
+  /** @type {string} */
+  baseDir
+
+  /**
+   * @param {string[]} modules
+   * @param {string} baseDir
+   */
+  constructor(modules, baseDir) {
     this.modules = modules
+    this.baseDir = baseDir
   }
 
   /**
@@ -21,7 +30,7 @@ export class preProcessor {
   process(src, _extra) {
     return src.replace(
       /^\/\/@magento_import\s(\([\w\s,]*\))?(.*)\s?;.*$/gm,
-      (_match, options, path) => {
+      (_match, options, target) => {
         /** @type {string[]} */
         const params = []
 
@@ -37,12 +46,20 @@ export class preProcessor {
           params.unshift('optional')
         }
 
-        path = path.replace(/["']/g, '').trim()
+        target = target.replace(/["']/g, '').trim()
+
+        // If the path contains a module name, we just need to target it.
+        if (target.includes('::')) {
+          const [mod, file] = target.split('::')
+          const filename = path.join(this.baseDir, mod, 'css', file)
+          return `@import (${params.join(', ')}) '${filename}';`
+        }
 
         return this.modules
-          .map(
-            (mod) => `@import (${params.join(', ')}) '../${mod}/css/${path}';`
-          )
+          .map((mod) => {
+            const filename = path.join(this.baseDir, mod, 'css', target)
+            return `@import (${params.join(', ')}) '${filename}';`
+          })
           .join('\n')
       }
     )
@@ -51,10 +68,11 @@ export class preProcessor {
 
 /**
  * @param {string[]} modules
+ * @param {string} baseDir
  * @returns {Less.Plugin}
  */
-export default (modules) => ({
+export default (modules, baseDir) => ({
   install: function (_less, pluginManager) {
-    pluginManager.addPreProcessor(new preProcessor(modules), 1)
+    pluginManager.addPreProcessor(new preProcessor(modules, baseDir), 1)
   },
 })
