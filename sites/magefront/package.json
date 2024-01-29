@@ -17,7 +17,7 @@
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
     "case": "^1.6.3",
-    "lucide-svelte": "^0.279.0",
+    "lucide-svelte": "^0.316.0",
     "mdsvex": "^0.11.0",
     "postcss": "^8.4.31",
     "rehype-pretty-code": "^0.10.1",
