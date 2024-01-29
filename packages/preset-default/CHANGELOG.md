@@ -1,5 +1,21 @@
 # magefront-preset-default
 
+## 2.1.0
+
+### Minor Changes
+
+- 6971441: Various updates and fixes
+
+### Patch Changes
+
+- Updated dependencies [6971441]
+  - magefront@2.1.0
+  - magefront-plugin-js-translation@2.1.0
+  - magefront-plugin-less@2.1.0
+  - magefront-plugin-lightningcss@0.2.0
+  - magefront-plugin-requirejs-config@2.1.0
+  - magefront-plugin-terser@2.1.0
+
 ## 2.0.0
 
 ### Major Changes
