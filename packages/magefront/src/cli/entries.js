@@ -15,8 +15,12 @@ import { getThemes } from '../magento/theme.js'
  * @returns {Promise<import('types').MagefrontOptions[]>}
  */
 export async function generateEntries(opts, rootPath, logger) {
-  const { theme, config, _: locales } = opts
+  const { theme, config, debug, _: locales } = opts
   const locale = locales[0] || 'en_US'
+
+  if (debug) {
+    logger.level = 'debug'
+  }
 
   const magentoContext = createMagentoContext({ magento: { rootPath } })
 

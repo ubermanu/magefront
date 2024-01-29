@@ -25,6 +25,7 @@ program
   .version(pkg.version)
   .option('-t, --theme <theme>', 'Theme identifier (e.g. Magento/blank)')
   .option('-c, --config <config>', 'Path to the configuration file')
+  .option('--debug', 'Enable debug mode')
 
 /**
  * The build command, gather all the theme files and build the theme into the
