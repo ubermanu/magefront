@@ -13,7 +13,7 @@
   "devDependencies": {
     "@fontsource-variable/roboto-slab": "^5.0.12",
     "@sveltejs/adapter-static": "^2.0.3",
-    "@sveltejs/kit": "^1.25.1",
+    "@sveltejs/kit": "^2.5.0",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.16",
     "case": "^1.6.3",
