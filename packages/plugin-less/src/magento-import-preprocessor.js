@@ -15,9 +15,9 @@ export class preProcessor {
 
   /**
    * @param {string[]} modules
-   * @param {string} baseDir
+   * @param {string} [baseDir]
    */
-  constructor(modules, baseDir) {
+  constructor(modules, baseDir = '') {
     this.modules = modules
     this.baseDir = baseDir
   }
