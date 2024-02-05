@@ -66,7 +66,7 @@ export const watch = async (context) => {
       !isRequireJsConfigFile(filePath) &&
       !isTranslationFile(filePath)
     ) {
-      return
+      // return
     }
 
     isBuilding = true
