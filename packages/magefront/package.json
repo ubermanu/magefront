@@ -34,7 +34,7 @@
     "types"
   ],
   "dependencies": {
-    "browser-sync": "^2.29.3",
+    "browser-sync": "^3.0.2",
     "chokidar": "^3.5.3",
     "cli-table": "^0.3.11",
     "fast-glob": "^3.3.1",
