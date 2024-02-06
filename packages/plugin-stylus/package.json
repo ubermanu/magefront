@@ -30,8 +30,8 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@types/stylus": "^0.48.39",
-    "fast-glob": "^3.3.1"
+    "@types/stylus": "^0.48.42",
+    "fast-glob": "^3.3.2"
   },
   "peerDependencies": {
     "magefront": "workspace:^",

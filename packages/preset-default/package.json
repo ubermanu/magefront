@@ -38,7 +38,7 @@
     "magefront-plugin-lightningcss": "workspace:^",
     "magefront-plugin-requirejs-config": "workspace:^",
     "magefront-plugin-terser": "workspace:^",
-    "postcss": "^8.4.31"
+    "postcss": "^8.4.34"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
