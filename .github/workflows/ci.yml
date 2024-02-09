@@ -3,6 +3,9 @@ name: continuous-integration
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
 
 concurrency:
   group: 'continuous-integration'
@@ -15,10 +18,6 @@ jobs:
     strategy:
       matrix:
         magento-version: [ '2.4.6' ]
-
-    env:
-      MAGENTO_MARKETPLACE_USERNAME: ${{ secrets.MAGENTO_MARKETPLACE_USERNAME }}
-      MAGENTO_MARKETPLACE_PASSWORD: ${{ secrets.MAGENTO_MARKETPLACE_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4
@@ -33,32 +32,13 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          tools: composer:2
-          php-version: 8.1
-          coverage: none
-
-      - name: Setup Magento Repository Credentials
-        run: |
-          composer global config http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_USERNAME}" "${MAGENTO_MARKETPLACE_PASSWORD}"
-
       - name: Create Magento Project
-        run: |
-          composer create-project --no-install --repository-url=https://repo.magento.com/ magento/project-community-edition=${{ matrix.magento-version }} "$GITHUB_WORKSPACE/magento"
-
-      - name: Cache Magento Project
-        id: cache
-        uses: actions/cache@v4
+        uses: actions/checkout@v4
         with:
-          path: ${{ github.workspace }}/magento
-          key: magento-${{ runner.os }}-${{ matrix.magento-version }}
-
-      - name: Install Composer Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: composer install --ignore-platform-reqs --no-interaction
-        working-directory: ${{ github.workspace }}/magento
+          repository: magento/magento2
+          ref: ${{ matrix.magento-version }}
+          path: magento
+          fetch-depth: 0
 
       - name: Add config.php file to Magento
         run: cp .github/_fixtures/config.php.dist "$GITHUB_WORKSPACE/magento/app/etc/config.php"
