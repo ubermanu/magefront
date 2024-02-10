@@ -9,7 +9,7 @@ on:
 
 concurrency:
   group: 'continuous-integration'
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
