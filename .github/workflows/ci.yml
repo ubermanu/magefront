@@ -32,7 +32,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 
+      - name: Cache Magento Repository
+        id: cache-magento
+        uses: actions/cache@v2
+        with:
+          path: magento
+          key: magento-${{ matrix.magento-version }}
+
       - name: Create Magento Project
+        if: steps.cache-magento.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
           repository: magento/magento2
