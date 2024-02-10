@@ -48,11 +48,11 @@
     "winston": "^3.11.0"
   },
   "devDependencies": {
-    "@types/browser-sync": "^2.27.1",
-    "@types/cli-table": "^0.3.2",
+    "@types/browser-sync": "^2.29.0",
+    "@types/cli-table": "^0.3.4",
     "@types/fs-extra": "^11.0.4",
-    "@types/memoizee": "^0.4.8",
-    "@types/node": "^20.11.10"
+    "@types/memoizee": "^0.4.11",
+    "@types/node": "^20.11.17"
   },
   "engines": {
     "node": ">=18"
