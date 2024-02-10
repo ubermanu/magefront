@@ -30,7 +30,7 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "fast-glob": "^3.3.1"
+    "fast-glob": "^3.3.2"
   },
   "peerDependencies": {
     "magefront": "workspace:^",
