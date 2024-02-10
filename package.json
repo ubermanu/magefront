@@ -9,7 +9,6 @@
   "author": "Emmanuel Vodor <emmanuel.vodor@proton.me>",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r build",
     "changeset": "changeset",
     "changeset:publish": "pnpm run build && changeset publish",
     "format": "prettier --write .",

@@ -16,6 +16,31 @@ export const getLanguages = memo((context) => {
   /** @type {Map<string, import('types').MagentoLanguage>} */
   const languages = new Map()
 
+  // Get the list of languages in the app/i18n directory.
+  const i18nPath = path.join(rootPath, 'app/i18n')
+  if (fs.existsSync(i18nPath)) {
+    fs.readdirSync(i18nPath).forEach((vendor) => {
+      const vendorPath = path.join(i18nPath, vendor)
+      fs.readdirSync(vendorPath).forEach((language) => {
+        const languagePath = path.join(vendorPath, language)
+        const code = getCodeFromLanguageXml(
+          path.join(languagePath, 'language.xml')
+        )
+
+        if (!code) {
+          return
+        }
+
+        languages.set(`${vendor}/${language}`, {
+          name: `${vendor}/${language}`,
+          code,
+          src: path.relative(rootPath, languagePath),
+          enabled: true,
+        })
+      })
+    })
+  }
+
   // Get the list of languages in the vendor directory.
   // For each package, get the subpackages according to the `registration.php` file.
   const packages = context.packages.filter(
