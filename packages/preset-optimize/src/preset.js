@@ -10,6 +10,7 @@ import imagemin from 'magefront-plugin-imagemin'
  * @returns {import('magefront').Preset}
  */
 export default () => {
+  /** @type {import('magefront').Plugin[]} */
   const plugins = []
 
   // Add image optimization plugins
