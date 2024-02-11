@@ -1,3 +1,4 @@
+import { resolve } from 'import-meta-resolve'
 import memo from 'memoizee'
 import path from 'node:path'
 import { pluginSchema, presetSchema } from './config/schema.js'
@@ -28,10 +29,10 @@ export const getBuildConfig = memo(async (opts, context) => {
   // The path to the destination directory where the theme will be deployed (pub/static)
   const dest = path.join(rootPath, theme.dest)
 
-  /** @type {import('types').MagefrontOptions['presets']} */
+  /** @type {import('types').MagefrontOptions['presets'] | unknown[]} */
   const all_presets = opts.presets || []
 
-  /** @type {import('types').MagefrontOptions['plugins']} */
+  /** @type {import('types').MagefrontOptions['plugins'] | unknown[]} */
   const all_plugins = []
 
   // Add the default preset if no preset or plugin is provided
@@ -43,12 +44,14 @@ export const getBuildConfig = memo(async (opts, context) => {
     all_presets.push('magefront-preset-default')
   }
 
+  // The import source (for the resolve function)
+  // If no config file is loaded, use the current file as the parent
+  const parent = opts.configFilename ?? import.meta.url
+
   // Add the preset plugins to the plugin list
   if (Array.isArray(all_presets) && all_presets.length > 0) {
     const presets = await Promise.all(
-      /** @type {import('types').Preset[]} */ all_presets.map(
-        transformPresetDefinition
-      )
+      all_presets.map((preset) => transformPresetDefinition(preset, parent))
     )
     presets.forEach((preset) => {
       if (Array.isArray(preset.plugins)) {
@@ -65,9 +68,7 @@ export const getBuildConfig = memo(async (opts, context) => {
   // Add support for multiple plugin formats
   // It can be 'string', 'object' or 'function'
   const plugins = await Promise.all(
-    /** @type {import('types').Plugin[]} */ all_plugins.map(
-      transformPluginDefinition
-    )
+    all_plugins.map((plugin) => transformPluginDefinition(plugin, parent))
   )
 
   return { tmp, dest, plugins }
@@ -77,10 +78,11 @@ export const getBuildConfig = memo(async (opts, context) => {
  * Transform the plugin to a function if it is not already. If passed a string,
  * import the plugin and return the default export.
  *
- * @param {any} definition
+ * @param {unknown} definition
+ * @param {string} [parent]
  * @returns {Promise<import('types').Plugin>}
  */
-async function transformPluginDefinition(definition) {
+async function transformPluginDefinition(definition, parent) {
   const { error } = pluginSchema.validate(definition)
 
   if (error) {
@@ -88,13 +90,13 @@ async function transformPluginDefinition(definition) {
   }
 
   if (typeof definition === 'string') {
-    const mod = await import(definition)
+    const mod = await import(resolve(definition, parent))
     return mod.default?.()
   }
 
   if (u.isArray(definition)) {
     const [pluginName, options] = definition
-    const mod = await import(pluginName)
+    const mod = await import(resolve(pluginName, parent))
     return mod.default?.(options)
   }
 
@@ -113,9 +115,10 @@ async function transformPluginDefinition(definition) {
  * import the preset and return the default export.
  *
  * @param {unknown} definition
+ * @param {string} [parent]
  * @returns {Promise<import('types').Preset>}
  */
-async function transformPresetDefinition(definition) {
+async function transformPresetDefinition(definition, parent) {
   const { error } = presetSchema.validate(definition)
 
   if (error) {
@@ -123,13 +126,13 @@ async function transformPresetDefinition(definition) {
   }
 
   if (typeof definition === 'string') {
-    const mod = await import(definition)
+    const mod = await import(resolve(definition, parent))
     return mod.default?.()
   }
 
   if (u.isArray(definition)) {
     const [presetName, options] = definition
-    const mod = await import(presetName)
+    const mod = await import(resolve(presetName, parent))
     return mod.default?.(options)
   }
 

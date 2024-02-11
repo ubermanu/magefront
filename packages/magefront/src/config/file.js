@@ -75,5 +75,10 @@ export async function loadConfigFile(filename, entries) {
     }
   }
 
+  // Add config filename to the entries
+  entries.forEach((entry) => {
+    entry.configFilename = 'file://' + filename
+  })
+
   return entries
 }

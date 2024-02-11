@@ -75,6 +75,13 @@ declare namespace magefront {
       /** The path to the magento root directory. */
       rootPath?: string
     }
+
+    /**
+     * The path to the `magefront.config.js` file.
+     *
+     * @internal
+     */
+    configFilename?: string
   }
 
   /**
