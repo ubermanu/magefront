@@ -35,8 +35,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0(prettier-plugin-svelte@3.1.2)(prettier-plugin-tailwindcss@0.5.11)(prettier@3.2.5)
       dotenv:
-        specifier: ^16.4.1
-        version: 16.4.1
+        specifier: ^16.4.2
+        version: 16.4.2
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -381,8 +381,8 @@ importers:
         specifier: ^1.6.3
         version: 1.6.3
       lucide-svelte:
-        specifier: ^0.323.0
-        version: 0.323.0(svelte@4.2.10)
+        specifier: ^0.325.0
+        version: 0.325.0(svelte@4.2.10)
       mdsvex:
         specifier: ^0.11.0
         version: 0.11.0(svelte@4.2.10)
@@ -1940,7 +1940,7 @@ packages:
     engines: {node: ^14.13.1 || ^16.0.0 || >=18}
     dependencies:
       '@changesets/get-github-info': 0.5.2
-      dotenv: 16.4.1
+      dotenv: 16.4.2
     transitivePeerDependencies:
       - encoding
     dev: true
@@ -3772,8 +3772,8 @@ packages:
       domhandler: 4.3.1
     dev: false
 
-  /dotenv@16.4.1:
-    resolution: {integrity: sha512-CjA3y+Dr3FyFDOAMnxZEGtnW9KBR2M0JvvUtXNW+dYJL5ROWxP9DUHCwgFqpMk0OXCc0ljhaNTr2w/kutYIcHQ==}
+  /dotenv@16.4.2:
+    resolution: {integrity: sha512-rZSSFxke7d9nYQ5NeMIwp5PP+f8wXgKNljpOb7KtH6SKW1cEqcXAz9VSJYVLKe7Jhup/gUYOkaeSVyK8GJ+nBg==}
     engines: {node: '>=12'}
     dev: true
 
@@ -6605,8 +6605,8 @@ packages:
       es5-ext: 0.10.62
     dev: false
 
-  /lucide-svelte@0.323.0(svelte@4.2.10):
-    resolution: {integrity: sha512-3GEFk1vCwB8BtHTHZTocFJfX6AtTLQw9a74JSuihAGx+MzhxqeWk8W1TkM4WUlvE0x9UdONM2rJGRyx9IyjkJg==}
+  /lucide-svelte@0.325.0(svelte@4.2.10):
+    resolution: {integrity: sha512-SbbbQpaiVoMBuRWmCtmaP+RyN/Bt/TIA51SVJGt0wydzxlhqOAuzNSpPBm0yRNbRNDsKeQGwjcDxdZgFPxxmCA==}
     peerDependencies:
       svelte: ^3 || ^4 || ^5.0.0-next.42
     dependencies:
