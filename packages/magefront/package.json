@@ -40,7 +40,7 @@
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
     "import-meta-resolve": "^4.0.0",
-    "joi": "^17.12.1",
+    "joi": "^17.12.2",
     "kleur": "^4.1.5",
     "magefront-preset-default": "workspace:^",
     "memoizee": "^0.4.15",
