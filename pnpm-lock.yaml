@@ -318,6 +318,21 @@ importers:
 
   packages/preset-optimize:
     dependencies:
+      '@types/imagemin-gifsicle':
+        specifier: ^7.0.4
+        version: 7.0.4
+      '@types/imagemin-jpegtran':
+        specifier: ^5.0.4
+        version: 5.0.4
+      '@types/imagemin-pngquant':
+        specifier: ^8.0.0
+        version: 8.0.0
+      '@types/imagemin-svgo':
+        specifier: ^10.0.5
+        version: 10.0.5
+      '@types/imagemin-webp':
+        specifier: ^7.0.3
+        version: 7.0.3
       imagemin:
         specifier: ^8.0.1
         version: 8.0.1
@@ -342,16 +357,6 @@ importers:
       magefront-plugin-imagemin:
         specifier: workspace:^
         version: link:../plugin-imagemin
-    devDependencies:
-      '@types/imagemin-gifsicle':
-        specifier: ^7.0.4
-        version: 7.0.4
-      '@types/imagemin-jpegtran':
-        specifier: ^5.0.4
-        version: 5.0.4
-      '@types/imagemin-svgo':
-        specifier: ^10.0.5
-        version: 10.0.5
 
   sites/magefront:
     dependencies:
@@ -2084,25 +2089,39 @@ packages:
     resolution: {integrity: sha512-ZghMBd/Jgqg5utTJNPmvf6DkuHzMhscJ8vgf/7MUGCpO+G+cLrhYltL+5d+h3A1B4W73S2SrmJZ1jS5LACpX+A==}
     dependencies:
       '@types/imagemin': 8.0.5
-    dev: true
+    dev: false
 
   /@types/imagemin-jpegtran@5.0.4:
     resolution: {integrity: sha512-PSMxOeJa8q94Y+qx8Yriw+qj1+vH5xWpvar63o6SGO0Xi5RlKuwHHfJmN2GRUngPrlhe394jOUmpVq8jQlVmFA==}
     dependencies:
       '@types/imagemin': 8.0.5
-    dev: true
+    dev: false
+
+  /@types/imagemin-pngquant@8.0.0:
+    resolution: {integrity: sha512-uFncUV7JWfBZj/oCrvD4M0RexrBq0h7Bfm5QBZkGhIxFxw0+ghant31hzKPk/DLd/WLhdgp76ay67fM/oZWNMQ==}
+    deprecated: This is a stub types definition. imagemin-pngquant provides its own type definitions, so you do not need this installed.
+    dependencies:
+      imagemin-pngquant: 9.0.2
+    dev: false
 
   /@types/imagemin-svgo@10.0.5:
     resolution: {integrity: sha512-9U2Rf7vWBHeqJvzmWNP3vYAKqR0208QqQ9Mkrq9OLIL5AeoF/dRVRou6iUYCufBSim57BpBpCJhZLrTgfS3k1g==}
     dependencies:
       '@types/imagemin': 8.0.5
       '@types/svgo': 2.6.4
-    dev: true
+    dev: false
+
+  /@types/imagemin-webp@7.0.3:
+    resolution: {integrity: sha512-C2/EMohS4bzsvY5VJvdzHFdcfmnZoui54DmM/9bFtK57/CgGmKkc+p6n49euPGmMFDDvwm4yVl60nwxcZOmH5A==}
+    dependencies:
+      '@types/imagemin': 8.0.5
+    dev: false
 
   /@types/imagemin@8.0.5:
     resolution: {integrity: sha512-tah3dm+5sG+fEDAz6CrQ5evuEaPX9K6DF3E5a01MPOKhA2oGBoC+oA5EJzSugB905sN4DE19EDzldT2Cld2g6Q==}
     dependencies:
       '@types/node': 20.11.20
+    dev: false
 
   /@types/is-ci@3.0.0:
     resolution: {integrity: sha512-Q0Op0hdWbYd1iahB+IFNQcWXFq4O0Q5MwQP7uN0souuQ4rPg1vEYcnIOfr1gY+M+6rc8FGoRaBO1mOOvL29sEQ==}
@@ -2242,7 +2261,7 @@ packages:
     resolution: {integrity: sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==}
     dependencies:
       '@types/node': 20.11.20
-    dev: true
+    dev: false
 
   /@types/triple-beam@1.3.2:
     resolution: {integrity: sha512-txGIh+0eDFzKGC25zORnswy+br1Ha7hj5cMVwKIU7+s0U2AxxJru/jZSMU6OC9MJWP6+pc/hc6ZjyZShpsyY2g==}

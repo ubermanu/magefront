@@ -2,6 +2,7 @@ import imageminGifsicle from 'imagemin-gifsicle'
 import imageminJpegtran from 'imagemin-jpegtran'
 import imageminPngquant from 'imagemin-pngquant'
 import imageminSvgo from 'imagemin-svgo'
+import imageminWebp from 'imagemin-webp'
 import imagemin from 'magefront-plugin-imagemin'
 
 /**
@@ -21,6 +22,7 @@ export default () => {
         imageminJpegtran(),
         imageminGifsicle(),
         imageminSvgo(),
+        imageminWebp(),
       ],
     })
   )

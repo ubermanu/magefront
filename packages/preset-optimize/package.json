@@ -32,6 +32,11 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/imagemin-gifsicle": "^7.0.4",
+    "@types/imagemin-jpegtran": "^5.0.4",
+    "@types/imagemin-pngquant": "^8.0.0",
+    "@types/imagemin-svgo": "^10.0.5",
+    "@types/imagemin-webp": "^7.0.3",
     "imagemin": "^8.0.1",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-jpegtran": "^7.0.0",
@@ -39,11 +44,6 @@
     "imagemin-svgo": "^10.0.1",
     "imagemin-webp": "^8.0.0",
     "magefront-plugin-imagemin": "workspace:^"
-  },
-  "devDependencies": {
-    "@types/imagemin-gifsicle": "^7.0.4",
-    "@types/imagemin-jpegtran": "^5.0.4",
-    "@types/imagemin-svgo": "^10.0.5"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
