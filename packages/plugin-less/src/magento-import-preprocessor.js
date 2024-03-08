@@ -55,12 +55,17 @@ export class preProcessor {
           return `@import (${params.join(', ')}) '${filename}';`
         }
 
-        return this.modules
-          .map((mod) => {
-            const filename = path.join(this.baseDir, mod, 'css', target)
-            return `@import (${params.join(', ')}) '${filename}';`
-          })
-          .join('\n')
+        const imports = this.modules.map((mod) => {
+          const filename = path.join(this.baseDir, mod, 'css', target)
+          return `@import (${params.join(', ')}) '${filename}';`
+        })
+
+        // Add also the theme file when non-modular imports are used
+        // TODO: Add tests for this
+        const filename = path.join(this.baseDir, 'css', target)
+        imports.unshift(`@import (${params.join(', ')}) '${filename}';`)
+
+        return imports.join('\n')
       }
     )
   }
