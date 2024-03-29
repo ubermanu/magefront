@@ -1,5 +1,6 @@
 import chokidar from 'chokidar'
 import k from 'kleur'
+import fs from 'node:fs'
 import path from 'node:path'
 import { performance } from 'node:perf_hooks'
 import prettyMilliseconds from 'pretty-ms'
@@ -130,7 +131,12 @@ export const watch = async (context) => {
   // TODO: Only build the plugins that are affected by the change
   srcWatcher
     .on('add', rebuild)
-    .on('addDir', rebuild)
+    .on('addDir', (dirPath) => {
+      // Check if the directory has files
+      if (fs.readdirSync(dirPath).length > 0) {
+        rebuild(dirPath)
+      }
+    })
     .on('unlink', rebuild)
     .on('unlinkDir', rebuild)
     .on('change', async (filePath) => {
