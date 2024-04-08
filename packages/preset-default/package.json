@@ -32,13 +32,13 @@
   },
   "dependencies": {
     "less": "3.13.1",
-    "lightningcss": "^1.24.0",
+    "lightningcss": "^1.24.1",
     "magefront-plugin-js-translation": "workspace:^",
     "magefront-plugin-less": "workspace:^",
     "magefront-plugin-lightningcss": "workspace:^",
     "magefront-plugin-requirejs-config": "workspace:^",
     "magefront-plugin-terser": "workspace:^",
-    "postcss": "^8.4.35"
+    "postcss": "^8.4.38"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
