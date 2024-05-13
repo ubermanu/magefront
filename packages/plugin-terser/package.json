@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "fast-glob": "^3.3.2",
-    "terser": "^5.30.4"
+    "terser": "^5.31.0"
   },
   "peerDependencies": {
     "magefront": "workspace:^"
